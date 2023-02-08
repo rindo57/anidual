@@ -98,7 +98,7 @@ def get_scheduledd_animes():
 
         if int(hh) < 24:
             x['time'] =  str(hh) + ":" + str(mm)
-            animes.append(x)
+            animesx.append(x)
 
     return animesx
             
