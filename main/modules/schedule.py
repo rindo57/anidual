@@ -104,7 +104,7 @@ def get_scheduledd_animes():
             
 async def update_schedulex():
     animesx = get_scheduledd_animes()
-    text = "<b>📆 Today's Schedule</b> \n\n"
+    textx = "<b>📆 Today's Schedule</b> \n\n"
 
     for i in animesx:
         text += '<b>[</b><code>{}</code><b>] - 📌 <a href="{}">{}</a></b>\n'.format(
@@ -113,9 +113,9 @@ async def update_schedulex():
             i["title"]
         )
 
-    text += "\n<b>⏰ Current TimeZone :</b> <code>UTC</code>"
+    textx += "\n<b>⏰ Current TimeZone :</b> <code>UTC</code>"
     
     try:
-        await schedulex.edit(text,parse_mode="html")
+        await schedulex.edit(textx,parse_mode="html")
     except:
         return
