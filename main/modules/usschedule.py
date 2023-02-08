@@ -7,7 +7,7 @@ from config import STATUS_ID, INDEX_ID, UPLOADS_ID, SCHEDULE_ID, UPLOADS_USERNAM
 
 GHOST_ID = -1001159872623
 US_ID = 15858
-schedule = app.get_messages(GHOST_ID,us_ID)
+schedule = app.get_messages(GHOST_ID,US_ID)
 schedule: Message
 
 def change_tz(gmt):
