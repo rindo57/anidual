@@ -65,8 +65,8 @@ async def update_schedule():
 
 
 
-schedule = app.get_messages(GHOST_ID,US_ID)
-schedule: Message
+schedulex = app.get_messages(GHOST_ID,US_ID)
+schedulex: Message
 
 def change_tz(gmt):
     i,y = gmt.split(":")
@@ -102,7 +102,7 @@ def get_scheduled_animes():
 
     return animes
             
-async def update_schedule():
+async def update_schedulex():
     animes = get_scheduled_animes()
     text = "<b>📆 Today's Schedule</b> \n\n"
 
@@ -116,6 +116,6 @@ async def update_schedule():
     text += "\n<b>⏰ Current TimeZone :</b> <code>UTC</code>"
     
     try:
-        await schedule.edit(text,parse_mode="html")
+        await schedulex.edit(text,parse_mode="html")
     except:
         return
