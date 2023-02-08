@@ -68,7 +68,7 @@ async def update_schedule():
 schedulex = app.get_messages(GHOST_ID,US_ID)
 schedulex: Message
 
-def change_tz(gmt):
+def change_tzx(usdt):
     i,y = gmt.split(":")
     i = int(i)
     y = int(y)
@@ -83,30 +83,30 @@ def change_tz(gmt):
 
     return i,y
 
-def get_scheduled_animes():
+def get_scheduledd_animes():
     url = 'https://subsplease.org/api/?f=schedule&h=true&tz=$'
     res = requests.get(url).json()['schedule']
 
-    animes = []
+    animesx = []
     for i in res:
         x = {}
         x['title'] = i['title']
         x['link'] = "https://subsplease.org/shows/" + i['page']
         t = i['time']
 
-        hh, mm = change_tz(t)
+        hh, mm = change_tzx(t)
 
         if int(hh) < 24:
             x['time'] =  str(hh) + ":" + str(mm)
             animes.append(x)
 
-    return animes
+    return animesx
             
 async def update_schedulex():
-    animes = get_scheduled_animes()
+    animesx = get_scheduledd_animes()
     text = "<b>📆 Today's Schedule</b> \n\n"
 
-    for i in animes:
+    for i in animesx:
         text += '<b>[</b><code>{}</code><b>] - 📌 <a href="{}">{}</a></b>\n'.format(
             i["time"],
             i["link"],
