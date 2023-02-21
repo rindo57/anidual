@@ -9,6 +9,7 @@ from main.modules.utils import episode_linker, get_duration, get_epnum, status_t
 from pyrogram.types import Message, InlineKeyboardMarkup, InlineKeyboardButton, CallbackQuery
 
 from main.modules.uploader import upload_video
+from main.modules.thumbnail import generate_thumbnail
 
 import os
 
@@ -137,7 +138,7 @@ async def start_uploading(data):
         main = await app.send_photo(KAYO_ID,photo=img,caption=caption)
         guessname = f"**{ghostname}**" + "\n" + "✓  `1080p x264 Web-DL`" + "\n" + "✓  `English Sub`" + "\n" + f"__({tit})__" + "\n"+ "#Source #WebDL"
         
-
+        thumbnail = await generate_thumbnail(id,file)
         videox = await app.send_document(
 
                 KAYO_ID,
