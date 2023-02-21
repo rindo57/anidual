@@ -165,7 +165,7 @@ def changeImageSize(maxWidth, maxHeight, image):
     newImage = image.resize((newWidth, newHeight))
     return newImage
 
-async def generate_thumbnail(id,file,title,ep_num,size,dur):
+async def generate_thumbnail(id,file):
     ss = get_screenshot(file)
     cc = await get_cover(id)
     thumb = cc
