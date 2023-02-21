@@ -72,7 +72,7 @@ async def upload_video(msg: Message,file,id,tit,name,ttl):
             filed = filed.replace("(1080p)", "[720p x265]")
             fukpath = "downloads/" + filed
             caption = f"{name}"
-            caption = caption.replace("(1080p)", "")
+            caption = caption.replace("(1080p)", "") 
             gcaption=f"**{caption}**" + "\n" + "✓  `720p x265 10Bit`" + "\n" + "✓  `English Sub`" + "\n" + f"__({tit})__" + "\n" + "#Encoded #HEVC"
             kayo_id = -1001591697490
             x = await app.send_document(
@@ -86,6 +86,8 @@ async def upload_video(msg: Message,file,id,tit,name,ttl):
             file_name=filed,
 
             force_document=True,
+                
+            thumb=thumbnail,
 
             progress=progress_for_pyrogram,
  
