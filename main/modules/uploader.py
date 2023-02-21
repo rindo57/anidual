@@ -140,7 +140,9 @@ async def upload_video(msg: Message,file,id,tit,name,ttl):
         output = f"""
 {gcaption}
 ━━━━━━━━━━━━━━━━━━━
-[🔗Download Link]({nyaa_text})"""
+[🔗Filechan]({nyaa_text})
+[🔗Gofile]({gofuk_text})
+[🔗KrakenFiles]({krfuk_text})"""
         daze = await x.edit(output, parse_mode = "markdown")
     except Exception:
        await app.send_message(message.chat.id, text="Something Went Wrong!")
