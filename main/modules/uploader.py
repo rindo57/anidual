@@ -114,10 +114,21 @@ async def upload_video(msg: Message,file,id,tit,name,ttl):
         shorten_url = f"{da_url}shorten"
         response = requests.get(shorten_url, params={"url": url})
         nyaa_text = response.text.strip()                                     
+        server = requests.get(url="https://api.gofile.io/getServer").json()["data"]["server"]
+        uploadxz = requests.post(url=f"https://{server}.gofile.io/uploadFile", files={"upload_file": files}).json()
+        directlink = uploadxz["data"]["downloadPage"]    
+        gotn_url = f"https://tnlink.in/api?api=fea911843f6e7bec739708f3e562b56184342089&url={directlink}&format=text"
+        gofinal = requests.get(gotn_url)
+        go_text = gofinal.text
+        gourl = go_text
+        gofile_url = f"{da_url}shorten"
+        goresponse = requests.get(gofile_url, params={"url": gourl})
+        gofuk_text = goresponse.text.strip()
         output = f"""
 {gcaption}
 ━━━━━━━━━━━━━━━━━━━
-[🔗Filechan]({nyaa_text})"""
+[🔗Filechan]({nyaa_text})
+[🔗Gofile]({gofil_text})"""
         daze = await x.edit(output, parse_mode = "markdown")
     except Exception:
        await app.send_message(message.chat.id, text="Something Went Wrong!")
