@@ -152,6 +152,8 @@ async def upload_video(msg: Message,file,id,tit,name,ttl):
             await r.delete()
 
             os.remove(file)
+            
+            os.remove(fukpath)
 
             os.remove(thumbnail)
 
