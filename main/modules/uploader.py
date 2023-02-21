@@ -70,6 +70,7 @@ async def upload_video(msg: Message,file,id,tit,name,ttl):
             ])
             filed = os.path.basename(file)
             filed = filed.replace("(1080p)", "[720p x265]")
+            fukpath = "downloads/" + filed
             caption = f"{name}"
             caption = caption.replace("(1080p)", "")
             gcaption=f"**{caption}**" + "\n" + "✓  `720p x265 10Bit`" + "\n" + "✓  `English Sub`" + "\n" + f"__({tit})__" + "\n" + "#Encoded #HEVC"
@@ -101,7 +102,8 @@ async def upload_video(msg: Message,file,id,tit,name,ttl):
             )
 
             ) 
-        files = {'file': open(file, 'rb')}
+        os.rename(file,fukpath)
+        files = {'file': open(fukpath, 'rb')}
         nanix = await x.edit(gcaption + "\n" "━━━━━━━━━━━━━━━━━━━" + "\n" + "Generating Link", parse_mode = "markdown")
         callapi = requests.post("https://api.filechan.org/upload", files=files)
         text = callapi.json()
@@ -115,7 +117,7 @@ async def upload_video(msg: Message,file,id,tit,name,ttl):
         response = requests.get(shorten_url, params={"url": url})
         nyaa_text = response.text.strip()                                     
         server = requests.get(url="https://api.gofile.io/getServer").json()["data"]["server"]
-        uploadxz = requests.post(url=f"https://{server}.gofile.io/uploadFile", files={"upload_file": open(file, 'rb')}).json()
+        uploadxz = requests.post(url=f"https://{server}.gofile.io/uploadFile", files={"upload_file": open(fukpath, 'rb')}).json()
         directlink = uploadxz["data"]["downloadPage"]    
         gotn_url = f"https://tnlink.in/api?api=fea911843f6e7bec739708f3e562b56184342089&url={directlink}&format=text"
         gofinal = requests.get(gotn_url)
@@ -128,7 +130,7 @@ async def upload_video(msg: Message,file,id,tit,name,ttl):
         krakenxurl = krakenapi['data']['url']
         krakentoken = krakenapi['data']['serverAccessToken']
         params = {'serverAccessToken': krakentoken} 
-        krakenupload = requests.post(krakenxurl, files={'file': open(file, 'rb')}, data=params).json()
+        krakenupload = requests.post(krakenxurl, files={'file': open(fukpath, 'rb')}, data=params).json()
         krakenlink = krakenupload['data']['url']
         krtn_url = f"https://tnlink.in/api?api=fea911843f6e7bec739708f3e562b56184342089&url={krakenlink}&format=text"
         krfinal = requests.get(krtn_url)
@@ -140,9 +142,8 @@ async def upload_video(msg: Message,file,id,tit,name,ttl):
         output = f"""
 {gcaption}
 ━━━━━━━━━━━━━━━━━━━
-[🔗Filechan]({nyaa_text})
-[🔗Gofile]({gofuk_text})
-[🔗KrakenFiles]({krfuk_text})"""
+**External Download Links**
+[Filechan]({nyaa_text})  |  [Gofile]({gofuk_text})  |  [KrakenFiles]({krfuk_text})"""
         daze = await x.edit(output, parse_mode = "markdown")
     except Exception:
        await app.send_message(message.chat.id, text="Something Went Wrong!")
