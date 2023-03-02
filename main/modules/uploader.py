@@ -110,7 +110,7 @@ async def upload_video(msg: Message,file,id,tit,name,ttl):
         callapi = requests.post("https://api.filechan.org/upload", files=files)
         text = callapi.json()
         long_url = text['data']['file']['url']['full']
-        api_url = f"https://tnlink.in/api?api=fea911843f6e7bec739708f3e562b56184342089&url={long_url}&format=text"
+        api_url = f"http://ouo.io/api/jezWr0hG?s={long_url}"
         result = requests.get(api_url)
         nai_text = result.text
         da_url = "https://da.gd/"
@@ -122,7 +122,7 @@ async def upload_video(msg: Message,file,id,tit,name,ttl):
         server = requests.get(url="https://api.gofile.io/getServer").json()["data"]["server"]
         uploadxz = requests.post(url=f"https://{server}.gofile.io/uploadFile", files={"upload_file": open(fukpath, 'rb')}).json()
         directlink = uploadxz["data"]["downloadPage"]    
-        gotn_url = f"https://tnlink.in/api?api=fea911843f6e7bec739708f3e562b56184342089&url={directlink}&format=text"
+        gotn_url = f"http://ouo.io/api/jezWr0hG?s={directlink}"
         gofinal = requests.get(gotn_url)
         go_text = gofinal.text
         gourl = go_text
@@ -136,7 +136,7 @@ async def upload_video(msg: Message,file,id,tit,name,ttl):
         params = {'serverAccessToken': krakentoken} 
         krakenupload = requests.post(krakenxurl, files={'file': open(fukpath, 'rb')}, data=params).json()
         krakenlink = krakenupload['data']['url']
-        krtn_url = f"https://tnlink.in/api?api=fea911843f6e7bec739708f3e562b56184342089&url={krakenlink}&format=text"
+        krtn_url = f"http://ouo.io/api/jezWr0hG?s={krakenlink}"
         krfinal = requests.get(krtn_url)
         kr_text = krfinal.text
         krurl = kr_text
