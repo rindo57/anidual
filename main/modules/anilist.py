@@ -234,6 +234,9 @@ async def get_anilist_data(name):
     tagsx = tagsx.replace("#Dissociative Identities", "#Dissociative_Identities")
     tagsx = tagsx.replace("#Achronological Order", "#Achronological Order")
     tagsx = tagsx.replace("#Time Skip", "#Time_Skip")
+    tagsx = tagsx.replace("#Age Regression", "#Age_Regression")
+    tagsx = tagsx.replace("#Human Pet", "#Human_Pet")
+    tagsx = tagsx.replace("#Achronoligical Order", "#Achronoligical_Order")
     
 
 
