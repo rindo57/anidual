@@ -13,4 +13,4 @@ motor
 dnspython
 opencv-python-headless
 aiofiles
-
+html5lib
