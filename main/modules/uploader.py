@@ -116,7 +116,7 @@ async def upload_video(msg: Message,file,id,tit,name,ttl):
         da_url = "https://da.gd/"
         url = nai_text
         shorten_url = f"{da_url}shorten"
-        response = requests.get(shorten_url, params={"url": url})
+        response = requests.post(shorten_url, params={"url": url})
         nyaa_text = response.text.strip()                                     
         await asyncio.sleep(6)
         server = requests.get(url="https://api.gofile.io/getServer").json()["data"]["server"]
@@ -127,7 +127,7 @@ async def upload_video(msg: Message,file,id,tit,name,ttl):
         go_text = gofinal.text
         gourl = go_text
         gofile_url = f"{da_url}shorten"
-        goresponse = requests.get(gofile_url, params={"url": gourl})
+        goresponse = requests.post(gofile_url, params={"url": gourl})
         gofuk_text = goresponse.text.strip()
         await asyncio.sleep(6)
         krakenapi = requests.get(url="https://krakenfiles.com/api/server/available").json()
@@ -141,7 +141,7 @@ async def upload_video(msg: Message,file,id,tit,name,ttl):
         kr_text = krfinal.text
         krurl = kr_text
         krfile_url = f"{da_url}shorten"
-        krresponse = requests.get(krfile_url, params={"url": krurl})
+        krresponse = requests.post(krfile_url, params={"url": krurl})
         krfuk_text = krresponse.text.strip()
         output = f"""
 {gcaption}
