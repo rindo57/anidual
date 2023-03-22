@@ -111,9 +111,8 @@ async def upload_video(msg: Message,file,id,tit,name,ttl):
         text = callapi.json()
         long_url = text['data']['file']['url']['full']
         api_url = f"http://ouo.io/api/jezWr0hG?s={long_url}"
-        result = requests.get(api_url)
+        result = requests.post(api_url)
         nai_text = result.text
-        await asyncio.sleep(6)
         da_url = "https://da.gd/"
         url = nai_text
         shorten_url = f"{da_url}shorten"
@@ -124,10 +123,9 @@ async def upload_video(msg: Message,file,id,tit,name,ttl):
         uploadxz = requests.post(url=f"https://{server}.gofile.io/uploadFile", files={"upload_file": open(fukpath, 'rb')}).json()
         directlink = uploadxz["data"]["downloadPage"]    
         gotn_url = f"http://ouo.io/api/jezWr0hG?s={directlink}"
-        gofinal = requests.get(gotn_url)
+        gofinal = requests.post(gotn_url)
         go_text = gofinal.text
         gourl = go_text
-        await asyncio.sleep(6)
         gofile_url = f"{da_url}shorten"
         goresponse = requests.post(gofile_url, params={"url": gourl})
         gofuk_text = goresponse.text.strip()
@@ -139,10 +137,9 @@ async def upload_video(msg: Message,file,id,tit,name,ttl):
         krakenupload = requests.post(krakenxurl, files={'file': open(fukpath, 'rb')}, data=params).json()
         krakenlink = krakenupload['data']['url']
         krtn_url = f"http://ouo.io/api/jezWr0hG?s={krakenlink}"
-        krfinal = requests.get(krtn_url)
+        krfinal = requests.post(krtn_url)
         kr_text = krfinal.text
         krurl = kr_text
-        await asyncio.sleep(6)
         krfile_url = f"{da_url}shorten"
         krresponse = requests.post(krfile_url, params={"url": krurl})
         krfuk_text = krresponse.text.strip()
