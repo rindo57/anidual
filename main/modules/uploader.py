@@ -129,25 +129,11 @@ async def upload_video(msg: Message,file,id,tit,name,ttl):
         gofile_url = f"{da_url}shorten"
         goresponse = requests.post(gofile_url, params={"url": gourl})
         gofuk_text = goresponse.text.strip()
-        await asyncio.sleep(6)
-        krakenapi = requests.get(url="https://krakenfiles.com/api/server/available").json()
-        krakenxurl = krakenapi['data']['url']
-        krakentoken = krakenapi['data']['serverAccessToken']
-        params = {'serverAccessToken': krakentoken} 
-        krakenupload = requests.post(krakenxurl, files={'file': open(fukpath, 'rb')}, data=params).json()
-        krakenlink = krakenupload['data']['url']
-        krtn_url = f"http://ouo.io/api/jezWr0hG?s={krakenlink}"
-        krfinal = requests.post(krtn_url)
-        kr_text = krfinal.text
-        krurl = kr_text
-        krfile_url = f"{da_url}shorten"
-        krresponse = requests.post(krfile_url, params={"url": krurl})
-        krfuk_text = krresponse.text.strip()
         output = f"""
 {gcaption}
 ━━━━━━━━━━━━━━━━━━━
 **External Download Links**
-[Gofile]({gofuk_text})  |  [KrakenFiles]({krfuk_text})"""
+[Gofile]({gofuk_text})"""
         daze = await x.edit(output, parse_mode = "markdown")
     except Exception:
        await app.send_message(message.chat.id, text="Something Went Wrong!")
