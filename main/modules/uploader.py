@@ -107,23 +107,12 @@ async def upload_video(msg: Message,file,id,tit,name,ttl):
         os.rename(file,fukpath)
         files = {'file': open(fukpath, 'rb')}
         nanix = await x.edit(gcaption + "\n" "━━━━━━━━━━━━━━━━━━━" + "\n" + "Generating Link", parse_mode = "markdown")
-        callapi = requests.post("https://api.filechan.org/upload", files=files)
-        text = callapi.json()
-        long_url = text['data']['file']['url']['full']
-        api_url = f"http://ouo.io/api/jezWr0hG?s={long_url}"
-        result = requests.post(api_url)
-        nai_text = result.text
-        da_url = "https://da.gd/"
-        url = nai_text
-        shorten_url = f"{da_url}shorten"
-        response = requests.post(shorten_url, params={"url": url})
-        nyaa_text = response.text.strip()                                     
-        await asyncio.sleep(6)
+        da_url = "https://da.gd/"                                 
         server = requests.get(url="https://api.gofile.io/getServer").json()["data"]["server"]
         uploadxz = requests.post(url=f"https://{server}.gofile.io/uploadFile", files={"upload_file": open(fukpath, 'rb')}).json()
         directlink = uploadxz["data"]["downloadPage"]    
         gotn_url = f"http://ouo.io/api/jezWr0hG?s={directlink}"
-        gofinal = requests.post(gotn_url)
+        gofinal = requests.get(gotn_url)
         go_text = gofinal.text
         gourl = go_text
         gofile_url = f"{da_url}shorten"
