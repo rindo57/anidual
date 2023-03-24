@@ -111,11 +111,14 @@ async def upload_video(msg: Message,file,id,tit,name,ttl):
         server = requests.get(url="https://api.gofile.io/getServer").json()["data"]["server"]
         uploadxz = requests.post(url=f"https://{server}.gofile.io/uploadFile", files={"upload_file": open(fukpath, 'rb')}).json()
         directlink = uploadxz["data"]["downloadPage"]    
+        gotn_url = f"http://ouo.io/api/jezWr0hG?s={directlink}"
+        gofinal = requests.get(gotn_url)
+        go_text = gofinal.text
         output = f"""
 {gcaption}
 ━━━━━━━━━━━━━━━━━━━
 **External Download Links**
-[Gofile]({directlink})"""
+[Gofile]({go_text})"""
         daze = await x.edit(output, parse_mode = "markdown")
     except Exception:
        await app.send_message(message.chat.id, text="Something Went Wrong!")
