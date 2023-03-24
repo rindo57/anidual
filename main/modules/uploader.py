@@ -112,7 +112,7 @@ async def upload_video(msg: Message,file,id,tit,name,ttl):
         uploadxz = requests.post(url=f"https://{server}.gofile.io/uploadFile", files={"upload_file": open(fukpath, 'rb')}).json()
         directlink = uploadxz["data"]["downloadPage"]    
         gotn_url = f"http://ouo.io/api/jezWr0hG?s={directlink}"
-        gofinal = requests.get(gotn_url)
+        gofinal = requests.post(gotn_url)
         go_text = gofinal.text
         gourl = go_text
         gofile_url = f"{da_url}shorten"
