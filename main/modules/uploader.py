@@ -118,7 +118,6 @@ async def upload_video(msg: Message,file,id,tit,name,ttl):
         shorten_url = f"{da_url}shorten"
         response = requests.get(shorten_url, params={"url": url})
         nyaa_text = response.text.strip()                                     
-        await asyncio.sleep(6)
         server = requests.get(url="https://api.gofile.io/getServer").json()["data"]["server"]
         uploadxz = requests.post(url=f"https://{server}.gofile.io/uploadFile", files={"upload_file": open(fukpath, 'rb')}).json()
         directlink = uploadxz["data"]["downloadPage"]    
@@ -129,7 +128,6 @@ async def upload_video(msg: Message,file,id,tit,name,ttl):
         gofile_url = f"{da_url}shorten"
         goresponse = requests.get(gofile_url, params={"url": gourl})
         gofuk_text = goresponse.text.strip()
-        await asyncio.sleep(6)
         krakenapi = requests.get(url="https://krakenfiles.com/api/server/available").json()
         krakenxurl = krakenapi['data']['url']
         krakentoken = krakenapi['data']['serverAccessToken']
