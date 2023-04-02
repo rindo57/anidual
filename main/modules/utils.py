@@ -13,6 +13,27 @@ def get_duration(file):
     seconds = int(frames / fps)
     return seconds
 
+async def mediainfo(fukpath):
+    try:
+        process = await asyncio.create_subprocess_shell(
+            f"mediainfo '''{file}''' --Output=HTML",
+            stdout=asyncio.subprocess.PIPE,
+            stderr=asyncio.subprocess.PIPE,
+        )
+        stdout, stderr = await process.communicate()
+        out = stdout.decode()
+        client = TelegraphPoster(use_api=True)
+        client.create_api_token("Mediainfo")
+        page = client.post(
+            title="Mediainfo",
+            author=("ANIMXT),
+            author_url=f"https://t.me/Latest_Ongoing_Airing_Anime",
+            text=out,
+        )
+        return page.get("url")
+    except Exception as error:
+        print(error)
+        return None
 
 def get_screenshot(file):
     cap = cv2.VideoCapture(file)
