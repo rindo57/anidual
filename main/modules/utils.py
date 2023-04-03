@@ -224,33 +224,4 @@ ETA: {}`
         )
         return text2
 
-async def gen_ss_sam(hash, fukpath, log):
-    try:
-        ss_path, sp_path = None, None
-        os.mkdir(hash)
-        tsec = await genss(fukpath)
-        fps = 10 / tsec
-        ncmd = f"ffmpeg -i '{fukpath}' -vf fps={fps} -vframes 10 '{hash}/pic%01d.png'"
-        process = await asyncio.create_subprocess_shell(
-            ncmd, stdout=asyncio.subprocess.PIPE, stderr=asyncio.subprocess.PIPE
-        )
-        await process.communicate()
-        ss, dd = await duration_s(fukpath)
-        __ = fukpath.split(".mkv")[-2]
-        out = __ + "_sample.mkv"
-        _ncmd = f'ffmpeg -i """{fukpath}""" -preset ultrafast -ss {ss} -to {dd} -c:v libx265 -crf 27 -map 0:v -c:a aac -map 0:a -c:s copy -map 0:s? """{out}""" -y'
-        process = await asyncio.create_subprocess_shell(
-            _ncmd, stdout=asyncio.subprocess.PIPE, stderr=asyncio.subprocess.PIPE
-        )
-        stdout, stderr = await process.communicate()
-        er = stderr.decode().strip()
-        try:
-            if er:
-                if not os.path.exists(out) or os.path.getsize(out) == 0:
-                    log.exception(str(er))
-                    return (ss_path, sp_path)
-        except BaseException:
-            pass
-        return hash, out
-    except Exception as err:
-        log.exception(str(err))
+
