@@ -2,6 +2,7 @@ from math import floor
 import os
 from main import queue
 import cv2, random
+import subprocess
 from string import ascii_letters, ascii_uppercase, digits
 from pyrogram.types import Message, MessageEntity
 import aiofiles
