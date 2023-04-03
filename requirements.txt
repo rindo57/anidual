@@ -13,4 +13,5 @@ dnspython
 opencv-python-headless
 aiofiles
 html5lib
-libtorrent==2.0.7
+libtorrent
+git+https://github.com/kaif-00z/html-telegraph-poster
