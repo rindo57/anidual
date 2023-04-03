@@ -34,7 +34,7 @@ def get_mediainfo(fukpath):
             author_url=f"https://t.me/animxt",
             text=outX,
         )
-        return page.get("url")
+        return page.get("url").text
 
 async def compress_video(total_time, videox, name, guessname):
 
