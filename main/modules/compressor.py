@@ -21,7 +21,7 @@ async def gg():
 async def mediainfo(bpath):
     try:
         process = await asyncio.create_subprocess_shell(
-            f"mediainfo '''bpath''' --Output=HTML",
+            f"mediainfo '''{bpath}''' --Output=HTML",
             stdout=asyncio.subprocess.PIPE,
             stderr=asyncio.subprocess.PIPE,
         )
