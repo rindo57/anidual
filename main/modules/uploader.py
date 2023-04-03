@@ -144,8 +144,7 @@ async def upload_video(msg: Message,file,id,tit,name,ttl):
         krresponse = requests.get(krfile_url, params={"url": krurl})
         krfuk_text = krresponse.text.strip()
         output = f"""
-{gcaption} 
-https://t.me/Enco1080_bot?start={hash}
+{gcaption}
 ━━━━━━━━━━━━━━━━━━━
 **External Download Links**
 [Filechan]({nyaa_text})  |  [Gofile]({gofuk_text})  |  [KrakenFiles]({krfuk_text})"""
