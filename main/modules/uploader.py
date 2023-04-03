@@ -5,7 +5,7 @@ import aiohttp
 import requests
 import aiofiles
 
-from main.modules.compressor import get_mediainfo
+from main.modules.compressor import mediainfo
 
 from main.modules.utils import format_time, get_duration, get_epnum, get_filesize, status_text, tags_generator
 
@@ -151,7 +151,7 @@ async def upload_video(msg: Message,file,id,tit,name,ttl):
 **External Download Links**
 [Filechan]({nyaa_text})  |  [Gofile]({gofuk_text})  |  [KrakenFiles]({krfuk_text})"""
         daze = await x.edit(output, parse_mode = "markdown")
-        link_info = await get_mediainfo(fukpath)
+        link_info = await mediainfo(fukpath)
         output = f"""
 {gcaption} 
 [Media Info]({link_info})
