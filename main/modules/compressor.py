@@ -35,7 +35,7 @@ async def get_mediainfo(file, acc):
             author_url=f"https://t.me/animxt",
             text=out,
         )
-        return page.get("url")
+        return page["url"]
     except Exception as error:
         print(error)
         return None
