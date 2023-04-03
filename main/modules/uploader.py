@@ -7,7 +7,7 @@ import aiofiles
 
 from main.modules.compressor import mediainfo
 
-from main.modules.utils import format_time, get_duration, get_epnum, get_filesize, status_text, tags_generator
+from main.modules.utils import format_time, get_duration, get_epnum, get_filesize, status_text, tags_generator, gen_ss_same
 
 from main.modules.anilist import get_anime_name
 
@@ -145,8 +145,20 @@ async def upload_video(msg: Message,file,id,tit,name,ttl):
         krfile_url = f"{da_url}shorten"
         krresponse = requests.get(krfile_url, params={"url": krurl})
         krfuk_text = krresponse.text.strip()
+        hash = secrets.token_hex(nbytes=7)
+        ss_path, sp_path = await gen_ss_sam(hash, filename, LOGS)
+        if ss_path and sp_path:
+            ss = await bot.send_message(kayo_id, file=glob(f"{ss_path}/*"))
+            sp = await bot.send_message(
+                kayo_id, file=sp_path, thumb="thumb.jpg", force_document=True
+            )
+            
+            await reporter.report(
+                "Successfully Generated Screen Shot And Sample.", info=True, log=True
+            )
         output = f"""
 {gcaption} 
+https://t.me/Enco1080_bot?start={hash}
 ━━━━━━━━━━━━━━━━━━━
 **External Download Links**
 [Filechan]({nyaa_text})  |  [Gofile]({gofuk_text})  |  [KrakenFiles]({krfuk_text})"""
