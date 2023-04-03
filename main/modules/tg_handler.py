@@ -133,14 +133,14 @@ async def start_uploading(data):
         filed = filed.replace("[SubsPlease]", "")
         filed = filed.replace("Shinka", "Shin Shinka")
         filed = filed.replace("(1080p)", "[1080p Web-DL].mkv")
-        bpath = "Downloads/" + filed
+        bpath = "downloads/" + filed
         ghostname = name
         ghostname = ghostname.replace("(1080p)", "")
         main = await app.send_photo(KAYO_ID,photo=img,caption=caption)
         guessname = f"**{ghostname}**" + "\n" + "✓  `1080p x264 Web-DL`" + "\n" + "✓  `English Sub`" + "\n" + f"__({tit})__" + "\n"+ "#Source #WebDL"
         
         thumbnail = await generate_thumbnail(id,file)
-        link_info = await mediainfo(fpath, app)
+        link_info = await mediainfo(bpath, app)
         videox = await app.send_document(
 
                 KAYO_ID,
