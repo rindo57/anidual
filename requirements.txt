@@ -14,4 +14,4 @@ opencv-python-headless
 aiofiles
 html5lib
 libtorrent
-git+https://github.com/kaif-00z/html-telegraph-poster
+html_telegraph_poster
