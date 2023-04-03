@@ -140,7 +140,7 @@ async def start_uploading(data):
         guessname = f"**{ghostname}**" + "\n" + "✓  `1080p x264 Web-DL`" + "\n" + "✓  `English Sub`" + "\n" + f"__({tit})__" + "\n"+ "#Source #WebDL"
         
         thumbnail = await generate_thumbnail(id,file)
-        link_info = await mediainfo(bpath, app)
+        link_info = await mediainfo(file, app)
         videox = await app.send_document(
 
                 KAYO_ID,
