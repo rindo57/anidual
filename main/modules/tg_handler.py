@@ -2,7 +2,7 @@ import asyncio
 
 import sys
 
-from main.modules.compressor import compress_video, media_info
+from main.modules.compressor import compress_video, mediainfo
 
 from main.modules.utils import episode_linker, get_duration, get_epnum, status_text
 
