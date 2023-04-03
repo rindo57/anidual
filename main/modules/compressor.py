@@ -31,7 +31,7 @@ async def mediainfo(file):
         client.create_api_token("Mediainfo")
         page = client.post(
             title="Mediainfo",
-            author=("animxt"),
+            author="animxt",
             author_url=f"https://t.me/animxt",
             text=out,
         )
