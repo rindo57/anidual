@@ -4,6 +4,7 @@ from main import queue
 import cv2, random
 from string import ascii_letters, ascii_uppercase, digits
 from pyrogram.types import Message, MessageEntity
+from html_telegraph_poster import TelegraphPoster
 
 def get_duration(file):
     data = cv2.VideoCapture(file)
