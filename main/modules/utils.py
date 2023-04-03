@@ -2,12 +2,8 @@ from math import floor
 import os
 from main import queue
 import cv2, random
-import subprocess
 from string import ascii_letters, ascii_uppercase, digits
 from pyrogram.types import Message, MessageEntity
-import aiofiles
-import aiohttp
-from html_telegraph_poster import TelegraphPoster
 
 def get_duration(file):
     data = cv2.VideoCapture(file)
@@ -16,28 +12,6 @@ def get_duration(file):
     fps = int(data.get(cv2.CAP_PROP_FPS))
     seconds = int(frames / fps)
     return seconds
-
-async def mediainfo(fukpath):
-    try:
-        process = await asyncio.create_subprocess_shell(
-            f"mediainfo '''{fukpath}''' --Output=HTML",
-            stdout=asyncio.subprocess.PIPE,
-            stderr=asyncio.subprocess.PIPE,
-        )
-        stdout, stderr = await process.communicate()
-        out = stdout.decode()
-        client = TelegraphPoster(use_api=True)
-        client.create_api_token("Mediainfo")
-        page = client.post(
-            title="Mediainfo",
-            author=("ANIMXT"),
-            author_url=f"https://t.me/Latest_Ongoing_Airing_Anime",
-            text=out,
-        )
-        return page.get("url")
-    except Exception as error:
-        print(error)
-        return None
 
 def get_screenshot(file):
     cap = cv2.VideoCapture(file)
