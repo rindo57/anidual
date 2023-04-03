@@ -18,23 +18,27 @@ async def gg():
           cmd = '''ffmpeg -hide_banner -loglevel quiet -progress "progressaa.txt" -i "video.mkv" -filter_complex "[0:v]drawtext=fontfile=font.ttf:text='t.me/animxt':fontsize=25:fontcolor=ffffff:alpha='if(lt(t,0),0,if(lt(t,5),(t-0)/5,if(lt(t,15),1,if(lt(t,20),(5-(t-15))/5,0))))':x=w-text_w-15:y=15" -c:v libx265 -s 192x144 -pix_fmt yuv420p10le -preset medium -r 24000/1001 -crf 24.2 -x265-params profile=main444-10:deblock=-1,-1:no-sao:aq-mode=2:aq-strength=0.75:bframes=6:frame-threads=4 -c:a libopus -b:a 96k "out.mkv" -y''',
           subprocess.Popen(cmd,shell=True)
 
-def get_mediainfo(fukpath):
+async def get_mediainfo(file, acc):
+    try:
         process = await asyncio.create_subprocess_shell(
-            f"mediainfo '''{fukpath}''' --Output=HTML",
+            f"mediainfo '''{file}''' --Output=HTML",
             stdout=asyncio.subprocess.PIPE,
             stderr=asyncio.subprocess.PIPE,
         )
         stdout, stderr = await process.communicate()
-        outX = stdout.decode()
+        out = stdout.decode()
         client = TelegraphPoster(use_api=True)
         client.create_api_token("Mediainfo")
         page = client.post(
             title="Mediainfo",
-            author="ANIMXT",
+            author=("animxt"),
             author_url=f"https://t.me/animxt",
-            text=outX,
+            text=out,
         )
-        return page.get("url").text
+        return page.get("url")
+    except Exception as error:
+        print(error)
+        return None
 
 async def compress_video(total_time, videox, name, guessname):
 
