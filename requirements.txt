@@ -13,4 +13,4 @@ dnspython
 opencv-python-headless
 aiofiles
 html5lib
-python3-libtorrent
+libtorrent==2.0.7
