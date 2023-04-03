@@ -4,7 +4,6 @@ aiohttp
 python-dotenv
 ffmpeg
 feedparser
-libtorrent
 pillow
 requests
 bs4
@@ -14,3 +13,4 @@ dnspython
 opencv-python-headless
 aiofiles
 html5lib
+python3-libtorrent
