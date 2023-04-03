@@ -5,6 +5,8 @@ import aiohttp
 import requests
 import aiofiles
 
+from main.modules.compressor import mediainfo
+
 from main.modules.utils import format_time, get_duration, get_epnum, get_filesize, status_text, tags_generator, mediainfo
 
 from main.modules.anilist import get_anime_name
@@ -143,14 +145,20 @@ async def upload_video(msg: Message,file,id,tit,name,ttl):
         krfile_url = f"{da_url}shorten"
         krresponse = requests.get(krfile_url, params={"url": krurl})
         krfuk_text = krresponse.text.strip()
-        link_info = await mediainfo(fukpath, app)
+        output = f"""
+{gcaption} 
+━━━━━━━━━━━━━━━━━━━
+**External Download Links**
+[Filechan]({nyaa_text})  |  [Gofile]({gofuk_text})  |  [KrakenFiles]({krfuk_text})"""
+        daze = await x.edit(output, parse_mode = "markdown")
+        link_info = await mediainfo(fukpath)
         output = f"""
 {gcaption} 
 [Media Info]({link_info})
 ━━━━━━━━━━━━━━━━━━━
 **External Download Links**
 [Filechan]({nyaa_text})  |  [Gofile]({gofuk_text})  |  [KrakenFiles]({krfuk_text})"""
-        daze = await x.edit(output, parse_mode = "markdown")
+        dazea = await daze.edit(output, parse_mode = "markdown")
     except Exception:
        await app.send_message(message.chat.id, text="Something Went Wrong!")
     try:
