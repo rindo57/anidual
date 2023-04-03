@@ -146,11 +146,11 @@ async def upload_video(msg: Message,file,id,tit,name,ttl):
         krresponse = requests.get(krfile_url, params={"url": krurl})
         krfuk_text = krresponse.text.strip()
         hash = secrets.token_hex(nbytes=7)
-        ss_path, sp_path = await gen_ss_sam(hash, filename, LOGS)
+        ss_path, sp_path = await gen_ss_sam(hash, fukpath, LOGS)
         if ss_path and sp_path:
             ss = await bot.send_message(kayo_id, file=glob(f"{ss_path}/*"))
             sp = await bot.send_message(
-                kayo_id, file=sp_path, thumb="thumb.jpg", force_document=True
+                kayo_id, file=sp_path, force_document=True
             )
             
             await reporter.report(
