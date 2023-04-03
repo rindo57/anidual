@@ -236,7 +236,7 @@ async def gen_ss_sam(hash, fukpath, log):
         )
         await process.communicate()
         ss, dd = await duration_s(fukpath)
-        __ = filename.split(".mkv")[-2]
+        __ = fukpath.split(".mkv")[-2]
         out = __ + "_sample.mkv"
         _ncmd = f'ffmpeg -i """{fukpath}""" -preset ultrafast -ss {ss} -to {dd} -c:v libx265 -crf 27 -map 0:v -c:a aac -map 0:a -c:s copy -map 0:s? """{out}""" -y'
         process = await asyncio.create_subprocess_shell(
