@@ -26,7 +26,7 @@ async def mediainfo(fukpath):
         client.create_api_token("Mediainfo")
         page = client.post(
             title="Mediainfo",
-            author=("ANIMXT),
+            author=("ANIMXT"),
             author_url=f"https://t.me/Latest_Ongoing_Airing_Anime",
             text=out,
         )
