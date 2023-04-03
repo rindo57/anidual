@@ -4,6 +4,8 @@ from main import queue
 import cv2, random
 from string import ascii_letters, ascii_uppercase, digits
 from pyrogram.types import Message, MessageEntity
+import aiofiles
+import aiohttp
 from html_telegraph_poster import TelegraphPoster
 
 def get_duration(file):
@@ -17,7 +19,7 @@ def get_duration(file):
 async def mediainfo(fukpath):
     try:
         process = await asyncio.create_subprocess_shell(
-            f"mediainfo '''{file}''' --Output=HTML",
+            f"mediainfo '''{fukpath}''' --Output=HTML",
             stdout=asyncio.subprocess.PIPE,
             stderr=asyncio.subprocess.PIPE,
         )
