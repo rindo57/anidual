@@ -106,7 +106,6 @@ async def upload_video(msg: Message,file,id,tit,name,ttl):
             )
 
             ) 
-        link_info = await mediainfo(file)
         os.rename(file,fukpath)
         files = {'file': open(fukpath, 'rb')}
         nanix = await x.edit(gcaption + "\n" "━━━━━━━━━━━━━━━━━━━" + "\n" + "Generating Link", parse_mode = "markdown")
@@ -152,6 +151,8 @@ async def upload_video(msg: Message,file,id,tit,name,ttl):
 **External Download Links**
 [Filechan]({nyaa_text})  |  [Gofile]({gofuk_text})  |  [KrakenFiles]({krfuk_text})"""
         daze = await x.edit(output, parse_mode = "markdown")
+        king = os.rename(file,"video.mkv")
+        link_info = await mediainfo(king, app)
         output = f"""
 {gcaption} 
 Media Info - {link_info}
@@ -168,7 +169,7 @@ Media Info - {link_info}
             os.remove(file)
             
             os.remove(fukpath)
-
+            os.remove("video.mkv")
             os.remove(thumbnail)
 
     except:
