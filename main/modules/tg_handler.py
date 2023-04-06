@@ -101,6 +101,7 @@ async def start_uploading(data):
         title = title.replace("Shinka", "Shin Shinka")
         title = title.replace("Ijiranaide, Nagatoro-san S2", "Ijiranaide, Nagatoro-san 2")
         title = title.replace("Dr. Stone S3", "Dr Stone New World")
+        title = title.replace("Opus.COLORs", "Opus COLORs")
         link = data["link"]
 
         size = data["size"]
