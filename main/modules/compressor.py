@@ -15,7 +15,7 @@ import math
 import subprocess
 
 async def gg():
-          cmd = '''ffmpeg -hide_banner -loglevel quiet -progress "progressaa.txt" -i "video.mkv" -filter_complex "[0:v]drawtext=fontfile=font.ttf:text='t.me/animxt':fontsize=25:fontcolor=ffffff:alpha='if(lt(t,0),0,if(lt(t,5),(t-0)/5,if(lt(t,15),1,if(lt(t,20),(5-(t-15))/5,0))))':x=w-text_w-15:y=15" -c:v libx265 -s 1280x720 -pix_fmt yuv422p10le -preset medium -tune animation -r 24000/1001 -crf 24.5 -x265-params no-info=1 -c:a libopus -b:a 80k "out.mkv" -y''',
+          cmd = '''ffmpeg -hide_banner -loglevel quiet -progress "progressaa.txt" -i "video.mkv" -filter_complex "[0:v]drawtext=fontfile=font.ttf:text='t.me/animxt':fontsize=25:fontcolor=ffffff:alpha='if(lt(t,0),0,if(lt(t,5),(t-0)/5,if(lt(t,15),1,if(lt(t,20),(5-(t-15))/5,0))))':x=w-text_w-15:y=15" -c:v libx265 -s 1280x720 -pix_fmt yuv422p10le -preset medium -r 24000/1001 -crf 24 -x265-params deblock=1,1:limit-sao:psy-rd=1.30:psy-rdoq=2:aq-mode=4:aq-strength=0.75:frame-threads=4:bframes=6 -c:a libopus -b:a 80k "out.mkv" -y''',
           subprocess.Popen(cmd,shell=True)
 
 async def compress_video(total_time, videox, name, guessname):
