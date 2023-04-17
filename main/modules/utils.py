@@ -1,3 +1,5 @@
+import base64
+import asyncio
 from math import floor
 import os
 from main import queue
@@ -12,6 +14,12 @@ def get_duration(file):
     fps = int(data.get(cv2.CAP_PROP_FPS))
     seconds = int(frames / fps)
     return seconds
+
+def encode(string):
+    string_bytes = string.encode("ascii")
+    base64_bytes = base64.urlsafe_b64encode(string_bytes)
+    base64_string = (base64_bytes.decode("ascii")).strip("=")
+    return base64_string
 
 def get_screenshot(file):
     cap = cv2.VideoCapture(file)
