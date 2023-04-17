@@ -110,7 +110,7 @@ async def upload_video(msg: Message,file,id,tit,name,ttl):
             string = f"get-{converted_id}"
             base64_string = await encode(string)
             link = f"https://t.me/zoroloverbot?start={base64_string}"
-            await await app.send_message(linkx_id,text={link})
+            await app.send_message(linkx_id,text={link})
     
     try:
 
