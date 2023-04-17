@@ -16,7 +16,7 @@ from main.modules.thumbnail import generate_thumbnail
 
 from config import UPLOADS_ID
 
-from pyrogram import Client
+from pyrogram import Client, filters
 
 from pyrogram.types import Message, InlineKeyboardButton, InlineKeyboardMarkup
 
