@@ -130,7 +130,7 @@ async def upload_video(msg: Message,file,id,tit,name,ttl):
 
     return x.message_id
 @app.on_message(filters.command('start') & filters.private)
-async def start_command(client: Client, message: Message):
+async def start_command(bot, message: Message):
     id = message.from_user.id
     if not await present_user(id):
         try:
@@ -178,11 +178,11 @@ async def start_command(client: Client, message: Message):
 
 
             try:
-                await msg.copy(chat_id=message.from_user.id, caption = "@animxt", parse_mode = ParseMode.HTML)
+                await msg.copy(chat_id=message.from_user.id, caption = "@animxt")
                 await asyncio.sleep(0.5)
             except FloodWait as e:
                 await asyncio.sleep(e.x)
-                await msg.copy(chat_id=message.from_user.id, caption = "@animxt", parse_mode = ParseMode.HTML)
+                await msg.copy(chat_id=message.from_user.id, caption = "@animxt")
             except:
                 pass
         return
