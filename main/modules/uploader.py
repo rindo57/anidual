@@ -15,7 +15,7 @@ from main.modules.thumbnail import generate_thumbnail
 
 from config import UPLOADS_ID
 
-from pyrogram.types import Message, InlineKeyboardButton, InlineKeyboardMarkup, Client
+from pyrogram.types import Message, InlineKeyboardButton, InlineKeyboardMarkup
 
 from main.modules.progress import progress_for_pyrogram
 
