@@ -1,4 +1,5 @@
 import base64
+import re
 import asyncio
 from math import floor
 import os
