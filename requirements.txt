@@ -14,4 +14,4 @@ opencv-python-headless
 aiofiles
 html5lib
 libtorrent
-html_telegraph_poster
+pyromod==1.5
