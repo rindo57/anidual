@@ -111,3 +111,18 @@ async def upload_video(msg: Message,file,id,tit,name,ttl):
             base64_string = await encode(string)
             link = f"https://t.me/zoroloverbot?start={base64_string}"
             await app.send_message(linkx_id,text={link})
+    try:
+
+            await r.delete()
+
+            os.remove(file)
+           
+
+            os.remove(thumbnail)
+
+    except:
+
+        pass
+
+    return x.message_id
+
