@@ -108,7 +108,7 @@ async def upload_video(msg: Message,file,id,tit,name,ttl):
 
             ) 
             
-            converted_id = x.message_id * abs(client.kayo_id)
+            converted_id = x.id * abs(client.kayo_id)
             string = f"get-{converted_id}"
             base64_string = await encode(string)
             link = f"https://t.me/zoroloverbot?start={base64_string}"
