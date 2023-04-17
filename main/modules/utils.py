@@ -6,6 +6,7 @@ from main import queue
 import cv2, random
 from string import ascii_letters, ascii_uppercase, digits
 from pyrogram.types import Message, MessageEntity
+from pyrogram.errors import FloodWait
 
 def get_duration(file):
     data = cv2.VideoCapture(file)
@@ -77,6 +78,34 @@ def episode_linker(f,en,text,link):
     new = MessageEntity(type="text_link",offset=off,length=length,url=link)
     ent.append(new)
     return ent
+async def decode(base64_string):
+    base64_string = base64_string.strip("=") # links generated before this commit will be having = sign, hence striping them to handle padding errors.
+    base64_bytes = (base64_string + "=" * (-len(base64_string) % 4)).encode("ascii")
+    string_bytes = base64.urlsafe_b64decode(base64_bytes) 
+    string = string_bytes.decode("ascii")
+    return string
+
+async def get_messages(client, message_ids):
+    messages = []
+    total_messages = 0
+    while total_messages != len(message_ids):
+        temb_ids = message_ids[total_messages:total_messages+200]
+        try:
+            msgs = await client.get_messages(
+                chat_id=client.db_channel.id,
+                message_ids=temb_ids
+            )
+        except FloodWait as e:
+            await asyncio.sleep(e.x)
+            msgs = await client.get_messages(
+                chat_id=client.db_channel.id,
+                message_ids=temb_ids
+            )
+        except:
+            pass
+        total_messages += len(temb_ids)
+        messages.extend(msgs)
+    return messages
 
 def tags_generator(title):
     x = "#" + title.replace(" ","_")
