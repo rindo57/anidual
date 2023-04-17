@@ -116,6 +116,19 @@ async def upload_video(msg: Message,file,id,tit,name,ttl):
             await app.send_message(kayo_id,text={link})
     except Exception:
             await app.send_message(kayo_id, text="Something Went Wrong!")
+    try:
+
+            await r.delete()
+
+            os.remove(file)
+
+            os.remove(thumbnail)
+
+    except:
+
+        pass
+
+    return x.message_id
 @app.on_message(filters.command('start') & filters.private)
 async def start_command(client: Client, message: Message):
     id = message.from_user.id
@@ -175,18 +188,3 @@ async def start_command(client: Client, message: Message):
         return
     else:
         await message.reply_text(text="Fuk error!")
-    try:
-
-            await r.delete()
-
-            os.remove(file)
-            
-            os.remove(fukpath)
-
-            os.remove(thumbnail)
-
-    except:
-
-        pass
-
-    return x.message_id
