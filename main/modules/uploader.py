@@ -5,7 +5,7 @@ import aiohttp
 import requests
 import aiofiles
 
-from main.modules.utils import format_time, get_duration, get_epnum, get_filesize, status_text, tags_generator
+from main.modules.utils import format_time, get_duration, get_epnum, get_filesize, status_text, tags_generator, encode
 
 from main.modules.anilist import get_anime_name
 
