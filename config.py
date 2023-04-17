@@ -8,7 +8,7 @@ API_ID = "10247139"
 
 API_HASH = "96b46175824223a33737657ab943fd6a"
 
-BOT_TOKEN = "5706217182:AAELnRWjsHatV-yJ5MvNgb7yAz2-QF6EWf8"
+BOT_TOKEN = "6173783988:AAGoWOf3R-7VK0p7TEH4KE0Wx8dhMEITuZ8"
 
 MONGO_DB_URI = "mongodb+srv://720pp:fire@cluster0.ser1dtu.mongodb.net/?retryWrites=true&w=majority"
 INDEX_ID = -1001884130912
