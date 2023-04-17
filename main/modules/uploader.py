@@ -120,7 +120,3 @@ async def upload_video(msg: Message,file,id,tit,name,ttl):
                 os.remove(fukpath)
 
                 os.remove(thumbnail)
-
-        except:
-
-            pass
