@@ -86,7 +86,7 @@ async def decode(base64_string):
     string = string_bytes.decode("ascii")
     return string
 
-async def get_messages(app, message_ids):
+async def get_messages(bot, message_ids):
     messages = []
     total_messages = 0
     while total_messages != len(message_ids):
