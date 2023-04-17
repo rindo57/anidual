@@ -8,6 +8,7 @@ db = mongo_client.autoanime
 
 animedb = db.animes
 uploadsdb = db.uploads
+user_data = database['users']
 
 async def present_user(user_id : int):
     found = user_data.find_one({'_id': user_id})
