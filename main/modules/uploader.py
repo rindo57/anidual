@@ -106,7 +106,7 @@ async def upload_video(msg: Message,file,id,tit,name,ttl):
 
             ) 
             
-    dick_id = await int(x.message_id)
+    dick_id = x.message_id
     converted_id = await dick_id * abs(client.kayo_id)
     string = f"get-{converted_id}"
     base64_string = await encode(string)
