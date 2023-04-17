@@ -85,19 +85,19 @@ async def decode(base64_string):
     string = string_bytes.decode("ascii")
     return string
 
-async def get_messages(client, message_ids):
+async def get_messages(app, message_ids):
     messages = []
     total_messages = 0
     while total_messages != len(message_ids):
         temb_ids = message_ids[total_messages:total_messages+200]
         try:
-            msgs = await client.get_messages(
+            msgs = await app.get_messages(
                 chat_id=kayo_id,
                 message_ids=temb_ids
             )
         except FloodWait as e:
             await asyncio.sleep(e.x)
-            msgs = await client.get_messages(
+            msgs = await app.get_messages(
                 chat_id=kayo_id,
                 message_ids=temb_ids
             )
