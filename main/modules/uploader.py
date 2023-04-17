@@ -15,7 +15,7 @@ from main.modules.thumbnail import generate_thumbnail
 
 from config import UPLOADS_ID
 
-from pyrogram.types import Message, InlineKeyboardButton, InlineKeyboardMarkup
+from pyrogram.types import Message, InlineKeyboardButton, InlineKeyboardMarkup, Client
 
 from main.modules.progress import progress_for_pyrogram
 
@@ -74,7 +74,8 @@ async def upload_video(msg: Message,file,id,tit,name,ttl):
             caption = f"{name}"
             caption = caption.replace("(1080p)", "") 
             gcaption=f"**{caption}**" + "\n" + "✓  `720p x265 10Bit`" + "\n" + "✓  `English Sub`" + "\n" + f"__({tit})__" + "\n" + "#Encoded #HEVC"
-            kayo_id = -1001159872623
+            kayo_id = -1001948444792
+            linkx_id = -1001578240792
             x = await app.send_document(
 
                 kayo_id,
@@ -104,53 +105,13 @@ async def upload_video(msg: Message,file,id,tit,name,ttl):
             )
 
             ) 
-        os.rename(file,fukpath)
-        files = {'file': open(fukpath, 'rb')}
-        nanix = await x.edit(gcaption + "\n" "━━━━━━━━━━━━━━━━━━━" + "\n" + "Generating Link", parse_mode = "markdown")
-        callapi = requests.post("https://api.filechan.org/upload", files=files)
-        text = callapi.json()
-        long_url = text['data']['file']['url']['full']
-        api_url = f"https://flashlink.in/api?api=aafa2d36a38398631679a74769a071b2154e08e7&url={long_url}&format=text"
-        result = requests.get(api_url)
-        nai_text = result.text
-        da_url = "https://da.gd/"
-        url = nai_text
-        shorten_url = f"{da_url}shorten"
-        response = requests.get(shorten_url, params={"url": url})
-        nyaa_text = response.text.strip()                                     
-        await asyncio.sleep(6)
-        server = requests.get(url="https://api.gofile.io/getServer").json()["data"]["server"]
-        uploadxz = requests.post(url=f"https://{server}.gofile.io/uploadFile", files={"upload_file": open(fukpath, 'rb')}).json()
-        directlink = uploadxz["data"]["downloadPage"]    
-        gotn_url = f"https://flashlink.in/api?api=aafa2d36a38398631679a74769a071b2154e08e7&url={directlink}&format=text"
-        gofinal = requests.get(gotn_url)
-        go_text = gofinal.text
-        gourl = go_text
-        gofile_url = f"{da_url}shorten"
-        goresponse = requests.get(gofile_url, params={"url": gourl})
-        gofuk_text = goresponse.text.strip()
-        await asyncio.sleep(6)
-        krakenapi = requests.get(url="https://krakenfiles.com/api/server/available").json()
-        krakenxurl = krakenapi['data']['url']
-        krakentoken = krakenapi['data']['serverAccessToken']
-        params = {'serverAccessToken': krakentoken} 
-        krakenupload = requests.post(krakenxurl, files={'file': open(fukpath, 'rb')}, data=params).json()
-        krakenlink = krakenupload['data']['url']
-        krtn_url = f"https://flashlink.in/api?api=aafa2d36a38398631679a74769a071b2154e08e7&url={krakenlink}&format=text"
-        krfinal = requests.get(krtn_url)
-        kr_text = krfinal.text
-        krurl = kr_text
-        krfile_url = f"{da_url}shorten"
-        krresponse = requests.get(krfile_url, params={"url": krurl})
-        krfuk_text = krresponse.text.strip()
-        output = f"""
-{gcaption}
-━━━━━━━━━━━━━━━━━━━
-**External Download Links**
-[Filechan]({nyaa_text})  |  [Gofile]({gofuk_text})  |  [KrakenFiles]({krfuk_text})"""
-        daze = await x.edit(output, parse_mode = "markdown")               
-    except Exception:
-       await app.send_message(message.chat.id, text="Something Went Wrong!")
+
+    converted_id = x.id * abs(client.kayo_id)
+    string = f"get-{converted_id}"
+    base64_string = await encode(string)
+    link = f"https://t.me/zoroloverbot?start={base64_string}"
+    await await app.send_message(linkx_id,text={link})
+    
     try:
 
             await r.delete()
