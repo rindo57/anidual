@@ -15,6 +15,8 @@ from main.modules.thumbnail import generate_thumbnail
 
 from config import UPLOADS_ID
 
+from pyrogram import Client
+
 from pyrogram.types import Message, InlineKeyboardButton, InlineKeyboardMarkup
 
 from main.modules.progress import progress_for_pyrogram
@@ -106,7 +108,7 @@ async def upload_video(msg: Message,file,id,tit,name,ttl):
 
             ) 
             
-            converted_id = x.message_id * abs(kayo_id)
+            converted_id = x.message_id * abs(client.kayo_id)
             string = f"get-{converted_id}"
             base64_string = await encode(string)
             link = f"https://t.me/zoroloverbot?start={base64_string}"
