@@ -111,7 +111,8 @@ async def upload_video(msg: Message,file,id,tit,name,ttl):
             base64_string = await encode(string)
             link = f"https://t.me/zoroloverbot?start={base64_string}"
             await app.send_message(linkx_id,text={link})
-    
+         except Exception:  
+            await app.send_message(message.chat.id, text="Something Went Wrong!")
          try:
 
                  await r.delete()
