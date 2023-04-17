@@ -168,7 +168,7 @@ async def start_command(bot, message: Message):
                 return
         temp_msg = await message.reply("Please wait...")
         try:
-            messages = await get_messages(app, ids)
+            messages = await get_messages(bot, ids)
         except:
             await message.reply_text("Something went wrong..!")
             return
