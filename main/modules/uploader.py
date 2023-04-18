@@ -180,9 +180,6 @@ async def start_command(bot, message: Message):
             try:
                 await msg.copy(chat_id=message.from_user.id, caption = "@animxt")
                 await asyncio.sleep(0.5)
-            except FloodWait as e:
-                await asyncio.sleep(e.x)
-                await msg.copy(chat_id=message.from_user.id, caption = "@animxt")
             except:
                 pass
         return
