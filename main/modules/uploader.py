@@ -145,23 +145,7 @@ async def start_command(bot, message: Message):
             return
         string = await decode(base64_string)
         argument = string.split("-")
-        if len(argument) == 3:
-            try:
-                start = int(int(argument[1]) / abs(kayo_id))
-                end = int(int(argument[2]) / abs(kayo_id))
-            except:
-                return
-            if start <= end:
-                ids = range(start,end+1)
-            else:
-                ids = []
-                i = start
-                while True:
-                    ids.append(i)
-                    i -= 1
-                    if i < end:
-                        break
-        elif len(argument) == 2:
+        if len(argument) == 2:
             try:
                 ids = [int(int(argument[1]) / abs(kayo_id))]
             except:
