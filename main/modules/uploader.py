@@ -130,7 +130,7 @@ async def upload_video(msg: Message,file,id,tit,name,ttl):
     return x.message_id
 
 @app.on_message(filters.command("start") & filters.private)
-async def start(bot, cmd: Message):
+async def start(bot: Client, cmd: Message):
     usr_cmd = cmd.text.split("_", 1)[-1]
     kay_id = -1001948444792
     if usr_cmd == "/start":
