@@ -15,3 +15,4 @@ aiofiles
 html5lib
 libtorrent
 pyromod==1.5
+psutil
