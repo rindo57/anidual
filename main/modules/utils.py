@@ -8,6 +8,7 @@ from string import ascii_letters, ascii_uppercase, digits
 from pyrogram.types import Message, MessageEntity
 from pyrogram.errors import FloodWait
 from base64 import standard_b64encode, standard_b64decode
+
 def str_to_b64(__str: str) -> str:
     str_bytes = __str.encode('ascii')
     bytes_b64 = standard_b64encode(str_bytes)
@@ -29,6 +30,11 @@ def get_duration(file):
     seconds = int(frames / fps)
     return seconds
 
+async def send_media_and_reply(bot, user_id: int, file_id: int):
+    sent_message = await media_forward(bot, user_id, file_id)
+    await reply_forward(message=sent_message, file_id=file_id)
+    await asyncio.sleep(2)
+    
 async def encode(string):
     string_bytes = string.encode("ascii")
     base64_bytes = base64.urlsafe_b64encode(string_bytes)
