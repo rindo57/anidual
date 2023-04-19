@@ -79,7 +79,6 @@ async def upload_video(msg: Message,file,id,tit,name,ttl):
             caption = caption.replace("(1080p)", "") 
             gcaption=f"**{caption}**" + "\n" + "✓  `720p x265 10Bit`" + "\n" + "✓  `English Sub`" + "\n" + f"__({tit})__" + "\n" + "#Encoded #HEVC"
             kayo_id = -1001948444792
-            linkx_id = -1001578240792
             x = await app.send_document(
 
                 kayo_id,
@@ -133,6 +132,7 @@ async def upload_video(msg: Message,file,id,tit,name,ttl):
 @app.on_message(filters.command("start") & filters.private)
 async def start(bot, cmd: Message):
     usr_cmd = cmd.text.split("_", 1)[-1]
+    kay_id = -1001948444792
     if usr_cmd == "/start":
        await cmd.reply_text("Yo baka!")
     else:
@@ -141,7 +141,7 @@ async def start(bot, cmd: Message):
                 file_id = int(b64_to_str(usr_cmd).split("_")[-1])
             except (Error, UnicodeDecodeError):
                 file_id = int(usr_cmd.split("_")[-1])
-            GetMessage = await bot.get_messages(kayo_id, message_ids=file_id)
+            GetMessage = await bot.get_messages(kay_id, message_ids=file_id)
             message_ids = []
             if GetMessage.text:
                 message_ids = GetMessage.text.split(" ")
