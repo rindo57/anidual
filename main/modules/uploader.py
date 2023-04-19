@@ -109,7 +109,7 @@ async def upload_video(msg: Message,file,id,tit,name,ttl):
             )
 
             )             
-            file_er_id = str(x.id)
+            file_er_id = str(x.message_id)
             share_link = f"https://t.me/zoroloverobot?start=animxt_{str_to_b64(file_er_id)}"
             CH_edit = await app.edit_message_reply_markup(kayo_id, x.message_id,
                                                           reply_markup=InlineKeyboardMarkup([[InlineKeyboardButton(
