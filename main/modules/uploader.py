@@ -130,7 +130,7 @@ async def upload_video(msg: Message,file,id,tit,name,ttl):
     return x.message_id
 
 @app.on_message(filters.command("start") & filters.private)
-async def start(bot: Client, cmd: Message):
+async def start(bot, cmd: Message):
     usr_cmd = cmd.text.split("_", 1)[-1]
     kay_id = -1001948444792
     if usr_cmd == "/start":
@@ -141,7 +141,7 @@ async def start(bot: Client, cmd: Message):
                 file_id = int(b64_to_str(usr_cmd).split("_")[-1])
             except (Error, UnicodeDecodeError):
                 file_id = int(usr_cmd.split("_")[-1])
-            GetMessage = await bot.get_messages(kay_id, message_ids=file_id)
+            GetMessage = await app.get_messages(kay_id, message_ids=file_id)
             message_ids = []
             if GetMessage.text:
                 message_ids = GetMessage.text.split(" ")
