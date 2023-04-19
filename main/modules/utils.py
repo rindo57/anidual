@@ -34,12 +34,7 @@ async def send_media_and_reply(bot, user_id: int, file_id: int):
     sent_message = await media_forward(bot, user_id, file_id)
     await reply_forward(message=sent_message, file_id=file_id)
     await asyncio.sleep(2)
-    
-async def encode(string):
-    string_bytes = string.encode("ascii")
-    base64_bytes = base64.urlsafe_b64encode(string_bytes)
-    base64_string = (base64_bytes.decode("ascii")).strip("=")
-    return base64_string
+
 
 def get_screenshot(file):
     cap = cv2.VideoCapture(file)
@@ -97,12 +92,6 @@ def episode_linker(f,en,text,link):
     new = MessageEntity(type="text_link",offset=off,length=length,url=link)
     ent.append(new)
     return ent
-async def decode(base64_string):
-    base64_string = base64_string.strip("=") # links generated before this commit will be having = sign, hence striping them to handle padding errors.
-    base64_bytes = (base64_string + "=" * (-len(base64_string) % 4)).encode("ascii")
-    string_bytes = base64.urlsafe_b64decode(base64_bytes) 
-    string = string_bytes.decode("ascii")
-    return string
 
 async def get_messages(bot, message_ids):
     messages = []
