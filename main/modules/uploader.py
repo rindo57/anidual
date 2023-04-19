@@ -5,7 +5,8 @@ import aiohttp
 import requests
 import aiofiles
 
-from main.modules.utils import format_time, get_duration, get_epnum, get_filesize, status_text, tags_generator, encode, decode, get_messages
+
+from main.modules.utils import format_time, get_duration, get_epnum, get_filesize, status_text, tags_generator, get_messages, b64_to_str, str_to_b64, send_media_and_reply
 
 from main.modules.anilist import get_anime_name
 
@@ -107,13 +108,12 @@ async def upload_video(msg: Message,file,id,tit,name,ttl):
 
             )
 
-            ) 
-            
-            converted_id = x.message_id * abs(kayo_id)
-            string = f"get-{converted_id}"
-            base64_string = await encode(string)
-            link = f"https://t.me/zoroloverobot?start={base64_string}"
-            await app.send_message(kayo_id,text={link})
+            )             
+            file_er_id = str(x.id)
+            share_link = f"https://t.me/zoroloverobot?start=animxt_{str_to_b64(file_er_id)}"
+            CH_edit = await app.edit_message_reply_markup(kayo_id, x.message_id,
+                                                          reply_markup=InlineKeyboardMarkup([[InlineKeyboardButton(
+                                                              "Telegram File", url=share_link)]]))
     except Exception:
             await app.send_message(kayo_id, text="Something Went Wrong!")
     try:
@@ -129,43 +129,29 @@ async def upload_video(msg: Message,file,id,tit,name,ttl):
         pass
 
     return x.message_id
-@app.on_message(filters.command('start') & filters.private)
-async def start_command(bot, message: Message):
-    id = message.from_user.id
-    if not await present_user(id):
-        try:
-            await add_user(id)
-        except:
-            pass
-    text = message.text
-    if len(text)>7:
-        try:
-            base64_string = text.split(" ", 1)[1]
-        except:
-            return
-        string = await decode(base64_string)
-        argument = string.split("-")
-        if len(argument) == 2:
-            try:
-                ids = [int(int(argument[1]) / abs(kayo_id))]
-            except:
-                return
-        temp_msg = await message.reply("Please wait...")
-        try:
-            messages = await get_messages(bot, ids)
-        except:
-            await message.reply_text("Something went wrong..!")
-            return
-        await temp_msg.delete()
 
-        for msg in messages:
-
-
-            try:
-                await msg.copy(chat_id=message.from_user.id, caption = "@animxt")
-                await asyncio.sleep(0.5)
-            except:
-                pass
-        return
+@app.on_message(filters.command("start") & filters.private)
+async def start(bot, cmd: Message):
+    usr_cmd = cmd.text.split("_", 1)[-1]
+        await cmd.reply_text("Yo baka!")
     else:
-        await message.reply_text(text="Fuk error!")
+        try:
+            try:
+                file_id = int(b64_to_str(usr_cmd).split("_")[-1])
+            except (Error, UnicodeDecodeError):
+                file_id = int(usr_cmd.split("_")[-1])
+            GetMessage = await bot.get_messages(kayo_id, message_ids=file_id)
+            message_ids = []
+            if GetMessage.text:
+                message_ids = GetMessage.text.split(" ")
+                _response_msg = await cmd.reply_text(
+                    text=f"**Total Files:** `{len(message_ids)}`",
+                    quote=True,
+                    disable_web_page_preview=True
+                )
+            else:
+                message_ids.append(int(GetMessage.id))
+            for i in range(len(message_ids)):
+                await send_media_and_reply(bot, user_id=cmd.from_user.id, file_id=int(message_ids[i]))
+        except Exception as err:
+            await cmd.reply_text(f"Something went wrong!\n\n**Error:** `Bitch`")
