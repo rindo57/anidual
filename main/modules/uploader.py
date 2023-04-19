@@ -133,7 +133,7 @@ async def upload_video(msg: Message,file,id,tit,name,ttl):
 @app.on_message(filters.command("start") & filters.private)
 async def start(bot, cmd: Message):
     usr_cmd = cmd.text.split("_", 1)[-1]
-        await cmd.reply_text("Yo baka!")
+    await cmd.reply_text("Yo baka!")
     else:
         try:
             try:
