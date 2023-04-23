@@ -98,8 +98,6 @@ async def start_uploading(data):
     try:
 
         title = data["title"]
-        title = title.replace("Shinka", "Shin Shinka")
-        title = title.replace("Ijiranaide, Nagatoro-san S2", "Ijiranaide, Nagatoro-san 2")
         title = title.replace("Dr. Stone S3", "Dr Stone New World")
         title = title.replace("Opus.COLORs", "Opus COLORs")
         link = data["link"]
@@ -121,7 +119,7 @@ async def start_uploading(data):
 
         await status.edit(await status_text(f"Downloading {name}"),reply_markup=button1)
 
-        file = await downloader(msg,link,size,title)
+        file = await downloader(msg,link,size,name,title)
 
         await msg.edit(f"Download Complete : {name}")
         print("Encoding --> ",name)
