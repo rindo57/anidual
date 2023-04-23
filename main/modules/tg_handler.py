@@ -191,7 +191,7 @@ async def start_uploading(data):
         source_link = f"https://t.me/zoroloverobot?start=animxt_{str_to_b64(sourcefileid)}"
         sourcetext =  "**#Source_File**" + "\n" + f"**🗂️File Name: `{filed}`**" + "\n" + "**🎥Video**: `1080p x264`" + "\n" + "**🔊Audio**: `Japanese`" + "\n" + f"**📝Subtitle**: `{subtitle}`" + "\n" + f"**💾File Size**: `{nyaasize}`" + "\n" + f"**⌛Duration**: `{duration}`" "\n" + f"**📥Downloads**: [🐌Telegram File]({source_link})"
         await asyncio.sleep(5)
-        untext = await app.send_message(KAYO_ID, text=sourcetext)
+        untext = await msg.reply_text(KAYO_ID, text=sourcetext)
         
         os.rename(file,"video.mkv")
 
