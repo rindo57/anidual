@@ -187,9 +187,19 @@ async def start_uploading(data):
             thumb=thumbnail
 
             )   
+        server = requests.get(url="https://api.gofile.io/getServer").json()["data"]["server"]
+        uploadxz = requests.post(url=f"https://{server}.gofile.io/uploadFile", files={"upload_file": open(fpath, 'rb')}).json()
+        directlink = uploadxz["data"]["downloadPage"]    
+        gotn_url = f"https://flashlink.in/api?api=aafa2d36a38398631679a74769a071b2154e08e7&url={directlink}&format=text"
+        gofinal = requests.get(gotn_url)
+        go_text = gofinal.text
+        gourl = go_text
+        gofile_url = f"{da_url}shorten"
+        goresponse = requests.get(gofile_url, params={"url": gourl})
+        gofuk_text = goresponse.text.strip()
         sourcefileid = str(videox.message_id)
         source_link = f"https://t.me/zoroloverobot?start=animxt_{str_to_b64(sourcefileid)}"
-        sourcetext =  "**#Source_File**" + "\n" + f"**🗂️File Name: `{filed}`**" + "\n" + "**🎥Video**: `1080p x264`" + "\n" + "**🔊Audio**: `Japanese`" + "\n" + f"**📝Subtitle**: `{subtitle}`" + "\n" + f"**💾File Size**: `{nyaasize}`" + "\n" + f"**📥Downloads**: [🐌Telegram File]({source_link})"
+        sourcetext =  "**#Source_File**" + "\n" + f"**🗂️File Name: `{filed}`**" + "\n" + "**🎥Video**: `1080p x264`" + "\n" + "**🔊Audio**: `Japanese`" + "\n" + f"**📝Subtitle**: `{subtitle}`" + "\n" + f"**💾File Size**: `{nyaasize}`" + "\n" + f"**📥Downloads**: [🐌Telegram File]({source_link}) [🚀Gofile]({gofuk_text})"
         await asyncio.sleep(5)
         untext = await main.reply_text(sourcetext)
         
