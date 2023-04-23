@@ -9,24 +9,23 @@ from main import queue
 from main.inline import button1
 
 def trim_title(title: str):
-    title, ext = title.replace("[SubsPlease]","").strip().split("[",maxsplit=2)
-    _, ext = ext.split("]",maxsplit=2)
-    title = title.strip() + ext
-    title = title.replace("Ijiranaide, Nagatoro-san S2", "Ijiranaide, Nagatoro-san 2")
-    title = title.replace("Shinka", "Shin Shinka")
+    title = title.rsplit(' ', 1)[0]
+    title = title.replace("[Erai-raws] ", "")
+    ext = ".mkv"
+    title = title + ext
     return title
 
 def parse():
-    a = feedparser.parse("https://subsplease.org/rss/?r=1080")
+    a = feedparser.parse("https://siftrss.com/f/D8mMbzpKvV")
     b = a["entries"]
-    b = b[0:10]
+    b = b[0:2]
     data = []    
 
     for i in b:
         item = {}
         item['title'] = trim_title(i['title'])
-        item['size'] = i['subsplease_size']
-        item['link'] = i['link']
+        item['size'] = i['nyaa_size']
+        item['link'] = "magnet:?xt=urn:btih:" + i['nyaa_infohash']
         data.append(item)
     data.reverse()
     return data
@@ -70,4 +69,4 @@ async def auto_parser():
         except:
             pass
 
-        await asyncio.sleep(30)
+        await asyncio.sleep(45)
