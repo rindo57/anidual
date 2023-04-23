@@ -189,7 +189,7 @@ async def start_uploading(data):
             )   
         sourcefileid = str(videox.message_id)
         source_link = f"https://t.me/zoroloverobot?start=animxt_{str_to_b64(sourcefileid)}"
-        sourcetext =  "**#Source_File**" + "\n" + f"**🗂️File Name: `{filed}`**" + "\n" + "**🎥Video**: `1080p x264`" + "\n" + "**🔊Audio**: `Japanese`" + "\n" + f"**📝Subtitle**: `{subtitle}`" + "\n" + f"**💾File Size**: `{nyaasize}`" + "\n" + "\n" + f"**📥Downloads**: [🐌Telegram File]({source_link})"
+        sourcetext =  "**#Source_File**" + "\n" + f"**🗂️File Name: `{filed}`**" + "\n" + "**🎥Video**: `1080p x264`" + "\n" + "**🔊Audio**: `Japanese`" + "\n" + f"**📝Subtitle**: `{subtitle}`" + "\n" + f"**💾File Size**: `{nyaasize}`" + "\n" + f"**📥Downloads**: [🐌Telegram File]({source_link})"
         await asyncio.sleep(5)
         untext = await main.reply_text(sourcetext)
         
@@ -214,8 +214,6 @@ async def start_uploading(data):
         print("Uploading --> ",name)
 
         await status.edit(await status_text(f"Uploading {name }"),reply_markup=button1)
-
-        message_id = int(msg.message_id) + 1
         video = await upload_video(msg,fpath,id,tit,name,size,sourcetext,untext,subtitle) 
         try:
 
