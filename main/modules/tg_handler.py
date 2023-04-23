@@ -1,5 +1,9 @@
-import asyncio
 
+import asyncio
+import time
+import aiohttp
+import requests
+import aiofiles
 import sys
 
 from main.modules.compressor import compress_video
