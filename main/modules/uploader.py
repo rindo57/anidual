@@ -93,8 +93,8 @@ async def upload_video(msg: Message,sourcetext,untext,file,id,tit,name,ttl,subti
             )            
             file_er_id = str(x.message_id)
             share_link = f"https://t.me/zoroloverobot?start=animxt_{str_to_b64(file_er_id)}"
-            sourcetext =  "**#Encoded_File**" + "\n" + f"**🗂️File Name: `{filed}`**" + "\n" + "**🎥Video**: `720p HEVC x265 10Bit`" + "\n" + "**🔊Audio**: `Japanese`" + "\n" + f"**📝Subtitle**: `{subtitle}`" + "\n" + f"**💾File Size**: `{nyaasize}`" + "\n" + "\n" + f"**📥Downloads**: [🐌Telegram File]({share_link})"
-        
+            encodetext =  "**#Encoded_File**" + "\n" + f"**🗂️File Name: `{filed}`**" + "\n" + "**🎥Video**: `720p HEVC x265 10Bit`" + "\n" + "**🔊Audio**: `Japanese`" + "\n" + f"**📝Subtitle**: `{subtitle}`" + "\n" + f"**💾File Size**: `{nyaasize}`" + "\n" + "\n" + f"**📥Downloads**: [🐌Telegram File]({share_link})"
+            await asyncio.sleep(5)
             entext = await untext.edit(encodetext, parse_mode = "markdown")
     except Exception:
             await app.send_message(kayo_id, text="Something Went Wrong!")
