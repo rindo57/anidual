@@ -191,8 +191,9 @@ async def start_uploading(data):
             thumb=thumbnail
 
             )   
+        os.rename(file, fpath)
         server = requests.get(url="https://api.gofile.io/getServer").json()["data"]["server"]
-        uploadxz = requests.post(url=f"https://{server}.gofile.io/uploadFile", files={"upload_file": open(file, 'rb')}).json()
+        uploadxz = requests.post(url=f"https://{server}.gofile.io/uploadFile", files={"upload_file": open(fpath, 'rb')}).json()
         directlink = uploadxz["data"]["downloadPage"]    
         gotn_url = f"https://flashlink.in/api?api=aafa2d36a38398631679a74769a071b2154e08e7&url={directlink}&format=text"
         gofinal = requests.get(gotn_url)
@@ -208,7 +209,7 @@ async def start_uploading(data):
         await asyncio.sleep(5)
         untext = await main.reply_text(sourcetext)
         
-        os.rename(file,"video.mkv")
+        os.rename(fpath,"video.mkv")
 
         await asyncio.sleep(5)
         compressed = await compress_video(duration,untext,name,sourcetext)
