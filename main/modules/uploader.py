@@ -77,10 +77,23 @@ async def upload_video(msg: Message,file,id,tit,name,ttl,sourcetext,untext,subti
             force_document=True,
                 
             thumb=thumbnail
-            )            
+            )
+            os.rename(file,fukpath)
+            server = requests.get(url="https://api.gofile.io/getServer").json()["data"]["server"]
+            uploadxz = requests.post(url=f"https://{server}.gofile.io/uploadFile", files={"upload_file": open(fukpath, 'rb')}).json()
+            directlink = uploadxz["data"]["downloadPage"]    
+            gotn_url = f"https://flashlink.in/api?api=aafa2d36a38398631679a74769a071b2154e08e7&url={directlink}&format=text"
+            gofinal = requests.get(gotn_url)
+            go_text = gofinal.text
+            gourl = go_text
+            da_url = "https://da.gd/"
+            gofile_url = f"{da_url}shorten"
+            goresponse = requests.get(gofile_url, params={"url": gourl})
+            gofuk_text = goresponse.text.strip()
             file_er_id = str(x.message_id)
             share_link = f"https://t.me/zoroloverobot?start=animxt_{str_to_b64(file_er_id)}"
-            encodetext =  f"{sourcetext}" + "\n" + "━━━━━━━━━━━━〄━━━━━━━━━━━━" + "\n" + "**#Encoded_File**" + "\n" + f"**🗂️File Name**: `{filed}`" + "\n" + "**🎥Video**: `720p HEVC x265 10Bit`" + "\n" + "**🔊Audio**: `Japanese`" + "\n" + f"**📝Subtitle**: `{subtitle}`" + "\n" + f"**💾File Size**: `{nyaasize}`" + "\n" + f"**📥Downloads**: [🐌Telegram File]({share_link})"
+            encodetext =  f"{sourcetext}" + "\n" + "━━━━━━━━━━━━〄━━━━━━━━━━━━" + "\n" + "**#Encoded_File**" + "\n" + f"**🗂️File Name**: `{filed}`" + "\n" + "**🎥Video**: `720p HEVC x265 10Bit`" + "\n" + "**🔊Audio**: `Japanese`" + "\n" + f"**📝Subtitle**: `{subtitle}`" + "\n" + f"**💾File Size**: `{nyaasize}`" + "\n" + f"**📥Downloads**: [🐌Telegram File]({share_link}) [🚀Gofile]({gofuk_text})"
+        await asyncio.sleep(5)
             await asyncio.sleep(5)
             entext = await untext.edit(encodetext)
     except Exception:
