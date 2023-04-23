@@ -6,7 +6,7 @@ import requests
 import aiofiles
 
 
-from main.modules.utils import format_time, get_duration, get_epnum, get_filesize, status_text, tags_generator, get_messages, b64_to_str, str_to_b64, send_media_and_reply
+from main.modules.utils import format_time, get_duration, get_epnum, get_filesize, status_text, tags_generator, get_messages, b64_to_str, str_to_b64, send_media_and_reply, get_durationx
 
 from main.modules.anilist import get_anime_name
 
@@ -48,7 +48,7 @@ async def upload_video(msg: Message,file,id,tit,name,ttl,sourcetext,untext,subti
             c_time = time.time()
 
             duration = get_duration(file)
-
+            durationx = get_durationx(file)
             size = get_filesize(file)
 
             ep_num = get_epnum(name)
@@ -92,7 +92,7 @@ async def upload_video(msg: Message,file,id,tit,name,ttl,sourcetext,untext,subti
             gofuk_text = goresponse.text.strip()
             file_er_id = str(x.message_id)
             share_link = f"https://t.me/zoroloverobot?start=animxt_{str_to_b64(file_er_id)}"
-            encodetext =  f"{sourcetext}" + "\n" + "━━━━━━━━━━━━〄━━━━━━━━━━━━" + "\n" + "**#Encoded_File**" + "\n" + f"**🗂️File Name**: `{filed}`" + "\n" + "**🎥Video**: `720p HEVC x265 10Bit`" + "\n" + "**🔊Audio**: `Japanese`" + "\n" + f"**📝Subtitle**: `{subtitle}`" + "\n" + f"**💾File Size**: `{nyaasize}`" + "\n" + f"**📥Downloads**: [🐌Telegram File]({share_link}) [🚀Gofile]({gofuk_text})"
+            encodetext =  f"{sourcetext}" + "\n" + "━━━━━━━━━━━━〄━━━━━━━━━━━━" + "\n" + "**#Encoded_File**" + "\n" + f"**🗂️File Name**: `{filed}`" + "\n" + "**🎥Video**: `720p HEVC x265 10Bit`" + "\n" + "**🔊Audio**: `Japanese`" + "\n" + f"**📝Subtitle**: `{subtitle}`" + "\n" + f"**💾File Size**: `{size}`" + "\n" + f"**⌛Duration**: {durationx}" + "\n" + f"**📥Downloads**: [🐌Telegram File]({share_link}) [🚀Gofile]({gofuk_text})"
             await asyncio.sleep(5)
             entext = await untext.edit(encodetext)
     except Exception:
