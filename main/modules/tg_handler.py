@@ -103,8 +103,8 @@ async def start_uploading(data):
         title = title.replace("Dr. Stone S3", "Dr Stone New World")
         title = title.replace("Opus.COLORs", "Opus COLORs")
         link = data["link"]
-
         size = data["size"]
+        nyaasize = data["size"]
         subtitle = data["subtitle"]
         name, ext = title.split(".")
 
@@ -124,7 +124,6 @@ async def start_uploading(data):
         file = await downloader(msg,link,size,title)
 
         await msg.edit(f"Download Complete : {name}")
-        source_size = get_filesize(file)
         print("Encoding --> ",name)
 
         await status.edit(await status_text(f"Encoding {name}"),reply_markup=button1)
@@ -192,7 +191,7 @@ async def start_uploading(data):
             )   
         sourcefile = videox.message_id
         source_link = f"https://t.me/zoroloverobot?start=animxt_{str_to_b64(sourcefile)}"
-        sourcetext = "**#Source_File**" + "\n" + f"**🗂️File Name: {filed}**" + "\n" + "**🎥Video**: `1080p x264`" + "\n" + "**🔊Audio**: `Japanese`") + "\n" + f"📝Subtitle: `{subtitle}`" + "\n" + f"💾File Size: `{source_size}`" + "\n" + f"📥Downloads: [🐌Telegram File]({source_link})"
+        sourcetext = "**#Source_File**" + "\n" + f"**🗂️File Name: {filed}**" + "\n" + "**🎥Video**: `1080p x264`" + "\n" + "**🔊Audio**: `Japanese`") + "\n" + f"📝Subtitle: `{subtitle}`" + "\n" + f"💾File Size: `{nyaasize}`" + "\n" + f"📥Downloads: [🐌Telegram File]({source_link})"
         untext = await app.send_message(KAYO_ID, text = sourcetext, parse_mode = "markdown")
         videox_id = videox.message_id
         videox_id = int(videox_id)
