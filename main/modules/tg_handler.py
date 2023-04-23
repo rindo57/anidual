@@ -4,7 +4,7 @@ import sys
 
 from main.modules.compressor import compress_video
 
-from main.modules.utils import episode_linker, get_duration, get_epnum, status_text
+from main.modules.utils import episode_linker, get_duration, get_epnum, status_text, get_filesize
 
 from pyrogram.types import Message, InlineKeyboardMarkup, InlineKeyboardButton, CallbackQuery
 
@@ -105,13 +105,13 @@ async def start_uploading(data):
         link = data["link"]
 
         size = data["size"]
-
+        subtitle = data["subtitle"]
         name, ext = title.split(".")
 
         name += f" @animxt." + ext
 
-        fpath = "downloads/" + name
         KAYO_ID = -1001948444792
+        DATABASE_ID = -1001903052236
         name = name.replace(f" @animxt.","").replace(ext,"").strip()
         id, img, tit = await get_anime_img(get_anime_name(title))
         msg = await app.send_photo(UPLOADS_ID,photo=img,caption=title)
@@ -124,28 +124,60 @@ async def start_uploading(data):
         file = await downloader(msg,link,size,title)
 
         await msg.edit(f"Download Complete : {name}")
-
+        source_size = get_filesize(file)
         print("Encoding --> ",name)
 
         await status.edit(await status_text(f"Encoding {name}"),reply_markup=button1)
 
         duration = get_duration(file)
         filed = os.path.basename(file)
-        filed = filed.rsplit(' ', 1)[0]
-        filed = filed.replace("[SubsPlease]", "")
-        filed = filed.replace("Shinka", "Shin Shinka")
-        filed = filed.replace("(1080p)", "[1080p Web-DL].mkv")
-        bpath = "downloads/" + filed
+        filed = filed.replace(filed[-14:], ".mkv")
+        filed = filed.replace("[Erai-raws]", "")
+        filed = filed.replace("[1080p][Multiple Subtitle]", "[1080p Web-DL]")
+        filed = filed.replace("[1080p]", "[1080p Web-DL]")
+        filed = filed.replace("2nd Season", "S2")
+        filed = filed.replace("3rd Season", "S3")
+        fpath = "downloads/" + filed
         ghostname = name
-        ghostname = ghostname.replace("(1080p)", "")
+        ghostname = ghostname.replace("[1080p][Multiple Subtitle]", "")
+        ghostname = ghostname.replace("[1080p]", "")
+        ghostname = ghostname.replace("2nd Season", "S2")
+        ghostname = ghostname.replace("3rd Season", "S3")
+        subtitle = subtitle.replace("][", ", ")
+        subtitle = subtitle.replace("[", "")
+        subtitle = subtitle.replace("]", "")     
+        subtitle = subtitle.replace("ENG", "English")
+        subtitle = subtitle.replace("POR-BR", "Portuguese (Brazil)")
+        subtitle = subtitle.replace("SPA-LA", "Spanish (Latin America)")
+        subtitle = subtitle.replace("SPA", "Spanish")
+        subtitle = subtitle.replace("ARA", "Arabic")
+        subtitle = subtitle.replace("FRE", "French")
+        subtitle = subtitle.replace("GER", "German")
+        subtitle = subtitle.replace("ITA", "Italian")
+        subtitle = subtitle.replace("RUS", "Russian")
+        subtitle = subtitle.replace("HIN", "Hindi")
+        subtitle = subtitle.replace("RUM", "Romanian")
+        subtitle = subtitle.replace("FIN", "Finnish")
+        subtitle = subtitle.replace("MAY", "Malaysian")
+        subtitle = subtitle.replace("SWE", "Swedish")
+        subtitle = subtitle.replace("GRE", "Greek")
+        subtitle = subtitle.replace("HEB", "Hebrew")
+        subtitle = subtitle.replace("JPN", "Japanese")
+        subtitle = subtitle.replace("POL", "Polish")
+        subtitle = subtitle.replace("DUT", "Dutch")
+        subtitle = subtitle.replace("FIL", "Filipino")
+        subtitle = subtitle.replace("CES", "Czech")
+        subtitle = subtitle.replace("HRV", "Croatian")
+        subtitle = subtitle.replace("HUN", "Hungarian")
+        subtitle = subtitle.replace("UKR", "Ukranian")
         main = await app.send_photo(KAYO_ID,photo=img,caption=caption)
-        guessname = f"**{ghostname}**" + "\n" + "✓  `1080p x264 Web-DL`" + "\n" + "✓  `English Sub`" + "\n" + f"__({tit})__" + "\n"+ "#Source #WebDL"
+        guessname = f"**{ghostname}**" + "\n" + f"__({tit})__" + "\n" + "━━━━━━━━━━━━━━━━━━━" + "\n" + "✓  `1080p x264 Web-DL`" + "\n" + f"✓  `{subtitle} ~ Subs`" + "\n" + "#Source #WebDL"
         
         thumbnail = await generate_thumbnail(id,file)
 
         videox = await app.send_document(
 
-                KAYO_ID,
+                DATABASE_ID,
 
             document=file,
             
@@ -157,7 +189,13 @@ async def start_uploading(data):
                         
             thumb=thumbnail
 
-            )        
+            )   
+            sourcefile = videox.message_id
+            fsre_link = f"https://t.me/zoroloverobot?start=animxt_{str_to_b64(file_er_idso}"
+            CH_edit = await app.edit_message_reply_markup(kayo_id, x.message_id,
+                                                          reply_markup=InlineKeyboardMarkup([[InlineKeyboardButton(
+                                                              "Telegram File", url=share_link)]]))
+        untext = await app.send_message(KAYO_ID, text = "**#Source_File**" + "\n" + f"**🗂️File Name: {filed}**" + "\n" + "**🎥Video**: `1080p x264`" + "\n" + "**🔊Audio**: `Japanese`") + "\n" + f"📝Subtitle: `{subtitle}`" + "\n" + f"💾File Size: {source_size}" + "\n" + f"📥Downloads: 🐌Telegram File  🚀Gofile
         videox_id = videox.message_id
         videox_id = int(videox_id)
         
@@ -180,15 +218,13 @@ async def start_uploading(data):
         else:
 
             os.rename("out.mkv",fpath)
-
+  
         print("Uploading --> ",name)
 
         await status.edit(await status_text(f"Uploading {name }"),reply_markup=button1)
 
         message_id = int(msg.message_id) + 1
-
-        video = await upload_video(msg,fpath,id,tit,name,size)   
-
+        video = await upload_video(msg,fpath,id,tit,name,size,subtitle) 
         try:
 
             os.remove("video.mkv")
