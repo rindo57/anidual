@@ -35,7 +35,7 @@ from pyrogram.errors import FloodWait
 
 from main.inline import button1
 
-async def upload_video(msg: Message,file,id,tit,name,ttl):
+async def upload_video(msg: Message,sourcetext,untext,file,id,tit,name,ttl):
 
     try:
 
@@ -51,7 +51,7 @@ async def upload_video(msg: Message,file,id,tit,name,ttl):
 
             duration = get_duration(file)
 
-            size = get_filesize(file)
+            esize = get_filesize(file)
 
             ep_num = get_epnum(name)
             
@@ -74,6 +74,7 @@ async def upload_video(msg: Message,file,id,tit,name,ttl):
             ])
             filed = os.path.basename(file)
             filed = filed.replace("(1080p)", "[720p x265]")
+            DATABASE_ID = -1001903052236
             fukpath = "downloads/" + filed
             caption = f"{name}"
             caption = caption.replace("(1080p)", "") 
@@ -81,7 +82,7 @@ async def upload_video(msg: Message,file,id,tit,name,ttl):
             kayo_id = -1001948444792
             x = await app.send_document(
 
-                kayo_id,
+                DATABASE_ID,
 
             document=file,
 
@@ -110,9 +111,9 @@ async def upload_video(msg: Message,file,id,tit,name,ttl):
             )             
             file_er_id = str(x.message_id)
             share_link = f"https://t.me/zoroloverobot?start=animxt_{str_to_b64(file_er_id)}"
-            CH_edit = await app.edit_message_reply_markup(kayo_id, x.message_id,
-                                                          reply_markup=InlineKeyboardMarkup([[InlineKeyboardButton(
-                                                              "Telegram File", url=share_link)]]))
+            encodetext = f"{sourcetext}" + "\n" + "━━━━━━━━━━━━〄━━━━━━━━━━━━" + "\n" + "**#Encoded_File**" + "\n" + f"**🗂️File Name: {filed}**" + "\n" + "**🎥Video**: `720p HEVC x265 10Bit`" + "\n" + "**🔊Audio**: `Japanese`") + "\n" + f"📝Subtitle: `{subtitle}`" + "\n" + f"💾File Size: `{esize}`" + "\n" + f"📥Downloads: [🐌Telegram File]({share_link})"
+            
+            entext = await untext.edit(encodetext, parse_mode = "markdown")
     except Exception:
             await app.send_message(kayo_id, text="Something Went Wrong!")
     try:
@@ -132,7 +133,7 @@ async def upload_video(msg: Message,file,id,tit,name,ttl):
 @app.on_message(filters.command("start") & filters.private)
 async def start(bot, cmd: Message):
     usr_cmd = cmd.text.split("_", 1)[-1]
-    kay_id = -1001948444792
+    kay_id = -1001903052236
     if usr_cmd == "/start":
        await cmd.reply_text("Yo baka!")
     else:
@@ -145,4 +146,4 @@ async def start(bot, cmd: Message):
             message_ids = GetMessage.message_id
             await app.copy_message(chat_id=cmd.from_user.id, from_chat_id=kay_id, message_id=message_ids)
         except Exception as err:
-            await cmd.reply_text(f"Something went wrong!\n\n**Error:** `Bitch`")
+            await cmd.reply_text(f"Something went wrong!\n\n**Error:** `XXXXXXX`")
