@@ -31,6 +31,15 @@ def get_duration(file):
     seconds = int(frames / fps)
     return seconds
 
+def get_durationz(file):
+    data = cv2.VideoCapture(file)
+  
+    frames = data.get(cv2.CAP_PROP_FRAME_COUNT)
+    fps = int(data.get(cv2.CAP_PROP_FPS))
+    seconds = int(frames / fps)
+    minutes = math.floor(seconds/60)
+    return minutes
+
 FORWARD_AS_COPY = "True"
 
 async def reply_forward(message: Message, file_id: int):
