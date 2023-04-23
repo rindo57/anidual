@@ -39,7 +39,7 @@ def get_durationx(file):
     seconds = int(frames / fps)
     minutes = floor(seconds/60)
     rem_seconds = round(seconds-(minutes*60))
-    durationz = str(minutes) + "mins" + str(rem_seconds) + "secs"
+    durationz = str(minutes) + " minutes " + str(rem_seconds) + " seconds"
     return durationz
 
 FORWARD_AS_COPY = "True"
