@@ -35,11 +35,9 @@ from pyrogram.errors import FloodWait
 
 from main.inline import button1
 
-async def upload_video(msg: Message,sourcetext,untext,file,id,tit,name,ttl,subtitle):
+async def upload_video(msg: Message,sourcetext,untext,file,id,tit,name,ttl,subtitle,nyaasize):
 
     try:
-
-    
 
         fuk = isfile(file)
 
@@ -51,7 +49,7 @@ async def upload_video(msg: Message,sourcetext,untext,file,id,tit,name,ttl,subti
 
             duration = get_duration(file)
 
-            esize = get_filesize(file)
+            size = get_filesize(file)
 
             ep_num = get_epnum(name)
             
@@ -73,16 +71,15 @@ async def upload_video(msg: Message,sourcetext,untext,file,id,tit,name,ttl,subti
 
             ])
             filed = os.path.basename(file)
-            filed = filed.replace("(1080p)", "[720p x265]")
-            DATABASE_ID = -1001903052236
+            filed = filed.replace("[1080p Web-DL]", "[720p x265] @animxt")
             fukpath = "downloads/" + filed
-            caption = f"{name}"
-            caption = caption.replace("(1080p)", "") 
-            gcaption=f"**{caption}**" + "\n" + "✓  `720p x265 10Bit`" + "\n" + "✓  `English Sub`" + "\n" + f"__({tit})__" + "\n" + "#Encoded #HEVC"
-            kayo_id = -1001948444792
+            caption = f"{filed}"
+            caption = caption.replace("[720p x265] @animxt.mkv", "") 
+            gcaption=f"**{caption}**" + "\n" +  f"__({tit})__" + "\n" + "━━━━━━━━━━━━━━━━━━━" + "\n" + "✓  `720p x265 10Bit`" + "\n" + f"✓  `{subtitle} ~ Subs`" + "\n" + "#Encoded #HEVC"
+            kayo_id = -1001159872623
             x = await app.send_document(
 
-                DATABASE_ID,
+                kayo_id,
 
             document=file,
 
@@ -92,23 +89,8 @@ async def upload_video(msg: Message,sourcetext,untext,file,id,tit,name,ttl,subti
 
             force_document=True,
                 
-            thumb=thumbnail,
-
-            progress=progress_for_pyrogram,
- 
-            progress_args=(
-
-                os.path.basename(file),
-
-                r,
-
-                c_time,
-
-                ttl
-
-            )
-
-            )             
+            thumb=thumbnail
+            )            
             file_er_id = str(x.message_id)
             share_link = f"https://t.me/zoroloverobot?start=animxt_{str_to_b64(file_er_id)}"
             sourcetext =  "**#Encoded_File**" + "\n" + f"**🗂️File Name: `{filed}`**" + "\n" + "**🎥Video**: `720p HEVC x265 10Bit`" + "\n" + "**🔊Audio**: `Japanese`" + "\n" + f"**📝Subtitle**: `{subtitle}`" + "\n" + f"**💾File Size**: `{nyaasize}`" + "\n" + "\n" + f"**📥Downloads**: [🐌Telegram File]({share_link})"
