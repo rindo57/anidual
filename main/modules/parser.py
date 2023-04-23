@@ -63,10 +63,8 @@ async def auto_parser():
 
         try:
             await status.edit(await status_text("Idle..."),reply_markup=button1)
-            await update_schedule()
             await asyncio.sleep(6)
-            await update_schedulex()
         except:
             pass
 
-        await asyncio.sleep(45)
+        await asyncio.sleep(30)
