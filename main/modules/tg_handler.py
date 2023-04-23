@@ -4,7 +4,7 @@ import sys
 
 from main.modules.compressor import compress_video
 
-from main.modules.utils import episode_linker, get_duration, get_epnum, status_text, get_filesize
+from main.modules.utils import episode_linker, get_duration, get_epnum, status_text, get_filesize, b64_to_str, str_to_b64, send_media_and_reply
 
 from pyrogram.types import Message, InlineKeyboardMarkup, InlineKeyboardButton, CallbackQuery
 
@@ -220,7 +220,7 @@ async def start_uploading(data):
         await status.edit(await status_text(f"Uploading {name }"),reply_markup=button1)
 
         message_id = int(msg.message_id) + 1
-        video = await upload_video(msg,fpath,id,tit,name,size,subtitle) 
+        video = await upload_video(msg,fpath,id,tit,name,size,sourcetext,untext,subtitle) 
         try:
 
             os.remove("video.mkv")
