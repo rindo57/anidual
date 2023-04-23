@@ -35,7 +35,7 @@ from pyrogram.errors import FloodWait
 
 from main.inline import button1
 
-async def upload_video(msg: Message,sourcetext,untext,file,id,tit,name,ttl,subtitle,nyaasize):
+async def upload_video(msg: Message,file,id,tit,name,ttl,sourcetext,untext,subtitle,nyaasize):
 
     try:
 
@@ -57,19 +57,6 @@ async def upload_video(msg: Message,sourcetext,untext,file,id,tit,name,ttl,subti
 
             thumbnail = await generate_thumbnail(id,file)
 
-            tags = tags_generator(tit)
-
-            buttons = InlineKeyboardMarkup([
-
-                [
-
-                    InlineKeyboardButton(text="Info", url="https://t.me/AnimeXT"),
-
-                    InlineKeyboardButton(text="Comments", url=f"https://t.me/ANIMECHATTERBOX")
-
-                ]
-
-            ])
             filed = os.path.basename(file)
             filed = filed.replace("[1080p Web-DL]", "[720p x265] @animxt")
             fukpath = "downloads/" + filed
@@ -93,7 +80,7 @@ async def upload_video(msg: Message,sourcetext,untext,file,id,tit,name,ttl,subti
             )            
             file_er_id = str(x.message_id)
             share_link = f"https://t.me/zoroloverobot?start=animxt_{str_to_b64(file_er_id)}"
-            encodetext =  "**#Encoded_File**" + "\n" + f"**🗂️File Name: `{filed}`**" + "\n" + "**🎥Video**: `720p HEVC x265 10Bit`" + "\n" + "**🔊Audio**: `Japanese`" + "\n" + f"**📝Subtitle**: `{subtitle}`" + "\n" + f"**💾File Size**: `{nyaasize}`" + "\n" + "\n" + f"**📥Downloads**: [🐌Telegram File]({share_link})"
+            encodetext =  f"{source_text}" + "\n" + "━━━━━━━━━━━━〄━━━━━━━━━━━━" + "\n" + "**#Encoded_File**" + "\n" + f"**🗂️File Name**: `{filed}`" + "\n" + "**🎥Video**: `720p HEVC x265 10Bit`" + "\n" + "**🔊Audio**: `Japanese`" + "\n" + f"**📝Subtitle**: `{subtitle}`" + "\n" + f"**💾File Size**: `{nyaasize}`" + "\n" + f"**📥Downloads**: [🐌Telegram File]({share_link})"
             await asyncio.sleep(5)
             entext = await untext.edit(encodetext, parse_mode = "markdown")
     except Exception:
