@@ -190,12 +190,10 @@ async def start_uploading(data):
             thumb=thumbnail
 
             )   
-            sourcefile = videox.message_id
-            fsre_link = f"https://t.me/zoroloverobot?start=animxt_{str_to_b64(file_er_idso}"
-            CH_edit = await app.edit_message_reply_markup(kayo_id, x.message_id,
-                                                          reply_markup=InlineKeyboardMarkup([[InlineKeyboardButton(
-                                                              "Telegram File", url=share_link)]]))
-        untext = await app.send_message(KAYO_ID, text = "**#Source_File**" + "\n" + f"**🗂️File Name: {filed}**" + "\n" + "**🎥Video**: `1080p x264`" + "\n" + "**🔊Audio**: `Japanese`") + "\n" + f"📝Subtitle: `{subtitle}`" + "\n" + f"💾File Size: {source_size}" + "\n" + f"📥Downloads: 🐌Telegram File  🚀Gofile
+        sourcefile = videox.message_id
+        source_link = f"https://t.me/zoroloverobot?start=animxt_{str_to_b64(sourcefile)}"
+        sourcetext = "**#Source_File**" + "\n" + f"**🗂️File Name: {filed}**" + "\n" + "**🎥Video**: `1080p x264`" + "\n" + "**🔊Audio**: `Japanese`") + "\n" + f"📝Subtitle: `{subtitle}`" + "\n" + f"💾File Size: {source_size}" + "\n" + f"📥Downloads: [🐌Telegram File]({source_link})"
+        untext = await app.send_message(KAYO_ID, text = sourcetext)
         videox_id = videox.message_id
         videox_id = int(videox_id)
         
