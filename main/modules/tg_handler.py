@@ -191,7 +191,7 @@ async def start_uploading(data):
 
         sourcetext = "hello"
         await asyncio.sleep(5)
-        untext = await app.send_message(KAYO_ID, text = "hello")
+        untext = await app.send_message(KAYO_ID, text=sourcetext)
         
         os.rename(file,"video.mkv")
 
