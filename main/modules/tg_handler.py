@@ -188,14 +188,14 @@ async def start_uploading(data):
 
             )   
         sourcefileid = videox.message_id
-        source_link = f"https://t.me/zoroloverobot?start=animxt_{str_to_b64(sourcefileid)}"
+
         sourcetext = "hello"
         await asyncio.sleep(5)
-        untext = await app.send_message(KAYO_ID, text = sourcetext, parse_mode = "markdown")
+        untext = await app.send_message(KAYO_ID, text = "hello")
         
         os.rename(file,"video.mkv")
 
-
+        await asyncio.sleep(5)
         compressed = await compress_video(duration,videox,untext,name,sourcetext)
         
         dingdong = await untext.edit(sourcetext)
