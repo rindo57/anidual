@@ -189,7 +189,7 @@ async def start_uploading(data):
             )   
         sourcefileid = str(videox.message_id)
         source_link = f"https://t.me/zoroloverobot?start=animxt_{str_to_b64(sourcefileid)}"
-        sourcetext =  "**#Source_File**" + "\n" + f"**🗂️File Name: `{filed}`**" + "\n" + "**🎥Video**: `1080p x264`" + "\n" + "**🔊Audio**: `Japanese`" + "\n" + f"**📝Subtitle**: `{subtitle}`" + "\n" + f"**💾File Size**: `{nyaasize}`" + "\n" + "**⌛Duration**: `{duration}`" "\n" + f"**📥Downloads**: [🐌Telegram File]({source_link})"
+        sourcetext =  "**#Source_File**" + "\n" + f"**🗂️File Name: `{filed}`**" + "\n" + "**🎥Video**: `1080p x264`" + "\n" + "**🔊Audio**: `Japanese`" + "\n" + f"**📝Subtitle**: `{subtitle}`" + "\n" + f"**💾File Size**: `{nyaasize}`" + "\n" + f"**⌛Duration**: `{duration}`" "\n" + f"**📥Downloads**: [🐌Telegram File]({source_link})"
         await asyncio.sleep(5)
         untext = await app.send_message(KAYO_ID, text=sourcetext)
         
