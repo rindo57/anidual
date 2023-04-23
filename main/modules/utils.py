@@ -94,7 +94,7 @@ def get_filesize(file):
     if x > 1024:
         x = str(round(x/1024,2)) + " GB"
     else:
-        x = str(x) + " MB"
+        x = str(x) + " MBs"
 
     return x
 
