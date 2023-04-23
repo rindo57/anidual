@@ -192,19 +192,17 @@ async def start_uploading(data):
             )   
         sourcefile = videox.message_id
         source_link = f"https://t.me/zoroloverobot?start=animxt_{str_to_b64(sourcefile)}"
-        sourcetext = "**#Source_File**" + "\n" + f"**🗂️File Name: {filed}**" + "\n" + "**🎥Video**: `1080p x264`" + "\n" + "**🔊Audio**: `Japanese`") + "\n" + f"📝Subtitle: `{subtitle}`" + "\n" + f"💾File Size: {source_size}" + "\n" + f"📥Downloads: [🐌Telegram File]({source_link})"
-        untext = await app.send_message(KAYO_ID, text = sourcetext)
+        sourcetext = "**#Source_File**" + "\n" + f"**🗂️File Name: {filed}**" + "\n" + "**🎥Video**: `1080p x264`" + "\n" + "**🔊Audio**: `Japanese`") + "\n" + f"📝Subtitle: `{subtitle}`" + "\n" + f"💾File Size: `{source_size}`" + "\n" + f"📥Downloads: [🐌Telegram File]({source_link})"
+        untext = await app.send_message(KAYO_ID, text = sourcetext, parse_mode = "markdown")
         videox_id = videox.message_id
         videox_id = int(videox_id)
         
         os.rename(file,"video.mkv")
 
 
+        compressed = await compress_video(duration,videox,untext,name,sourcetext)
         
-
-        compressed = await compress_video(duration,videox,name,guessname)
-        
-        dingdong = await videox.edit(guessname)
+        dingdong = await untext.edit(sourcetext)
 
 
         if compressed == "None" or compressed == None:
