@@ -8,10 +8,10 @@ API_ID = "10247139"
 
 API_HASH = "96b46175824223a33737657ab943fd6a"
 
-BOT_TOKEN = "6173783988:AAGoWOf3R-7VK0p7TEH4KE0Wx8dhMEITuZ8"
+BOT_TOKEN = "5222572158:AAENHtTOnhWBh4UUZKTjq5ruMtil_4zRA_0"
 
-MONGO_DB_URI = "mongodb+srv://hevc:sucks@cluster0.mdnim6a.mongodb.net/?retryWrites=true&w=majority"
-INDEX_ID = -1001948444792
+MONGO_DB_URI = "mongodb+srv://720pp:fire@cluster0.ser1dtu.mongodb.net/?retryWrites=true&w=majority"
+INDEX_ID = -1001884130912
 
 UPLOADS_ID = -1001948444792
 
