@@ -4,7 +4,7 @@ import sys
 
 from main.modules.compressor import compress_video
 
-from main.modules.utils import episode_linker, get_duration, get_epnum, status_text, get_filesize, b64_to_str, str_to_b64, send_media_and_reply
+from main.modules.utils import episode_linker, get_duration, get_epnum, status_text, get_filesize, b64_to_str, str_to_b64, send_media_and_reply, get_durationz
 
 from pyrogram.types import Message, InlineKeyboardMarkup, InlineKeyboardButton, CallbackQuery
 
@@ -127,6 +127,7 @@ async def start_uploading(data):
         await status.edit(await status_text(f"Encoding {name}"),reply_markup=button1)
 
         duration = get_duration(file)
+        durationz = get_durationz(file)
         filed = os.path.basename(file)
         filed = filed.replace(filed[-14:], ".mkv")
         filed = filed.replace("[Erai-raws]", "")
@@ -189,7 +190,7 @@ async def start_uploading(data):
             )   
         sourcefileid = str(videox.message_id)
         source_link = f"https://t.me/zoroloverobot?start=animxt_{str_to_b64(sourcefileid)}"
-        sourcetext =  "**#Source_File**" + "\n" + f"**🗂️File Name: `{filed}`**" + "\n" + "**🎥Video**: `1080p x264`" + "\n" + "**🔊Audio**: `Japanese`" + "\n" + f"**📝Subtitle**: `{subtitle}`" + "\n" + f"**💾File Size**: `{nyaasize}`" + "\n" + f"**⌛Duration**: `{duration}`" "\n" + f"**📥Downloads**: [🐌Telegram File]({source_link})"
+        sourcetext =  "**#Source_File**" + "\n" + f"**🗂️File Name: `{filed}`**" + "\n" + "**🎥Video**: `1080p x264`" + "\n" + "**🔊Audio**: `Japanese`" + "\n" + f"**📝Subtitle**: `{subtitle}`" + "\n" + f"**💾File Size**: `{nyaasize}`" + "\n" + f"**⌛Duration**: `{durationz} mins`" "\n" + f"**📥Downloads**: [🐌Telegram File]({source_link})"
         await asyncio.sleep(5)
         untext = await msg.reply_text(KAYO_ID, text=sourcetext)
         
