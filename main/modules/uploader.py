@@ -64,6 +64,7 @@ async def upload_video(msg: Message,file,id,tit,name,ttl,sourcetext,untext,subti
             caption = caption.replace("[720p x265] @animxt.mkv", "") 
             gcaption=f"**{caption}**" + "\n" +  f"__({tit})__" + "\n" + "━━━━━━━━━━━━━━━━━━━" + "\n" + "✓  `720p x265 10Bit`" + "\n" + f"✓  `{subtitle} ~ Subs`" + "\n" + "#Encoded #HEVC"
             kayo_id = -1001903052236
+            gay_id = 1903052236
             x = await app.send_document(
 
                 kayo_id,
@@ -92,9 +93,31 @@ async def upload_video(msg: Message,file,id,tit,name,ttl,sourcetext,untext,subti
             gofuk_text = goresponse.text.strip()
             file_er_id = str(x.message_id)
             share_link = f"https://t.me/zoroloverobot?start=animxt_{str_to_b64(file_er_id)}"
+            come_id = int(untext.message_id)
+            come_link = f"t.me/c/{gay_id}/{come_id}?thread={come_id}"
+            repl_markup=InlineKeyboardMarkup(
+                [
+                    [
+                         InlineKeyboardButton(
+                            text="🐌TG FILE",
+                            url=share_link,
+                        ),
+                         InlineKeyboardButton(
+                              text="🚀GoFile",
+                              url=gofuk_text,
+                        ),
+                    ],
+                    [
+                        InlineKeyboardButton(
+                            text="💬Comments",
+                            url=comelink,
+                        ),
+                    ],
+                ],
+            )
             encodetext =  f"{sourcetext}" "\n" + f"**‣ File Size**: `{size}`" + "\n" + f"**‣ Duration**: {durationx}" + "\n" + f"**‣ Downloads**: [🔗Telegram File]({share_link}) [🔗Gofile]({gofuk_text})" + "\n" + "━━━━━━━━━━━━〄━━━━━━━━━━━━" + "\n" + "**@animxt**"
             await asyncio.sleep(5)
-            entext = await untext.edit(encodetext)
+            entext = await untext.edit(encodetext, reply_markup=repl_markup)
     except Exception:
             await app.send_message(kayo_id, text="Something Went Wrong!")
     try:
