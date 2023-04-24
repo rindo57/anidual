@@ -63,8 +63,8 @@ async def upload_video(msg: Message,file,id,tit,name,ttl,sourcetext,untext,subti
             caption = f"{filed}"
             caption = caption.replace("[720p x265] @animxt.mkv", "") 
             gcaption=f"**{caption}**" + "\n" +  f"__({tit})__" + "\n" + "━━━━━━━━━━━━━━━━━━━" + "\n" + "✓  `720p x265 10Bit`" + "\n" + f"✓  `{subtitle} ~ Subs`" + "\n" + "#Encoded #HEVC"
-            kayo_id = -1001903052236
-            gay_id = 1903052236
+            kayo_id = -1001642923224
+            gay_id = 1159872623
             x = await app.send_document(
 
                 kayo_id,
@@ -92,7 +92,7 @@ async def upload_video(msg: Message,file,id,tit,name,ttl,sourcetext,untext,subti
             goresponse = requests.get(gofile_url, params={"url": gourl})
             gofuk_text = goresponse.text.strip()
             file_er_id = str(x.message_id)
-            share_link = f"https://t.me/zoroloverobot?start=animxt_{str_to_b64(file_er_id)}"
+            share_link = f"https://t.me/somayukibot?start=animxt_{str_to_b64(file_er_id)}"
             enshare_link = f"https://flashlink.in/api?api=aafa2d36a38398631679a74769a071b2154e08e7&url={share_link}&format=text"
             fukshare = requests.get(enshare_link)
             tshare = fukshare.text
@@ -122,7 +122,7 @@ async def upload_video(msg: Message,file,id,tit,name,ttl,sourcetext,untext,subti
                     ],
                 ],
             )
-            encodetext =  f"{sourcetext}" "\n" + f"**‣ File Size**: `{size}`" + "\n" + f"**‣ Duration**: {durationx}" + "\n" + f"**‣ Downloads**: [🔗Telegram File]({share_link}) [🔗Gofile]({teleshare})" + "\n" + "━━━━━━━━━━━━〄━━━━━━━━━━━━" + "\n" + "**@animxt**"
+            encodetext =  f"{sourcetext}" "\n" + f"**‣ File Size**: `{size}`" + "\n" + f"**‣ Duration**: {durationx}" + "\n" + f"**‣ Downloads**: [🔗Telegram File]({share_link}) [🔗Gofile]({teleshare})"
             await asyncio.sleep(5)
             entext = await untext.edit(encodetext, reply_markup=repl_markup)
     except Exception:
@@ -144,7 +144,7 @@ async def upload_video(msg: Message,file,id,tit,name,ttl,sourcetext,untext,subti
 @app.on_message(filters.command("start") & filters.private)
 async def start(bot, cmd: Message):
     usr_cmd = cmd.text.split("_", 1)[-1]
-    kay_id = -1001903052236
+    kay_id = -1001642923224
     if usr_cmd == "/start":
        await cmd.reply_text("Bot seems online! ⚡️")
     else:
