@@ -233,7 +233,7 @@ async def start_uploading(data):
                 ],
             )
         
-        enrepl_markup=InlineKeyboardMarkup([InlineKeyboardButton(text="💬Comments",url=encomment])
+        enrepl_markup=InlineKeyboardMarkup([InlineKeyboardButton(text="💬Comments",url=encomment)])
         orgtext =  "**#Source_File**" + "\n" + f"**‣ File Name: `{filed}`**" + "\n" + "**‣ Video**: `1080p x264`" + "\n" + "**‣ Audio**: `Japanese`" + "\n" + f"**‣ Subtitle**: `{subtitle}`" + "\n" + f"**‣ File Size**: `{nyaasize}`" + "\n" + f"**‣ Duration**: {durationx}" + "\n" + f"**‣ Downloads**: [🔗Telegram File]({source_link}) [🔗Gofile]({gofuk_text})"
         await asyncio.sleep(5)
         unitext = await main.reply_text(orgtext, reply_markup=repl_markup)
