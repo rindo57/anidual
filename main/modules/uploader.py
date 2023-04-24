@@ -93,6 +93,13 @@ async def upload_video(msg: Message,file,id,tit,name,ttl,sourcetext,untext,subti
             gofuk_text = goresponse.text.strip()
             file_er_id = str(x.message_id)
             share_link = f"https://t.me/zoroloverobot?start=animxt_{str_to_b64(file_er_id)}"
+            enshare_link = f"https://flashlink.in/api?api=aafa2d36a38398631679a74769a071b2154e08e7&url={share_link}&format=text"
+            fukshare = requests.get(enshare_link)
+            tshare = fukshare.text
+            cshare = tshare
+            xshare_url = f"{da_url}shorten"
+            tgshare = requests.get(xshare_url, params={"url": cshare})
+            teleshare = tgshare.text.strip()            
             come_id = int(untext.message_id)
             come_link = f"t.me/c/{gay_id}/{come_id}?thread={come_id}"
             repl_markup=InlineKeyboardMarkup(
@@ -100,7 +107,7 @@ async def upload_video(msg: Message,file,id,tit,name,ttl,sourcetext,untext,subti
                     [
                          InlineKeyboardButton(
                             text="🐌TG FILE",
-                            url=share_link,
+                            url=teleshare,
                         ),
                          InlineKeyboardButton(
                               text="🚀GoFile",
@@ -115,7 +122,7 @@ async def upload_video(msg: Message,file,id,tit,name,ttl,sourcetext,untext,subti
                     ],
                 ],
             )
-            encodetext =  f"{sourcetext}" "\n" + f"**‣ File Size**: `{size}`" + "\n" + f"**‣ Duration**: {durationx}" + "\n" + f"**‣ Downloads**: [🔗Telegram File]({share_link}) [🔗Gofile]({gofuk_text})" + "\n" + "━━━━━━━━━━━━〄━━━━━━━━━━━━" + "\n" + "**@animxt**"
+            encodetext =  f"{sourcetext}" "\n" + f"**‣ File Size**: `{size}`" + "\n" + f"**‣ Duration**: {durationx}" + "\n" + f"**‣ Downloads**: [🔗Telegram File]({share_link}) [🔗Gofile]({teleshare})" + "\n" + "━━━━━━━━━━━━〄━━━━━━━━━━━━" + "\n" + "**@animxt**"
             await asyncio.sleep(5)
             entext = await untext.edit(encodetext, reply_markup=repl_markup)
     except Exception:
@@ -139,7 +146,7 @@ async def start(bot, cmd: Message):
     usr_cmd = cmd.text.split("_", 1)[-1]
     kay_id = -1001903052236
     if usr_cmd == "/start":
-       await cmd.reply_text("Yo baka!")
+       await cmd.reply_text("Bot seems online! ⚡️")
     else:
         try:
             try:
