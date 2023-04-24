@@ -9,7 +9,7 @@ from main.modules.tg_handler import tg_handler
 
 loop = asyncio.get_event_loop()
 
-@app.on_message(filters.command(["start","help","ping"]))
+@app.on_message(filters.command(["help","ping"]))
 async def start(bot, message: Message):
   return await message.reply_text("⚡ **Bot Is up...**")
 
