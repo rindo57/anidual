@@ -113,6 +113,7 @@ async def start_uploading(data):
         name += f" @animxt." + ext
 
         KAYO_ID = -1001948444792
+        uj_id = 1948444792
         DATABASE_ID = -1001903052236
         name = name.replace(f" @animxt.","").replace(ext,"").strip()
         id, img, tit = await get_anime_img(get_anime_name(title))
@@ -208,16 +209,18 @@ async def start_uploading(data):
         sourcefileid = str(videox.message_id)
         source_link = f"https://t.me/zoroloverobot?start=animxt_{str_to_b64(sourcefileid)}"
         com_id = int(main.message_id) + 1
-        comment = f"t.me/c/{KAYO_ID}/{com_id}?thread={com_id}"
+        encom_id = int(main.message_id) + 2
+        comment = f"t.me/c/{uj_id}/{com_id}?thread={com_id}"
+        encomment = f"t.me/c/{uj_id}/{encom_id}?thread={encom_id}"
         repl_markup=InlineKeyboardMarkup(
                 [
                     [
                          InlineKeyboardButton(
-                            text="TG FILE",
+                            text="🐌TG FILE",
                             url=source_link,
                         ),
                          InlineKeyboardButton(
-                              text="GoFile",
+                              text="🚀GoFile",
                               url=gofuk_text,
                         ),
                     ],
@@ -229,12 +232,16 @@ async def start_uploading(data):
                     ],
                 ],
             )
+        
+        enrepl_markup=InlineKeyboardMarkup([InlineKeyboardButton(text="💬Comments",url=encomment])
         orgtext =  "**#Source_File**" + "\n" + f"**‣ File Name: `{filed}`**" + "\n" + "**‣ Video**: `1080p x264`" + "\n" + "**‣ Audio**: `Japanese`" + "\n" + f"**‣ Subtitle**: `{subtitle}`" + "\n" + f"**‣ File Size**: `{nyaasize}`" + "\n" + f"**‣ Duration**: {durationx}" + "\n" + f"**‣ Downloads**: [🔗Telegram File]({source_link}) [🔗Gofile]({gofuk_text})"
         await asyncio.sleep(5)
         unitext = await main.reply_text(orgtext, reply_markup=repl_markup)
         await asyncio.sleep(5)
         sourcetext =  f"**#Encoded_File**" + "\n" + f"**‣ File Name**: `{razo}`" + "\n" + "**‣ Video**: `720p HEVC x265 10Bit`" + "\n" + "**‣ Audio**: `Japanese`" + "\n" + f"**‣ Subtitle**: `{subtitle}`"
-        untext = await main.reply_text(sourcetext)
+        untext = await main.reply_text(sourcetext,  reply_markup=enrepl_markup)
+        await asyncio.sleep(3)
+        await app.send_sticker(KAYO_ID,"CAACAgUAAx0CXbNEVgABATemYrg6dYZGimb4zx9Q1DAAARzJ_M_NAAI6BQAC7s_BVQFFcU052MmMHgQ")
         os.rename(fpath,"video.mkv")
         await asyncio.sleep(5)
         compressed = await compress_video(duration,untext,name,sourcetext)
