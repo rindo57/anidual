@@ -191,8 +191,7 @@ Speed: {}
 ETA: {}
     """
 
-    text2 = """#Encoded_File
-{}
+    text2 = """{}
 ━━━━━━━━━━━━〄━━━━━━━━━━━━
 **STATUS**: `Encoding UwU!` ⚡️
 **○ Precentage**: `{}%`
