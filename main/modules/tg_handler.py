@@ -139,6 +139,7 @@ async def start_uploading(data):
         filed = filed.replace("[1080p]", "[1080p Web-DL]")
         filed = filed.replace("2nd Season", "S2")
         filed = filed.replace("3rd Season", "S3")
+        razo = filed.replace("[1080p Web-DL]", "[720p x265] @animxt")
         fpath = "downloads/" + filed
         ghostname = name
         ghostname = ghostname.replace("[1080p][Multiple Subtitle]", "")
@@ -206,12 +207,13 @@ async def start_uploading(data):
         gofuk_text = goresponse.text.strip()
         sourcefileid = str(videox.message_id)
         source_link = f"https://t.me/zoroloverobot?start=animxt_{str_to_b64(sourcefileid)}"
-        sourcetext =  "**#Source_File**" + "\n" + f"**🗂️File Name: `{filed}`**" + "\n" + "**🎥Video**: `1080p x264`" + "\n" + "**🔊Audio**: `Japanese`" + "\n" + f"**📝Subtitle**: `{subtitle}`" + "\n" + f"**💾File Size**: `{nyaasize}`" + "\n" + f"**⌛Duration**: {durationx}" + "\n" + f"**📥Downloads**: [🐌Telegram File]({source_link}) [🚀Gofile]({gofuk_text})"
+        orgtext =  "**#Source_File**" + "\n" + f"**‣ File Name: `{filed}`**" + "\n" + "**‣ Video**: `1080p x264`" + "\n" + "**‣ Audio**: `Japanese`" + "\n" + f"**‣ Subtitle**: `{subtitle}`" + "\n" + f"**‣ File Size**: `{nyaasize}`" + "\n" + f"**‣ Duration**: {durationx}" + "\n" + f"**‣ Downloads**: [🔗Telegram File]({source_link}) [🔗Gofile]({gofuk_text})"
         await asyncio.sleep(5)
+        unitext = await main.reply_text(orgtext)
+        await asyncio.sleep(5)
+        sourcetext =  f"**#Encoded_File**" + "\n" + f"**‣ File Name**: `{razo}`" + "\n" + "**‣ Video**: `720p HEVC x265 10Bit`" + "\n" + "**‣ Audio**: `Japanese`" + "\n" + f"**‣ Subtitle**: `{subtitle}`"
         untext = await main.reply_text(sourcetext)
-        
         os.rename(fpath,"video.mkv")
-
         await asyncio.sleep(5)
         compressed = await compress_video(duration,untext,name,sourcetext)
         
