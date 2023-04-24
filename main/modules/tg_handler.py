@@ -205,12 +205,12 @@ async def start_uploading(data):
                 [
                     [
                          InlineKeyboardButton(
-                            text="🐌TG FILE",
+                            text="TG FILE",
                             url=source_link,
                         ),
                          InlineKeyboardButton(
-                              text="🚀GoFile",
-                              url=gofuk_text,
+                              text="GoFile",
+                              url="https://gofile.io",
                         ),
                     ],
                     [
