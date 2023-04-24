@@ -225,12 +225,6 @@ async def start_uploading(data):
                               url=gofuk_text,
                         ),
                     ],
-                    [
-                        InlineKeyboardButton(
-                            text="💬Comments",
-                            url=comment,
-                        ),
-                    ],
                 ],
             )
         
@@ -245,14 +239,14 @@ async def start_uploading(data):
         sourcetext =  f"**#Encoded_File**" + "\n" + f"**‣ File Name**: `{razo}`" + "\n" + "**‣ Video**: `720p HEVC x265 10Bit`" + "\n" + "**‣ Audio**: `Japanese`" + "\n" + f"**‣ Subtitle**: `{subtitle}`"
         untexti = await main.reply_text(sourcetext)
         await asyncio.sleep(2)
-        untext = await untexti.edit(sourcetext, reply_markup=enrepl_markup)
+        untext = await untexti.edit(sourcetext)
         await asyncio.sleep(3)
         await app.send_sticker(KAYO_ID,"CAACAgUAAxkBAAEU_9FkRrLoli952oqIMVFPftW12xYLRwACGgADQ3PJEsT69_t2KrvBLwQ")
         os.rename(fpath,"video.mkv")
         await asyncio.sleep(5)
-        compressed = await compress_video(duration,untext,name,sourcetext,enrepl_markup)
+        compressed = await compress_video(duration,untext,name,sourcetext)
         
-        dingdong = await untext.edit(sourcetext, reply_markup=enrepl_markup)
+        dingdong = await untext.edit(sourcetext)
 
 
         if compressed == "None" or compressed == None:
