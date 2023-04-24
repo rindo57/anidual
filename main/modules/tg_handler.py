@@ -222,7 +222,7 @@ async def start_uploading(data):
                         ),
                          InlineKeyboardButton(
                               text="🚀GoFile",
-                              url="gofuk_text",
+                              url=gofuk_text,
                         ),
                     ],
                     [
