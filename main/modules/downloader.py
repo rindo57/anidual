@@ -9,12 +9,12 @@ from main.modules.progress import *
 from main.modules.utils import get_progress_text
 
 
-async def downloader(message: Message, link: str,total,name):
+async def downloader(message: Message, link,total,name):
   params = {
   'save_path': 'downloads/',
   'storage_mode': lt.storage_mode_t(2),}
 
-  handle = lt.add_magnet_uri(ses, link, params)
+  handle = lt.add_magnet_uri(ses, str(link), params)
   ses.start_dht()
 
   r = message
