@@ -191,12 +191,13 @@ Speed: {}
 ETA: {}
     """
 
-    text2 = """{}
+    text2 = """#Encoded_File
+{}
 ━━━━━━━━━━━━〄━━━━━━━━━━━━
-`Encoding to 720p HEVC 10Bit
-♻️Precentage: {}%
-⚡Speed: {}
-⌛ETA: {}`
+**STATUS**: `Encoding UwU!` ⚡️
+**○ Precentage**: `{}%`
+**○ Speed**: `{}`
+**○ ETA**: `{}`
     """
 
     if enco == False:
