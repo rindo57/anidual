@@ -117,7 +117,7 @@ async def upload_video(msg: Message,file,id,tit,name,ttl,sourcetext,untext,subti
                     [
                         InlineKeyboardButton(
                             text="💬Comments",
-                            url=comelink,
+                            url=come_link,
                         ),
                     ],
                 ],
