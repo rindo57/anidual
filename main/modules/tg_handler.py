@@ -231,12 +231,12 @@ async def start_uploading(data):
         sourcetext =  f"**#Encoded_File**" + "\n" + f"**‣ File Name**: `{razo}`" + "\n" + "**‣ Video**: `720p HEVC x265 10Bit`" + "\n" + "**‣ Audio**: `Japanese`" + "\n" + f"**‣ Subtitle**: `{subtitle}`"
         untext = await main.reply_text(sourcetext, reply_markup=enrepl_markup)
         await asyncio.sleep(3)
-        await app.send_sticker(KAYO_ID,"CAACAgUAAx0CXbNEVgABATemYrg6dYZGimb4zx9Q1DAAARzJ_M_NAAI6BQAC7s_BVQFFcU052MmMHgQ")
+        await app.send_sticker(KAYO_ID,"CAACAgUAAxkBAAEU_9FkRrLoli952oqIMVFPftW12xYLRwACGgADQ3PJEsT69_t2KrvBLwQ")
         os.rename(fpath,"video.mkv")
         await asyncio.sleep(5)
-        compressed = await compress_video(duration,untext,name,sourcetext)
+        compressed = await compress_video(duration,untext,name,sourcetext,enrepl_markup)
         
-        dingdong = await untext.edit(sourcetext)
+        dingdong = await untext.edit(sourcetext, reply_markup=enrepl_markup)
 
 
         if compressed == "None" or compressed == None:
