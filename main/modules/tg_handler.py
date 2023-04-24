@@ -233,6 +233,28 @@ async def start_uploading(data):
         orgtext =  "**#Source_File**" + "\n" + f"**‣ File Name: `{filed}`**" + "\n" + "**‣ Video**: `1080p x264`" + "\n" + "**‣ Audio**: `Japanese`" + "\n" + f"**‣ Subtitle**: `{subtitle}`" + "\n" + f"**‣ File Size**: `{nyaasize}`" + "\n" + f"**‣ Duration**: {durationx}" + "\n" + f"**‣ Downloads**: [🔗Telegram File]({source_link}) [🔗Gofile]({gofuk_text})"
         await asyncio.sleep(5)
         untextx = await main.reply_text(orgtext)
+        nanda_id = int(untextx.message_id)
+        kaze = await app.get_discussion_message(KAYO_ID, nanda_id)
+        repl_markup=InlineKeyboardMarkup(
+                [
+                    [
+                         InlineKeyboardButton(
+                            text="🐌TG FILE",
+                            url=source_link,
+                        ),
+                         InlineKeyboardButton(
+                              text="🚀GoFile",
+                              url=gofuk_text,
+                        ),
+                    ],
+                    [
+                        InlineKeyboardButton(
+                            text="💬Comments",
+                            url=kaze,
+                        ),
+                    ],
+                ],
+            )
         await asyncio.sleep(3)
         unitext = await untextx.edit(orgtext, reply_markup=repl_markup)
         await asyncio.sleep(5)
