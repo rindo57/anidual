@@ -112,9 +112,9 @@ async def start_uploading(data):
 
         name += f" @animxt." + ext
 
-        KAYO_ID = -1001948444792
-        uj_id = 1948444792
-        DATABASE_ID = -1001903052236
+        KAYO_ID = -1001159872623
+        uj_id = 1159872623
+        DATABASE_ID = -1001642923224
         name = name.replace(f" @animxt.","").replace(ext,"").strip()
         id, img, tit = await get_anime_img(get_anime_name(title))
         msg = await app.send_photo(KAYO_ID,photo=img,caption=title)
@@ -207,7 +207,7 @@ async def start_uploading(data):
         goresponse = requests.get(gofile_url, params={"url": gourl})
         gofuk_text = goresponse.text.strip()
         sourcefileid = str(videox.message_id)
-        source_link = f"https://t.me/zoroloverobot?start=animxt_{str_to_b64(sourcefileid)}"
+        source_link = f"https://t.me/somayukibot?start=animxt_{str_to_b64(sourcefileid)}"
         com_id = int(main.message_id) + 1
         encom_id = int(main.message_id) + 2
         comment = f"t.me/c/{uj_id}/{com_id}?thread={com_id}"
