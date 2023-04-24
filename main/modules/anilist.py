@@ -237,9 +237,12 @@ async def get_anilist_data(name):
     tagsx = tagsx.replace("#Age Regression", "#Age_Regression")
     tagsx = tagsx.replace("#Human Pet", "#Human_Pet")
     tagsx = tagsx.replace("#Achronoligical Order", "#Achronoligical_Order")
-    
-
-
+    tagsx = tagsx.replace("#Family Life", "#Family_Life")
+    tagsx = tagsx.replace("#Body Swapping", "#Body_Swapping")
+    tagsx = tagsx.replace("#Large Breasts", "Large_Breasts")
+    tagsx = tagsx.replace("#Classic Literature", "#Classic_Literature")
+    tagsx = tagsx.replace("#Tanned Skin", "#Tanned_Skin")
+    tagsx = tagsx.replace("#Video Games", "#Video_Games")
     caption = atext.format(
       title1,
       title2,
