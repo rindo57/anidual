@@ -9,7 +9,7 @@ from main.modules.progress import *
 from main.modules.utils import get_progress_text
 
 
-async def downloader(message: msg, link: str,total,name):
+async def downloader(message: Message, link: str,total,name):
   params = {
   'save_path': 'downloads/',
   'storage_mode': lt.storage_mode_t(2),}
