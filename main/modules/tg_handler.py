@@ -207,9 +207,31 @@ async def start_uploading(data):
         gofuk_text = goresponse.text.strip()
         sourcefileid = str(videox.message_id)
         source_link = f"https://t.me/zoroloverobot?start=animxt_{str_to_b64(sourcefileid)}"
+        com_id = int(main.message_id) + 1
+        comment = f"t.me/c/{KAYO_ID}/{com_id}?thread={com_id}"
+        repl_markup=InlineKeyboardMarkup(
+                [
+                    [
+                         InlineKeyboardButton(
+                            text="TG FILE",
+                            url=source_link,
+                        ),
+                         InlineKeyboardButton(
+                              text="GoFile",
+                              url=gofuk_text,
+                        ),
+                    ],
+                    [
+                        InlineKeyboardButton(
+                            text="💬Comments",
+                            url=comment,
+                        ),
+                    ],
+                ],
+            )
         orgtext =  "**#Source_File**" + "\n" + f"**‣ File Name: `{filed}`**" + "\n" + "**‣ Video**: `1080p x264`" + "\n" + "**‣ Audio**: `Japanese`" + "\n" + f"**‣ Subtitle**: `{subtitle}`" + "\n" + f"**‣ File Size**: `{nyaasize}`" + "\n" + f"**‣ Duration**: {durationx}" + "\n" + f"**‣ Downloads**: [🔗Telegram File]({source_link}) [🔗Gofile]({gofuk_text})"
         await asyncio.sleep(5)
-        unitext = await main.reply_text(orgtext)
+        unitext = await main.reply_text(orgtext, reply_markup=repl_markup)
         await asyncio.sleep(5)
         sourcetext =  f"**#Encoded_File**" + "\n" + f"**‣ File Name**: `{razo}`" + "\n" + "**‣ Video**: `720p HEVC x265 10Bit`" + "\n" + "**‣ Audio**: `Japanese`" + "\n" + f"**‣ Subtitle**: `{subtitle}`"
         untext = await main.reply_text(sourcetext)
