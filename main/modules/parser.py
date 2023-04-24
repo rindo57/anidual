@@ -20,9 +20,9 @@ def multi_sub(title: str):
     return subtitle
 
 def parse():
-    a = feedparser.parse("https://siftrss.com/f/jb61o6VbXpy")
+    a = feedparser.parse("https://siftrss.com/f/YmlRrkj0nN")
     b = a["entries"]
-    b = b[0:4]
+    b = b[0:15]
     data = []    
 
     for i in b:
