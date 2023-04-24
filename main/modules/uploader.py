@@ -122,7 +122,7 @@ async def upload_video(msg: Message,file,id,tit,name,ttl,sourcetext,untext,subti
                     ],
                 ],
             )
-            encodetext =  f"{sourcetext}" "\n" + f"**‣ File Size**: `{size}`" + "\n" + f"**‣ Duration**: {durationx}" + "\n" + f"**‣ Downloads**: [🔗Telegram File]({share_link}) [🔗Gofile]({gofuk_text})"
+            encodetext =  f"{sourcetext}" "\n" + f"**‣ File Size**: `{size}`" + "\n" + f"**‣ Duration**: {durationx}" + "\n" + f"**‣ Downloads**: [🔗Telegram File]({teleshare}) [🔗Gofile]({gofuk_text})"
             await asyncio.sleep(5)
             entext = await untext.edit(encodetext, reply_markup=repl_markup)
     except Exception:
