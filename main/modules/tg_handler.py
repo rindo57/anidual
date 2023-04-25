@@ -208,7 +208,7 @@ async def start_uploading(data):
         goresponse = requests.get(gofile_url, params={"url": gourl})
         gofuk_text = goresponse.text.strip()
         sourcefileid = str(videox.message_id)
-        source_link = f"https://t.me/somayukibot?start=animxt_{str_to_b64(sourcefileid)}"
+        source_link = f"https://telegram.me/somayukibot?start=animxt_{str_to_b64(sourcefileid)}"
         com_id = int(main.message_id) + 1
         encom_id = int(main.message_id) + 2
         comment = f"t.me/c/{uj_id}/{com_id}?thread={com_id}"
