@@ -11,6 +11,7 @@ from main.inline import button1
 def trim_title(title: str):
     title = title.rsplit(' ', 1)[0]
     title = title.replace("[Erai-raws] ", "")
+    title = title.replace("Dr. Stone - New World", "Dr Stone New World")
     ext = ".mkv"
     title = title + ext
     return title
