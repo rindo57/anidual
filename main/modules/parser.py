@@ -12,6 +12,7 @@ def trim_title(title: str):
     title = title.rsplit(' ', 1)[0]
     title = title.replace("[Erai-raws] ", "")
     title = title.replace("Dr. Stone - New World", "Dr Stone New World")
+    title = title.replace("Opus.COLORs", "Opus COLORs")
     ext = ".mkv"
     title = title + ext
     return title
