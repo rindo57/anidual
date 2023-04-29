@@ -191,7 +191,7 @@ async def start_uploading(data):
             thumb=thumbnail
 
             )   
-        
+        os.rename(file, fpath)
         sourcefileid = str(videox.message_id)
         source_link = f"https://telegram.me/somayukibot?start=animxt_{str_to_b64(sourcefileid)}"
         com_id = int(main.message_id) + 1
