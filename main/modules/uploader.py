@@ -99,24 +99,37 @@ async def upload_video(msg: Message,file,id,tit,name,ttl,sourcetext,untext,subti
             cshare = tshare
             xshare_url = f"{da_url}shorten"
             tgshare = requests.get(xshare_url, params={"url": cshare})
-            teleshare = tgshare.text.strip()            
+            teleshare = tgshare.text.strip()    
+            tnshare_link = f"https://tnlink.in/api?api=fea911843f6e7bec739708f3e562b56184342089&url={share_link}&format=text"
+            fuksharex = requests.get(tnshare_link)
+            tsharex = fuksharex.text
+            csharex = tsharex
+            xshare_urlx = f"{da_url}shorten"
+            tgsharex = requests.get(xshare_urlx, params={"url": csharex})
+            telesharex = tgsharex.text.strip() 
             come_id = int(untext.message_id)
             come_link = f"t.me/c/{gay_id}/{come_id}?thread={come_id}"
             repl_markup=InlineKeyboardMarkup(
-                [
                     [
-                         InlineKeyboardButton(
-                            text="🐌TG FILE",
-                            url=teleshare,
-                        ),
-                         InlineKeyboardButton(
-                              text="🚀GoFile",
-                              url=gofuk_text,
-                        ),
+                        [
+                             InlineKeyboardButton(
+                                text="🐌TG FILE",
+                                url=teleshare,
+                            ),
+                             InlineKeyboardButton(
+                                  text="🚀GoFile",
+                                  url=gofuk_text,
+                            ),
+                        ],
+                        [
+                            InlineKeyboardButton(
+                                text="🐌TG FILE (ALT)",
+                                url=telesharex,
+                            ),
+                        ],
                     ],
-                ],
-            )
-            encodetext =  f"{sourcetext}" "\n" + f"**‣ File Size**: `{size}`" + "\n" + f"**‣ Duration**: {durationx}" + "\n" + f"**‣ Downloads**: [🔗Telegram File]({teleshare}) [🔗Gofile]({gofuk_text})"
+                 )
+            encodetext =  f"{sourcetext}" "\n" + f"**‣ File Size**: `{size}`" + "\n" + f"**‣ Duration**: {durationx}" + "\n" + f"**‣ Downloads**: [🔗Telegram File]({teleshare}) [🔗Gofile]({gofuk_text})" + "\n" + f"**‣ Downloads (Alt.)**: [🔗Telegram File]({telesharex})"
             await asyncio.sleep(5)
             entext = await untext.edit(encodetext, reply_markup=repl_markup)
     except Exception:
