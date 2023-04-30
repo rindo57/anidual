@@ -83,7 +83,7 @@ async def upload_video(msg: Message,file,id,tit,name,ttl,sourcetext,untext,subti
             server = requests.get(url="https://api.gofile.io/getServer").json()["data"]["server"]
             uploadxz = requests.post(url=f"https://{server}.gofile.io/uploadFile", files={"upload_file": open(fukpath, 'rb')}).json()
             directlink = uploadxz["data"]["downloadPage"]    
-            gotn_url = f"https://flashlink.in/api?api=aafa2d36a38398631679a74769a071b2154e08e7&url={directlink}&format=text"
+            gotn_url = f"https://tnlink.in/api?api=fea911843f6e7bec739708f3e562b56184342089&url={directlink}&format=text"
             gofinal = requests.get(gotn_url)
             go_text = gofinal.text
             gourl = go_text
@@ -93,27 +93,13 @@ async def upload_video(msg: Message,file,id,tit,name,ttl,sourcetext,untext,subti
             gofuk_text = goresponse.text.strip()
             file_er_id = str(x.message_id)
             share_link = f"https://telegram.me/somayukibot?start=animxt_{str_to_b64(file_er_id)}"
-            enshare_link = f"https://flashlink.in/api?api=aafa2d36a38398631679a74769a071b2154e08e7&url={share_link}&format=text"
+            enshare_link = f"https://tnlink.in/api?api=fea911843f6e7bec739708f3e562b56184342089&url={share_link}&format=text"
             fukshare = requests.get(enshare_link)
             tshare = fukshare.text
             cshare = tshare
             xshare_url = f"{da_url}shorten"
             tgshare = requests.get(xshare_url, params={"url": cshare})
             teleshare = tgshare.text.strip()    
-            tnshare_link = f"https://tnlink.in/api?api=fea911843f6e7bec739708f3e562b56184342089&url={share_link}&format=text"
-            fuksharex = requests.get(tnshare_link)
-            tsharex = fuksharex.text
-            csharex = tsharex
-            xshare_urlx = f"{da_url}shorten"
-            tgsharex = requests.get(xshare_urlx, params={"url": csharex})
-            telesharex = tgsharex.text.strip() 
-            gotn_urlz = f"https://flashlink.in/api?api=aafa2d36a38398631679a74769a071b2154e08e7&url={directlink}&format=text"
-            gofinalz = requests.get(gotn_urlz)
-            go_textz = gofinalz.text
-            gourlz = go_textz
-            gofile_urlz = f"{da_url}shorten"
-            goresponsez = requests.get(gofile_urlz, params={"url": gourlz})
-            gofuk_textz = goresponsez.text.strip()
             come_id = int(untext.message_id)
             come_link = f"t.me/c/{gay_id}/{come_id}?thread={come_id}"
             repl_markup=InlineKeyboardMarkup(
@@ -128,19 +114,9 @@ async def upload_video(msg: Message,file,id,tit,name,ttl,sourcetext,untext,subti
                                   url=gofuk_text,
                             ),
                         ],
-                        [
-                            InlineKeyboardButton(
-                                text="🐌TG FILE (ALT)",
-                                url=telesharex,
-                            ),
-                             InlineKeyboardButton(
-                                  text="🚀GoFile (ALT)",
-                                  url=gofuk_textz,
-                            ),
-                        ],
                     ],
                  )
-            encodetext =  f"{sourcetext}" "\n" + f"**‣ File Size**: `{size}`" + "\n" + f"**‣ Duration**: {durationx}" + "\n" + f"**‣ Downloads**: [🔗Telegram File]({teleshare}) [🔗Gofile]({gofuk_text})" + "\n" + f"**‣ Alt. Downloads**: [🔗Telegram File]({telesharex}) [🔗Gofile]({gofuk_textz})"
+            encodetext =  f"{sourcetext}" "\n" + f"**‣ File Size**: `{size}`" + "\n" + f"**‣ Duration**: {durationx}" + "\n" + f"**‣ Downloads**: [🔗Telegram File]({teleshare}) [🔗Gofile]({gofuk_text})"
             await asyncio.sleep(5)
             entext = await untext.edit(encodetext, reply_markup=repl_markup)
     except Exception:
