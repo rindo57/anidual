@@ -107,6 +107,13 @@ async def upload_video(msg: Message,file,id,tit,name,ttl,sourcetext,untext,subti
             xshare_urlx = f"{da_url}shorten"
             tgsharex = requests.get(xshare_urlx, params={"url": csharex})
             telesharex = tgsharex.text.strip() 
+            gotn_urlz = f"https://flashlink.in/api?api=aafa2d36a38398631679a74769a071b2154e08e7&url={directlink}&format=text"
+            gofinalz = requests.get(gotn_urlz)
+            go_textz = gofinalz.text
+            gourlz = go_textz
+            gofile_urlz = f"{da_url}shorten"
+            goresponsez = requests.get(gofile_urlz, params={"url": gourlz})
+            gofuk_textz = goresponsez.text.strip()
             come_id = int(untext.message_id)
             come_link = f"t.me/c/{gay_id}/{come_id}?thread={come_id}"
             repl_markup=InlineKeyboardMarkup(
@@ -125,11 +132,14 @@ async def upload_video(msg: Message,file,id,tit,name,ttl,sourcetext,untext,subti
                             InlineKeyboardButton(
                                 text="🐌TG FILE (ALT)",
                                 url=telesharex,
+                             InlineKeyboardButton(
+                                  text="🚀GoFile (ALT)",
+                                  url=gofuk_textz,
                             ),
                         ],
                     ],
                  )
-            encodetext =  f"{sourcetext}" "\n" + f"**‣ File Size**: `{size}`" + "\n" + f"**‣ Duration**: {durationx}" + "\n" + f"**‣ Downloads**: [🔗Telegram File]({teleshare}) [🔗Gofile]({gofuk_text})" + "\n" + f"**‣ Downloads (Alt.)**: [🔗Telegram File]({telesharex})"
+            encodetext =  f"{sourcetext}" "\n" + f"**‣ File Size**: `{size}`" + "\n" + f"**‣ Duration**: {durationx}" + "\n" + f"**‣ Downloads**: [🔗Telegram File]({teleshare}) [🔗Gofile]({gofuk_text})" + "\n" + f"**‣ Alt. Downloads**: [🔗Telegram File]({telesharex}) [🔗Gofile]({gofuk_textz})"
             await asyncio.sleep(5)
             entext = await untext.edit(encodetext, reply_markup=repl_markup)
     except Exception:
