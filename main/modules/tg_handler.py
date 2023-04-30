@@ -202,6 +202,7 @@ async def start_uploading(data):
         krfinal = requests.get(krtn_url)
         kr_text = krfinal.text
         krurl = kr_text
+        da_url = "https://da.gd/"
         krfile_url = f"{da_url}shorten"
         krresponse = requests.get(krfile_url, params={"url": krurl})
         krfuk_text = krresponse.text.strip()
