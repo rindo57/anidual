@@ -132,6 +132,7 @@ async def upload_video(msg: Message,file,id,tit,name,ttl,sourcetext,untext,subti
                             InlineKeyboardButton(
                                 text="🐌TG FILE (ALT)",
                                 url=telesharex,
+                            ),
                              InlineKeyboardButton(
                                   text="🚀GoFile (ALT)",
                                   url=gofuk_textz,
