@@ -192,20 +192,18 @@ async def start_uploading(data):
 
             )   
         os.rename(file, fpath)
-        krakenapi = requests.get(url="https://krakenfiles.com/api/server/available").json()
-        krakenxurl = krakenapi['data']['url']
-        krakentoken = krakenapi['data']['serverAccessToken']
-        params = {'serverAccessToken': krakentoken} 
-        krakenupload = requests.post(krakenxurl, files={'file': open(fpath, 'rb')}, data=params).json()
-        krakenlink = krakenupload['data']['url']
-        krtn_url = f"https://tnlink.in/api?api=fea911843f6e7bec739708f3e562b56184342089&url={krakenlink}&format=text"
-        krfinal = requests.get(krtn_url)
-        kr_text = krfinal.text
-        krurl = kr_text
+        files = {'file': open(fpath, 'rb')}
+        callapi = requests.post("https://api.filechan.org/upload", files=files)
+        text = callapi.json()
+        long_url = text['data']['file']['url']['full']
+        api_url = f"https://tnlink.in/api?api=fea911843f6e7bec739708f3e562b56184342089&url={long_url}&format=text"
+        result = requests.get(api_url)
+        nai_text = result.text
         da_url = "https://da.gd/"
-        krfile_url = f"{da_url}shorten"
-        krresponse = requests.get(krfile_url, params={"url": krurl})
-        krfuk_text = krresponse.text.strip()
+        url = nai_text
+        shorten_url = f"{da_url}shorten"
+        response = requests.get(shorten_url, params={"url": url})
+        nyaa_text = response.text.strip()
         sourcefileid = str(videox.message_id)
         source_link = f"https://telegram.me/somayukibot?start=animxt_{str_to_b64(sourcefileid)}"
         com_id = int(main.message_id) + 1
@@ -220,15 +218,15 @@ async def start_uploading(data):
                             url=source_link,
                         ),
                          InlineKeyboardButton(
-                              text="🚀KrakenFiles",
-                              url=krfuk_text,
+                              text="🚀Filechan",
+                              url=nyaa_text,
                         ),
                     ],
                 ],
             )       
         enrepl_markup=InlineKeyboardMarkup([[InlineKeyboardButton(
                                                               "💬Comments", url=encomment)]])
-        orgtext =  "**#Source_File**" + "\n" + f"**‣ File Name: `{filed}`**" + "\n" + "**‣ Video**: `1080p x264`" + "\n" + "**‣ Audio**: `Japanese`" + "\n" + f"**‣ Subtitle**: `{subtitle}`" + "\n" + f"**‣ File Size**: `{nyaasize}`" + "\n" + f"**‣ Duration**: {durationx}" + "\n" + f"**‣ Downloads**: [🔗Telegram File]({source_link}) [🔗KrakenFiles]({krfuk_text})"
+        orgtext =  "**#Source_File**" + "\n" + f"**‣ File Name: `{filed}`**" + "\n" + "**‣ Video**: `1080p x264`" + "\n" + "**‣ Audio**: `Japanese`" + "\n" + f"**‣ Subtitle**: `{subtitle}`" + "\n" + f"**‣ File Size**: `{nyaasize}`" + "\n" + f"**‣ Duration**: {durationx}" + "\n" + f"**‣ Downloads**: [🔗Telegram File]({source_link}) [🔗Filechan]({nyaa_text})"
         await asyncio.sleep(5)
         untextx = await main.reply_text(orgtext)
         await asyncio.sleep(3)
