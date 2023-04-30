@@ -193,17 +193,17 @@ async def start_uploading(data):
             )   
         os.rename(file, fpath)
         files = {'file': open(fpath, 'rb')}
-        callapi = requests.post("https://api.filechan.org/upload", files=files)
-        text = callapi.json()
-        long_url = text['data']['file']['url']['full']
-        api_url = f"https://tnlink.in/api?api=fea911843f6e7bec739708f3e562b56184342089&url={long_url}&format=text"
-        result = requests.get(api_url)
-        nai_text = result.text
+        server = requests.get(url="https://api.gofile.io/getServer").json()["data"]["server"]
+        uploadxz = requests.post(url=f"https://{server}.gofile.io/uploadFile", files={"upload_file": open(fpath, 'rb')}).json()
+        directlink = uploadxz["data"]["downloadPage"]    
+        gotn_url = f"https://flashlink.in/api?api=aafa2d36a38398631679a74769a071b2154e08e7&url={directlink}&format=text"
+        gofinal = requests.get(gotn_url)
+        go_text = gofinal.text
+        gourl = go_text
         da_url = "https://da.gd/"
-        url = nai_text
-        shorten_url = f"{da_url}shorten"
-        response = requests.get(shorten_url, params={"url": url})
-        nyaa_text = response.text.strip()
+        gofile_url = f"{da_url}shorten"
+        goresponse = requests.get(gofile_url, params={"url": gourl})
+        gofuk_text = goresponse.text.strip()
         sourcefileid = str(videox.message_id)
         source_link = f"https://telegram.me/somayukibot?start=animxt_{str_to_b64(sourcefileid)}"
         com_id = int(main.message_id) + 1
@@ -218,15 +218,15 @@ async def start_uploading(data):
                             url=source_link,
                         ),
                          InlineKeyboardButton(
-                              text="🚀Filechan",
-                              url=nyaa_text,
+                              text="🚀Gofile",
+                              url=gofuk_text,
                         ),
                     ],
                 ],
             )       
         enrepl_markup=InlineKeyboardMarkup([[InlineKeyboardButton(
                                                               "💬Comments", url=encomment)]])
-        orgtext =  "**#Source_File**" + "\n" + f"**‣ File Name: `{filed}`**" + "\n" + "**‣ Video**: `1080p x264`" + "\n" + "**‣ Audio**: `Japanese`" + "\n" + f"**‣ Subtitle**: `{subtitle}`" + "\n" + f"**‣ File Size**: `{nyaasize}`" + "\n" + f"**‣ Duration**: {durationx}" + "\n" + f"**‣ Downloads**: [🔗Telegram File]({source_link}) [🔗Filechan]({nyaa_text})"
+        orgtext =  "**#Source_File**" + "\n" + f"**‣ File Name: `{filed}`**" + "\n" + "**‣ Video**: `1080p x264`" + "\n" + "**‣ Audio**: `Japanese`" + "\n" + f"**‣ Subtitle**: `{subtitle}`" + "\n" + f"**‣ File Size**: `{nyaasize}`" + "\n" + f"**‣ Duration**: {durationx}" + "\n" + f"**‣ Downloads**: [🔗Telegram File]({source_link}) [🔗Gofile]({gofuk_text})"
         await asyncio.sleep(5)
         untextx = await main.reply_text(orgtext)
         await asyncio.sleep(3)
