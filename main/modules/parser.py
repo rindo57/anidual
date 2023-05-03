@@ -14,6 +14,7 @@ def trim_title(title: str):
     title = title.replace("Dr. Stone - New World", "Dr Stone New World")
     title = title.replace("Opus.COLORs", "Opus COLORs")
     title = title.replace("Ousama Ranking - Yuuki no Takarabako", "Ousama Ranking Yuuki no Takarabako")
+    title = title.replace(" Isekai wa Smartphone to Tomo ni. 2", " Isekai wa Smartphone to Tomo ni 2")
     ext = ".mkv"
     title = title + ext
     return title
