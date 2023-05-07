@@ -86,7 +86,7 @@ async def upload_video(msg: Message,file,id,tit,name,ttl,sourcetext,untext,subti
             params = {'serverAccessToken': krakentoken} 
             krakenupload = requests.post(krakenxurl, files={'file': open(fukpath, 'rb')}, data=params).json()
             krakenlink = krakenupload['data']['url']
-            krtn_url = f"https://flashlink.in/api?api=aafa2d36a38398631679a74769a071b2154e08e7&url={krakenlink}&format=text"
+            krtn_url = f"https://tnlink.in/api?api=fea911843f6e7bec739708f3e562b56184342089&url={krakenlink}&format=text"
             krfinal = requests.get(krtn_url)
             kr_text = krfinal.text
             krurl = kr_text
