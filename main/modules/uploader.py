@@ -80,20 +80,17 @@ async def upload_video(msg: Message,file,id,tit,name,ttl,sourcetext,untext,subti
             thumb=thumbnail
             )
             os.rename(file,fukpath)
-            krakenapi = requests.get(url="https://krakenfiles.com/api/server/available").json()
-            krakenxurl = krakenapi['data']['url']
-            krakentoken = krakenapi['data']['serverAccessToken']
-            params = {'serverAccessToken': krakentoken} 
-            krakenupload = requests.post(krakenxurl, files={'file': open(fukpath, 'rb')}, data=params).json()
-            krakenlink = krakenupload['data']['url']
-            krtn_url = f"https://tnlink.in/api?api=fea911843f6e7bec739708f3e562b56184342089&url={krakenlink}&format=text"
-            krfinal = requests.get(krtn_url)
-            kr_text = krfinal.text
-            krurl = kr_text
+            server = requests.get(url="https://api.gofile.io/getServer").json()["data"]["server"]
+            uploadxz = requests.post(url=f"https://{server}.gofile.io/uploadFile", files={"upload_file": open(fukpath, 'rb')}).json()
+            directlink = uploadxz["data"]["downloadPage"]    
+            gotn_url = f"https://tnlink.in/api?api=fea911843f6e7bec739708f3e562b56184342089&url={directlink}&format=text"
+            gofinal = requests.get(gotn_url)
+            go_text = gofinal.text
+            gourl = go_text
             da_url = "https://da.gd/"
-            krfile_url = f"{da_url}shorten"
-            krresponse = requests.get(krfile_url, params={"url": krurl})
-            gofuk_text = krresponse.text.strip()
+            gofile_url = f"{da_url}shorten"
+            goresponse = requests.get(gofile_url, params={"url": gourl})
+            gofuk_text = goresponse.text.strip()
             file_er_id = str(x.message_id)
             share_link = f"https://telegram.me/somayukibot?start=animxt_{str_to_b64(file_er_id)}"
             enshare_link = f"https://flashlink.in/api?api=aafa2d36a38398631679a74769a071b2154e08e7&url={share_link}&format=text"
@@ -102,24 +99,24 @@ async def upload_video(msg: Message,file,id,tit,name,ttl,sourcetext,untext,subti
             cshare = tshare
             xshare_url = f"{da_url}shorten"
             tgshare = requests.get(xshare_url, params={"url": cshare})
-            teleshare = tgshare.text.strip()    
+            teleshare = tgshare.text.strip()            
             come_id = int(untext.message_id)
             come_link = f"t.me/c/{gay_id}/{come_id}?thread={come_id}"
             repl_markup=InlineKeyboardMarkup(
+                [
                     [
-                        [
-                             InlineKeyboardButton(
-                                text="🐌TG File",
-                                url=teleshare,
-                            ),
-                             InlineKeyboardButton(
-                                  text="🚀KrakenFiles",
-                                  url=gofuk_text,
-                            ),
-                        ],
+                         InlineKeyboardButton(
+                            text="🐌TG FILE",
+                            url=teleshare,
+                        ),
+                         InlineKeyboardButton(
+                              text="🚀GoFile",
+                              url=gofuk_text,
+                        ),
                     ],
-                 )
-            encodetext =  f"{sourcetext}" "\n" + f"**‣ File Size**: `{size}`" + "\n" + f"**‣ Duration**: {durationx}" + "\n" + f"**‣ Downloads**: [🔗Telegram File]({teleshare}) [🔗KrakenFiles]({gofuk_text})"
+                ],
+            )
+            encodetext =  f"{sourcetext}" "\n" + f"**‣ File Size**: `{size}`" + "\n" + f"**‣ Duration**: {durationx}" + "\n" + f"**‣ Downloads**: [🔗Telegram File]({teleshare}) [🔗Gofile]({gofuk_text})"
             await asyncio.sleep(5)
             entext = await untext.edit(encodetext, reply_markup=repl_markup)
     except Exception:
