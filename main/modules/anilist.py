@@ -133,7 +133,7 @@ atext = """
 • Status: {}
 • Episodes: {}
 • Duration: {} mins/Ep
-• Tags:{**
+• Tags:{}**
 """
 
 async def get_anilist_data(name):
