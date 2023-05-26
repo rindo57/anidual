@@ -83,7 +83,7 @@ async def upload_video(msg: Message,file,id,tit,name,ttl,sourcetext,untext,subti
             server = requests.get(url="https://api.gofile.io/getServer").json()["data"]["server"]
             uploadxz = requests.post(url=f"https://{server}.gofile.io/uploadFile", files={"upload_file": open(fukpath, 'rb')}).json()
             directlink = uploadxz["data"]["downloadPage"]    
-            gotn_url = f"https://link2earn.in/api?api=ac36439c32bb95b0ccbb58263da5a6c5c2318a3b&url={directlink}&format=text"
+            gotn_url = f"https://api.shareus.in/shortLink?token=171zSsL9fjZiloftZ7OQs3b6O6O2&format=text&link={directlink}"
             gofinal = requests.get(gotn_url)
             go_text = gofinal.text
             gourl = go_text
