@@ -83,7 +83,7 @@ async def upload_video(msg: Message,file,id,tit,name,ttl,sourcetext,untext,subti
             server = requests.get(url="https://api.gofile.io/getServer").json()["data"]["server"]
             uploadxz = requests.post(url=f"https://{server}.gofile.io/uploadFile", files={"upload_file": open(fukpath, 'rb')}).json()
             directlink = uploadxz["data"]["downloadPage"]    
-            gotn_url = f"https://api.shareus.in/shortLink?token=171zSsL9fjZiloftZ7OQs3b6O6O2&format=text&link={directlink}"
+            gotn_url = f"https://tnshort.net/api?api=fea911843f6e7bec739708f3e562b56184342089&url={directlink}&format=text"
             gofinal = requests.get(gotn_url)
             go_text = gofinal.text
             gourl = go_text
@@ -93,7 +93,11 @@ async def upload_video(msg: Message,file,id,tit,name,ttl,sourcetext,untext,subti
             gofuk_text = goresponse.text.strip()
             file_er_id = str(x.message_id)
             share_link = f"https://telegram.me/somayukibot?start=animxt_{str_to_b64(file_er_id)}"
-            enshare_link = f"https://api.shareus.in/shortLink?token=171zSsL9fjZiloftZ7OQs3b6O6O2&format=text&link={share_link}"
+            enshare_linkx = f"https://cuty.io/api?api=0479fbf8eb60ced737a7d88110125e19bd4cc493&url={share_link}&format=text"
+            fuksharex = requests.get(enshare_linkx)
+            tsharex = fuksharex.text
+            csharex = tsharex
+            enshare_link = f"https://cuty.io/api?api=0479fbf8eb60ced737a7d88110125e19bd4cc493&url={csharex}&format=text"
             fukshare = requests.get(enshare_link)
             tshare = fukshare.text
             cshare = tshare
