@@ -101,6 +101,7 @@ async def start_uploading(data):
         title = title.replace("Dr. Stone - New World", "Dr Stone New World")
         title = title.replace("Opus.COLORs", "Opus COLORs")
         title = title.replace(" Isekai wa Smartphone to Tomo ni. 2", " Isekai wa Smartphone to Tomo ni 2")
+        title = title.replace("Stand My Heroes - Warmth of Memories - OVA", "Stand My Heroes Warmth of Memories - OVA")
         link = data["link"]
         size = data["size"]
         nyaasize = data["size"]
