@@ -82,8 +82,12 @@ async def upload_video(msg: Message,file,id,tit,name,ttl,sourcetext,untext,subti
             os.rename(file,fukpath)
             server = requests.get(url="https://api.gofile.io/getServer").json()["data"]["server"]
             uploadxz = requests.post(url=f"https://{server}.gofile.io/uploadFile", files={"upload_file": open(fukpath, 'rb')}).json()
-            directlink = uploadxz["data"]["downloadPage"]    
-            gotn_url = f"https://tnlinks.in/api?api=1458ad61946fd6f5b8a93161c9cfd94733813566&url={directlink}&format=text"
+            directlink = uploadxz["data"]["downloadPage"]
+            gotn_urlx = f"https://tnlinks.in/api?api=1458ad61946fd6f5b8a93161c9cfd94733813566&url={directlink}&format=text"
+            gofinalx = requests.get(gotn_urlx)
+            go_textx = gofinalx.text
+            gourlx = go_textx
+            gotn_url = f"https://tnlinks.in/api?api=1458ad61946fd6f5b8a93161c9cfd94733813566&url={gourlx}&format=text"
             gofinal = requests.get(gotn_url)
             go_text = gofinal.text
             gourl = go_text
@@ -93,8 +97,11 @@ async def upload_video(msg: Message,file,id,tit,name,ttl,sourcetext,untext,subti
             gofuk_text = goresponse.text.strip()
             file_er_id = str(x.message_id)
             share_link = f"https://telegram.me/somayukibot?start=animxt_{str_to_b64(file_er_id)}"
- 
-            enshare_link = f"https://tnlinks.in/api?api=1458ad61946fd6f5b8a93161c9cfd94733813566&url={share_link}&format=text"
+            enshare_linkz = f"https://tnlinks.in/api?api=1458ad61946fd6f5b8a93161c9cfd94733813566&url={share_link}&format=text"
+            fuksharez = requests.get(enshare_linkz)
+            tsharez = fuksharez.text
+            csharez = tsharez
+            enshare_link = f"https://tnlinks.in/api?api=1458ad61946fd6f5b8a93161c9cfd94733813566&url={csharez}&format=text"
             fukshare = requests.get(enshare_link)
             tshare = fukshare.text
             cshare = tshare
