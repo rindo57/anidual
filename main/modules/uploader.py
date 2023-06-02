@@ -83,15 +83,18 @@ async def upload_video(msg: Message,file,id,tit,name,ttl,sourcetext,untext,subti
             server = requests.get(url="https://api.gofile.io/getServer").json()["data"]["server"]
             uploadxz = requests.post(url=f"https://{server}.gofile.io/uploadFile", files={"upload_file": open(fukpath, 'rb')}).json()
             directlink = uploadxz["data"]["downloadPage"]
+            da_url = "https://da.gd/"
             gotn_urlx = f"https://tnlinks.in/api?api=1458ad61946fd6f5b8a93161c9cfd94733813566&url={directlink}&format=text"
             gofinalx = requests.get(gotn_urlx)
             go_textx = gofinalx.text
             gourlx = go_textx
-            gotn_url = f"https://tnlinks.in/api?api=1458ad61946fd6f5b8a93161c9cfd94733813566&url={gourlx}&format=text"
+            gofile_urlx = f"{da_url}shorten"
+            goresponsex = requests.get(gofile_urlx, params={"url": gourlx})
+            gofuk_textx = goresponsex.text.strip()
+            gotn_url = f"https://tnlinks.in/api?api=1458ad61946fd6f5b8a93161c9cfd94733813566&url={gofuk_textx}&format=text"
             gofinal = requests.get(gotn_url)
             go_text = gofinal.text
             gourl = go_text
-            da_url = "https://da.gd/"
             gofile_url = f"{da_url}shorten"
             goresponse = requests.get(gofile_url, params={"url": gourl})
             gofuk_text = goresponse.text.strip()
@@ -101,7 +104,10 @@ async def upload_video(msg: Message,file,id,tit,name,ttl,sourcetext,untext,subti
             fuksharez = requests.get(enshare_linkz)
             tsharez = fuksharez.text
             csharez = tsharez
-            enshare_link = f"https://tnlinks.in/api?api=1458ad61946fd6f5b8a93161c9cfd94733813566&url={csharez}&format=text"
+            xshare_urlz = f"{da_url}shorten"
+            tgsharez = requests.get(xshare_urlz, params={"url": csharez})
+            telesharez = tgsharez.text.strip() 
+            enshare_link = f"https://tnlinks.in/api?api=1458ad61946fd6f5b8a93161c9cfd94733813566&url={telesharez}&format=text"
             fukshare = requests.get(enshare_link)
             tshare = fukshare.text
             cshare = tshare
