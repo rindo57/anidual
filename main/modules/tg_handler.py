@@ -194,18 +194,12 @@ async def start_uploading(data):
 
             )   
         os.rename(file, fpath)
-        sourcefileid = str(videox.message_id)
+        sourcefileid = str(videox.id)
         source_link = f"https://telegram.me/somayukibot?start=animxt_{str_to_b64(sourcefileid)}"
-        com_id = int(main.message_id) + 1
-        encom_id = int(main.message_id) + 2
-        comment = f"t.me/c/{uj_id}/{com_id}?thread={com_id}"
-        encomment = f"t.me/c/{uj_id}/{encom_id}?thread={encom_id}"
         repl_markup=InlineKeyboardMarkup([[InlineKeyboardButton(
                                                               "🐌TG FILE", url=source_link)]])
-        enrepl_markup=InlineKeyboardMarkup([[InlineKeyboardButton(
-                                                              "💬Comments", url=encomment)]])
         orgtext =  "**#Source_File**" + "\n" + f"**‣ File Name: `{filed}`**" + "\n" + "**‣ Video**: `1080p x264`" + "\n" + "**‣ Audio**: `Japanese`" + "\n" + f"**‣ Subtitle**: `{subtitle}`" + "\n" + f"**‣ File Size**: `{nyaasize}`" + "\n" + f"**‣ Duration**: {durationx}" + "\n" + f"**‣ Downloads**: [🔗Telegram File]({source_link})"
-        rep_id = int(main.message_id)
+        rep_id = int(main.id)
         await asyncio.sleep(5)
         untextx = await app.send_message(
                       chat_id=KAYO_ID,
