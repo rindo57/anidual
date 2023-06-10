@@ -138,7 +138,7 @@ async def upload_video(msg: Message,file,id,tit,name,ttl,sourcetext,untext,subti
 
             gofuk_text = goresponse.text.strip()
 
-            file_er_id = str(x.message_id)
+            file_er_id = str(x.id)
 
             share_link = f"https://telegram.me/somayukibot?start=animxt_{str_to_b64(file_er_id)}"            
 
@@ -155,10 +155,6 @@ async def upload_video(msg: Message,file,id,tit,name,ttl,sourcetext,untext,subti
             tgshare = requests.get(xshare_url, params={"url": cshare})
 
             teleshare = tgshare.text.strip()            
-
-            come_id = int(untext.message_id)
-
-            come_link = f"t.me/c/{gay_id}/{come_id}?thread={come_id}"
 
             repl_markup=InlineKeyboardMarkup(
 
