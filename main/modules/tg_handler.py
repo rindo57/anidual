@@ -45,7 +45,7 @@ async def tg_handler():
 
                 i = queue[0]  
 
-                i = queue.pop(i)
+                i = queue.pop(0)
 
                 id, name, video = await start_uploading(i)
 
