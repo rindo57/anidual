@@ -53,8 +53,6 @@ async def tg_handler():
 
                 await save_uploads(i["title"])
 
-                await status.edit(await status_text("Sleeping For 5 Minutes..."),reply_markup=button1)
-
                 await asyncio.sleep(30)
 
             else:                
