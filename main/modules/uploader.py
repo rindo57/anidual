@@ -138,7 +138,7 @@ async def upload_video(msg: Message,file,id,tit,name,ttl,sourcetext,untext,subti
 
             gofuk_text = goresponse.text.strip()
 
-            file_er_id = str(x.message_id)
+            file_er_id = str(x.id)
 
             share_link = f"https://telegram.me/somayukibot?start=animxt_{str_to_b64(file_er_id)}"            
 
