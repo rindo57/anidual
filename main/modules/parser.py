@@ -17,6 +17,7 @@ def trim_title(title: str):
     title = title.replace(" Isekai wa Smartphone to Tomo ni. 2", " Isekai wa Smartphone to Tomo ni 2")
     title = title.replace("Kimetsu no Yaiba - Katanakaji no Sato Hen", "Demon Slayer Kimetsu No Yaiba To the Swordsmith Village")
     title = title.replace("Kidou Senshi Gundam - Suisei no Majo", "Kidou Senshi Gundam Suisei no Majo")
+    title = title.replace("Birdie Wing - Golf Girls Story Season 2", "Birdie Wing Golf Girls Story Season 2"
     ext = ".mkv"
     title = title + ext
     return title
@@ -28,7 +29,7 @@ def multi_sub(title: str):
 def parse():
     a = feedparser.parse("https://siftrss.com/f/oyebWJBqN8")
     b = a["entries"]
-    b = b[0:1]
+    b = b[0:8]
     data = []    
 
     for i in b:
