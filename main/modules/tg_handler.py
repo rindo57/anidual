@@ -47,7 +47,7 @@ async def tg_handler():
 
                 i = queue.pop(0)
 
-                await start_uploading(i)
+                val, name, video = await start_uploading(i)
 
                 await del_anime(i["title"])
 
@@ -264,4 +264,4 @@ async def start_uploading(data):
 
         await asyncio.sleep(flood_time)
 
-    return  id, name, video
+    return name, video
