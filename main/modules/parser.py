@@ -17,7 +17,7 @@ def trim_title(title: str):
     title = title.replace(" Isekai wa Smartphone to Tomo ni. 2", " Isekai wa Smartphone to Tomo ni 2")
     title = title.replace("Kimetsu no Yaiba - Katanakaji no Sato Hen", "Demon Slayer Kimetsu No Yaiba To the Swordsmith Village")
     title = title.replace("Kidou Senshi Gundam - Suisei no Majo", "Kidou Senshi Gundam Suisei no Majo")
-    title = title.replace("Birdie Wing - Golf Girls Story Season 2", "Birdie Wing Golf Girls Story Season 2"
+    title = title.replace("Birdie Wing - Golf Girls Story Season 2", "Birdie Wing Golf Girls Story Season 2")
     ext = ".mkv"
     title = title + ext
     return title
