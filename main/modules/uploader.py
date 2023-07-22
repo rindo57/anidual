@@ -110,7 +110,7 @@ async def upload_video(msg: Message,file,id,tit,name,ttl,sourcetext,untext,subti
 
             da_url = "https://da.gd/"
 
-            gotn_urlx = f"https://tnlinks.in/api?api=1458ad61946fd6f5b8a93161c9cfd94733813566&url={directlink}&format=text"
+            gotn_urlx = f"https://tnshort.net/api?api=fea911843f6e7bec739708f3e562b56184342089&url={directlink}&format=text"
 
             gofinalx = requests.get(gotn_urlx)
 
@@ -124,19 +124,6 @@ async def upload_video(msg: Message,file,id,tit,name,ttl,sourcetext,untext,subti
 
             gofuk_textx = goresponsex.text.strip()
 
-            gotn_url = f"https://tnlinks.in/api?api=1458ad61946fd6f5b8a93161c9cfd94733813566&url={gofuk_textx}&format=text"
-
-            gofinal = requests.get(gotn_url)
-
-            go_text = gofinal.text
-
-            gourl = go_text
-
-            gofile_url = f"{da_url}shorten"
-
-            goresponse = requests.get(gofile_url, params={"url": gourl})
-
-            gofuk_text = goresponse.text.strip()
 
             file_er_id = str(x.message_id)
 
@@ -174,7 +161,7 @@ async def upload_video(msg: Message,file,id,tit,name,ttl,sourcetext,untext,subti
 
                               text="🚀GoFile",
 
-                              url=gofuk_text,
+                              url=gofuk_textx,
 
                         ),
 
@@ -184,7 +171,7 @@ async def upload_video(msg: Message,file,id,tit,name,ttl,sourcetext,untext,subti
 
             )
 
-            encodetext =  f"{sourcetext}" "\n" + f"**‣ File Size**: `{size}`" + "\n" + f"**‣ Duration**: {durationx}" + "\n" + f"**‣ Downloads**: [🔗Telegram File]({teleshare}) [🔗Gofile]({gofuk_text})"
+            encodetext =  f"{sourcetext}" "\n" + f"**‣ File Size**: `{size}`" + "\n" + f"**‣ Duration**: {durationx}" + "\n" + f"**‣ Downloads**: [🔗Telegram File]({teleshare}) [🔗Gofile]({gofuk_textx})"
 
             await asyncio.sleep(5)
 
