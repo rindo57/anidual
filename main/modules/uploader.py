@@ -4,6 +4,8 @@ import os
 
 import time
 
+import pixeldrain
+
 import aiohttp
 
 import requests
@@ -123,8 +125,26 @@ async def upload_video(msg: Message,file,id,tit,name,ttl,sourcetext,untext,subti
             goresponsex = requests.get(gofile_urlx, params={"url": gourlx})
 
             gofuk_textx = goresponsex.text.strip()
+            repz = pixeldrain.upload_file(fukpath)
+            if repz["success"]:              
+                datax = pixeldrain.info(repz["id"])   
+            else:
+                print("Failed!")
+            ddl = f"https://pixeldrain.com/api/file/{data['id']}"
+            pxtn_urlx = f"https://tnshort.net/api?api=fea911843f6e7bec739708f3e562b56184342089&url={directlink}&format=text"
 
+            pxfinalx = requests.get(pxtn_urlx)
 
+            px_textx = pxfinalx.text
+
+            pxurlx = px_textx
+
+            pxfile_urlx = f"{da_url}shorten"
+
+            pxresponsex = requests.get(pxfile_urlx, params={"url": gourlx})
+
+            pxfuk_textx = pxresponsex.text.strip()
+ 
             file_er_id = str(x.message_id)
 
             share_link = f"https://telegram.me/somayukibot?start=animxt_{str_to_b64(file_er_id)}"            
@@ -164,14 +184,18 @@ async def upload_video(msg: Message,file,id,tit,name,ttl,sourcetext,untext,subti
                               url=gofuk_textx,
 
                         ),
-
+  
                     ],
-
+                    [
+                        InlineKeyboardButton(
+                            text="🚀Pixeldrain",
+                            url=pxfuk_textx,
+                        ),
+                    ],
                 ],
-
             )
 
-            encodetext =  f"{sourcetext}" "\n" + f"**‣ File Size**: `{size}`" + "\n" + f"**‣ Duration**: {durationx}" + "\n" + f"**‣ Downloads**: [🔗Telegram File]({teleshare}) [🔗Gofile]({gofuk_textx})"
+            encodetext =  f"{sourcetext}" "\n" + f"**‣ File Size**: `{size}`" + "\n" + f"**‣ Duration**: {durationx}" + "\n" + f"**‣ Downloads**: [🔗Telegram File]({teleshare}) [🔗Gofile]({gofuk_textx}) [🔗Pixeldrain]({pxfuk_textx})"
 
             await asyncio.sleep(5)
 
