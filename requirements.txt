@@ -7,6 +7,7 @@ feedparser
 pillow
 requests
 bs4
+pixeldrain
 uvloop
 motor
 dnspython
