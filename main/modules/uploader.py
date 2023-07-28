@@ -131,7 +131,7 @@ async def upload_video(msg: Message,file,id,tit,name,ttl,sourcetext,untext,subti
             else:
                 print("Failed!")
             ddl = f"https://pixeldrain.com/api/file/{data['id']}"
-            pxtn_urlx = f"https://tnshort.net/api?api=fea911843f6e7bec739708f3e562b56184342089&url={directlink}&format=text"
+            pxtn_urlx = f"https://tnshort.net/api?api=fea911843f6e7bec739708f3e562b56184342089&url={ddl}&format=text"
 
             pxfinalx = requests.get(pxtn_urlx)
 
