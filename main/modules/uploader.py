@@ -141,7 +141,7 @@ async def upload_video(msg: Message,file,id,tit,name,ttl,sourcetext,untext,subti
 
             pxfile_urlx = f"{da_url}shorten"
 
-            pxresponsex = requests.get(pxfile_urlx, params={"url": gourlx})
+            pxresponsex = requests.get(pxfile_urlx, params={"url": pxurlx})
 
             pxfuk_textx = pxresponsex.text.strip()
  
