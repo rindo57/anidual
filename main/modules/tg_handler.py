@@ -115,9 +115,9 @@ async def start_uploading(data):
         name = name.replace(f" @animxt.","").replace(ext,"").strip()
         id, img, tit = await get_anime_img(get_anime_name(title))
         msg = await app.send_photo(bin_id,photo=img,caption=title)
-        img, caption = await get_anilist_data(title)
 
         print("Downloading --> ",name)
+        img, caption = await get_anilist_data(title)
         await asyncio.sleep(5)
         await status.edit(await status_text(f"Downloading {name}"),reply_markup=button1)
 
