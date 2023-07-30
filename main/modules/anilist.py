@@ -131,22 +131,21 @@ atext = """
 📺 **{}**
       **({})**
 **━━━━━━━━━━━━━━━━━━━━━━**
-• Type: {}
-• Source: {}
-• Score: 🌟{}
-• Episodes: {}
-• Genre: #{}
-• Status: {}
-• Aired: {}
-• Premiered: {}
-• Licensors: {}
-• Studio: {}
-• Themes: {}
-• Duration: {} mins/Ep
-• Tags: {}
-• Rating: {}
-• Rank: # {}
-• Popularity: # {}
+▸ **Type**: {}
+▸ **Source**: {}
+▸ **Score**: 🌟{}
+▸ **Episodes**: {}
+▸ **Genre**: #{}
+▸ **Status**: {}
+▸ **Aired**: {}
+▸ **Premiered**: {}
+▸ **Licensors**: {}
+▸ **Studio**: {}
+▸ **Themes**: {}
+▸ **Duration**: {} mins/Ep
+▸ **Tags**: {}
+▸ **Rating**: {}
+▸ **Rank**: {} | Popularity: {}
 """
 
 async def get_anilist_data(name):
@@ -308,8 +307,8 @@ async def get_anilist_data(name):
       site = None
 
     if site == "youtube":
-      caption += f"\n**• [Trailer](https://www.youtube.com/watch?v={ytid}) \n • More Info: [AniList](https://anilist.co/anime/{id_}) | [MAL]({malink})\n ━━━━━━━━━━━━━━━━━━━━━━\n@Latest_ongoing_airing_anime**"
+      caption += f"\n**▸ Links: [Trailer](https://www.youtube.com/watch?v={ytid}) | [AniList](https://anilist.co/anime/{id_}) | [MAL]({malink})\n ━━━━━━━━━━━━━━━━━━━━━━\n@Latest_ongoing_airing_anime**"
     else:
-      caption += f"\n**• More Info: [AniList](https://anilist.co/anime/{id_}) | [MAL]({malink})\n━━━━━━━━━━━━━━━━━━━━━━\n@Latest_ongoing_airing_anime**"
+      caption += f"\n**▸ Links: [AniList](https://anilist.co/anime/{id_}) | [MAL]({malink})\n━━━━━━━━━━━━━━━━━━━━━━\n@Latest_ongoing_airing_anime**"
 
     return img, caption
