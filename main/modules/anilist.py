@@ -148,11 +148,12 @@ atext = """
 • Popularity: # {}
 """
 
-async def get_anilist_data(title):
-    malurl = f"https://api.jikan.moe/v4/anime?q={title}"
+async def get_anilist_data(name):
+    print("anime name is", name)
+    malurl = f"https://api.jikan.moe/v4/anime?q={name}"
     malresponse = requests.get(malurl)
     maldata = malresponse.json()
-    vars_ = {"search": title}
+    vars_ = {"search": name}
     data = await get_anime(vars_,less=False)
     id_ = data.get("id")
     title = data.get("title")
@@ -263,15 +264,15 @@ async def get_anilist_data(title):
       producer = []
       for i in mal['producers']:
         producer.append(i["name"])
-        producer = ", ".join(producer)
+      producer = ", ".join(producer)
       licensor = []
       for i in mal['licensors']:
         licensor.append(i["name"])
-        licensor = ", ".join(licensor)
+      licensor = ", ".join(licensor)
       theme = []
       for i in mal['themes']:
         theme.append(i["name"])
-        theme = ", ".join(theme)
+      theme = ", ".join(theme)
       season = f"{mal['season']} {mal['year']}"
       rating = mal['rating']
       aired = mal['aired']['string']
