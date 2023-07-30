@@ -126,16 +126,28 @@ atext = """
 📺 **{}**
       **({})**
 **━━━━━━━━━━━━━━━━━━━━━━**
-**• Type: {}
+• Type: {}
 • Source: {}
 • Score: 🌟{}
+• Episodes: {}
 • Genre: #{}
 • Status: {}
-• Episodes: {}
-• Duration: {} mins/Ep**
+• Aired: {}
+• Premiered: {}
+• Licensors: {}
+• Studio: {}
+• Themes: {}
+• Duration: {} mins/Ep
+• Tags: {}
+• Rating: {}
+• MAL ranking: {}
+• Popularity: {}
 """
 
 async def get_anilist_data(name):
+    malurl = f"https://api.jikan.moe/v4/anime?q={name}"
+    malresponse = requests.get(malurl)
+    maldata = malresponse.json()
     vars_ = {"search": name}
     data = await get_anime(vars_,less=False)
     id_ = data.get("id")
@@ -242,7 +254,27 @@ async def get_anilist_data(name):
     tagsx = tagsx.replace("#Classic Literature", "#Classic_Literature")
     tagsx = tagsx.replace("#Tanned Skin", "#Tanned_Skin")
     tagsx = tagsx.replace("#Video Games", "#Video_Games")
-    caption = atext.format(
+    if data and "data" in maldata and len(maldata["data"]) > 0:
+      mal = maldata["data"][0]
+      producer = []
+      for i in mal['producers']:
+        producer.append(i["name"])
+        producer = ", ".join(producer)
+      licensor = []
+      for i in mal['licensors']:
+        licensor.append(i["name"])
+        licensor = ", ".join(licensor)
+      theme = []
+      for i in mal['themes']:
+        theme.append(i["name"])
+        theme = ", ".join(theme)
+      season = f"{mal['season']} {mal['year']}"
+      rating = mal['rating']
+      aired = mal['aired']['string']
+      malink = mal['url']
+      malrank = mal['rank']
+      malpopularity = mal['popularity']
+      caption = atext.format(
       title1,
       title2,
       form,
@@ -251,7 +283,8 @@ async def get_anilist_data(name):
       genre,
       status,
       episodes,
-      duration
+      duration,
+      tagsx
     )
 
     if trailer != None:
