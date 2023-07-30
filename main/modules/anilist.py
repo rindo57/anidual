@@ -31,6 +31,11 @@ query ($id: Int, $idMal:Int, $search: String) {
     tags {
       name
     }
+    studios {
+    nodes {
+        name
+    }
+    }
     averageScore
     relations {
       edges {
@@ -140,8 +145,8 @@ atext = """
 • Duration: {} mins/Ep
 • Tags: {}
 • Rating: {}
-• MAL ranking: {}
-• Popularity: {}
+• Rank: # {}
+• Popularity: # {}
 """
 
 async def get_anilist_data(name):
@@ -183,7 +188,7 @@ async def get_anilist_data(name):
     genre = genre.replace("#Slice of Life", "#Slice_of_Life")
     genre = genre.replace("#Mahou Shoujo", "#Mahou_Shoujo")    
     genre = genre.replace("#Sci-Fi", "#SciFi")
-    
+    studiox = data['studios']['nodes'][0]['name']
     tags = []
     for i in data['tags']:
         tags.append(i["name"])
@@ -274,17 +279,26 @@ async def get_anilist_data(name):
       malink = mal['url']
       malrank = mal['rank']
       malpopularity = mal['popularity']
+      
       caption = atext.format(
       title1,
       title2,
       form,
-      source,
+      source,   
       averageScore,
+      episodes,
       genre,
       status,
-      episodes,
+      aired,
+      season,
+      licensor,
+      studiox,
+      theme,
       duration,
-      tagsx
+      tagsx,
+      rating,
+      malrank,
+      malpopularity
     )
 
     if trailer != None:
@@ -294,8 +308,8 @@ async def get_anilist_data(name):
       site = None
 
     if site == "youtube":
-      caption += f"**• [Trailer](https://www.youtube.com/watch?v={ytid})  |  [More Info](https://anilist.co/anime/{id_})\n ━━━━━━━━━━━━━━━━━━━━━━\n@Latest_ongoing_airing_anime**"
+      caption += f"\n**• [Trailer](https://www.youtube.com/watch?v={ytid}) \n • More Info: [AniList](https://anilist.co/anime/{id_}) | [MAL]({malink})\n ━━━━━━━━━━━━━━━━━━━━━━\n@Latest_ongoing_airing_anime**"
     else:
-      caption += f"**• [More Info](https://anilist.co/anime/{id_})\n━━━━━━━━━━━━━━━━━━━━━━\n@Latest_ongoing_airing_anime**"
+      caption += f"\n**• More Info: [AniList](https://anilist.co/anime/{id_}) | [MAL]({malink})\n━━━━━━━━━━━━━━━━━━━━━━\n@Latest_ongoing_airing_anime**"
 
     return img, caption
