@@ -143,13 +143,13 @@ atext = """
 • Studio: {}
 • Themes: {}
 • Duration: {} mins/Ep
+• Tags: {}
 • Rating: {}
 • Rank: # {}
 • Popularity: # {}
 """
 
 async def get_anilist_data(name):
-    print("anime name is", name)
     malurl = f"https://api.jikan.moe/v4/anime?q={name}"
     malresponse = requests.get(malurl)
     maldata = malresponse.json()
@@ -295,6 +295,7 @@ async def get_anilist_data(name):
       studiox,
       theme,
       duration,
+      tagsx,
       rating,
       malrank,
       malpopularity
