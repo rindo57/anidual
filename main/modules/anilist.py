@@ -145,7 +145,7 @@ atext = """
 ▸ **Duration**: {} mins/Ep
 ▸ **Tags**: {}
 ▸ **Rating**: {}
-▸ **Rank**: {} | Popularity: {}
+▸ **Rank**: {} | **Popularity**: {}
 """
 
 async def get_anilist_data(name):
