@@ -91,7 +91,7 @@ async def get_anime(vars_,less):
             print([f"[{error_sts}]"])
             print(vars_)
             data = temp[0]
-            temp.pop(0)
+            temp.pop(0) 
         else:
           data = result["data"]["Media"]   
           temp.append(data)
@@ -143,7 +143,6 @@ atext = """
 ▸ **Studio**: {}
 ▸ **Themes**: {}
 ▸ **Duration**: {} mins/Ep
-▸ **Tags**: {}
 ▸ **Rating**: {}
 ▸ **Rank**: {} | **Popularity**: {}
 """
@@ -294,7 +293,6 @@ async def get_anilist_data(name):
       studiox,
       theme,
       duration,
-      tagsx,
       rating,
       malrank,
       malpopularity
