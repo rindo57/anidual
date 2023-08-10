@@ -15,7 +15,7 @@ def trim_title(title: str):
     title = title.replace("Opus.COLORs", "Opus COLORs")
     title = title.replace("Ousama Ranking - Yuuki no Takarabako", "Ousama Ranking Yuuki no Takarabako")
     title = title.replace(" Isekai wa Smartphone to Tomo ni. 2", " Isekai wa Smartphone to Tomo ni 2")
-    title = title.replace("Ryza no Atelier - Tokoyami no Joou to Himitsu no Kakurega", "Ryza no Atelier Tokoyami no Joou to Himitsu no Kakurega")
+    title = title.replace("Hataraku Maou-sama!! Part 2", "The Devil is a Part-Timer! S2 Part 2")
     title = title.replace("Kidou Senshi Gundam - Suisei no Majo", "Kidou Senshi Gundam Suisei no Majo")
     title = title.replace("Birdie Wing - Golf Girls Story Season 2", "Birdie Wing Golf Girls Story Season 2")
     ext = ".mkv"
