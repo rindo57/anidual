@@ -143,7 +143,6 @@ atext = """
 ▸ **Studio**: {}
 ▸ **Themes**: {}
 ▸ **Duration**: {} mins/Ep
-▸ **Tags**: {}
 ▸ **Rating**: {}
 ▸ **Rank**: {} | **Popularity**: {}
 """
@@ -294,7 +293,6 @@ async def get_anilist_data(name):
       studiox,
       theme,
       duration,
-      tagsx,
       rating,
       malrank,
       malpopularity
