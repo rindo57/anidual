@@ -178,9 +178,9 @@ async def upload_video(msg: Message,file,id,tit,name,ttl,sourcetext,untext,subti
 
             entext = await untext.edit(encodetext, disable_web_page_preview=True, reply_markup=repl_markup)
 
-    except Exception:
-
-            await app.send_message(kayo_id, text="Something Went Wrong!")
+    except Exception as e:
+            print(e)
+            await app.send_message(kayo_id, text="Something went wrong!")
 
     try:
 
