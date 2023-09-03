@@ -103,28 +103,20 @@ async def upload_video(msg: Message,file,id,tit,name,ttl,sourcetext,untext,subti
             )
 
             os.rename(file,fukpath)
-
-            server = requests.get(url="https://api.gofile.io/getServer").json()["data"]["server"]
-
-            uploadxz = requests.post(url=f"https://{server}.gofile.io/uploadFile", files={"upload_file": open(fukpath, 'rb')}).json()
-
-            directlink = uploadxz["data"]["downloadPage"]
-
+            krakenapi = requests.get(url="https://krakenfiles.com/api/server/available").json()
+            krakenxurl = krakenapi['data']['url']
+            krakentoken = krakenapi['data']['serverAccessToken']
+            params = {'serverAccessToken': krakentoken} 
+            krakenupload = requests.post(krakenxurl, files={'file': open(fukpath, 'rb')}, data=params).json()
+            krakenlink = krakenupload['data']['url']
+            krtn_url = f"https://tnshort.net/api?api=fea911843f6e7bec739708f3e562b56184342089&url={krakenlink}&format=text"
+            krfinal = requests.get(krtn_url)
+            kr_text = krfinal.text
+            krurl = kr_text
             da_url = "https://da.gd/"
-
-            gotn_urlx = f"https://tnshort.net/api?api=fea911843f6e7bec739708f3e562b56184342089&url={directlink}&format=text"
-
-            gofinalx = requests.get(gotn_urlx)
-
-            go_textx = gofinalx.text
-
-            gourlx = go_textx
-
-            gofile_urlx = f"{da_url}shorten"
-
-            goresponsex = requests.get(gofile_urlx, params={"url": gourlx})
-
-            gofuk_textx = goresponsex.text.strip()
+            krfile_url = f"{da_url}shorten"
+            krresponse = requests.get(krfile_url, params={"url": krurl})
+            krfuk_text = krresponse.text.strip()
             
  
             file_er_id = str(x.message_id)
@@ -161,9 +153,9 @@ async def upload_video(msg: Message,file,id,tit,name,ttl,sourcetext,untext,subti
 
                          InlineKeyboardButton(
 
-                              text="🚀GoFile",
+                              text="🚀KrakenFiles",
 
-                              url=gofuk_textx,
+                              url=krfuk_text,
 
                         ),
   
@@ -172,7 +164,7 @@ async def upload_video(msg: Message,file,id,tit,name,ttl,sourcetext,untext,subti
                 ],
             )
 
-            encodetext =  f"{sourcetext}" "\n" + f"**‣ File Size**: `{size}`" + "\n" + f"**‣ Duration**: {durationx}" + "\n" + f"**‣ Downloads**: [🔗Telegram File]({teleshare}) [🔗Gofile]({gofuk_textx})"
+            encodetext =  f"{sourcetext}" "\n" + f"**‣ File Size**: `{size}`" + "\n" + f"**‣ Duration**: {durationx}" + "\n" + f"**‣ Downloads**: [🔗Telegram File]({teleshare}) [🔗KrakenFiles]({krfuk_text})"
 
             await asyncio.sleep(5)
 
