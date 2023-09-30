@@ -17,7 +17,7 @@ from main.modules.thumbnail import generate_thumbnail
 
 import os
 
-from main.modules.db import del_anime, save_uploads
+from main.modules.db import del_anime, save_uploads, is_fid_in_db
 
 from main.modules.downloader import downloader
 
@@ -192,10 +192,10 @@ async def start_uploading(data):
 
             )   
         os.rename(file, fpath)
-        sourcefileid = str(videox.message_id)
-        source_link = f"https://telegram.me/somayukibot?start=animxt_{str_to_b64(sourcefileid)}"
+        fid = str(videox.message_id)
+        source_link = f"https://telegram.me/somayukibot?start=animxt_{str_to_b64(fid)}"
         await asyncio.sleep(10)
-        xid = is_fid_in_db(sourcefileid)
+        xid = await is_fid_in_db(fid)
         if xid:
             hash = xid["code"]
             ddlx = f"https://dxd.ownl.tk/dl/{hash}"
