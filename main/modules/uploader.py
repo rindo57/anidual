@@ -107,7 +107,7 @@ async def upload_video(msg: Message,file,id,tit,name,ttl,sourcetext,untext,subti
 
             share_link = f"https://telegram.me/somayukibot?start=animxt_{str_to_b64(fid)}"            
             await asyncio.sleep(10)
-            id = is_fid_in_db(fid)
+            id = await is_fid_in_db(fid)
             if id:
                 hash = id["code"]
                 ddl = f"https://dxd.ownl.tk/dl/{hash}"
