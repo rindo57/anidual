@@ -199,6 +199,8 @@ async def start_uploading(data):
         if id:
             hash = id["code"]
             ddlx = f"https://dxd.ownl.tk/dl/{hash}"
+        else:
+            pass
         repl_markup=InlineKeyboardMarkup(
 
             [
