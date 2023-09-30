@@ -194,9 +194,40 @@ async def start_uploading(data):
         os.rename(file, fpath)
         sourcefileid = str(videox.message_id)
         source_link = f"https://telegram.me/somayukibot?start=animxt_{str_to_b64(sourcefileid)}"
-        repl_markup=InlineKeyboardMarkup([[InlineKeyboardButton(
-                                                              "🐌TG FILE", url=source_link)]])
-        orgtext =  "**#Source_File**" + "\n" + f"**‣ File Name: `{filed}`**" + "\n" + "**‣ Video**: `1080p x264`" + "\n" + "**‣ Audio**: `Japanese`" + "\n" + f"**‣ Subtitle**: `{subtitle}`" + "\n" + f"**‣ File Size**: `{nyaasize}`" + "\n" + f"**‣ Duration**: {durationx}" + "\n" + f"**‣ Downloads**: [🔗Telegram File]({source_link})"
+        await asyncio.sleep(10)
+        xid = is_fid_in_db(sourcefileid)
+        if xid:
+            hash = xid["code"]
+            ddlx = f"https://dxd.ownl.tk/dl/{hash}"
+        else:
+            pass
+        repl_markup=InlineKeyboardMarkup(
+
+            [
+
+                [
+
+                    InlineKeyboardButton(
+
+                        text="🐌TG FILE",
+
+                        url=source_link,
+
+                    ),
+
+                    InlineKeyboardButton(
+
+                        text="🚀BETA DL",
+
+                        url=ddlx,
+
+                    ),
+  
+                ],
+                    
+            ],
+        )
+        orgtext =  "**#Source_File**" + "\n" + f"**‣ File Name: `{filed}`**" + "\n" + "**‣ Video**: `1080p x264`" + "\n" + "**‣ Audio**: `Japanese`" + "\n" + f"**‣ Subtitle**: `{subtitle}`" + "\n" + f"**‣ File Size**: `{nyaasize}`" + "\n" + f"**‣ Duration**: {durationx}" + "\n" + f"**‣ Downloads**: [🔗Telegram File]({source_link}) [🔗BETA DL]({ddlx})"
         rep_id = int(main.message_id)
         await asyncio.sleep(5)
         untextx = await app.send_message(
