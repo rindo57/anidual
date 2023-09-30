@@ -1,11 +1,10 @@
 import asyncio
 from motor.motor_asyncio import AsyncIOMotorClient as MongoClient
 from config import MONGO_DB_URI
-
 print("[INFO]: STARTING MONGO DB CLIENT")
 mongo_client = MongoClient(MONGO_DB_URI)
 db = mongo_client.autoanime
-dbx = client["techzcloud"]
+dbx = mongo_client["techzcloud"]
 filesdb = dbx["files"]
 animedb = db.animes
 uploadsdb = db.uploads
