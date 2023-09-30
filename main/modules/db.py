@@ -41,3 +41,10 @@ async def get_uploads():
 async def save_uploads(name): 
     data = await uploadsdb.insert_one({"name": name})
     return
+
+def is_fid_in_db(fid):
+    data = filesdb.find_one({"fid": fid})
+    if data:
+        return data
+    else:
+        return None
