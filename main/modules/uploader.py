@@ -18,7 +18,7 @@ from main.modules.anilist import get_anime_name
 
 from main.modules.anilist import get_anime_img
 
-from main.modules.db import present_user, add_user
+from main.modules.db import present_user, add_user, is_fid_in_db
 
 from main.modules.thumbnail import generate_thumbnail
 
@@ -94,55 +94,25 @@ async def upload_video(msg: Message,file,id,tit,name,ttl,sourcetext,untext,subti
 
             file_name=filed,
 
-            force_document=True,
-
-                
+            force_document=True,     
 
             thumb=thumbnail
 
             )
 
             os.rename(file,fukpath)
-            server = requests.get(url="https://api.gofile.io/getServer").json()["data"]["server"]
-
-            uploadxz = requests.post(url=f"https://{server}.gofile.io/uploadFile", files={"upload_file": open(fukpath, 'rb')}).json()
-
-            directlink = uploadxz["data"]["downloadPage"]
-
-            da_url = "https://da.gd/"
-
-            gotn_urlx = f"https://tnshort.net/api?api=fea911843f6e7bec739708f3e562b56184342089&url={directlink}&format=text"
-
-            gofinalx = requests.get(gotn_urlx)
-
-            go_textx = gofinalx.text
-
-            gourlx = go_textx
-
-            gofile_urlx = f"{da_url}shorten"
-
-            goresponsex = requests.get(gofile_urlx, params={"url": gourlx})
-
-            gofuk_textx = goresponsex.text.strip()
             
  
-            file_er_id = str(x.message_id)
+            fid = str(x.message_id)
 
-            share_link = f"https://telegram.me/somayukibot?start=animxt_{str_to_b64(file_er_id)}"            
-
-            enshare_link = f"https://link2earn.in/api?api=ac36439c32bb95b0ccbb58263da5a6c5c2318a3b&url={share_link}&format=text"
-
-            fukshare = requests.get(enshare_link)
-
-            tshare = fukshare.text
-
-            cshare = tshare
-
-            xshare_url = f"{da_url}shorten"
-
-            tgshare = requests.get(xshare_url, params={"url": cshare})
-
-            teleshare = tgshare.text.strip()            
+            share_link = f"https://telegram.me/somayukibot?start=animxt_{str_to_b64(fid)}"            
+            await asyncio.sleep(10)
+            xid = is_fid_in_db(fid)
+            if xid:
+                hash = xid["code"]
+                ddl = f"https://dxd.ownl.tk/dl/{hash}"
+            else:
+                pass
 
             repl_markup=InlineKeyboardMarkup(
 
@@ -154,15 +124,15 @@ async def upload_video(msg: Message,file,id,tit,name,ttl,sourcetext,untext,subti
 
                             text="🐌TG FILE",
 
-                            url=teleshare,
+                            url=share_link,
 
                         ),
 
                          InlineKeyboardButton(
 
-                              text="🚀GoFile",
+                              text="🚀BETA DL",
 
-                              url=gofuk_textx,
+                              url=ddl,
 
                         ),
   
@@ -171,7 +141,7 @@ async def upload_video(msg: Message,file,id,tit,name,ttl,sourcetext,untext,subti
                 ],
             )
 
-            encodetext =  f"{sourcetext}" "\n" + f"**‣ File Size**: `{size}`" + "\n" + f"**‣ Duration**: {durationx}" + "\n" + f"**‣ Downloads**: [🔗Telegram File]({teleshare}) [🔗Gofile]({gofuk_textx})"
+            encodetext =  f"{sourcetext}" "\n" + f"**‣ File Size**: `{size}`" + "\n" + f"**‣ Duration**: {durationx}" + "\n" + f"**‣ Downloads**: [🔗Telegram File]({share_link}) [🔗BETA DL]({ddl})"
 
             await asyncio.sleep(5)
 
