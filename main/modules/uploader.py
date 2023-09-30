@@ -111,6 +111,8 @@ async def upload_video(msg: Message,file,id,tit,name,ttl,sourcetext,untext,subti
             if id:
                 hash = id["code"]
                 ddl = f"https://dxd.ownl.tk/dl/{hash}"
+            else:
+                pass
             repl_markup=InlineKeyboardMarkup(
 
                 [
