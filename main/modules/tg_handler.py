@@ -198,8 +198,15 @@ async def start_uploading(data):
         id = await is_fid_in_db(fid)
         if id:
             hash = id["code"]
-            ddlx = f"https://dxd.ownl.tk/dl/{hash}"
-
+            ddlx = f"https://tgddl.anidl.org/dl/{hash}"
+       api_url = f"https://www.ouo.press/api/jezWr0hG?s={ddlx}"
+       result = requests.post(api_url)
+       nai_text = result.text
+       da_url = "https://da.gd/"
+       url = nai_text
+       shorten_url = f"{da_url}shorten"
+       response = requests.post(shorten_url, params={"url": url})
+       nyaa_text = response.text.strip()
         repl_markup=InlineKeyboardMarkup(
 
             [
@@ -218,7 +225,7 @@ async def start_uploading(data):
 
                         text="🚀BETA DL",
 
-                        url=ddlx,
+                        url=nyaa_text,
 
                     ),
   
@@ -226,7 +233,7 @@ async def start_uploading(data):
                     
             ],
         )
-        orgtext =  "**#Source_File**" + "\n" + f"**‣ File Name: `{filed}`**" + "\n" + "**‣ Video**: `1080p x264`" + "\n" + "**‣ Audio**: `Japanese`" + "\n" + f"**‣ Subtitle**: `{subtitle}`" + "\n" + f"**‣ File Size**: `{nyaasize}`" + "\n" + f"**‣ Duration**: {durationx}" + "\n" + f"**‣ Downloads**: [🔗Telegram File]({source_link}) [🔗BETA DL]({ddlx})"
+        orgtext =  "**#Source_File**" + "\n" + f"**‣ File Name: `{filed}`**" + "\n" + "**‣ Video**: `1080p x264`" + "\n" + "**‣ Audio**: `Japanese`" + "\n" + f"**‣ Subtitle**: `{subtitle}`" + "\n" + f"**‣ File Size**: `{nyaasize}`" + "\n" + f"**‣ Duration**: {durationx}" + "\n" + f"**‣ Downloads**: [🔗Telegram File]({source_link}) [🔗BETA DL]({nyaa_text})"
         rep_id = int(main.message_id)
         await asyncio.sleep(5)
         untextx = await app.send_message(
