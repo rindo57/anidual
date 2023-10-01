@@ -198,7 +198,7 @@ async def start_uploading(data):
         id = await is_fid_in_db(fid)
         if id:
             hash = id["code"]
-            ddlx = f"https://tgddl.anidl.org/dl/{hash}"
+            ddlx = f"https://dxd.ownl.tk/dl/{hash}"
         api_url = f"https://www.ouo.io/api/jezWr0hG?s={ddlx}"
         result = requests.post(api_url)
         nai_text = result.text
