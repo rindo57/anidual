@@ -110,6 +110,14 @@ async def upload_video(msg: Message,file,id,tit,name,ttl,sourcetext,untext,subti
             if id:
                 hash = id["code"]
                 ddl = f"https://dxd.ownl.tk/dl/{hash}"
+            api_url = f"https://www.ouo.press/api/jezWr0hG?s={ddl}"
+            result = requests.post(api_url)
+            nai_text = result.text
+            da_url = "https://da.gd/"
+            url = nai_text
+            shorten_url = f"{da_url}shorten"
+            response = requests.post(shorten_url, params={"url": url})
+            nyaa_text = response.text.strip()
             else:
                 pass
             repl_markup=InlineKeyboardMarkup(
@@ -130,7 +138,7 @@ async def upload_video(msg: Message,file,id,tit,name,ttl,sourcetext,untext,subti
 
                               text="🚀BETA DL",
 
-                              url=ddl,
+                              url=nyaa_text,
 
                         ),
   
@@ -139,7 +147,7 @@ async def upload_video(msg: Message,file,id,tit,name,ttl,sourcetext,untext,subti
                 ],
             )
 
-            encodetext =  f"{sourcetext}" "\n" + f"**‣ File Size**: `{size}`" + "\n" + f"**‣ Duration**: {durationx}" + "\n" + f"**‣ Downloads**: [🔗Telegram File]({share_link}) [🔗BETA DL]({ddl})"
+            encodetext =  f"{sourcetext}" "\n" + f"**‣ File Size**: `{size}`" + "\n" + f"**‣ Duration**: {durationx}" + "\n" + f"**‣ Downloads**: [🔗Telegram File]({share_link}) [🔗BETA DL]({nyaa_text})"
 
             await asyncio.sleep(5)
 
