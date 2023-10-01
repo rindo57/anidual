@@ -199,14 +199,14 @@ async def start_uploading(data):
         if id:
             hash = id["code"]
             ddlx = f"https://tgddl.anidl.org/dl/{hash}"
-       api_url = f"https://www.ouo.press/api/jezWr0hG?s={ddlx}"
-       result = requests.post(api_url)
-       nai_text = result.text
-       da_url = "https://da.gd/"
-       url = nai_text
-       shorten_url = f"{da_url}shorten"
-       response = requests.post(shorten_url, params={"url": url})
-       nyaa_text = response.text.strip()
+        api_url = f"https://www.ouo.press/api/jezWr0hG?s={ddlx}"
+        result = requests.post(api_url)
+        nai_text = result.text
+        da_url = "https://da.gd/"
+        url = nai_text
+        shorten_url = f"{da_url}shorten"
+        response = requests.post(shorten_url, params={"url": url})
+        nyaa_text = response.text.strip()
         repl_markup=InlineKeyboardMarkup(
 
             [
