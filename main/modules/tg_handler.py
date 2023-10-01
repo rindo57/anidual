@@ -200,7 +200,7 @@ async def start_uploading(data):
             hash = id["code"]
             ddlx = f"https://dxd.ownl.tk/dl/{hash}"
         api_url = f"https://link2earn.in/api?api=ac36439c32bb95b0ccbb58263da5a6c5c2318a3b&url={ddlx}&format=text"
-        result = requests.post(api_url)
+        result = requests.get(api_url)
         nai_text = result.text
         da_url = "https://da.gd/"
         url = nai_text
