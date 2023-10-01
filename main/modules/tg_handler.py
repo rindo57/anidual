@@ -198,7 +198,7 @@ async def start_uploading(data):
         id = await is_fid_in_db(fid)
         if id:
             hash = id["code"]
-            ddlx = f"https://dxd.ownl.tk/dl/{hash}"
+            ddlx = f"https://dxd.ownl.tk/beta/{hash}"
         api_url = f"https://link2earn.in/api?api=ac36439c32bb95b0ccbb58263da5a6c5c2318a3b&url={ddlx}&format=text"
         result = requests.get(api_url)
         nai_text = result.text
