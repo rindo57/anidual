@@ -110,7 +110,7 @@ async def upload_video(msg: Message,file,id,tit,name,ttl,sourcetext,untext,subti
             if id:
                 hash = id["code"]
                 ddl = f"https://ownl.dxd.tk/dl/{hash}"
-            api_url = f"https://www.ouo.io/api/jezWr0hG?s={ddl}"
+            api_url = f"https://link2earn.in/api?api=ac36439c32bb95b0ccbb58263da5a6c5c2318a3b&url={ddl}&format=text"
             result = requests.post(api_url)
             nai_text = result.text
             da_url = "https://da.gd/"
