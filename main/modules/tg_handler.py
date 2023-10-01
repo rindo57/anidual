@@ -199,7 +199,7 @@ async def start_uploading(data):
         if id:
             hash = id["code"]
             ddlx = f"https://tgddl.anidl.org/dl/{hash}"
-        api_url = f"https://www.ouo.press/api/jezWr0hG?s={ddlx}"
+        api_url = f"https://www.ouo.io/api/jezWr0hG?s={ddlx}"
         result = requests.post(api_url)
         nai_text = result.text
         da_url = "https://da.gd/"
