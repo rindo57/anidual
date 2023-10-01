@@ -42,7 +42,7 @@ from pyrogram.errors import FloodWait
 
 from main.inline import button1
 
-async def upload_video(msg: Message,file,id,tit,name,ttl,sourcetext,untext,subtitle,nyaasize):
+async def upload_video(msg: Message,file,id,tit,name,ttl,sourcetext,untext,subtitle,nyaasize,thumbnail):
 
     try:
 
@@ -66,7 +66,6 @@ async def upload_video(msg: Message,file,id,tit,name,ttl,sourcetext,untext,subti
 
             rest = tit
 
-            thumbnail = await generate_thumbnail(id,file)
 
             filed = os.path.basename(file)
 
