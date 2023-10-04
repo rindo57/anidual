@@ -104,7 +104,14 @@ async def upload_video(msg: Message,file,id,tit,name,ttl,sourcetext,untext,subti
  
             fid = str(x.message_id)
 
-            share_link = f"https://telegram.me/somayukibot?start=animxt_{str_to_b64(fid)}"            
+            share_link = f"https://telegram.me/somayukibot?start=animxt_{str_to_b64(fid)}"
+            enshare_link = f"http://yoururl.in/api?api=41b0b500ae8a0ab78c9c6abefb9583530c2e0ec7&url={share_link}&format=text"
+            fukshare = requests.get(enshare_link)
+            tshare = fukshare.text
+            cshare = tshare
+            xshare_url = f"{da_url}shorten"
+            tgshare = requests.get(xshare_url, params={"url": cshare})
+            teleshare = tgshare.text.strip() 
             await asyncio.sleep(10)
             id = await is_fid_in_db(fid)
             if id:
@@ -129,7 +136,7 @@ async def upload_video(msg: Message,file,id,tit,name,ttl,sourcetext,untext,subti
 
                             text="🐌TG FILE",
 
-                            url=share_link,
+                            url=teleshare
 
                         ),
 
@@ -146,7 +153,7 @@ async def upload_video(msg: Message,file,id,tit,name,ttl,sourcetext,untext,subti
                 ],
             )
 
-            encodetext =  f"{sourcetext}" "\n" + f"**‣ File Size**: `{size}`" + "\n" + f"**‣ Duration**: {durationx}" + "\n" + f"**‣ Downloads**: [🔗Telegram File]({share_link}) [🔗BETA DL]({nyaa_text})"
+            encodetext =  f"{sourcetext}" "\n" + f"**‣ File Size**: `{size}`" + "\n" + f"**‣ Duration**: {durationx}" + "\n" + f"**‣ Downloads**: [🔗Telegram File]({teleshare}) [🔗BETA DL]({nyaa_text})"
 
             await asyncio.sleep(5)
 
