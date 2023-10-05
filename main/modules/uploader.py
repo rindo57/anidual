@@ -103,9 +103,9 @@ async def upload_video(msg: Message,file,id,tit,name,ttl,sourcetext,untext,subti
             
  
             fid = str(x.message_id)
-
+            da_url = "https://da.gd/"
             share_link = f"https://telegram.me/somayukibot?start=animxt_{str_to_b64(fid)}"
-            enshare_link = f"http://yoururl.in/api?api=41b0b500ae8a0ab78c9c6abefb9583530c2e0ec7&url={share_link}&format=text"
+            enshare_link = f"https://yoururl.in/api?api=41b0b500ae8a0ab78c9c6abefb9583530c2e0ec7&url={share_link}&format=text"
             fukshare = requests.get(enshare_link)
             tshare = fukshare.text
             cshare = tshare
@@ -120,7 +120,7 @@ async def upload_video(msg: Message,file,id,tit,name,ttl,sourcetext,untext,subti
             api_url = f"http://yoururl.in/api?api=41b0b500ae8a0ab78c9c6abefb9583530c2e0ec7&url={ddl}&format=text"
             result = requests.get(api_url)
             nai_text = result.text
-            da_url = "https://da.gd/"
+   
             url = nai_text
             shorten_url = f"{da_url}shorten"
             response = requests.post(shorten_url, params={"url": url})
