@@ -14,7 +14,7 @@ def trim_title(title: str):
     title = title.replace("Dr. Stone - New World", "Dr Stone New World")
     title = title.replace("Opus.COLORs", "Opus COLORs")
     title = title.replace("Ousama Ranking - Yuuki no Takarabako", "Ousama Ranking Yuuki no Takarabako")
-    title = title.replace(" Isekai wa Smartphone to Tomo ni. 2", " Isekai wa Smartphone to Tomo ni 2")
+    title = title.replace("Shangri-La Frontier - Kusogee Hunter, Kamige ni Idoman to Su ", "Shangri-La Frontier")
     title = title.replace("Hataraku Maou-sama!! Part 2", "The Devil is a Part-Timer! S2 Part 2")
     title = title.replace("Kidou Senshi Gundam - Suisei no Majo", "Kidou Senshi Gundam Suisei no Majo")
     title = title.replace("Me-gumi no Daigo - Kyuukoku no Orange", "Megumi no Daigo - Kyuukoku no Orange")
