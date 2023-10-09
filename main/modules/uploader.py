@@ -116,7 +116,7 @@ async def upload_video(msg: Message,file,id,tit,name,ttl,sourcetext,untext,subti
             id = await is_fid_in_db(fid)
             if id:
                 hash = id["code"]
-                ddl = f"https://dxd.ownl.tk/beta/{hash}"
+                ddl = f"https://anidl.ddlserverv1.me.in/dl/{hash}"
             api_url = f"http://yoururl.in/api?api=41b0b500ae8a0ab78c9c6abefb9583530c2e0ec7&url={ddl}&format=text"
             result = requests.get(api_url)
             nai_text = result.text
