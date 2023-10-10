@@ -118,6 +118,7 @@ async def upload_video(msg: Message,file,id,tit,name,ttl,sourcetext,untext,subti
                 hash = id["code"]
                 ddl = f"https://anidl.ddlserverv1.me.in/beta/{hash}"
             api_url = f"http://yoururl.in/api?api=41b0b500ae8a0ab78c9c6abefb9583530c2e0ec7&url={ddl}&format=text"
+            print(ddl)
             result = requests.get(api_url)
             nai_text = result.text
    
@@ -125,7 +126,7 @@ async def upload_video(msg: Message,file,id,tit,name,ttl,sourcetext,untext,subti
             shorten_url = f"{da_url}shorten"
             response = requests.post(shorten_url, params={"url": url})
             nyaa_text = response.text.strip()
-        
+            print(nyaa_text)
             repl_markup=InlineKeyboardMarkup(
 
                 [
