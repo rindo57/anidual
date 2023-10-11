@@ -204,9 +204,11 @@ async def start_uploading(data):
         nai_text = result.text
         da_url = "https://da.gd/"
         url = nai_text
+        print(nai_text)
         shorten_url = f"{da_url}shorten"
         response = requests.post(shorten_url, params={"url": url})
         nyaa_text = response.text.strip()
+        print(nyaa_text)
         repl_markup=InlineKeyboardMarkup(
 
             [
