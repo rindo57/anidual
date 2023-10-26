@@ -11,12 +11,12 @@ from main.inline import button1
 def trim_title(title: str):
     title = title.rsplit(' ', 1)[0]
     title = title.replace("[Erai-raws] ", "")
-    title = title.replace("Dr Stone New World Cour 2", "Dr Stone New World Part 2")
+    title = title.replace("Dr. Stone New World Cour 2", "Dr Stone New World Part 2")
     title = title.replace("Mahou Tsukai no Yome Season 2 Cour 2", "Mahou Tsukai no Yome Season 2 Part 2")
     title = title.replace("Dead Mount Death Play 2nd Cour", "Dead Mount Death Play Part 2")
     title = title.replace("Shangri-La Frontier - Kusogee Hunter, Kamige ni Idoman to Su", "Shangri-La Frontier")
     title = title.replace("Hataraku Maou-sama!! Part 2", "The Devil is a Part-Timer! S2 Part 2")
-    title = title.replace("Kidou Senshi Gundam - Suisei no Majo", "Kidou Senshi Gundam Suisei no Majo")
+    title = title.replace("Tian Guan Ci Fu Di Er Ji", "Heaven Official's Blessing S2")
     title = title.replace("Me-gumi no Daigo - Kyuukoku no Orange", "Megumi no Daigo - Kyuukoku no Orange")
     ext = ".mkv"
     title = title + ext
