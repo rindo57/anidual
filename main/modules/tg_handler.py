@@ -174,79 +174,14 @@ async def start_uploading(data):
         main = await app.send_photo(KAYO_ID,photo=img,caption=caption)
         guessname = f"**{ghostname}**" + "\n" + f"__({tit})__" + "\n" + "━━━━━━━━━━━━━━━━━━━" + "\n" + "✓  `1080p x264 Web-DL`" + "\n" + f"✓  `{subtitle} ~ Subs`" + "\n" + "#Source #WebDL"
         
-        thumbnail = await generate_thumbnail(id,file)
-
-        videox = await app.send_document(
-
-                DATABASE_ID,
-
-            document=file,
-            
-            caption=guessname,
-
-            file_name=filed,
-
-            force_document=True,
-                        
-            thumb=thumbnail
-
-            )   
         os.rename(file, fpath)
-        fid = str(videox.message_id)
-        source_link = f"https://telegram.me/somayukibot?start=animxt_{str_to_b64(fid)}"
-        await asyncio.sleep(10)
-        id = await is_fid_in_db(fid)
-        if id:
-            hash = id["code"]
-            ddlx = f"https://ddl.animxt.fun/beta/{hash}"
-        print(hash)
-        api_url = f"https://yoururl.in/api?api=41b0b500ae8a0ab78c9c6abefb9583530c2e0ec7&url={ddlx}&format=text"
-        result = requests.get(api_url)
-        nai_text = result.text
-        da_url = "https://da.gd/"
-        url = nai_text
-        print(nai_text)
-        shorten_url = f"{da_url}shorten"
-        response = requests.post(shorten_url, params={"url": url})
-        nyaa_text = response.text.strip()
-        print(nyaa_text)
-        repl_markup=InlineKeyboardMarkup(
-
-            [
-
-                [
-
-                    InlineKeyboardButton(
-
-                        text="🐌TG FILE",
-
-                        url=source_link,
-
-                    ),
-
-                    InlineKeyboardButton(
-
-                        text="🚀BETA DL",
-
-                        url=nyaa_text,
-
-                    ),
-  
-                ],
-                    
-            ],
-        )
-        orgtext =  "**#Source_File**" + "\n" + f"**‣ File Name: `{filed}`**" + "\n" + "**‣ Video**: `1080p x264`" + "\n" + "**‣ Audio**: `Japanese`" + "\n" + f"**‣ Subtitle**: `{subtitle}`" + "\n" + f"**‣ File Size**: `{nyaasize}`" + "\n" + f"**‣ Duration**: {durationx}" + "\n" + f"**‣ Downloads**: [🔗Telegram File]({source_link}) [🔗BETA DL]({nyaa_text})"
+    
+        
+        
         rep_id = int(main.message_id)
-        await asyncio.sleep(5)
-        untextx = await app.send_message(
-                      chat_id=KAYO_ID,
-                      text=orgtext,
-                      reply_to_message_id=rep_id
-                  )
+        
         await asyncio.sleep(3)
-        unitext = await untextx.edit(orgtext, reply_markup=repl_markup)
-        await asyncio.sleep(5)
+    
         sourcetext =  f"**#Encoded_File**" + "\n" + f"**‣ File Name**: `{razo}`" + "\n" + "**‣ Video**: `720p HEVC x265 10Bit`" + "\n" + "**‣ Audio**: `Japanese`" + "\n" + f"**‣ Subtitle**: `{subtitle}`"
         untext = await app.send_message(
                       chat_id=KAYO_ID,
@@ -275,7 +210,7 @@ async def start_uploading(data):
         print("Uploading --> ",name)
 
         await status.edit(await status_text(f"Uploading {name }"),reply_markup=button1)
-        video = await upload_video(msg,fpath,id,tit,name,size,sourcetext,untext,subtitle,nyaasize,thumbnail) 
+        video = await upload_video(msg,fpath,id,tit,name,size,sourcetext,untext,subtitle,nyaasize) 
         try:
 
             os.remove("video.mkv")
