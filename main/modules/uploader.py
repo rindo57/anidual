@@ -1,306 +1,180 @@
 import asyncio
-import time
-import aiohttp
-import requests
-import aiofiles
-import sys
-
-from main.modules.compressor import compress_video
-
-from main.modules.utils import episode_linker, get_duration, get_epnum, status_text, get_filesize, b64_to_str, str_to_b64, send_media_and_reply, get_durationx
-
-from pyrogram.types import Message, InlineKeyboardMarkup, InlineKeyboardButton, CallbackQuery
-
-from main.modules.uploader import upload_video
-from main.modules.thumbnail import generate_thumbnail
 
 import os
 
-from main.modules.db import del_anime, save_uploads, is_fid_in_db
+import time
 
-from main.modules.downloader import downloader
+import pixeldrain
 
-from main.modules.anilist import get_anilist_data, get_anime_img, get_anime_name
+import aiohttp
 
-from config import INDEX_USERNAME, UPLOADS_USERNAME, UPLOADS_ID, INDEX_ID, PROGRESS_ID, LINK_ID
+import requests
 
-from main import app, queue, status
+import aiofiles
+
+from main.modules.utils import format_time, get_duration, get_epnum, get_filesize, status_text, tags_generator, get_messages, b64_to_str, str_to_b64, send_media_and_reply, get_durationx
+
+from main.modules.anilist import get_anime_name
+
+from main.modules.anilist import get_anime_img
+
+from main.modules.db import present_user, add_user, is_fid_in_db
+
+from main.modules.thumbnail import generate_thumbnail
+
+from config import UPLOADS_ID
+
+from pyrogram import Client, filters
+
+from pyrogram.types import Message, InlineKeyboardButton, InlineKeyboardMarkup
+
+from main.modules.progress import progress_for_pyrogram
+
+from os.path import isfile
+
+import os
+
+import time
+
+from main import app, status
 
 from pyrogram.errors import FloodWait
 
-from pyrogram import filters
-
 from main.inline import button1
 
-status: Message
-
-async def tg_handler():
-
-    while True:
-
-        try:
-
-            if len(queue) != 0:
-
-                i = queue[0]  
-
-                i = queue.pop(0)
-
-                id, name, video = await start_uploading(i)
-
-                await del_anime(i["title"])
-
-                await save_uploads(i["title"])
-
-                await asyncio.sleep(30)
-
-            else:                
-
-                if "Idle..." in status.text:
-
-                    try:
-
-                        await status.edit(await status_text("Idle..."),reply_markup=button1)
-
-                    except:
-
-                        pass
-
-                await asyncio.sleep(30)
-
-
-
-        except FloodWait as e:
-
-            flood_time = int(e.x) + 5
-
-            try:
-
-                await status.edit(await status_text(f"Floodwait... Sleeping For {flood_time} Seconds"),reply_markup=button1)
-
-            except:
-
-                pass
-
-            await asyncio.sleep(flood_time)
-
-        except:
-
-            pass
-
-
-
-async def start_uploading(data):
+async def upload_video(msg: Message,file,id,tit,name,ttl,sourcetext,untext,subtitle,nyaasize):
 
     try:
 
-        title = data["title"]
-        title = title.replace("Dr. Stone - New World", "Dr Stone New World")
-        title = title.replace("Opus.COLORs", "Opus COLORs")
-        title = title.replace(" Isekai wa Smartphone to Tomo ni. 2", " Isekai wa Smartphone to Tomo ni 2")
-        title = title.replace("Stand My Heroes - Warmth of Memories - OVA", "Stand My Heroes Warmth of Memories - OVA")
-        link = data["link"]
-        size = data["size"]
-        nyaasize = data["size"]
-        subtitle = data["subtitle"]
-        name, ext = title.split(".")
+        fuk = isfile(file)
 
-        name += f" @animxt." + ext
+        if fuk:
 
-        KAYO_ID = -1001159872623
-        uj_id = 1159872623
-        DATABASE_ID = -1001642923224
-        bin_id = -1001700435443
-        name = name.replace(f" @animxt.","").replace(ext,"").strip()
-        id, img, tit = await get_anime_img(get_anime_name(title))
-        msg = await app.send_photo(bin_id,photo=img,caption=title)
+            r = msg
 
-        print("Downloading --> ",name)
-        img, caption = await get_anilist_data(title)
-        await asyncio.sleep(5)
-        await status.edit(await status_text(f"Downloading {name}"),reply_markup=button1)
+            c_time = time.time()
 
-        file = await downloader(msg,link,size,title)
+            duration = get_duration(file)
 
-        await msg.edit(f"Download Complete : {name}")
-        print("Encoding --> ",name)
+            durationx = get_durationx(file)
 
-        await status.edit(await status_text(f"Encoding {name}"),reply_markup=button1)
+            size = get_filesize(file)
 
-        duration = get_duration(file)
-        durationx = get_durationx(file)
-        filed = os.path.basename(file)
-        filed = filed.replace(filed[-14:], ".mkv")
-        filed = filed.replace("[Erai-raws]", "")
-        filed = filed.replace("[1080p][Multiple Subtitle]", "[1080p Web-DL]")
-        filed = filed.replace("[1080p]", "[1080p Web-DL]")
-        filed = filed.replace("2nd Season", "S2")
-        filed = filed.replace("3rd Season", "S3")
-        razo = filed.replace("[1080p Web-DL]", "[720p x265] @animxt")
-        fpath = "downloads/" + filed
-        ghostname = name
-        ghostname = ghostname.replace("[1080p][Multiple Subtitle]", "")
-        ghostname = ghostname.replace("[1080p]", "")
-        ghostname = ghostname.replace("2nd Season", "S2")
-        ghostname = ghostname.replace("3rd Season", "S3")
-        subtitle = subtitle.replace("][", ", ")
-        subtitle = subtitle.replace("[", "")
-        subtitle = subtitle.replace("]", "")     
-        subtitle = subtitle.replace("ENG", "English")
-        subtitle = subtitle.replace("POR-BR", "Portuguese (Brazil)")
-        subtitle = subtitle.replace("SPA-LA", "Spanish (Latin America)")
-        subtitle = subtitle.replace("SPA", "Spanish")
-        subtitle = subtitle.replace("ARA", "Arabic")
-        subtitle = subtitle.replace("FRE", "French")
-        subtitle = subtitle.replace("GER", "German")
-        subtitle = subtitle.replace("ITA", "Italian")
-        subtitle = subtitle.replace("RUS", "Russian")
-        subtitle = subtitle.replace("HIN", "Hindi")
-        subtitle = subtitle.replace("RUM", "Romanian")
-        subtitle = subtitle.replace("FIN", "Finnish")
-        subtitle = subtitle.replace("MAY", "Malaysian")
-        subtitle = subtitle.replace("SWE", "Swedish")
-        subtitle = subtitle.replace("GRE", "Greek")
-        subtitle = subtitle.replace("HEB", "Hebrew")
-        subtitle = subtitle.replace("JPN", "Japanese")
-        subtitle = subtitle.replace("POL", "Polish")
-        subtitle = subtitle.replace("DUT", "Dutch")
-        subtitle = subtitle.replace("FIL", "Filipino")
-        subtitle = subtitle.replace("CES", "Czech")
-        subtitle = subtitle.replace("HRV", "Croatian")
-        subtitle = subtitle.replace("HUN", "Hungarian")
-        subtitle = subtitle.replace("UKR", "Ukranian")
-        main = await app.send_photo(KAYO_ID,photo=img,caption=caption)
-        guessname = f"**{ghostname}**" + "\n" + f"__({tit})__" + "\n" + "━━━━━━━━━━━━━━━━━━━" + "\n" + "✓  `1080p x264 Web-DL`" + "\n" + f"✓  `{subtitle} ~ Subs`" + "\n" + "#Source #WebDL"
+            ep_num = get_epnum(name)
 
-        thumbnail = await generate_thumbnail(id,file)
+            thumbnail = await generate_thumbnail(id,file)
 
-        videox = await app.send_document(
+            rest = tit
 
-                DATABASE_ID,
+
+            filed = os.path.basename(file)
+
+            filed = filed.replace("[1080p Web-DL]", "[720p x265] @animxt")
+
+            fukpath = "downloads/" + filed
+
+            caption = f"{filed}"
+
+            caption = caption.replace("[720p x265] @animxt.mkv", "") 
+
+            gcaption=f"**{caption}**" + "\n" +  f"__({tit})__" + "\n" + "━━━━━━━━━━━━━━━━━━━" + "\n" + "✓  `720p x265 10Bit`" + "\n" + f"✓  `{subtitle} ~ Subs`" + "\n" + "#Encoded #HEVC"
+
+            kayo_id = -1001642923224
+
+            gay_id = 1159872623
+
+            x = await app.send_document(
+
+                kayo_id,
 
             document=file,
 
-            caption=guessname,
+            caption=gcaption,
 
             file_name=filed,
 
-            force_document=True,
+            force_document=True,     
 
             thumb=thumbnail
 
-            )   
-        os.rename(file, fpath)
-        fid = str(videox.message_id)
-        source_link = f"https://telegram.me/somayukibot?start=animxt_{str_to_b64(fid)}"
-        await asyncio.sleep(10)
-        id = await is_fid_in_db(fid)
-        if id:
-            hash = id["code"]
-            ddlx = f"https://ddl.animxt.fun/beta/{hash}"
-        print(hash)
-        api_url = f"https://yoururl.in/api?api=41b0b500ae8a0ab78c9c6abefb9583530c2e0ec7&url={ddlx}&format=text"
-        result = requests.get(api_url)
-        nai_text = result.text
-        da_url = "https://da.gd/"
-        url = nai_text
-        print(nai_text)
-        shorten_url = f"{da_url}shorten"
-        response = requests.post(shorten_url, params={"url": url})
-        nyaa_text = response.text.strip()
-        print(nyaa_text)
-        repl_markup=InlineKeyboardMarkup(
+            )
 
-            [
+            os.rename(file,fukpath)
+            
+ 
+            fid = str(x.message_id)
+            da_url = "https://da.gd/"
+            share_link = f"https://telegram.me/somayukibot?start=animxt_{str_to_b64(fid)}"
+            enshare_link = f"https://yoururl.in/api?api=41b0b500ae8a0ab78c9c6abefb9583530c2e0ec7&url={share_link}&format=text"
+            fukshare = requests.get(enshare_link)
+            tshare = fukshare.text
+            cshare = tshare
+            xshare_url = f"{da_url}shorten"
+            tgshare = requests.get(xshare_url, params={"url": cshare})
+            teleshare = tgshare.text.strip() 
+            await asyncio.sleep(10)
+            id = await is_fid_in_db(fid)
+            if id:
+                hash = id["code"]
+                ddl = f"https://ddl.animxt.fun/beta/{hash}"
+            api_url = f"http://yoururl.in/api?api=41b0b500ae8a0ab78c9c6abefb9583530c2e0ec7&url={ddl}&format=text"
+            print(ddl)
+            result = requests.get(api_url)
+            nai_text = result.text
+   
+            url = nai_text
+            shorten_url = f"{da_url}shorten"
+            response = requests.post(shorten_url, params={"url": url})
+            nyaa_text = response.text.strip()
+            print(nyaa_text)
+            repl_markup=InlineKeyboardMarkup(
 
                 [
 
-                    InlineKeyboardButton(
+                    [
 
-                        text="🐌TG FILE",
+                         InlineKeyboardButton(
 
-                        url=source_link,
+                            text="🐌TG FILE",
 
-                    ),
+                            url=teleshare
 
-                    InlineKeyboardButton(
+                        ),
 
-                        text="🚀BETA DL",
+                         InlineKeyboardButton(
 
-                        url=nyaa_text,
+                              text="🚀BETA DL",
 
-                    ),
+                              url=nyaa_text,
 
+                        ),
+  
+                    ],
+                    
                 ],
+            )
 
-            ],
-        )
-        orgtext =  "**#Source_File**" + "\n" + f"**‣ File Name: `{filed}`**" + "\n" + "**‣ Video**: `1080p x264`" + "\n" + "**‣ Audio**: `Japanese`" + "\n" + f"**‣ Subtitle**: `{subtitle}`" + "\n" + f"**‣ File Size**: `{nyaasize}`" + "\n" + f"**‣ Duration**: {durationx}" + "\n" + f"**‣ Downloads**: [🔗Telegram File]({source_link}) [🔗BETA DL]({nyaa_text})"
-        rep_id = int(main.message_id)
-        await asyncio.sleep(5)
-        untextx = await app.send_message(
-                      chat_id=KAYO_ID,
-                      text=orgtext,
-                      reply_to_message_id=rep_id
-                  )
-        await asyncio.sleep(3)
-        unitext = await untextx.edit(orgtext, reply_markup=repl_markup)
-        await asyncio.sleep(5)
-        sourcetext =  f"**#Encoded_File**" + "\n" + f"**‣ File Name**: `{razo}`" + "\n" + "**‣ Video**: `720p HEVC x265 10Bit`" + "\n" + "**‣ Audio**: `Japanese`" + "\n" + f"**‣ Subtitle**: `{subtitle}`"
-        untext = await app.send_message(
-                      chat_id=KAYO_ID,
-                      text=sourcetext,
-                      reply_to_message_id=rep_id
-                  )
-        await asyncio.sleep(2)
-        await app.send_sticker(KAYO_ID,"CAACAgUAAxkBAAEU_9FkRrLoli952oqIMVFPftW12xYLRwACGgADQ3PJEsT69_t2KrvBLwQ")
-        os.rename(fpath,"video.mkv")
-        await asyncio.sleep(5)
-        compressed = await compress_video(duration,untext,name,sourcetext)
+            encodetext =  f"{sourcetext}" "\n" + f"**‣ File Size**: `{size}`" + "\n" + f"**‣ Duration**: {durationx}" + "\n" + f"**‣ Downloads**: [🔗Telegram File]({teleshare}) [🔗BETA DL]({nyaa_text})"
 
-        dingdong = await untext.edit(sourcetext)
+            await asyncio.sleep(5)
 
+            entext = await untext.edit(encodetext, disable_web_page_preview=True, reply_markup=repl_markup)
 
-        if compressed == "None" or compressed == None:
+    except Exception:
 
-            print("Encoding Failed Uploading The Original File")
+            await app.send_message(kayo_id, text="Something Went Wrong!")
 
-            os.rename("video.mkv",fpath)
-
-        else:
-
-            os.rename("out.mkv",fpath)
-
-        print("Uploading --> ",name)
-
-        await status.edit(await status_text(f"Uploading {name }"),reply_markup=button1)
-        video = await upload_video(msg,fpath,id,tit,name,size,sourcetext,untext,subtitle,nyaasize,thumbnail) 
-        try:
-
-            os.remove("video.mkv")
-
-            os.remove("out.mkv")
+    try:
+        
+            
+            await r.delete()
 
             os.remove(file)
 
-            os.remove(fpath)
+            os.remove(thumbnail)
 
-        except:
+    except:
 
-            pass     
+        pass
 
-    except FloodWait as e:
-
-        flood_time = int(e.x) + 5
-
-        try:
-
-            await status.edit(await status_text(f"Floodwait... Sleeping For {flood_time} Seconds"),reply_markup=button1)
-
-        except:
-
-            pass
-
-        await asyncio.sleep(flood_time)
-
-    return id, name, video
+    return x.message_id
