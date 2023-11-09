@@ -62,8 +62,6 @@ async def upload_video(msg: Message,file,id,tit,name,ttl,sourcetext,untext,subti
 
             ep_num = get_epnum(name)
 
-            thumbnail = await generate_thumbnail(id,file)
-
             rest = tit
 
 
