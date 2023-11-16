@@ -11,7 +11,7 @@ from main.inline import button1
 def trim_title(title: str):
     title = title.rsplit(' ', 1)[0]
     title = title.replace("[Erai-raws] ", "")
-    title = title.replace("Dr. Stone: New World Cour 2", "Dr Stone New World Part 2")
+    title = title.replace("Dr. Stone - New World Cour 2", "Dr Stone New World Part 2")
     title = title.replace("Mahou Tsukai no Yome Season 2 Cour 2", "Mahou Tsukai no Yome Season 2 Part 2")
     title = title.replace("Dead Mount Death Play 2nd Cour", "Dead Mount Death Play Part 2")
     title = title.replace("Shangri-La Frontier - Kusogee Hunter, Kamige ni Idoman to Su", "Shangri-La Frontier")
