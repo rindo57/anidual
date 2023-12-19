@@ -199,13 +199,10 @@ async def start_uploading(data):
         if id:
             hash = id["code"]
             ddlx = f"https://anidl.ddlserverv1.me.in/dl/beta/{hash}"
-        api_url = f"http://yoururl.in/api?api=41b0b500ae8a0ab78c9c6abefb9583530c2e0ec7&url={ddlx}&format=text"
-        result = requests.get(api_url)
-        nai_text = result.text
+        
         da_url = "https://da.gd/"
-        url = nai_text
         shorten_url = f"{da_url}shorten"
-        response = requests.post(shorten_url, params={"url": url})
+        response = requests.post(shorten_url, params={"url": ddlx})
         nyaa_text = response.text.strip()
         repl_markup=InlineKeyboardMarkup(
 
