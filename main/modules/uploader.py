@@ -103,26 +103,16 @@ async def upload_video(msg: Message,file,id,tit,name,ttl,sourcetext,untext,subti
             fid = str(x.message_id)
             da_url = "https://da.gd/"
             share_link = f"https://telegram.me/somayukibot?start=animxt_{str_to_b64(fid)}"
-            enshare_link = f"https://yoururl.in/api?api=41b0b500ae8a0ab78c9c6abefb9583530c2e0ec7&url={share_link}&format=text"
-            fukshare = requests.get(enshare_link)
-            tshare = fukshare.text
-            cshare = tshare
-            xshare_url = f"{da_url}shorten"
-            tgshare = requests.get(xshare_url, params={"url": cshare})
-            teleshare = tgshare.text.strip() 
+            teleshare = f"https://yoururl.in/api?api=41b0b500ae8a0ab78c9c6abefb9583530c2e0ec7&url={share_link}&format=text"
+         
             await asyncio.sleep(10)
-            id = await is_fid_in_db(fid)
+            id = await is_fid_in_db(fid) 
             if id:
                 hash = id["code"]
                 ddl = f"https://ddl.animxt.fun/beta/{hash}"
-            api_url = f"http://yoururl.in/api?api=41b0b500ae8a0ab78c9c6abefb9583530c2e0ec7&url={ddl}&format=text"
-            print(ddl)
-            result = requests.get(api_url)
-            nai_text = result.text
-   
-            url = nai_text
+            
             shorten_url = f"{da_url}shorten"
-            response = requests.post(shorten_url, params={"url": url})
+            response = requests.post(shorten_url, params={"url": ddl})
             nyaa_text = response.text.strip()
             print(nyaa_text)
             repl_markup=InlineKeyboardMarkup(
