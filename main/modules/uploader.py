@@ -102,9 +102,8 @@ async def upload_video(msg: Message,file,id,tit,name,ttl,sourcetext,untext,subti
  
             fid = str(x.message_id)
             da_url = "https://da.gd/"
-            share_link = f"https://telegram.me/somayukibot?start=animxt_{str_to_b64(fid)}"
-            teleshare = f"https://yoururl.in/api?api=41b0b500ae8a0ab78c9c6abefb9583530c2e0ec7&url={share_link}&format=text"
-         
+            teleshare = f"https://telegram.me/somayukibot?start=animxt_{str_to_b64(fid)}"
+        
             await asyncio.sleep(10)
             id = await is_fid_in_db(fid) 
             if id:
