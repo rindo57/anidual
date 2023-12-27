@@ -198,7 +198,7 @@ async def start_uploading(data):
         id = await is_fid_in_db(fid)
         if id:
             hash = id["code"]
-            ddlx = f"https://anidl.ddlserverv1.me.in/dl/beta/{hash}"
+            ddlx = f"https://animxt.fun/beta/{hash}"
         
         da_url = "https://da.gd/"
         shorten_url = f"{da_url}shorten"
