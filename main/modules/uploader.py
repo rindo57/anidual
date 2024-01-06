@@ -109,7 +109,7 @@ async def upload_video(msg: Message,file,id,tit,name,ttl,sourcetext,untext,subti
             if id:
                 hash = id["code"]
                 ddl = f"https://ddl.animxt.fun/beta/{hash}"
-            api_url = f"http://yoururl.in/api?api=41b0b500ae8a0ab78c9c6abefb9583530c2e0ec7&url={ddl}&format=text"
+            api_url = f"https://nanolinks.in/api?api=7da8202d8af0c8d76c024a6be6badadaabe66a01&url={ddlx}&format=text"
             print(ddl)
             result = requests.get(api_url)
             nai_text = result.text
