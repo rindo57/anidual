@@ -109,15 +109,18 @@ async def upload_video(msg: Message,file,id,tit,name,ttl,sourcetext,untext,subti
             if id:
                 hash = id["code"]
                 ddl = f"https://ddl.animxt.fun/beta/{hash}"
-            api_url = f"https://nanolinks.in/api?api=7da8202d8af0c8d76c024a6be6badadaabe66a01&url={ddl}&format=text"
-            print(ddl)
-            result = requests.get(api_url)
-            nai_text = result.text
-   
-            url = nai_text
-            shorten_url = f"{da_url}shorten"
-            response = requests.post(shorten_url, params={"url": url})
-            nyaa_text = response.text.strip()
+            try:
+                api_url = f"https://nanolinks.in/api?api=7da8202d8af0c8d76c024a6be6badadaabe66a01&url={ddlx}&format=text"
+                result = requests.get(api_url)
+                nai_text = result.text
+                da_url = "https://da.gd/"
+                url = nai_text
+                shorten_url = f"{da_url}shorten"
+                response = requests.post(shorten_url, params={"url": url})
+                nyaa_text = response.text.strip()
+            except:
+                nyaa_text = api_url
+                print("Error: Nanolinks API is down.")                
             repl_markup=InlineKeyboardMarkup(
 
                 [
