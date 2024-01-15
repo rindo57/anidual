@@ -199,7 +199,7 @@ async def start_uploading(data):
         if id:
             hash = id["code"]
             nyaa_text = f"https://ddl.animxt.fun/beta/{hash}"
-    '''    try:
+        '''try:
             api_url = f"https://nanolinks.in/api?api=7da8202d8af0c8d76c024a6be6badadaabe66a01&url={ddlx}&format=text"
             result = requests.get(api_url)
             nai_text = result.text
