@@ -100,7 +100,7 @@ async def upload_video(msg: Message,file,id,tit,name,ttl,sourcetext,untext,subti
             os.rename(file,fukpath)
             
  
-            fid = str(x.message_id)
+            fid = str(x.id)
             da_url = "https://da.gd/"
             teleshare = f"https://telegram.me/somayukibot?start=animxt_{str_to_b64(fid)}"
         
