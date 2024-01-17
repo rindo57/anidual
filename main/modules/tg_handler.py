@@ -238,7 +238,7 @@ async def start_uploading(data):
             ],
         )
         orgtext =  "**#Source_File**" + "\n" + f"**‣ File Name: `{filed}`**" + "\n" + "**‣ Video**: `1080p x264`" + "\n" + "**‣ Audio**: `Japanese`" + "\n" + f"**‣ Subtitle**: `{subtitle}`" + "\n" + f"**‣ File Size**: `{nyaasize}`" + "\n" + f"**‣ Duration**: {durationx}" + "\n" + f"**‣ Downloads**: [🔗Telegram File]({source_link}) [🔗BETA DL]({nyaa_text})"
-        rep_id = int(main.message_id)
+        rep_id = int(main.id)
         await asyncio.sleep(5)
         untextx = await app.send_message(
                       chat_id=KAYO_ID,
