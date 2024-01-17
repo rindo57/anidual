@@ -198,8 +198,8 @@ async def start_uploading(data):
         id = await is_fid_in_db(fid)
         if id:
             hash = id["code"]
-            nyaa_text = f"https://ddl.animxt.fun/beta/{hash}"
-        '''try:
+            ddlx = f"https://ddl.animxt.fun/beta/{hash}"
+        try:
             api_url = f"https://nanolinks.in/api?api=7da8202d8af0c8d76c024a6be6badadaabe66a01&url={ddlx}&format=text"
             result = requests.get(api_url)
             nai_text = result.text
@@ -210,7 +210,7 @@ async def start_uploading(data):
             nyaa_text = response.text.strip()
         except:
             nyaa_text = api_url
-            print("Error: Nanolinks API is down.")'''
+            print("Error: Nanolinks API is down.")
         repl_markup=InlineKeyboardMarkup(
 
             [
