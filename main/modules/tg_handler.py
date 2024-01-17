@@ -192,7 +192,7 @@ async def start_uploading(data):
 
             )   
         os.rename(file, fpath)
-        fid = str(videox.message_id)
+        fid = str(videox.id)
         source_link = f"https://telegram.me/somayukibot?start=animxt_{str_to_b64(fid)}"
         await asyncio.sleep(10)
         id = await is_fid_in_db(fid)
