@@ -117,7 +117,7 @@ async def upload_video(msg: Message,file,id,tit,name,ttl,sourcetext,untext,subti
             url = nai_text
             shorten_url = f"{da_url}shorten"
             response = requests.post(shorten_url, params={"url": url})
-            nyaa_text = response.text.strip()'''
+            nyaa_text = response.text.strip()
                           
             repl_markup=InlineKeyboardMarkup(
 
