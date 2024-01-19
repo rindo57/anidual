@@ -108,9 +108,9 @@ async def upload_video(msg: Message,file,id,tit,name,ttl,sourcetext,untext,subti
             id = await is_fid_in_db(fid) 
             if id:
                 hash = id["code"]
-                nyaa_text = f"https://ddl.animxt.fun/beta/{hash}"
+                ddlx = f"https://ddl.animxt.fun/beta/{hash}"
             
-            '''api_url = f"https://nanolinks.in/api?api=7da8202d8af0c8d76c024a6be6badadaabe66a01&url={ddlx}&format=text"
+            api_url = f"https://tnshort.net/api?api=fea911843f6e7bec739708f3e562b56184342089&url={ddlx}&format=text"
             result = requests.get(api_url)
             nai_text = result.text
             da_url = "https://da.gd/"
