@@ -49,9 +49,9 @@ async def tg_handler():
 
                 id, name, video = await start_uploading(i)
 
-                await del_anime(i["title"])
+                await del_anime(i["name"])
 
-                await save_uploads(i["title"])
+                await save_uploads(i["name"])
 
                 await asyncio.sleep(30)
 
