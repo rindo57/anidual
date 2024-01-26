@@ -44,14 +44,15 @@ async def tg_handler():
             if len(queue) != 0:
 
                 si = queue[0]  
-
+                print("queue si:", si)
                 i = queue.pop(0)
+                titl = i["title"]
                 print("Queue: ", i)
                 await start_uploading(i)
+                    
+                await del_anime(titl)
 
-                await del_anime(si["title"])
-
-                await save_uploads(si["title"])
+                await save_uploads(titl)
 
                 await asyncio.sleep(30)
 
@@ -285,9 +286,6 @@ async def start_uploading(data):
             os.remove(file)
 
             os.remove(fpath)
-            await del_anime(i["title"])
-
-            await save_uploads(i["title"])
         except:
 
             pass     
