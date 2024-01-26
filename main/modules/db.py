@@ -1,4 +1,5 @@
 import asyncio
+import pymongo
 from motor.motor_asyncio import AsyncIOMotorClient as MongoClient
 from config import MONGO_DB_URI
 print("[INFO]: STARTING MONGO DB CLIENT")
@@ -29,8 +30,14 @@ async def save_animedb(name,data):
     return
   
 async def del_anime(name): 
-    data = await animedb.delete_one({"name": name})
-    return
+    try:
+        result = await animedb.delete_one({"name": name})
+        if result.deleted_count > 0:
+            print(f"Successfully deleted anime: {name}")
+        else:
+            print(f"No anime found with the name: {name}")
+    except pymongo.errors.PyMongoError as e:
+        print(f"Error deleting anime: {e}")
 
 async def get_uploads(): 
     anime_list = []
@@ -39,7 +46,7 @@ async def get_uploads():
     return anime_list
 
 async def save_uploads(name): 
-    data = await uploadsdb.insert_one({"name": name})
+    data = await uploadsdb.insert_one({"title": name})
     return
 
 def is_fid_in_db(fid):
