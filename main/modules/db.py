@@ -31,7 +31,8 @@ async def save_animedb(name,data):
   
 async def del_anime(name): 
     try:
-        result = await animedb.delete_one({"name": name})
+        animesdb = db.animes
+        result = await animesdb.delete_one({"name": name})
         if result.deleted_count > 0:
             print(f"Successfully deleted anime: {name}")
         else:
@@ -45,8 +46,9 @@ async def get_uploads():
         anime_list.append(name)
     return anime_list
 
-async def save_uploads(name): 
-    data = await uploadsdb.insert_one({"title": name})
+async def save_uploads(name):
+    uploadb = db.uploads
+    data = await uploaddb.insert_one({"title": name})
     return
 
 def is_fid_in_db(fid):
