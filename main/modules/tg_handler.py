@@ -49,6 +49,8 @@ async def tg_handler():
                 titl = i["title"]
                 print("Queue: ", i)
                 name, video = await start_uploading(i)
+                await del_anime(titl)
+                await save_uploads(titl)
                 await asyncio.sleep(30)
 
             else:                
@@ -273,8 +275,6 @@ async def start_uploading(data):
 
         await status.edit(await status_text(f"Uploading {name }"),reply_markup=button1)
         video = await upload_video(msg,fpath,id,tit,name,size,sourcetext,untext,subtitle,nyaasize,thumbnail) 
-        await del_anime(dbtit)
-        await save_uploads(dbtit)
         try:
 
             os.remove("video.mkv")
