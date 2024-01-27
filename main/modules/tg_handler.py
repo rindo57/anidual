@@ -48,12 +48,7 @@ async def tg_handler():
                 i = queue.pop(0)
                 titl = i["title"]
                 print("Queue: ", i)
-                await start_uploading(i)
-                    
-                await del_anime(titl)
-
-                await save_uploads(titl)
-
+                name, video = await start_uploading(i)
                 await asyncio.sleep(30)
 
             else:                
@@ -97,6 +92,7 @@ async def start_uploading(data):
     try:
 
         title = data["title"]
+        dbtit = data["title"]
         title = title.replace("Dr. Stone - New World", "Dr Stone New World")
         title = title.replace("Opus.COLORs", "Opus COLORs")
         title = title.replace(" Isekai wa Smartphone to Tomo ni. 2", " Isekai wa Smartphone to Tomo ni 2")
@@ -277,6 +273,8 @@ async def start_uploading(data):
 
         await status.edit(await status_text(f"Uploading {name }"),reply_markup=button1)
         video = await upload_video(msg,fpath,id,tit,name,size,sourcetext,untext,subtitle,nyaasize,thumbnail) 
+        await del_anime(dbtit)
+        await save_uploads(dbtit)
         try:
 
             os.remove("video.mkv")
@@ -303,5 +301,6 @@ async def start_uploading(data):
             pass
 
         await asyncio.sleep(flood_time)
+    return name, video
 
     
