@@ -40,18 +40,20 @@ async def tg_handler():
     while True:
 
         try:
-
             if len(queue) != 0:
 
-                si = queue[0]  
-                print("queue si:", si)
+                i = queue[0]  
+
                 i = queue.pop(0)
-                titl = i["title"]
-                print("Queue: ", i)
-                name, video = await start_uploading(i)
-                await del_anime(titl)
-                await save_uploads(titl)
+
+                id, name, video = await start_uploading(i)
+
+                await del_anime(i["title"])
+
+                await save_uploads(i["title"])
+
                 await asyncio.sleep(30)
+
 
             else:                
 
@@ -227,7 +229,7 @@ async def start_uploading(data):
 
                         text="🚀BETA DL",
 
-                        url=nyaa_text,
+                        url="https://google.com,
 
                     ),
   
@@ -235,7 +237,7 @@ async def start_uploading(data):
                     
             ],
         )
-        orgtext =  "**#Source_File**" + "\n" + f"**‣ File Name: `{filed}`**" + "\n" + "**‣ Video**: `1080p x264`" + "\n" + "**‣ Audio**: `Japanese`" + "\n" + f"**‣ Subtitle**: `{subtitle}`" + "\n" + f"**‣ File Size**: `{nyaasize}`" + "\n" + f"**‣ Duration**: {durationx}" + "\n" + f"**‣ Downloads**: [🔗Telegram File]({source_link}) [🔗BETA DL]({nyaa_text})"
+        orgtext =  "**#Source_File**" + "\n" + f"**‣ File Name: `{filed}`**" + "\n" + "**‣ Video**: `1080p x264`" + "\n" + "**‣ Audio**: `Japanese`" + "\n" + f"**‣ Subtitle**: `{subtitle}`" + "\n" + f"**‣ File Size**: `{nyaasize}`" + "\n" + f"**‣ Duration**: {durationx}" + "\n" + f"**‣ Downloads**: [🔗Telegram File]({source_link}) [🔗BETA DL](https://google.com)"
         rep_id = int(main.id)
         await asyncio.sleep(5)
         untextx = await app.send_message(
@@ -301,6 +303,6 @@ async def start_uploading(data):
             pass
 
         await asyncio.sleep(flood_time)
-    return name, video
+    return id, name, video
 
     
