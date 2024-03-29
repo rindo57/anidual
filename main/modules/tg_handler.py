@@ -229,7 +229,7 @@ async def start_uploading(data):
 
                         text="🚀BETA DL",
 
-                        url="https://google.com,
+                        url="https://google.com",
 
                     ),
   
