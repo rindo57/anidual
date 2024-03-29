@@ -14,6 +14,6 @@ dnspython
 opencv-python-headless
 aiofiles
 html5lib
-libtorrent
+libtorrent==2.0.9
 pyromod==1.5
 psutil
