@@ -107,7 +107,7 @@ async def start_uploading(data):
 
         name += f" @animxt." + ext
 
-        KAYO_ID = -1001159872623
+        KAYO_ID = -1001881311590
         uj_id = 1159872623
         DATABASE_ID = -1001642923224
         bin_id = -1001700435443
