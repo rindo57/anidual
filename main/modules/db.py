@@ -48,7 +48,8 @@ async def get_uploads():
 
 async def save_uploads(name):
     uploadb = db.uploads
-    data = await uploadb.insert_one({"title": name})
+    print("save_uploads: ", name)
+    data = await uploadb.insert_one({"name": name})
     return
 
 def is_fid_in_db(fid):
