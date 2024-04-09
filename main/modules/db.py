@@ -47,8 +47,7 @@ async def get_uploads():
     return anime_list
 
 async def save_uploads(name):
-    uploadb = db.uploads
-    data = await uploaddb.insert_one({"title": name})
+    data = await uploadsdb.insert_one({"title": name})
     return
 
 def is_fid_in_db(fid):
