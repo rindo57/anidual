@@ -169,4 +169,4 @@ async def upload_video(msg: Message,file,id,tit,name,ttl,sourcetext,untext,subti
 
         pass
 
-    return x.message_id
+    return x.id
