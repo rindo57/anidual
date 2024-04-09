@@ -48,9 +48,6 @@ async def tg_handler():
 
                 id, name, video = await start_uploading(i)
 
-                await del_anime(i["title"])
-
-                await save_uploads(i["title"])
 
                 await asyncio.sleep(30)
 
@@ -276,7 +273,11 @@ async def start_uploading(data):
         print("Uploading --> ",name)
 
         await status.edit(await status_text(f"Uploading {name }"),reply_markup=button1)
-        video = await upload_video(msg,fpath,id,tit,name,size,sourcetext,untext,subtitle,nyaasize,thumbnail) 
+        video = await upload_video(msg,fpath,id,tit,name,size,sourcetext,untext,subtitle,nyaasize,thumbnail)
+        print("Title: ", i["title"])
+        await del_anime(i["title"])
+        await save_uploads(i["title"])
+
         try:
 
             os.remove("video.mkv")
@@ -303,6 +304,7 @@ async def start_uploading(data):
             pass
 
         await asyncio.sleep(flood_time)
+        
     return id, name, video
 
     
