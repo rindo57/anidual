@@ -191,13 +191,15 @@ Speed: {}
 ETA: {}
     """
 
-    text2 = """{}
-━━━━━━━━━━━━〄━━━━━━━━━━━━
-**STATUS**: `Encoding UwU!` ⚡️
-**○ Engine**: `Vultr`
-**○ Precentage**: `{}%`
-**○ Speed**: `{}`
-**○ ETA**: `{}`
+    text2 = """<blockquote>{}</blockquote>
+
+<blockquote>
+<b>STATUS</b>: <code>Encoding UwU!</code> ⚡️
+<b>○ Engine</b>: <code>Vultr</code>
+<b>○ Precentage</b>: <code>{}%</code>
+<b>○ Speed</b>: <code>{}</code>
+<b>○ ETA</b>: <code>{}</code>
+</blockquote>
     """
 
 
