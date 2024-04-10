@@ -26,7 +26,7 @@ from config import UPLOADS_ID
 
 from pyrogram import Client, filters
 
-from pyrogram.types import Message, InlineKeyboardButton, InlineKeyboardMarkup
+from pyrogram.types import Message, InlineKeyboardButton, InlineKeyboardMarkup, InputMediaPhoto, InputMediaVideo, InputMediaAudio
 
 from main.modules.progress import progress_for_pyrogram
 
@@ -63,7 +63,6 @@ async def upload_video(msg: Message,file,id,tit,name,ttl,main,subtitle,nyaasize)
             ep_num = get_epnum(name)
 
             rest = tit
-            thumbnail = await generate_thumbnail(id,file)
             
             filed = os.path.basename(file)
 
@@ -80,14 +79,15 @@ async def upload_video(msg: Message,file,id,tit,name,ttl,main,subtitle,nyaasize)
             kayo_id = -1001373634390
 
             gay_id = 1159872623
-            
-            x = await main.edit_media(
-            media=file,
-            caption=gcaption,
+            upid = main.id
+            x = await app.edit_message_media(
+            kayo_id,
+            upid,
+            InputMediaDocument(file)
             file_name=filed,
-            force_document=True,
-            thumb=thumbnail
             )
+
+            await x.edit_caption(gcaption)
 
             os.rename(file,fukpath)
             
