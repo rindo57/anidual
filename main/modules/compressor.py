@@ -97,7 +97,7 @@ async def compress_video(total_time,main,name):
 
             pass
 
-      await asyncio.sleep(20)
+      await asyncio.sleep(15)
 
     if os.path.lexists(out):
 
