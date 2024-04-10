@@ -80,7 +80,20 @@ async def upload_video(msg: Message,file,id,tit,name,ttl,sourcetext,untext,subti
             kayo_id = -1001642923224
 
             gay_id = 1159872623
-
+            x = await app.send_document(
+                kayo_id,
+            document=file,
+            caption=gcaption,
+            file_name=filed,
+            force_document=True,
+            thumb=thumbnail
+            progress=progress_for_pyrogram,
+            progress_args=(
+                os.path.basename(file),
+                r,
+                c_time,
+                ttl
+            )
             x = await app.send_document(
 
                 kayo_id,
