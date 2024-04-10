@@ -105,13 +105,13 @@ async def start_uploading(data):
         subtitle = data["subtitle"]
         name, ext = title.split(".")
 
-        name += f" @animxt." + ext
+        name += f" [AniDL]." + ext
 
         KAYO_ID =  -1001373634390
         uj_id = 1159872623
         DATABASE_ID = -1001373634390
         bin_id = -1002062055380
-        name = name.replace(f" @animxt.","").replace(ext,"").strip()
+        name = name.replace(f" [AniDL].","").replace(ext,"").strip()
         id, img, tit = await get_anime_img(get_anime_name(title))
         msg = await app.send_photo(bin_id,photo=img,caption=title)
 
@@ -124,8 +124,6 @@ async def start_uploading(data):
 
         await main.edit(f"Download Complete : {name}")
         print("Encoding --> ",name)
-
-        await status.edit(await status_text(f"Encoding {name}"),reply_markup=button1)
 
         duration = get_duration(file)
         durationx = get_durationx(file)
@@ -172,14 +170,10 @@ async def start_uploading(data):
         subtitle = subtitle.replace("HUN", "Hungarian")
         subtitle = subtitle.replace("UKR", "Ukranian")
     
-        
-        await asyncio.sleep(2)
         os.rename(fpath,"video.mkv")
         await asyncio.sleep(5)
         compressed = await compress_video(duration,main,name)
-        
-        dingdong = await untext.edit(sourcetext)
-
+    
 
         if compressed == "None" or compressed == None:
 
@@ -192,8 +186,6 @@ async def start_uploading(data):
             os.rename("out.mkv",fpath)
   
         print("Uploading --> ",name)
-
-        await status.edit(await status_text(f"Uploading {name }"),reply_markup=button1)
         video = await upload_video(msg,fpath,id,tit,name,size,main,subtitle,nyaasize)
 
 
