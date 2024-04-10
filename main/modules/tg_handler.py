@@ -119,10 +119,9 @@ async def start_uploading(data):
         img, caption = await get_anilist_data(title)
         await asyncio.sleep(5)
         await status.edit(await status_text(f"Downloading {name}"),reply_markup=button1)
-        main = await app.send_photo(KAYO_ID,photo=img)
-        file = await downloader(main,link,size,title)
+        file = await downloader(msg,link,size,title)
 
-        await main.edit(f"Download Complete : {name}")
+        await msg.edit(f"Download Complete : {name}")
         print("Encoding --> ",name)
 
         duration = get_duration(file)
@@ -172,6 +171,7 @@ async def start_uploading(data):
     
         os.rename(fpath,"video.mkv")
         await asyncio.sleep(5)
+        main = await app.send_photo(KAYO_ID,photo=img)
         compressed = await compress_video(duration,main,name)
     
 
