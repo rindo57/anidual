@@ -73,7 +73,7 @@ async def upload_video(msg: Message, file, id, tit, name, ttl, main, subtitle, n
             hash = "".join([random.choice(ascii_letters + digits) for n in range(50)])
             save_file_in_db(filed, hash, upid)
             print(hash)
-            gcaption = f"`{filed}: https://robot.ddlserverv1.me.in/beta/{hash}`" + "\n" + f"__({tit})__" + "\n" + "━━━━━━━━━━━━━━━━━━━━━━" + "\n" + f"- **Subtitle**: `{subtitle}`"
+            gcaption = f"`📺 {filed}`\n\n`🔗 EP - {ep_num}:  https://robot.ddlserverv1.me.in/beta/{hash}`" + "\n\n" + f"🔠 __({tit})__" + "\n" + "\n" + f"📝 `{subtitle}`"
             dl_markup = InlineKeyboardMarkup(
                 [
                     [
