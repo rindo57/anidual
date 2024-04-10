@@ -42,7 +42,7 @@ async def downloader(message: Message, link: str,total,name):
         enco=False
       )
     try:
-      await r.edit_caption(texty)
+      await r.edit(text=texty)
     except:
       pass
 
