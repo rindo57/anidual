@@ -84,7 +84,7 @@ async def upload_video(msg: Message, file, id, tit, name, ttl, main, subtitle, n
             await asyncio.sleep(3)
             await app.edit_message_reply_markup(
                 chat_id=kayo_id,
-                message_id+upid,
+                message_id=upid,
                 reply_markup=dl_markup
             )
     except Exception:
