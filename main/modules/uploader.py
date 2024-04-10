@@ -52,6 +52,7 @@ async def upload_video(msg: Message, file, id, tit, name, ttl, main, subtitle, n
             durationx = get_durationx(file)
             size = get_filesize(file)
             ep_num = get_epnum(name)
+            print(ep_num)
             rest = tit
             filed = os.path.basename(file)
             print('filed: ', filed)
