@@ -45,18 +45,12 @@ async def tg_handler():
                 i = queue[0]  
 
                 i = queue.pop(0)
-                bit = i["title"]
-                print(bit)
-                xyz = is_tit_in_db(bit)
-                if xyz == True:    
-                    print("Title already in the database:", bit)
-                else:
-                    id, name, video = await start_uploading(i)
-                    print("Title: ", i["title"])
-                    await del_anime(i["title"])
-                    await save_uploads(i["title"])
-
-                    await asyncio.sleep(30)
+                
+                id, name, video = await start_uploading(i)
+                print("Title: ", i["title"])
+                await del_anime(i["title"])
+                await save_uploads(i["title"])
+                await asyncio.sleep(30)
 
 
             else:                
