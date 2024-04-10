@@ -72,19 +72,19 @@ async def upload_video(msg: Message,file,id,tit,name,ttl,main,subtitle,nyaasize)
 
             caption = f"{filed}"
 
-            caption = caption.replace("[720p x265] @animxt.mkv", "") 
 
             gcaption=f"`{filed}`**" + "\n" +  f"__({tit})__" + "\n" + "━━━━━━━━━━━━━━━━━━━" + "\n" + f"✓  **Subtitle**: `{subtitle}`"
 
             kayo_id = -1001373634390
 
             gay_id = 1159872623
-            upid = main.id
-            x = await app.edit_message_media(
-            kayo_id,
-            upid,
-            InputMediaDocument(file),
-            file_name=filed,
+            upid = int(main.id)
+            print(upid)
+            await app.edit_message_media(
+                chat_id=kayo_id,
+                message_id=upid,
+                InputMediaDocument(file),
+                file_name=filed
             )
             await asyncio.sleep(3)
             await x.edit_caption(gcaption)
