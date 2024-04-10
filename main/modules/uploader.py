@@ -73,7 +73,14 @@ async def upload_video(msg: Message, file, id, tit, name, ttl, main, subtitle, n
             hash = "".join([random.choice(ascii_letters + digits) for n in range(50)])
             await save_file_in_db(filed, hash, upid)
             gcaption = f"`{filed}: https://robot.anidlserverv1.me.in/beta/{hash}`" + "\n" + f"__({tit})__" + "\n" + "━━━━━━━━━━━━━━━━━━━" + "\n" + f"- **Subtitle**: `{subtitle}`"
-            await x.edit_caption(gcaption)
+            dl_markup = InlineKeyboardMarkup(
+                [
+                    [
+                        InlineKeyboardButton(text="🔗 Download Link", url=f"https://robot.ddlserverv1.me.in/beta/{hash}")
+                    ]
+                ]
+            )
+            await x.edit_caption(caption=gcaption, reply_markup=dl_markup)
     except Exception:
         await app.send_message(kayo_id, text="Something Went Wrong!")
 
