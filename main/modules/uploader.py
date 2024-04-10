@@ -94,21 +94,7 @@ async def upload_video(msg: Message,file,id,tit,name,ttl,sourcetext,untext,subti
                 c_time,
                 ttl
             )
-            x = await app.send_document(
 
-                kayo_id,
-
-            document=file,
-
-            caption=gcaption,
-
-            file_name=filed,
-
-            force_document=True,     
-
-            thumb=thumbnail
-
-            )
 
             os.rename(file,fukpath)
             
