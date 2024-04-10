@@ -58,3 +58,7 @@ def is_fid_in_db(fid):
         return data
     else:
         return None
+
+def is_tit_in_db(bit):
+    data = uploadb.find_one({"name": bit})
+    return bool(data)
