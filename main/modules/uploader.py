@@ -86,7 +86,7 @@ async def upload_video(msg: Message,file,id,tit,name,ttl,sourcetext,untext,subti
             caption=gcaption,
             file_name=filed,
             force_document=True,
-            thumb=thumbnail
+            thumb=thumbnail,
             progress=progress_for_pyrogram,
             progress_args=(
                 os.path.basename(file),
