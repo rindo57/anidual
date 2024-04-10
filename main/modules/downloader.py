@@ -41,7 +41,7 @@ async def downloader(message: Message, link: str,total,name):
           s.download_rate,
           total
         )
-      await r.edit(text)
+      await r.edit_caption(text)
     except:
       pass
 
