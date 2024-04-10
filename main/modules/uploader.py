@@ -80,11 +80,11 @@ async def upload_video(msg: Message,file,id,tit,name,ttl,main,subtitle,nyaasize)
             gay_id = 1159872623
             upid = int(main.id)
             print(upid)
-            await app.edit_message_media(
-                chat_id=kayo_id,
-                message_id=upid,
-                InputMediaDocument(file),
-                file_name=filed
+            x = await app.edit_message_media(
+            chat_id=kayo_id,
+            message_id=upid,
+            InputMediaDocument(file),
+            file_name=filed
             )
             await asyncio.sleep(3)
             await x.edit_caption(gcaption)
