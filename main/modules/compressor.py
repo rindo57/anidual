@@ -13,8 +13,8 @@ import math
 
 import subprocess
 
-async def gg():
-          cmd = '''ffmpeg -hide_banner -loglevel quiet -progress "progressaa.txt" -i "video.mkv" -filter_complex "[0:v]drawtext=fontfile=font.ttf:text='t.me/animxt':fontsize=35:fontcolor=ffffff:alpha='if(lt(t,0),0,if(lt(t,5),(t-0)/5,if(lt(t,15),1,if(lt(t,20),(5-(t-15))/5,0))))':x=w-text_w-15:y=15" -c:v h264 -s 320x240 -pix_fmt yuv420p10le -preset veryfast -r 24000/1001 -crf 23.2 -map 0:v -c:a aac -b:a 128k -map 0:a -c:s copy -map 0:s? "out.mkv" -y''',
+async def gg(name):
+          cmd = f'''ffmpeg -hide_banner -loglevel quiet -progress "progressaa.txt" -i "video.mkv" -metadata title={name} -pix_fmt yuv420p10le -r 24000/1001 -s 1280x720 -preset medium -c:v libx265 -crf 22 -x265-params deblock=1,1:limit-sao:psy-rd=1.30:psy-rdoq=2:aq-mode=4:aq-strength=0.90:frame-threads=4:bframes=6:numa-pools=+:no-info=1 -metadata:s:v:0 title="[AniDL] ~ 720p x265 10Bit"  -map 0:v -c:a libopus -b:a 96k -map 0:a  -c:s copy -map 0:s? "out.mkv" -y''',
           subprocess.Popen(cmd,shell=True)
 
 async def compress_video(total_time,main,name):
@@ -33,7 +33,7 @@ async def compress_video(total_time,main,name):
 
     
 
-    asyncio.create_task(gg())
+    asyncio.create_task(gg(name))
 
    
 
