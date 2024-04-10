@@ -5,7 +5,7 @@ from config import MONGO_DB_URI
 print("[INFO]: STARTING MONGO DB CLIENT")
 mongo_client = MongoClient(MONGO_DB_URI)
 db = mongo_client.autoanime
-dbx = mongo_client["techzcloud"]
+dbx = mongo_client["anidl"]
 filesdb = dbx["files"]
 animedb = db.animes
 uploadsdb = db.uploads
@@ -59,6 +59,16 @@ def is_fid_in_db(fid):
     else:
         return None
 
+def save_file_in_db(filed, hash, upid=None):
+    filesdb.update_one(
+        {
+            "hash": hash,
+            "fid": str(upid),
+        },
+        {"$set": {"filename": filed, "filenamex": filed, "code": hash, "msg_id": upid}},
+        upsert=True,
+    )
+    
 def is_tit_in_db(bit):
     uploadeb = db.uploads
     data = uploadeb.find_one({"name": bit})
