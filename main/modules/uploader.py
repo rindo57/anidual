@@ -86,21 +86,8 @@ async def upload_video(msg: Message,file,id,tit,name,ttl,main,subtitle,nyaasize)
             InputMediaDocument(file),
             file_name=filed,
             )
-
+            await asyncio.sleep(3)
             await x.edit_caption(gcaption)
-
-            os.rename(file,fukpath)
-            
- 
-            await asyncio.sleep(10)
-            id = await is_fid_in_db(fid) 
-            if id:
-                hash = id["code"]
-                ddlx = f"https://ddl.animxt.fun/beta/{hash}"
-            
-           
-            
-            await asyncio.sleep(5)
 
 
     except Exception:
