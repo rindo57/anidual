@@ -257,7 +257,7 @@ ETA: {}
 
         speed += "/sec"
         text = text.format(
-            name,
+            sourcetext,
             status,
             percent,
             bar,
