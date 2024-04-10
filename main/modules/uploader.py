@@ -60,7 +60,7 @@ async def upload_video(msg: Message, file, id, tit, name, ttl, main, subtitle, n
             fukpath = "downloads/" + filed
             caption = f"{filed}"
 
-            kayo_id = -1001373634390
+            kayo_id = -1001895203720
             gay_id = 1159872623
             upid = int(main.id)
             print(upid)
