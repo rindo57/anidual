@@ -3,7 +3,7 @@ import asyncio
 import os
 
 import time
-
+import random
 import pixeldrain
 
 import aiohttp
@@ -18,7 +18,7 @@ from main.modules.anilist import get_anime_name
 
 from main.modules.anilist import get_anime_img
 
-from main.modules.db import present_user, add_user, is_fid_in_db
+from main.modules.db import present_user, add_user, is_fid_in_db, save_file_in_db
 
 from main.modules.thumbnail import generate_thumbnail
 
@@ -58,7 +58,7 @@ async def upload_video(msg: Message, file, id, tit, name, ttl, main, subtitle, n
             filed = filed.replace("[1080p Web-DL]", "[Web][720p x265 10Bit][Opus][Erai-raws]")
             fukpath = "downloads/" + filed
             caption = f"{filed}"
-            gcaption = f"`{filed}`**" + "\n" + f"__({tit})__" + "\n" + "━━━━━━━━━━━━━━━━━━━" + "\n" + f"✓ **Subtitle**: `{subtitle}`"
+
             kayo_id = -1001373634390
             gay_id = 1159872623
             upid = int(main.id)
@@ -70,6 +70,9 @@ async def upload_video(msg: Message, file, id, tit, name, ttl, main, subtitle, n
                 file_name=filed
             )
             await asyncio.sleep(3)
+            hash = "".join([random.choice(ascii_letters + digits) for n in range(50)])
+            await save_file_in_db(filed, hash, upid)
+            gcaption = f"`{filed}: https://robot.anidlserverv1.me.in/beta/{hash}`" + "\n" + f"__({tit})__" + "\n" + "━━━━━━━━━━━━━━━━━━━" + "\n" + f"- **Subtitle**: `{subtitle}`"
             await x.edit_caption(gcaption)
     except Exception:
         await app.send_message(kayo_id, text="Something Went Wrong!")
