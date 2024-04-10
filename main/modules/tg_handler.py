@@ -110,7 +110,7 @@ async def start_uploading(data):
         KAYO_ID =  -1001373634390
         uj_id = 1159872623
         DATABASE_ID = -1001373634390
-        bin_id = -1001700435443
+        bin_id = -1002062055380
         name = name.replace(f" @animxt.","").replace(ext,"").strip()
         id, img, tit = await get_anime_img(get_anime_name(title))
         msg = await app.send_photo(bin_id,photo=img,caption=title)
