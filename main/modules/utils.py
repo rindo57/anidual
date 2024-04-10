@@ -199,6 +199,7 @@ ETA: {}
 **○ ETA**: `{}`
     """
 
+
     if enco == False:
         total = str(total)
         completed = round(completed*100,2)
@@ -246,8 +247,8 @@ ETA: {}
         else:
             size = str(size) + " MB"
 
-        fill = "🟩"
-        blank = "🟥"
+        fill = " ▰ "
+        blank = " ▱ "
         bar = ""
 
         bar += round(percent/10)*fill
@@ -288,10 +289,10 @@ ETA: {}
         else:
             ETA = str(ETA) + " Seconds"
 
-        percent = round((completed/total)*100)
+        percent = round((completed/total)*100,2)
 
-        fill = "🟩"
-        blank = "🟥"
+        fill = " ▰ "
+        blank = " ▱ "
         bar = ""
 
         bar += round(percent/10)*fill
