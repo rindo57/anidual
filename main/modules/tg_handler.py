@@ -17,7 +17,7 @@ from main.modules.thumbnail import generate_thumbnail
 
 import os
 
-from main.modules.db import del_anime, save_uploads, is_fid_in_db
+from main.modules.db import del_anime, save_uploads, is_fid_in_db, is_tit_in_db
 
 from main.modules.downloader import downloader
 
