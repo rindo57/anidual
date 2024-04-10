@@ -7,7 +7,7 @@ from config import STATUS_ID, INDEX_ID, UPLOADS_ID, SCHEDULE_ID, UPLOADS_USERNAM
 
 GHOST_ID = -1001373634390
 IST_ID = 18
-US_ID = 19
+
 schedule = app.get_messages(GHOST_ID,IST_ID)
 schedule: Message
 
