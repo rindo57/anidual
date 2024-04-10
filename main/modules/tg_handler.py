@@ -47,7 +47,8 @@ async def tg_handler():
                 i = queue.pop(0)
                 bit = i["title"]
                 print(bit)
-                if is_tit_in_db(bit)==True:
+                xyz = await is_tit_in_db(bit):
+                if xyz==bool(True):    
                     print("Title already in the database:", bit)
                 else:
                     id, name, video = await start_uploading(i)
