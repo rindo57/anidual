@@ -83,7 +83,7 @@ async def upload_video(msg: Message,file,id,tit,name,ttl,main,subtitle,nyaasize)
             x = await app.edit_message_media(
             kayo_id,
             upid,
-            InputMediaDocument(file)
+            InputMediaDocument(file),
             file_name=filed,
             )
 
