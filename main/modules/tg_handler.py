@@ -171,7 +171,7 @@ async def start_uploading(data):
     
         os.rename(fpath,"video.mkv")
         await asyncio.sleep(5)
-        main = await app.send_photo(KAYO_ID,photo=img)
+        main = await app.send_photo(KAYO_ID,photo=img, caption=title)
         compressed = await compress_video(duration,main,name)
     
 
