@@ -2,7 +2,7 @@ import asyncio
 import aiofiles
 import aiohttp
 from pathlib import Path
-
+from pyrogram import Client, idle, filters, enums
 from main.modules.utils import get_progress_text 
 
 import os
@@ -91,7 +91,7 @@ async def compress_video(total_time,main,name):
 
         try:
 
-          await main.edit_caption(progress_str)
+          await main.edit_caption(progress_str, parse_mode=enums.ParseMode.HTML)
 
         except:
 
