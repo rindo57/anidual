@@ -42,7 +42,7 @@ from pyrogram.errors import FloodWait
 
 from main.inline import button1
 
-async def upload_video(msg: Message,file,id,tit,name,ttl,sourcetext,untext,subtitle,nyaasize,thumbnail):
+async def upload_video(msg: Message,file,id,tit,name,ttl,main,subtitle,nyaasize):
 
     try:
 
@@ -63,11 +63,11 @@ async def upload_video(msg: Message,file,id,tit,name,ttl,sourcetext,untext,subti
             ep_num = get_epnum(name)
 
             rest = tit
-
-
+            thumbnail = await generate_thumbnail(id,file)
+            
             filed = os.path.basename(file)
 
-            filed = filed.replace("[1080p Web-DL]", "[720p x265] @animxt")
+            filed = filed.replace("[1080p Web-DL]", "[Web][720p x265 10Bit][Opus][Erai-raws]")
 
             fukpath = "downloads/" + filed
 
@@ -75,81 +75,33 @@ async def upload_video(msg: Message,file,id,tit,name,ttl,sourcetext,untext,subti
 
             caption = caption.replace("[720p x265] @animxt.mkv", "") 
 
-            gcaption=f"**{caption}**" + "\n" +  f"__({tit})__" + "\n" + "━━━━━━━━━━━━━━━━━━━" + "\n" + "✓  `720p x265 10Bit`" + "\n" + f"✓  `{subtitle} ~ Subs`" + "\n" + "#Encoded #HEVC"
+            gcaption=f"`{filed}`**" + "\n" +  f"__({tit})__" + "\n" + "━━━━━━━━━━━━━━━━━━━" + "\n" + f"✓  **Subtitle**: `{subtitle}`"
 
-            kayo_id = -1001642923224
+            kayo_id = -1001373634390
 
             gay_id = 1159872623
-            x = await app.send_document(
-                kayo_id,
-            document=file,
+            
+            x = await main.edit_media(
+            media=file,
             caption=gcaption,
             file_name=filed,
             force_document=True,
-            thumb=thumbnail,
-            progress=progress_for_pyrogram,
-            progress_args=(
-                os.path.basename(file),
-                r,
-                c_time,
-                ttl    
-            )
+            thumb=thumbnail
             )
 
             os.rename(file,fukpath)
             
  
-            fid = str(x.id)
-            da_url = "https://da.gd/"
-            teleshare = f"https://telegram.me/somayukibot?start=animxt_{str_to_b64(fid)}"
-        
             await asyncio.sleep(10)
             id = await is_fid_in_db(fid) 
             if id:
                 hash = id["code"]
                 ddlx = f"https://ddl.animxt.fun/beta/{hash}"
             
-            api_url = f"https://tnshort.net/api?api=fea911843f6e7bec739708f3e562b56184342089&url={ddlx}&format=text"
-            result = requests.get(api_url)
-            nai_text = result.text
-            da_url = "https://da.gd/"
-            url = nai_text
-            shorten_url = f"{da_url}shorten"
-            response = requests.post(shorten_url, params={"url": url})
-            nyaa_text = response.text.strip()
-                          
-            repl_markup=InlineKeyboardMarkup(
-
-                [
-
-                    [
-
-                         InlineKeyboardButton(
-
-                            text="🐌TG FILE",
-
-                            url=teleshare
-
-                        ),
-
-                         InlineKeyboardButton(
-
-                              text="🚀BETA DL",
-
-                              url=nyaa_text,
-
-                        ),
-  
-                    ],
-                    
-                ],
-            )
-
-            encodetext =  f"{sourcetext}" "\n" + f"**‣ File Size**: `{size}`" + "\n" + f"**‣ Duration**: {durationx}" + "\n" + f"**‣ Downloads**: [🔗Telegram File]({teleshare}) [🔗BETA DL]({nyaa_text})"
-
+           
+            
             await asyncio.sleep(5)
 
-            entext = await untext.edit(encodetext, disable_web_page_preview=True, reply_markup=repl_markup)
 
     except Exception:
 
