@@ -39,9 +39,10 @@ async def downloader(message: Message, link: str,total,name):
           str(state_str[s.state]).capitalize(), 
           s.progress,
           s.download_rate,
-          total
+          total,
+          enco=False
         )
-      await r.edit_caption(text)
+      await r.edit(text)
     except:
       pass
 
