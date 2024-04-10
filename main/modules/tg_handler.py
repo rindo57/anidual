@@ -170,8 +170,10 @@ async def start_uploading(data):
         subtitle = subtitle.replace("UKR", "Ukranian")
     
         os.rename(file,"video.mkv")
-        main = await app.send_photo(KAYO_ID,photo=img, caption=title)
-        compressed = await compress_video(duration,main,name)
+        titlx = title.replace('[1080p][Multiple Subtitle]', '[Web][720p x265 10Bit][Opus][Erai-raws]')
+        titm = f"**[AniDL] {titlx}**"
+        main = await app.send_photo(KAYO_ID,photo=img, caption=titm)
+        compressed = await compress_video(duration,main,titm)
     
 
         if compressed == "None" or compressed == None:
