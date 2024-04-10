@@ -1,7 +1,7 @@
 import asyncio
 
 import os
-
+from string import ascii_letters, digits
 import time
 import random
 import pixeldrain
@@ -72,7 +72,7 @@ async def upload_video(msg: Message, file, id, tit, name, ttl, main, subtitle, n
             await asyncio.sleep(3)
             hash = "".join([random.choice(ascii_letters + digits) for n in range(50)])
             await save_file_in_db(filed, hash, upid)
-            gcaption = f"`{filed}: https://robot.anidlserverv1.me.in/beta/{hash}`" + "\n" + f"__({tit})__" + "\n" + "━━━━━━━━━━━━━━━━━━━━━━" + "\n" + f"- **Subtitle**: `{subtitle}`"
+            gcaption = f"`{filed}: https://robot.ddlserverv1.me.in/beta/{hash}`" + "\n" + f"__({tit})__" + "\n" + "━━━━━━━━━━━━━━━━━━━━━━" + "\n" + f"- **Subtitle**: `{subtitle}`"
             dl_markup = InlineKeyboardMarkup(
                 [
                     [
