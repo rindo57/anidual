@@ -47,7 +47,7 @@ async def tg_handler():
                 i = queue.pop(0)
                 bit = i["title"]
                 print(bit)
-                xyz = await is_tit_in_db(bit)
+                xyz = is_tit_in_db(bit)
                 if xyz == True:    
                     print("Title already in the database:", bit)
                 else:
