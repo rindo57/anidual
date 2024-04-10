@@ -26,7 +26,7 @@ from config import UPLOADS_ID
 
 from pyrogram import Client, filters
 
-from pyrogram.types import Message, InlineKeyboardButton, InlineKeyboardMarkup, InputMediaPhoto, InputMediaVideo, InputMediaAudio
+from pyrogram.types import Message, InlineKeyboardButton, InlineKeyboardMarkup, InputMediaPhoto, InputMediaVideo, InputMediaAudio, InputMediaDocument
 
 from main.modules.progress import progress_for_pyrogram
 
