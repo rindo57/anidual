@@ -194,6 +194,7 @@ ETA: {}
     text2 = """{}
 ━━━━━━━━━━━━〄━━━━━━━━━━━━
 **STATUS**: `Encoding UwU!` ⚡️
+**○ Engine**: `Vultr`
 **○ Precentage**: `{}%`
 **○ Speed**: `{}`
 **○ ETA**: `{}`
