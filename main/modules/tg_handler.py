@@ -159,7 +159,7 @@ async def start_uploading(data):
         subtitle = subtitle.replace("SWE", "Swedish")
         subtitle = subtitle.replace("GRE", "Greek")
         subtitle = subtitle.replace("HEB", "Hebrew")
-        subtitle = subtitle.replace("1080p, 95972F57.mkv", "English")
+    
         subtitle = subtitle.replace("JPN", "Japanese")
         subtitle = subtitle.replace("POL", "Polish")
         subtitle = subtitle.replace("DUT", "Dutch")
@@ -170,7 +170,6 @@ async def start_uploading(data):
         subtitle = subtitle.replace("UKR", "Ukranian")
     
         os.rename(fpath,"video.mkv")
-        await asyncio.sleep(5)
         main = await app.send_photo(KAYO_ID,photo=img, caption=title)
         compressed = await compress_video(duration,main,name)
     
