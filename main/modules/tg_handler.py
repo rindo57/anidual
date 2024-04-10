@@ -59,7 +59,7 @@ async def tg_handler():
 
                     try:
 
-                        await status.edit(await status_text("Idle..."),reply_markup=button1)
+                        await status.edit(await status_text("Idle..."))
 
                     except:
 
