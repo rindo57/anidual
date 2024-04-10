@@ -92,9 +92,9 @@ async def upload_video(msg: Message,file,id,tit,name,ttl,sourcetext,untext,subti
                 os.path.basename(file),
                 r,
                 c_time,
-                ttl
+                ttl    
             )
-
+            )
 
             os.rename(file,fukpath)
             
