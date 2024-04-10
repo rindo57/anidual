@@ -224,9 +224,9 @@ ETA: {}
             if x > 60:
                 z = floor(x/60)
                 x = x-(z*60)
-                ETA = str(z) + " Hour " + str(x) + " Minute"
+                ETA = str(z) + " Hour " + str(x) + " Minutes"
             else:
-                ETA = str(x) + " Minute " + str(y) + " Second"
+                ETA = str(x) + " Minute " + str(y) + " Seconds"
         else:
             ETA = str(ETA) + " Second"  
 
