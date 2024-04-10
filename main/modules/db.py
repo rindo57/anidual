@@ -68,6 +68,7 @@ def save_file_in_db(filed, hash, upid=None):
         {"$set": {"filename": filed, "filenamex": filed, "code": hash, "msg_id": upid}},
         upsert=True,
     )
+    return
     
 def is_tit_in_db(bit):
     uploadeb = db.uploads
