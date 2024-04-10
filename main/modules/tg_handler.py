@@ -169,7 +169,7 @@ async def start_uploading(data):
         subtitle = subtitle.replace("HUN", "Hungarian")
         subtitle = subtitle.replace("UKR", "Ukranian")
     
-        os.rename(fpath,"video.mkv")
+        os.rename(file,"video.mkv")
         main = await app.send_photo(KAYO_ID,photo=img, caption=title)
         compressed = await compress_video(duration,main,name)
     
