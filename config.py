@@ -10,7 +10,7 @@ API_HASH = "96b46175824223a33737657ab943fd6a"
 
 BOT_TOKEN = "7006069272:AAELYCIFkH7cu9LuhxBk-d858sSs0AOefVY"
 
-MONGO_DB_URI = "mongodb+srv://hevc:sucks@cluster0.mdnim6a.mongodb.net/?retryWrites=true&w=majority"
+MONGO_DB_URI = "mongodb+srv://anidl:encodes@cluster0.oobfx33.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0"
 INDEX_ID = -1002062055380
 
 UPLOADS_ID = -1002062055380
