@@ -33,16 +33,16 @@ async def downloader(message: Message, link: str,total,name):
     
     state_str = ['queued', 'checking', 'downloading metadata', 'downloading', 'finished', 'seeding', 'allocating']
     
+    texty = get_progress_text(
+        name, 
+        str(state_str[s.state]).capitalize(), 
+        s.progress,
+        s.download_rate,
+        total,
+        enco=False
+      )
     try:
-      text = get_progress_text(
-          name, 
-          str(state_str[s.state]).capitalize(), 
-          s.progress,
-          s.download_rate,
-          total,
-          enco=False
-        )
-      await r.edit(text)
+      await r.edit_caption(texty)
     except:
       pass
 
