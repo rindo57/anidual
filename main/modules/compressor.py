@@ -17,7 +17,7 @@ async def gg():
           cmd = '''ffmpeg -hide_banner -loglevel quiet -progress "progressaa.txt" -i "video.mkv" -filter_complex "[0:v]drawtext=fontfile=font.ttf:text='t.me/animxt':fontsize=35:fontcolor=ffffff:alpha='if(lt(t,0),0,if(lt(t,5),(t-0)/5,if(lt(t,15),1,if(lt(t,20),(5-(t-15))/5,0))))':x=w-text_w-15:y=15" -c:v h264 -s 320x240 -pix_fmt yuv420p10le -preset veryfast -r 24000/1001 -crf 23.2 -map 0:v -c:a aac -b:a 128k -map 0:a -c:s copy -map 0:s? "out.mkv" -y''',
           subprocess.Popen(cmd,shell=True)
 
-async def compress_video(total_time,untext,name,sourcetext):
+async def compress_video(total_time,main,name):
 
   try:
 
@@ -87,11 +87,11 @@ async def compress_video(total_time,untext,name,sourcetext):
 
         
 
-        progress_str = get_progress_text(sourcetext,"Encoding",time_done,str(speed),total_time,enco=True)
+        progress_str = get_progress_text(name,"Encoding",time_done,str(speed),total_time,enco=True)
 
         try:
 
-          await untext.edit(progress_str)
+          await main.edit(progress_str)
 
         except:
 
