@@ -107,9 +107,9 @@ async def start_uploading(data):
 
         name += f" [AniDL]." + ext
 
-        KAYO_ID =  -1001373634390
+        KAYO_ID =  -1001895203720
         uj_id = 1159872623
-        DATABASE_ID = -1001373634390
+        DATABASE_ID = -1001895203720
         bin_id = -1002062055380
         name = name.replace(f" [AniDL].","").replace(ext,"").strip()
         id, img, tit = await get_anime_img(get_anime_name(title))
