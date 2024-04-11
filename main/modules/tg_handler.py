@@ -170,7 +170,7 @@ async def start_uploading(data):
         subtitle = subtitle.replace("UKR", "Ukranian")
     
         os.rename(file,"video.mkv")
-        titlx = title.replace('[1080p][Multiple Subtitle]', '[Web][1080p x265 10Bit][AAC][Erai-raws]')
+        titlx = title.replace('[1080p][Multiple Subtitle]', '[Web][480p x265 10Bit][Opus][Erai-raws]')
         titm = f"**[AniDL] {titlx}**"
         tito = f"[AniDL] {titlx}"
         main = await app.send_photo(KAYO_ID,photo=img, caption=titm)
