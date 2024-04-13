@@ -104,7 +104,7 @@ async def upload_video(msg: Message, img, file, id, tit, name, ttl, main, subtit
                 ]
             )
             
-            anidl = await app.send_photo(anidl_id,photo=img,caption=anidlcap, reply_markup=anidl_markup, parse_mode=enums.ParseMode.HTML)
+            await app.send_photo(anidl_id,photo=img,caption=anidlcap, reply_markup=anidl_markup, parse_mode=enums.ParseMode.HTML)
     except Exception:
         await app.send_message(kayo_id, text="Something Went Wrong!")
 
