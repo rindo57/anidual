@@ -24,7 +24,7 @@ from main.modules.thumbnail import generate_thumbnail
 
 from config import UPLOADS_ID
 
-from pyrogram import Client, filters
+from pyrogram import Client, filters, enums
 
 from pyrogram.types import Message, InlineKeyboardButton, InlineKeyboardMarkup, InputMediaPhoto, InputMediaVideo, InputMediaAudio, InputMediaDocument
 
@@ -55,6 +55,8 @@ async def upload_video(msg: Message, img, file, id, tit, name, ttl, main, subtit
             rest = tit
             filed = os.path.basename(file)
             print('filed: ', filed)
+            anidltitle = filed.replace("[AniDL] ", "")
+            anidltitle = filed.replace("[1080p Web-DL].mkv", "")
             filed = filed.replace("[1080p Web-DL]", "[Web][480p x265 10Bit][Opus][Erai-raws]")
             fukpath = "downloads/" + filed
             caption = f"{filed}"
@@ -92,6 +94,17 @@ async def upload_video(msg: Message, img, file, id, tit, name, ttl, main, subtit
                 message_id=upid,
                 reply_markup=dl_markup
             )
+            anidl_id=-1001234112068
+            anidlcap = f"<b>{anidltitle}</b>\n<i>({tit})</i>\n\n<blockquote><b>• Source:</b> `Erai-raws`\n <b>• Video:</b> `480p x265 10Bit CRF@23`\n<b>• Audio:</b> `Japanese`\n <b>• Subtitle:</b> `{subtitle}`</blockquote>"
+            anidl_markup = InlineKeyboardMarkup(
+                [
+                    [
+                        InlineKeyboardButton(text="🔗 VISIT PAGE", url=f"https://anidl.org/airing-anime")
+                    ]
+                ]
+            )
+            
+            anidl = await app.send_photo(anidl_id,photo=img,caption=anidlcap, reply_markup=anidl_markup, parse_mode=enums.ParseMode.HTML)
     except Exception:
         await app.send_message(kayo_id, text="Something Went Wrong!")
 
