@@ -41,7 +41,7 @@ from main import app, status
 from pyrogram.errors import FloodWait
 
 from main.inline import button1
-async def upload_video(msg: Message, img, file, id, tit, name, ttl, main, subtitle, nyaasize, audio_info):
+async def upload_video(msg: Message, img, file, id, tit, name, ttl, main, subtitle, nyaasize, audio_info, alink):
     try:
         fuk = isfile(file)
         if fuk:
@@ -73,7 +73,7 @@ async def upload_video(msg: Message, img, file, id, tit, name, ttl, main, subtit
             )
             await asyncio.sleep(3)
             hash = "".join([random.choice(ascii_letters + digits) for n in range(50)])
-            save_file_in_db(filed, hash, subtitle, img, audio_info, tit, upid)
+            save_file_in_db(filed, hash, subtitle, img, audio_info, tit, alink, upid)
             print(hash)
             gcaption = f"`📺 {filed}`\n\n`🔗 EP - {ep_num}:  https://anidl.ddlserverv1.me.in/beta/{hash}`" + "\n\n" + f"🔠 __{tit}__" + "\n" + "\n" + f"📝 `{subtitle}`"
             dl_markup = InlineKeyboardMarkup(
