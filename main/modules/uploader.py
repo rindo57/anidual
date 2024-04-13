@@ -41,8 +41,7 @@ from main import app, status
 from pyrogram.errors import FloodWait
 
 from main.inline import button1
-
-async def upload_video(msg: Message, file, id, tit, name, ttl, main, subtitle, nyaasize):
+async def upload_video(msg: Message, img, file, id, tit, name, ttl, main, subtitle, nyaasize, audio_info):
     try:
         fuk = isfile(file)
         if fuk:
