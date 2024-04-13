@@ -95,7 +95,7 @@ async def upload_video(msg: Message, img, file, id, tit, name, ttl, main, subtit
                 reply_markup=dl_markup
             )
             anidl_id=-1001234112068
-            anidlcap = f"<b>{anidltitle}</b>\n<i>({tit})</i>\n\n<blockquote><b>• Source:</b> `Erai-raws`\n <b>• Video:</b> `480p x265 10Bit CRF@23`\n<b>• Audio:</b> `Japanese`\n <b>• Subtitle:</b> `{subtitle}`</blockquote>"
+            anidlcap = f"<b>{anidltitle}</b>\n<i>({tit})</i>\n\n<blockquote><b>• Source:</b> <code>Erai-raws</code>\n<b>• Video:</b> <code>480p x265 10Bit CRF@23</code>\n<b>• Audio:</b> <code>Japanese</code>\n<b>• Subtitle:</b> <code>{subtitle}</code></blockquote>"
             anidl_markup = InlineKeyboardMarkup(
                 [
                     [
