@@ -56,7 +56,7 @@ async def upload_video(msg: Message, img, file, id, tit, name, ttl, main, subtit
             filed = os.path.basename(file)
             print('filed: ', filed)
             anidltitle = filed.replace("[AniDL] ", "")
-            anidltitle = filed.replace("[1080p Web-DL].mkv", "")
+            anidltitle = anidltitle.replace("[1080p Web-DL].mkv", "")
             filed = filed.replace("[1080p Web-DL]", "[Web][480p x265 10Bit][Opus][Erai-raws]")
             fukpath = "downloads/" + filed
             caption = f"{filed}"
