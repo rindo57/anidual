@@ -91,7 +91,7 @@ async def tg_handler():
 
 def get_audio_language(video_path):
     try:
-        probe = ffmpeg.probe(video_path)
+        probe = ffmpeg.probe(video_path, cmd='/usr/bin/ffprobe')
         audio_stream = next(
             (stream for stream in probe['streams'] if stream['codec_type'] == 'audio'),
             None
