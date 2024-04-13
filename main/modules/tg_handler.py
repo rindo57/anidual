@@ -2,13 +2,11 @@
 import asyncio
 import time
 import aiohttp
-import ffmpeg
 import requests
 import aiofiles
 import sys
-from moviepy.editor import VideoFileClip
 from main.modules.compressor import compress_video
-
+from mediainfopy import MediaInfo
 from main.modules.utils import episode_linker, get_duration, get_epnum, status_text, get_filesize, b64_to_str, str_to_b64, send_media_and_reply, get_durationx
 
 from pyrogram.types import Message, InlineKeyboardMarkup, InlineKeyboardButton, CallbackQuery
@@ -91,19 +89,16 @@ async def tg_handler():
 
 def get_audio_language(video_path):
     try:
-        probe = ffmpeg.probe(video_path, cmd='/usr/bin/ffprobe')
-        audio_stream = next(
-            (stream for stream in probe['streams'] if stream['codec_type'] == 'audio'),
-            None
-        )
-        if audio_stream:
-            language = audio_stream.get('tags', {}).get('language')
-            return language
-        else:
-            return None
+        media_info = MediaInfo.parse(video_path)
+        for track in media_info.tracks:
+            if track.track_type == 'Audio':
+                language = track.language
+                return language
+        return None
     except Exception as e:
         print(f"Error: {e}")
-        return None          
+        return None
+        
 
 async def start_uploading(data):
 
@@ -167,11 +162,11 @@ async def start_uploading(data):
         main = await app.send_photo(KAYO_ID,photo=img, caption=titm)
         video_path="video.mkv"
         
-        audio_info = await get_audio_language(video_path)      
-        if audio_info:
-            print("Audio Track Language: ", audio_info['audio_track_language'])
+        audio_language = get_audio_language(video_path)
+        if audio_language:
+            print("Audio Track Language:", audio_language)
         else:
-            print("Failed to get audio information.")
+            print("Failed to get audio language.")
         compressed = await compress_video(duration,main,tito)
     
 
