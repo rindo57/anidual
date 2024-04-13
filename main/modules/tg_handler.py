@@ -2,6 +2,7 @@
 import asyncio
 import time
 import aiohttp
+import ffmpeg
 import requests
 import aiofiles
 import sys
@@ -87,17 +88,22 @@ async def tg_handler():
 
             pass
 
-def get_audio_info(video_path):
+
+def get_audio_language(video_path):
     try:
-        video_clip = VideoFileClip(video_path)
-        audio = video_clip.audio
-        audio_info = {
-            'audio_track_language': audio.langcode
-        }
-        return audio_info
+        probe = ffmpeg.probe(video_path)
+        audio_stream = next(
+            (stream for stream in probe['streams'] if stream['codec_type'] == 'audio'),
+            None
+        )
+        if audio_stream:
+            language = audio_stream.get('tags', {}).get('language')
+            return language
+        else:
+            return None
     except Exception as e:
         print(f"Error: {e}")
-        return None             
+        return None          
 
 async def start_uploading(data):
 
@@ -161,7 +167,7 @@ async def start_uploading(data):
         main = await app.send_photo(KAYO_ID,photo=img, caption=titm)
         video_path="video.mkv"
         
-        audio_info = await get_audio_info(video_path)      
+        audio_info = await get_audio_language(video_path)      
         if audio_info:
             print("Audio Track Language: ", audio_info['audio_track_language'])
         else:
