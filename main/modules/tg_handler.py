@@ -6,7 +6,7 @@ import requests
 import aiofiles
 import sys
 from main.modules.compressor import compress_video
-from mediainfopy import MediaInfo
+from pymediainfo import MediaInfo
 from main.modules.utils import episode_linker, get_duration, get_epnum, status_text, get_filesize, b64_to_str, str_to_b64, send_media_and_reply, get_durationx
 
 from pyrogram.types import Message, InlineKeyboardMarkup, InlineKeyboardButton, CallbackQuery
