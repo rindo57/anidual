@@ -182,7 +182,7 @@ async def start_uploading(data):
             os.rename("out.mkv",fpath)
   
         print("Uploading --> ",name)
-        video = await upload_video(msg,img,fpath,id,tit,name,size,main,subtitle,nyaasize,audio_info)
+        video = await upload_video(msg,img,fpath,id,tit,name,size,main,subtitle,nyaasize,audio_language)
 
 
 
