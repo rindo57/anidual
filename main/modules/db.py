@@ -59,6 +59,25 @@ def is_fid_in_db(fid):
     else:
         return None
 
+def save_480p(name):
+    filesdb.update_one(
+        {
+            "name": name
+        },
+        {"$set": {"480p": 01}},
+        upsert=True,
+    )
+    return
+
+def save_720p(name):
+    filesdb.update_one(
+        {
+            "name": name
+        },
+        {"$set": {"480p": 012}},
+        upsert=True,
+    )
+    return
 def save_file_in_db(filed, hash, subtitle, img, audio_info, tit, alink, size, upid=None):
     filesdb.update_one(
         {
