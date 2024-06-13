@@ -65,7 +65,7 @@ def save_480p(name):
         {
             "name": name
         },
-        {"$set": {"480p": '01'}},
+        {"$set": {"data.480p": '01'}},
         upsert=True,
     )
     return
@@ -76,7 +76,7 @@ def save_720p(name):
         {
             "name": name
         },
-        {"$set": {"480p": '012'}},
+        {"$set": {"data.480p": '012'}},
         upsert=True,
     )
     return
@@ -86,7 +86,7 @@ def save_1080p(name):
         {
             "name": name
         },
-        {"$set": {"480p": '0123'}},
+        {"$set": {"data.480p": '0123'}},
         upsert=True,
     )
     return
