@@ -24,9 +24,9 @@ async def downloader(message: Message, link: str,total,name):
     await asyncio.sleep(1)
 
   await r.edit(f'Got Metadata, Starting Download Of **{str(name)}**...')
-
+  print("n: ", name)
   trgt = str(handle.name())
-
+  print(trgt)
   while (handle.status().state != lt.torrent_status.seeding):
     
     s = handle.status()
