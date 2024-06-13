@@ -328,7 +328,7 @@ async def upload_video1080p(msg: Message, img, file, id, tit, name, ttl, main, s
                 reply_markup=dl_markup
             )
             anidl_id=-1001234112068
-            anidlcap3 = anidlcap2 + "\n" + f"<blockquote><b><a href={fxylink}>🗂️ [Web ~ Erai-raws][1080p x265 10Bit CRF@22][JAP ~ AAC][Multiple Subs ~ {subtitle}]</a></b></blockquote>""
+            anidlcap3 = anidlcap2 + "\n" + f"<blockquote><b><a href={fxylink}>🗂️ [Web ~ Erai-raws][1080p x265 10Bit CRF@22][JAP ~ AAC][Multiple Subs ~ {subtitle}]</a></b></blockquote>"
             fmarkup=InlineKeyboardMarkup(
                     [
                         [
