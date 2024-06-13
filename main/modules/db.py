@@ -60,7 +60,7 @@ def is_fid_in_db(fid):
         return None
 
 def save_480p(name):
-    filesdb.update_one(
+    animedb.update_one(
         {
             "name": name
         },
@@ -70,7 +70,7 @@ def save_480p(name):
     return
 
 def save_720p(name):
-    filesdb.update_one(
+    animedb.update_one(
         {
             "name": name
         },
@@ -79,7 +79,7 @@ def save_720p(name):
     )
     return
 def save_1080p(name):
-    filesdb.update_one(
+    animedb.update_one(
         {
             "name": name
         },
