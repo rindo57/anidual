@@ -8,7 +8,8 @@ from main.inline import button1
 
 def trim_title(title: str):
     title = title.rsplit(' ', 1)[0]
-    title = title.replace("[Erai-raws] ", "")
+    title = title.replace("[Magnet] ", "")
+    title = f"{title} [1080p][Multiple Subtitle]"
     title = title.replace("Dr. Stone - New World Cour 2", "Dr Stone New World Part 2")
     title = title.replace("Mahou Tsukai no Yome Season 2 Cour 2", "Mahou Tsukai no Yome Season 2 Part 2")
     title = title.replace("Dead Mount Death Play 2nd Cour", "Dead Mount Death Play Part 2")
@@ -25,18 +26,18 @@ def multi_sub(title: str):
     return subtitle
 
 def parse():
-    a = feedparser.parse("https://siftrss.com/f/oyebWJBqN8")
+    a = feedparser.parse("https://www.siftrss.com/f/6XM5qNo7aq")
     b = a["entries"]
-    b = b[0:49] 
+    b = b[0:51] 
     
     data = []    
 
     for i in b:
         item = {}
         item['title'] = trim_title(i['title'])
-        item['subtitle'] = multi_sub(i['title'])
-        item['size'] = i['nyaa_size']   
-        item['link'] = "magnet:?xt=urn:btih:" + i['nyaa_infohash']
+        item['subtitle'] = (i['erai_subtitles'])
+        item['size'] = i['erai_size']   
+        item['link'] = i['link']
         item['480p'] = '0'
         data.append(item)
         data.reverse()
