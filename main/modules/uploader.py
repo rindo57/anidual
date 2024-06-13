@@ -228,11 +228,9 @@ async def upload_video720p(msg: Message, title, img, file, id, tit, name, ttl, m
                 reply_markup=dl_markup
             )
             anidl_id=-1001234112068
-            filex = filed.replace("[AniDL] ", "")
-            name480p = filex.replace("[Web][720p x265 10Bit][Opus][Erai-raws]", "[1080p Web-DL]")
             code480p = await get_link480p(title)
+            print(code480p)
             dl480pcap = f"<b>{anidltitle}</b>\n<i>{tit}</i>\n<blockquote><b><a href={code480p}>🗂️ [Web ~ Erai-raws][480p x265 10Bit CRF@23][JAP ~ Opus][Multiple Subs ~ {subtitle}]</a></b></blockquote>"
-            dl720pcap = f"\n<blockquote><b><a href={code720p}>🗂️ [Web ~ Erai-raws][720p x265 10Bit CRF@22][JAP ~ Opus][Multiple Subs ~ {subtitle}]</a></b></blockquote>"
             anidlcap2 = dl480pcap + "\n" + f"<blockquote><b><a href={fxlink}>🗂️ [Web ~ Erai-raws][720p x265 10Bit CRF@22][JAP ~ Opus][Multiple Subs ~ {subtitle}]</a></b></blockquote>"
             fmarkup=InlineKeyboardMarkup(
                     [
@@ -257,6 +255,7 @@ async def upload_video720p(msg: Message, title, img, file, id, tit, name, ttl, m
             )
             await asyncio.sleep(3)
             postid = await get_postid(title)
+            print(postid)
             await app.edit_message_text(anidl_id, postid, text=anidlcap2, reply_markup=fmarkup, parse_mode=enums.ParseMode.HTML)
     except Exception as e:
         await app.send_message(kayo_id, text="Something Went Wrong!" + "\n" + e)
