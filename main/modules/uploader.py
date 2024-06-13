@@ -88,6 +88,7 @@ async def upload_video(msg: Message, img, file, id, tit, name, ttl, main, subtit
             ulvis = f"https://ulvis.net/api.php?url={ouolink}&private=1"
             result = requests.get(ulvis)
             flink = result.text
+            print("name: ", name)
             save_link480p(name, flink)
             dl_markup = InlineKeyboardMarkup(
                 [
