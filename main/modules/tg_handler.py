@@ -46,7 +46,9 @@ async def tg_handler():
                 i = queue.pop(0)
                 
                 id, name, video = await start_uploading(i)
+                await asyncio.sleep(10)
                 id, name, video = await start_uploading(i)
+                await asyncio.sleep(10)
                 id, name, video = await start_uploading(i)
                 print("Title: ", i["title"])
                 await del_anime(i["title"])
@@ -257,7 +259,7 @@ async def start_uploading(data):
                 os.rename("out.mkv",fpath)
   
             print("Uploading --> ",name)
-            video = await upload_video(msg,img,fpath,id,tit,name,size,main,subtitle,nyaasize,audio_language, alink)
+            video = await upload_video720p(msg,img,fpath,id,tit,name,size,main,subtitle,nyaasize,audio_language, alink)
             await save_720p(i["title"])
         #1080p
         elif data["480p"]==012:
@@ -334,7 +336,7 @@ async def start_uploading(data):
                 os.rename("out.mkv",fpath)
   
             print("Uploading --> ",name)
-            video = await upload_video(msg,img,fpath,id,tit,name,size,main,subtitle,nyaasize,audio_language, alink)
+            video = await upload_video1080p(msg,img,fpath,id,tit,name,size,main,subtitle,nyaasize,audio_language, alink)
             await save_1080p(i["title"])
             try:
                 os.remove("video.mkv")
@@ -346,9 +348,11 @@ async def start_uploading(data):
                 pass  
         else:
             print("All format uploaded.")
+            id = None
+            name = None
+            video = None
 
    
-
     except FloodWait as e:
 
         flood_time = int(e.x) + 5
