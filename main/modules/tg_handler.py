@@ -127,6 +127,7 @@ async def start_uploading(data):
             img, caption, alink = await get_anilist_data(title)
             await asyncio.sleep(5)
             await status.edit(await status_text(f"Downloading {name}"),reply_markup=button1)
+            print(link)
             file = await downloader(msg,link,size,title)
 
             await msg.edit(f"Download Complete : {name}")
