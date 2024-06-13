@@ -37,7 +37,7 @@ def parse():
         item['subtitle'] = multi_sub(i['title'])
         item['size'] = i['nyaa_size']   
         item['link'] = "magnet:?xt=urn:btih:" + i['nyaa_infohash']
-        item['480p'] = 0
+        item['480p'] = '0'
         data.append(item)
         data.reverse()
     return data
