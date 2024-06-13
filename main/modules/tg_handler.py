@@ -128,7 +128,6 @@ async def start_uploading(data):
             img, caption, alink = await get_anilist_data(title)
             await asyncio.sleep(5)
             await status.edit(await status_text(f"Downloading {name}"),reply_markup=button1)
-            print(link)
             file = await downloader(msg,link,size,title)
 
             await msg.edit(f"Download Complete : {name}")
@@ -180,7 +179,7 @@ async def start_uploading(data):
                 os.rename("out.mkv",fpath)
   
             print("Uploading --> ",name)
-            video = await upload_video(msg,img,fpath,id,tit,name,size,main,subtitle,nyaasize,audio_language, alink)
+            video = await upload_video(msg,title,img,fpath,id,tit,name,size,main,subtitle,nyaasize,audio_language, alink)
             print("480title: ", data["title"])
             save_480p(data["title"])
    
@@ -206,7 +205,7 @@ async def start_uploading(data):
                 os.rename("out.mkv",fpath)
   
             print("Uploading --> ",name)
-            video = await upload_video720p(msg2,img,fpath,id,tit,name,size,main2,subtitle,nyaasize,audio_language, alink)
+            video = await upload_video720p(msg2,title,img,fpath,id,tit,name,size,main2,subtitle,nyaasize,audio_language, alink)
             save_720p(data["title"])
             await asyncio.sleep(5)
 # 1080p 
@@ -231,7 +230,7 @@ async def start_uploading(data):
                 os.rename("out.mkv",fpath)
   
             print("Uploading --> ",name)
-            video = await upload_video1080p(msg3,img,fpath,id,tit,name,size,main,subtitle,nyaasize,audio_language, alink)
+            video = await upload_video1080p(msg3,title,img,fpath,id,tit,name,size,main,subtitle,nyaasize,audio_language, alink)
             save_1080p(data["title"])
             try:
                 os.remove("video.mkv")
@@ -316,7 +315,7 @@ async def start_uploading(data):
                 os.rename("out.mkv",fpath)
   
             print("Uploading --> ",name)
-            video = await upload_video720p(msg,img,fpath,id,tit,name,size,main,subtitle,nyaasize,audio_language, alink)
+            video = await upload_video720p(msg,title,img,fpath,id,tit,name,size,main,subtitle,nyaasize,audio_language, alink)
             await save_720p(data["title"])
 #1080p 
 
@@ -340,7 +339,7 @@ async def start_uploading(data):
                 os.rename("out.mkv",fpath)
   
             print("Uploading --> ",name)
-            video = await upload_video1080p(msg3,img,fpath,id,tit,name,size,main,subtitle,nyaasize,audio_language, alink)
+            video = await upload_video1080p(msg3,title,img,fpath,id,tit,name,size,main,subtitle,nyaasize,audio_language, alink)
             save_1080p(data["title"])
             try:
                 os.remove("video.mkv")
@@ -424,7 +423,7 @@ async def start_uploading(data):
                 os.rename("out.mkv",fpath)
   
             print("Uploading --> ",name)
-            video = await upload_video1080p(msg,img,fpath,id,tit,name,size,main,subtitle,nyaasize,audio_language, alink)
+            video = await upload_video1080p(msg,title,img,fpath,id,tit,name,size,main,subtitle,nyaasize,audio_language, alink)
             await save_1080p(data["title"])
             try:
                 os.remove("video.mkv")
