@@ -129,7 +129,7 @@ def get_postid(name):
     else:
         return False
 
-def get_link480p(filename):    
+async def get_link480p(filename):    
     andb = db.animes
     data = andb.find_one({"name": filename})
     filink = data["slink480p"]
@@ -138,7 +138,7 @@ def get_link480p(filename):
     else:
         return None
 
-def get_link720p(filename):    
+async def get_link720p(filename):    
     andb = db.animes
     data = andb.find_one({"name": filename})
     filink = data["slink7280p"]
