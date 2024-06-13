@@ -108,7 +108,7 @@ def get_audio_language(video_path):
 async def start_uploading(data):
 
     try:
-        if data["480p"]==0:
+        if data["480p"]=='0':
             title = data["title"]
             dbtit = data["title"]
             link = data["link"]
@@ -185,7 +185,7 @@ async def start_uploading(data):
             video = await upload_video(msg,img,fpath,id,tit,name,size,main,subtitle,nyaasize,audio_language, alink)
             await save_480p(i["title"])
 
-        elif data["480p"]==01:
+        elif data["480p"]=='01':
             title = data["title"]
             dbtit = data["title"]
             link = data["link"]
@@ -262,7 +262,7 @@ async def start_uploading(data):
             video = await upload_video720p(msg,img,fpath,id,tit,name,size,main,subtitle,nyaasize,audio_language, alink)
             await save_720p(i["title"])
         #1080p
-        elif data["480p"]==012:
+        elif data["480p"]=='012':
             title = data["title"]
             dbtit = data["title"]
             link = data["link"]
