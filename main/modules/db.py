@@ -119,7 +119,7 @@ def is_tit_in_db(bit):
     else:
         return False
 
-def get_postid(name):
+async def get_postid(name):
     animdb = db.animes
     data = animdb.find_one({"name": name})
     posterid = data["postid"]
