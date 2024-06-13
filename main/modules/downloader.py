@@ -26,7 +26,7 @@ async def downloader(message: Message, link: str,total,name):
   await r.edit(f'Got Metadata, Starting Download Of **{str(name)}**...')
 
   trgt = str(handle.name())
-
+  print(trgt)
   while (handle.status().state != lt.torrent_status.seeding):
     
     s = handle.status()
@@ -43,8 +43,8 @@ async def downloader(message: Message, link: str,total,name):
       )
     try:
       await r.edit(text=texty)
-    except:
-      pass
+    except Exception as e:
+      print(e)
 
     await asyncio.sleep(10)
   
