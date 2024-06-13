@@ -121,28 +121,28 @@ def is_tit_in_db(bit):
 
 async def get_postid(name):
     animdb = db.animes
-    data = animdb.find_one({"name": name})
-    posterid = data["data.postid"]
+    dat = animdb.find_one({"name": name})
+    posterid = dat["data"]["postid"]
     postid = int(posterid)
-    if data:
+    if dat:
         return postid
     else:
         return False
 
 async def get_link480p(filename):    
     andb = db.animes
-    data = andb.find_one({"name": filename})
-    filink = data["data.slink480p"]
-    if data:
+    dat = andb.find_one({"name": filename})
+    filink = dat["data"]["slink480p"]
+    if dat:
         return filink
     else:
         return None
 
 async def get_link720p(filename):    
     andb = db.animes
-    data = andb.find_one({"name": filename})
-    filink = data["data.slink720p"]
-    if data:
+    dat = andb.find_one({"name": filename})
+    filink = dat["data"]["slink720p"]
+    if dat:
         return filink
     else:
         return None
