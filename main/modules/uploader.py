@@ -42,7 +42,7 @@ from pyrogram.errors import FloodWait
 
 from main.inline import button1
 async def upload_video(msg: Message, img, file, id, tit, name, ttl, main, subtitle, nyaasize, audio_info, alink):
-    global postid, anidlcap
+    global postid, anidlcap, flink
     try:
         fuk = isfile(file)
         if fuk:
@@ -88,6 +88,7 @@ async def upload_video(msg: Message, img, file, id, tit, name, ttl, main, subtit
             ulvis = f"https://ulvis.net/api.php?url={ouolink}&private=1"
             result = requests.get(ulvis)
             flink = result.text
+            
             dl_markup = InlineKeyboardMarkup(
                 [
                     [
@@ -109,6 +110,23 @@ async def upload_video(msg: Message, img, file, id, tit, name, ttl, main, subtit
             anidl_id=-1001234112068
             xurl = f"https://anidl.ddlserverv1.me.in/beta/{hash}"
             anidlcap = f"<b>{anidltitle}</b>\n<i>{tit}</i>\n<blockquote><b><a href={flink}>🗂️ [Web ~ Erai-raws][480p x265 10Bit CRF@23][JAP ~ Opus][Multiple Subs ~ {subtitle}]</a></b></blockquote>"
+            fmarkup=InlineKeyboardMarkup(
+                    [
+                        [
+                            InlineKeyboardButton(
+                                text="480p",
+                                url=flink,
+                            ),
+                        ],
+                        [
+                            InlineKeyboardButton(
+                                text="🌐 AIRING ANIME",
+                                url="https://anidl.org/airing-anime",
+                            ),
+                        ],
+                        
+                    ],
+            )
             anidl_markup = InlineKeyboardMarkup(
                 [
                     [
@@ -117,7 +135,7 @@ async def upload_video(msg: Message, img, file, id, tit, name, ttl, main, subtit
                 ]
             )
             await asyncio.sleep(3)
-            post = await app.send_message(anidl_id,text=anidlcap, reply_markup=anidl_markup, parse_mode=enums.ParseMode.HTML)
+            post = await app.send_message(anidl_id,text=anidlcap, reply_markup=fmarkup, parse_mode=enums.ParseMode.HTML)
             postid = post.id
     except Exception:
         await app.send_message(kayo_id, text="Something Went Wrong!")
@@ -139,7 +157,7 @@ async def upload_video(msg: Message, img, file, id, tit, name, ttl, main, subtit
     return x.id
 
 async def upload_video720p(msg: Message, img, file, id, tit, name, ttl, main, subtitle, nyaasize, audio_info, alink):
-    global anidlcap2
+    global anidlcap2, fxlink
     try:
         fuk = isfile(file)
         if fuk:
@@ -184,7 +202,7 @@ async def upload_video720p(msg: Message, img, file, id, tit, name, ttl, main, su
             ouolink = f"http://ouo.press/qs/jezWr0hG?s={dalink}"
             ulvis = f"https://ulvis.net/api.php?url={ouolink}&private=1"
             result = requests.get(ulvis)
-            flink = result.text
+            fxlink = result.text
             dl_markup = InlineKeyboardMarkup(
                 [
                     [
@@ -204,19 +222,45 @@ async def upload_video720p(msg: Message, img, file, id, tit, name, ttl, main, su
                 reply_markup=dl_markup
             )
             anidl_id=-1001234112068
-            xurl = f"https://anidl.ddlserverv1.me.in/beta/{hash}"
-            anidlcap2 = anidlcap + "\n" + f"<blockquote><b><a href={flink}>🗂️ [Web ~ Erai-raws][720p x265 10Bit CRF@22][JAP ~ Opus][Multiple Subs ~ {subtitle}]</a></b></blockquote>"
-            anidl_markup = InlineKeyboardMarkup(
-                [
+
+            anidlcap2 = anidlcap + "\n" + f"<blockquote><b><a href={fxlink}>🗂️ [Web ~ Erai-raws][720p x265 10Bit CRF@22][JAP ~ Opus][Multiple Subs ~ {subtitle}]</a></b></blockquote>"
+            fmarkup=InlineKeyboardMarkup(
                     [
-                        InlineKeyboardButton(text="🔗 VISIT PAGE", url=f"https://anidl.org/airing-anime")
-                    ]
-                ]
+                        [
+                            InlineKeyboardButton(
+                                text="480p",
+                                url=flink,
+                            ),
+                            InlineKeyboardButton(
+                                text="720p",
+                                url=fxlink,
+                            ),
+                        ],
+                        [
+                            InlineKeyboardButton(
+                                text="🌐 AIRING ANIME",
+                                url="https://anidl.org/airing-anime",
+                            ),
+                        ],
+                        
+                    ],
             )
             await asyncio.sleep(3)
-            await app.edit_message_text(anidl_id, postid, text=anidlcap2, reply_markup=anidl_markup, parse_mode=enums.ParseMode.HTML)
+            await app.edit_message_text(anidl_id, postid, text=anidlcap2, reply_markup=fmarkup, parse_mode=enums.ParseMode.HTML)
     except Exception:
         await app.send_message(kayo_id, text="Something Went Wrong!")
+    try:
+        
+            
+            await r.delete()
+
+            os.remove(file)
+
+            os.remove(thumbnail)
+
+    except:
+
+        pass
 
 async def upload_video1080p(msg: Message, img, file, id, tit, name, ttl, main, subtitle, nyaasize, audio_info, alink):
     global anidlcap2
@@ -264,7 +308,7 @@ async def upload_video1080p(msg: Message, img, file, id, tit, name, ttl, main, s
             ouolink = f"http://ouo.press/qs/jezWr0hG?s={dalink}"
             ulvis = f"https://ulvis.net/api.php?url={ouolink}&private=1"
             result = requests.get(ulvis)
-            flink = result.text
+            fxylink = result.text
             dl_markup = InlineKeyboardMarkup(
                 [
                     [
@@ -284,7 +328,32 @@ async def upload_video1080p(msg: Message, img, file, id, tit, name, ttl, main, s
                 reply_markup=dl_markup
             )
             anidl_id=-1001234112068
-            anidlcap3 = anidlcap2 + "\n" + f"<blockquote><b><a href={flink}>🗂️ [Web ~ Erai-raws][1080p x265 10Bit CRF@22][JAP ~ AAC][Multiple Subs ~ {subtitle}]</a></b></blockquote>\n\n<i>({tit})</i>""
+            anidlcap3 = anidlcap2 + "\n" + f"<blockquote><b><a href={fxylink}>🗂️ [Web ~ Erai-raws][1080p x265 10Bit CRF@22][JAP ~ AAC][Multiple Subs ~ {subtitle}]</a></b></blockquote>""
+            fmarkup=InlineKeyboardMarkup(
+                    [
+                        [
+                            InlineKeyboardButton(
+                                text="480p",
+                                url=flink,
+                            ),
+                            InlineKeyboardButton(
+                                text="720p",
+                                url=fxlink,
+                            ),
+                            InlineKeyboardButton(
+                                text="1080p",
+                                url=fxylink,
+                            ),
+                        ],
+                        [
+                            InlineKeyboardButton(
+                                text="🌐 AIRING ANIME",
+                                url="https://anidl.org/airing-anime",
+                            ),
+                        ],
+                        
+                    ],
+            )
             anidl_markup = InlineKeyboardMarkup(
                 [
                     [
@@ -293,7 +362,7 @@ async def upload_video1080p(msg: Message, img, file, id, tit, name, ttl, main, s
                 ]
             )
             await asyncio.sleep(3)
-            await app.edit_message_text(anidl_id, postid, text=anidlcap3, reply_markup=anidl_markup, parse_mode=enums.ParseMode.HTML)
+            await app.edit_message_text(anidl_id, postid, text=anidlcap3, reply_markup=fmarkup, parse_mode=enums.ParseMode.HTML)
     except Exception:
         await app.send_message(kayo_id, text="Something Went Wrong!")
     try:
