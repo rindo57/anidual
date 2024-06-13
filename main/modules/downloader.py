@@ -26,6 +26,26 @@ async def downloader(message: Message, link: str,total,name):
   await r.edit(f'Got Metadata, Starting Download Of **{str(name)}**...')
 
   trgt = str(handle.name())
-  print(trgt)
+
+  while (handle.status().state != lt.torrent_status.seeding):
+    
+    s = handle.status()
+    
+    state_str = ['queued', 'checking', 'downloading metadata', 'downloading', 'finished', 'seeding', 'allocating']
+    
+    texty = get_progress_text(
+        str(name), 
+        str(state_str[s.state]).capitalize(), 
+        s.progress,
+        s.download_rate,
+        total,
+        enco=False
+      )
+    try:
+      await r.edit(text=texty)
+    except:
+      pass
+
+    await asyncio.sleep(10)
   
   return "downloads/" + trgt
