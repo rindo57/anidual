@@ -183,7 +183,7 @@ async def start_uploading(data):
             await save_480p(data["title"])
             await asyncio.sleep(5)
         # 720p
-            msg = await app.send_photo(bin_id,photo=img,caption=title)
+            msg2 = await app.send_photo(bin_id,photo=img,caption=title)
             os.rename(fpath,"video.mkv")
             titlx2 = title.replace('[1080p][Multiple Subtitle]', '[Web][720p x265 10Bit][Opus][Erai-raws]')
             titm2 = f"**[AniDL] {titlx2}**"
@@ -204,12 +204,12 @@ async def start_uploading(data):
                 os.rename("out.mkv",fpath)
   
             print("Uploading --> ",name)
-            video = await upload_video720p(msg,img,fpath,id,tit,name,size,main2,subtitle,nyaasize,audio_language, alink)
+            video = await upload_video720p(msg2,img,fpath,id,tit,name,size,main2,subtitle,nyaasize,audio_language, alink)
             await save_720p(data["title"])
             await asyncio.sleep(5)
 # 1080p 
 
-            msg = await app.send_photo(bin_id,photo=img,caption=title)
+            msg3 = await app.send_photo(bin_id,photo=img,caption=title)
             os.rename(fpath,"video.mkv")
             titlx3 = title.replace('[1080p][Multiple Subtitle]', '[Web][1080p x265 10Bit][AAC][Erai-raws]')
             titm3 = f"**[AniDL] {titlx3}**"
@@ -230,7 +230,7 @@ async def start_uploading(data):
                 os.rename("out.mkv",fpath)
   
             print("Uploading --> ",name)
-            video = await upload_video108p(msg,img,fpath,id,tit,name,size,main,subtitle,nyaasize,audio_language, alink)
+            video = await upload_video108p(msg3,img,fpath,id,tit,name,size,main,subtitle,nyaasize,audio_language, alink)
             await save_1080p(data["title"])
             try:
                 os.remove("video.mkv")
@@ -317,9 +317,9 @@ async def start_uploading(data):
             print("Uploading --> ",name)
             video = await upload_video720p(msg,img,fpath,id,tit,name,size,main,subtitle,nyaasize,audio_language, alink)
             await save_720p(data["title"])
+#1080p 
 
-
-            msg = await app.send_photo(bin_id,photo=img,caption=title)
+            msg3 = await app.send_photo(bin_id,photo=img,caption=title)
             os.rename(fpath,"video.mkv")
             titlx3 = title.replace('[1080p][Multiple Subtitle]', '[Web][1080p x265 10Bit][AAC][Erai-raws]')
             titm3 = f"**[AniDL] {titlx3}**"
@@ -340,7 +340,7 @@ async def start_uploading(data):
                 os.rename("out.mkv",fpath)
   
             print("Uploading --> ",name)
-            video = await upload_video108p(msg,img,fpath,id,tit,name,size,main,subtitle,nyaasize,audio_language, alink)
+            video = await upload_video108p(msg3,img,fpath,id,tit,name,size,main,subtitle,nyaasize,audio_language, alink)
             await save_1080p(data["title"])
             try:
                 os.remove("video.mkv")
