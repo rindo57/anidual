@@ -183,8 +183,8 @@ async def start_uploading(data):
   
             print("Uploading --> ",name)
             video = await upload_video(msg,img,fpath,id,tit,name,size,main,subtitle,nyaasize,audio_language, alink)
-            print("480title: ", i["title"])
-            save_480p(i["title"])
+            print("480title: ", data["title"])
+            await save_480p(data["title"])
 
         elif data["480p"]=='01':
             title = data["title"]
@@ -261,7 +261,7 @@ async def start_uploading(data):
   
             print("Uploading --> ",name)
             video = await upload_video720p(msg,img,fpath,id,tit,name,size,main,subtitle,nyaasize,audio_language, alink)
-            save_720p(i["title"])
+            await save_720p(data["title"])
         #1080p
         elif data["480p"]=='012':
             title = data["title"]
@@ -338,7 +338,7 @@ async def start_uploading(data):
   
             print("Uploading --> ",name)
             video = await upload_video1080p(msg,img,fpath,id,tit,name,size,main,subtitle,nyaasize,audio_language, alink)
-            save_1080p(i["title"])
+            await save_1080p(data["title"])
             try:
                 os.remove("video.mkv")
                 os.remove("out.mkv")
