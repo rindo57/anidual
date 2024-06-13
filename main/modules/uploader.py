@@ -41,7 +41,7 @@ from main import app, status
 from pyrogram.errors import FloodWait
 
 from main.inline import button1
-async def upload_video(msg: Message, img, file, id, tit, name, ttl, main, subtitle, nyaasize, audio_info, alink):
+async def upload_video(msg: Message, title, img, file, id, tit, name, ttl, main, subtitle, nyaasize, audio_info, alink):
     
     try:
         fuk = isfile(file)
@@ -53,6 +53,7 @@ async def upload_video(msg: Message, img, file, id, tit, name, ttl, main, subtit
             size = get_filesize(file)
             ep_num = get_epnum(name)
             print(ep_num)
+            print("name: ", name)
             rest = tit
             filed = os.path.basename(file)
             print('filed: ', filed)
@@ -88,8 +89,8 @@ async def upload_video(msg: Message, img, file, id, tit, name, ttl, main, subtit
             ulvis = f"https://ulvis.net/api.php?url={ouolink}&private=1"
             result = requests.get(ulvis)
             flink = result.text
-            print("name: ", name)
-            save_link480p(name, flink)
+            print("title upload: ", title)
+            save_link480p(title, flink)
             dl_markup = InlineKeyboardMarkup(
                 [
                     [
@@ -139,8 +140,8 @@ async def upload_video(msg: Message, img, file, id, tit, name, ttl, main, subtit
             await asyncio.sleep(3)
             post = await app.send_message(anidl_id,text=anidlcap, reply_markup=fmarkup, parse_mode=enums.ParseMode.HTML)
             postid = post.id
-            print("name: ", name)
-            save_postid(name, postid)
+            print("title upload: ", title)
+            save_postid(title, postid)
     except Exception:
         await app.send_message(kayo_id, text="Something Went Wrong!")
 
@@ -160,7 +161,7 @@ async def upload_video(msg: Message, img, file, id, tit, name, ttl, main, subtit
 
     return x.id
 
-async def upload_video720p(msg: Message, img, file, id, tit, name, ttl, main, subtitle, nyaasize, audio_info, alink):
+async def upload_video720p(msg: Message, title, img, file, id, tit, name, ttl, main, subtitle, nyaasize, audio_info, alink):
     global anidlcap2, fxlink
     try:
         fuk = isfile(file)
@@ -207,7 +208,7 @@ async def upload_video720p(msg: Message, img, file, id, tit, name, ttl, main, su
             ulvis = f"https://ulvis.net/api.php?url={ouolink}&private=1"
             result = requests.get(ulvis)
             fxlink = result.text
-            save_link720p(name, fxlink)
+            save_link720p(title, fxlink)
             dl_markup = InlineKeyboardMarkup(
                 [
                     [
@@ -229,10 +230,10 @@ async def upload_video720p(msg: Message, img, file, id, tit, name, ttl, main, su
             anidl_id=-1001234112068
             filex = filed.replace("[AniDL] ", "")
             name480p = filex.replace("[Web][720p x265 10Bit][Opus][Erai-raws]", "[1080p Web-DL]")
-            code480p = await get_link480p(name480p)
+            code480p = await get_link480p(title)
             dl480pcap = f"<b>{anidltitle}</b>\n<i>{tit}</i>\n<blockquote><b><a href={code480p}>🗂️ [Web ~ Erai-raws][480p x265 10Bit CRF@23][JAP ~ Opus][Multiple Subs ~ {subtitle}]</a></b></blockquote>"
             dl720pcap = f"\n<blockquote><b><a href={code720p}>🗂️ [Web ~ Erai-raws][720p x265 10Bit CRF@22][JAP ~ Opus][Multiple Subs ~ {subtitle}]</a></b></blockquote>"
-            anidlcap2 = dl480p + "\n" + f"<blockquote><b><a href={fxlink}>🗂️ [Web ~ Erai-raws][720p x265 10Bit CRF@22][JAP ~ Opus][Multiple Subs ~ {subtitle}]</a></b></blockquote>"
+            anidlcap2 = dl480pcap + "\n" + f"<blockquote><b><a href={fxlink}>🗂️ [Web ~ Erai-raws][720p x265 10Bit CRF@22][JAP ~ Opus][Multiple Subs ~ {subtitle}]</a></b></blockquote>"
             fmarkup=InlineKeyboardMarkup(
                     [
                         [
@@ -255,10 +256,10 @@ async def upload_video720p(msg: Message, img, file, id, tit, name, ttl, main, su
                     ],
             )
             await asyncio.sleep(3)
-            postid = await get_postid(name)
+            postid = await get_postid(title)
             await app.edit_message_text(anidl_id, postid, text=anidlcap2, reply_markup=fmarkup, parse_mode=enums.ParseMode.HTML)
-    except Exception:
-        await app.send_message(kayo_id, text="Something Went Wrong!")
+    except Exception as e:
+        await app.send_message(kayo_id, text="Something Went Wrong!" + "\n" + e)
     try:
         
             
@@ -272,7 +273,7 @@ async def upload_video720p(msg: Message, img, file, id, tit, name, ttl, main, su
 
         pass
 
-async def upload_video1080p(msg: Message, img, file, id, tit, name, ttl, main, subtitle, nyaasize, audio_info, alink):
+async def upload_video1080p(msg: Message, title, img, file, id, tit, name, ttl, main, subtitle, nyaasize, audio_info, alink):
     
     try:
         fuk = isfile(file)
@@ -319,7 +320,7 @@ async def upload_video1080p(msg: Message, img, file, id, tit, name, ttl, main, s
             ulvis = f"https://ulvis.net/api.php?url={ouolink}&private=1"
             result = requests.get(ulvis)
             fxylink = result.text
-            save_link1080p(name, fxylink)
+            save_link1080p(title, fxylink)
             dl_markup = InlineKeyboardMarkup(
                 [
                     [
@@ -339,11 +340,8 @@ async def upload_video1080p(msg: Message, img, file, id, tit, name, ttl, main, s
                 reply_markup=dl_markup
             )
             anidl_id=-1001234112068
-            filex = filed.replace("[AniDL] ", "")
-            name480p = filex.replace("[Web][1080p x265 10Bit][AAC][Erai-raws]", "[1080p][Multiple Subtitle]")
-            name720p = filex.replace("[Web][1080p x265 10Bit][AAC][Erai-raws]", "[1080p][Multiple Subtitle]")
-            code480p = await get_link480p(name480p)
-            code720p = await get_link720p(name720p)
+            code480p = await get_link480p(title)
+            code720p = await get_link720p(title)
             dl480pcap = f"<b>{anidltitle}</b>\n<i>{tit}</i>\n<blockquote><b><a href={code480p}>🗂️ [Web ~ Erai-raws][480p x265 10Bit CRF@23][JAP ~ Opus][Multiple Subs ~ {subtitle}]</a></b></blockquote>"
             dl720pcap = f"\n<blockquote><b><a href={code720p}>🗂️ [Web ~ Erai-raws][720p x265 10Bit CRF@22][JAP ~ Opus][Multiple Subs ~ {subtitle}]</a></b></blockquote>"
             anidlcap3 = dl480pcap + dl720pcap + "\n" + f"<blockquote><b><a href={fxylink}>🗂️ [Web ~ Erai-raws][1080p x265 10Bit CRF@22][JAP ~ AAC][Multiple Subs ~ {subtitle}]</a></b></blockquote>"
@@ -373,11 +371,11 @@ async def upload_video1080p(msg: Message, img, file, id, tit, name, ttl, main, s
                     ],
             )
             await asyncio.sleep(3)
-            print("name: ", name)
-            postid = await get_postid(name)
+            print("title upload: ", title)
+            postid = await get_postid(title)
             await app.edit_message_text(anidl_id, postid, text=anidlcap3, reply_markup=fmarkup, parse_mode=enums.ParseMode.HTML)
-    except Exception:
-        await app.send_message(kayo_id, text="Something Went Wrong!")
+    except Exception as e:
+        await app.send_message(kayo_id, text="Something Went Wrong!" + "\n" + e)
     try:
         
             
