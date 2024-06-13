@@ -86,6 +86,50 @@ async def tg_handler():
 
             pass
 
+def replace_text_with_mapping(subtitle, mapping):
+    for original_text, replacement_text in mapping.items():
+        subtitle = subtitle.replace(original_text, replacement_text)
+    return subtitle
+
+
+mapping = {
+    "us": "ENG",
+    "br": "POR-BR",
+    "mx": "SPA-LA",
+    "es": "SPA",
+    "sa": "ARA",
+    "fr": "FRE",
+    "de": "GER",
+    "it": "ITA",
+    "ru": "RUS",
+    "ja": "JPN",
+    "pt": "POR",
+    "pl": "POL",
+    "nl": "DUT",
+    "nb": "NOB",
+    "fi": "FIN",
+    "tr": "TUR",
+    "sv": "SWE",
+    "el": "GRE",
+    "he": "HEB",
+    "ro": "RUM",
+    "id": "IND",
+    "th": "THA",
+    "ko": "KOR",
+    "da": "DAN",
+    "zh": "CHI",
+    "bg": "BUL",
+    "vn": "VIE",
+    "hi": "HIN",
+    "te": "TEL",
+    "uk": "UKR",
+    "hu": "HUN",
+    "cs": "CES",
+    "hr": "HRV",
+    "my": "MAY",
+    "sk": "SLK",
+    "fil": "FIL"
+}
 
 def get_audio_language(video_path):
     try:
@@ -111,7 +155,8 @@ async def start_uploading(data):
             size = data["size"]
             size = size.replace("GB", " GiB")
             nyaasize = size
-            subtitle = data["subtitle"]
+            subtitl = data["subtitle"]
+            subtitle = replace_text_with_mapping(subtitl, mapping)
             name, ext = title.split(".")
 
             name += f" [AniDL]." + ext
@@ -248,7 +293,9 @@ async def start_uploading(data):
             size = data["size"]
             size = size.replace("GB", " GiB")
             nyaasize = size
-            subtitle = data["subtitle"]
+            
+            subtitl = data["subtitle"]
+            subtitle = replace_text_with_mapping(subtitl, mapping)
             name, ext = title.split(".")
 
             name += f" [AniDL]." + ext
@@ -357,7 +404,8 @@ async def start_uploading(data):
             size = data["size"]
             size = size.replace("GB", " GiB")
             nyaasize = size
-            subtitle = data["subtitle"]
+            subtitl = data["subtitle"]
+            subtitle = replace_text_with_mapping(subtitl, mapping)
             name, ext = title.split(".")
 
             name += f" [AniDL]." + ext
