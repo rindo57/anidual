@@ -122,7 +122,8 @@ def is_tit_in_db(bit):
 def get_postid(name):
     animdb = db.animes
     data = animdb.find_one({"name": name})
-    postid = data["postid"]
+    posterid = data["postid"]
+    postid = int(posterid)
     if data:
         return postid
     else:
