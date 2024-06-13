@@ -183,7 +183,7 @@ async def start_uploading(data):
             save_480p(data["title"])
    
             print(data["title"])
-            titlev2 = data["title"])
+            titlev2 = data["title"]
             id, img, tit = await get_anime_img(get_anime_name(titlev2))
             msg2 = await app.send_photo(bin_id,photo=img,caption=titlev2)
             os.rename(fpath,"video.mkv")
