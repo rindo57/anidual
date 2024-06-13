@@ -59,6 +59,16 @@ def is_fid_in_db(fid):
     else:
         return None
 
+def save_postid(name, postid):
+    animexdb = db.animes
+    animexdb.update_one(
+        {
+            "name": name
+        },
+        {"$set": {"data.postid": postid}},
+        upsert=True,
+    )
+    return
 def save_480p(name):
     animexdb = db.animes
     animexdb.update_one(
@@ -108,3 +118,12 @@ def is_tit_in_db(bit):
         return True
     else:
         return False
+
+def get_postid(name):
+    animdb = db.animes
+    data = animdb.find_one({"name": name})
+    if data:
+        return data["postid"]
+    else:
+        return False
+
