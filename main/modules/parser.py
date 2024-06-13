@@ -39,7 +39,7 @@ def parse():
         item['title'] = trim_title(i['title'])
         item['subtitle'] = (i['erai_subtitles'])
         item['size'] = i['erai_size']   
-        item['link'] = i['link']
+        item['link'] = "magnet:?xt=urn:btih:" + i['erai_infohash']
         item['480p'] = '0'
         data.append(item)
         data.reverse()
