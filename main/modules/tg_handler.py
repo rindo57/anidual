@@ -182,7 +182,9 @@ async def start_uploading(data):
             print("480title: ", data["title"])
             await save_480p(data["title"])
             await asyncio.sleep(5)
-        # 720p
+
+            print(title)
+            id, img, tit = await get_anime_img(get_anime_name(title))
             msg2 = await app.send_photo(bin_id,photo=img,caption=title)
             os.rename(fpath,"video.mkv")
             titlx2 = title.replace('[1080p][Multiple Subtitle]', '[Web][720p x265 10Bit][Opus][Erai-raws]')
