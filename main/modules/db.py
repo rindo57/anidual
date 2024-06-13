@@ -137,7 +137,7 @@ def get_link480p(filename):
     else:
         return None
 
-ef get_link720p(filename):    
+def get_link720p(filename):    
     andb = db.animes
     data = andb.find_one({"name": filename})
     filink = data["slink7280p"]
