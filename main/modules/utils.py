@@ -183,7 +183,7 @@ async def status_text(text):
 
 
 def get_progress_text(sourcetext,status,completed,speed,total,enco=False):
-    text = """Name: {}
+    text1 = """Name: {}
 {}: {}%
 [{}]
 {} of {}
@@ -259,7 +259,7 @@ ETA: {}
 
 
         speed += "/sec"
-        text = text.format(
+        text = text1.format(
             sourcetext,
             status,
             percent,
