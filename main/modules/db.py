@@ -78,6 +78,15 @@ def save_720p(name):
         upsert=True,
     )
     return
+def save_1080p(name):
+    filesdb.update_one(
+        {
+            "name": name
+        },
+        {"$set": {"480p": 0123}},
+        upsert=True,
+    )
+    return
 def save_file_in_db(filed, hash, subtitle, img, audio_info, tit, alink, size, upid=None):
     filesdb.update_one(
         {
