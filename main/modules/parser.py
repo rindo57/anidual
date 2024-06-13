@@ -17,6 +17,7 @@ def trim_title(title: str):
     title = title.replace(" (JA)", "")
     title = title.replace(" (Japanese Audio)", "")
     title = title.replace(" (Chinese Audio)", "")
+    title = title.replace(" (Multi) ", "")
     title = title.replace("Tian Guan Ci Fu Di Er Ji", "Heaven Official's Blessing S2")
     title = title.replace("(AAC 2.0) ", "")
     ext = ".mkv"
