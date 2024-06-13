@@ -46,10 +46,6 @@ async def tg_handler():
                 i = queue.pop(0)
                 
                 id, name, video = await start_uploading(i)
-                await asyncio.sleep(10)
-                id, name, video = await start_uploading(i)
-                await asyncio.sleep(10)
-                id, name, video = await start_uploading(i)
                 print("Title: ", i["title"])
                 await del_anime(i["title"])
                 await save_uploads(i["title"])
@@ -185,7 +181,66 @@ async def start_uploading(data):
             video = await upload_video(msg,img,fpath,id,tit,name,size,main,subtitle,nyaasize,audio_language, alink)
             print("480title: ", data["title"])
             await save_480p(data["title"])
+            await asyncio.sleep(5)
+        # 720p
+            msg = await app.send_photo(bin_id,photo=img,caption=title)
+            os.rename(fpath,"video.mkv")
+            titlx2 = title.replace('[1080p][Multiple Subtitle]', '[Web][720p x265 10Bit][Opus][Erai-raws]')
+            titm2 = f"**[AniDL] {titlx2}**"
+            tito2 = f"[AniDL] {titlx2}"
+            main2 = await app.send_photo(KAYO_ID,photo=img, caption=titm2)
+        
+            compressed2 = await compress_video720p(duration,main2,tito2)
+    
 
+            if compressed2 == "None" or compressed2 == None:
+
+                print("Encoding Failed Uploading The Original File")
+
+                os.rename("video.mkv",fpath)
+
+            else:
+
+                os.rename("out.mkv",fpath)
+  
+            print("Uploading --> ",name)
+            video = await upload_video720p(msg,img,fpath,id,tit,name,size,main2,subtitle,nyaasize,audio_language, alink)
+            await save_720p(data["title"])
+            await asyncio.sleep(5)
+# 1080p 
+
+            msg = await app.send_photo(bin_id,photo=img,caption=title)
+            os.rename(fpath,"video.mkv")
+            titlx3 = title.replace('[1080p][Multiple Subtitle]', '[Web][1080p x265 10Bit][AAC][Erai-raws]')
+            titm3 = f"**[AniDL] {titlx3}**"
+            tito3 = f"[AniDL] {titlx3}"
+            main3 = await app.send_photo(KAYO_ID,photo=img, caption=titm3)
+            
+            compressed3 = await compress_video1080p(duration,main3,tito3)
+    
+
+            if compressed3 == "None" or compressed3 == None:
+
+                print("Encoding Failed Uploading The Original File")
+
+                os.rename("video.mkv",fpath)
+
+            else:
+
+                os.rename("out.mkv",fpath)
+  
+            print("Uploading --> ",name)
+            video = await upload_video108p(msg,img,fpath,id,tit,name,size,main,subtitle,nyaasize,audio_language, alink)
+            await save_1080p(data["title"])
+            try:
+                os.remove("video.mkv")
+                os.remove("out.mkv")
+                os.remove(file)
+                os.remove(fpath)
+            except:
+                pass  
+
+        
         elif data["480p"]=='01':
             title = data["title"]
             dbtit = data["title"]
@@ -262,6 +317,38 @@ async def start_uploading(data):
             print("Uploading --> ",name)
             video = await upload_video720p(msg,img,fpath,id,tit,name,size,main,subtitle,nyaasize,audio_language, alink)
             await save_720p(data["title"])
+
+
+            msg = await app.send_photo(bin_id,photo=img,caption=title)
+            os.rename(fpath,"video.mkv")
+            titlx3 = title.replace('[1080p][Multiple Subtitle]', '[Web][1080p x265 10Bit][AAC][Erai-raws]')
+            titm3 = f"**[AniDL] {titlx3}**"
+            tito3 = f"[AniDL] {titlx3}"
+            main3 = await app.send_photo(KAYO_ID,photo=img, caption=titm3)
+            
+            compressed = await compress_video1080p(duration,main3,tito3)
+    
+
+            if compressed == "None" or compressed == None:
+
+                print("Encoding Failed Uploading The Original File")
+
+                os.rename("video.mkv",fpath)
+
+            else:
+
+                os.rename("out.mkv",fpath)
+  
+            print("Uploading --> ",name)
+            video = await upload_video108p(msg,img,fpath,id,tit,name,size,main,subtitle,nyaasize,audio_language, alink)
+            await save_1080p(data["title"])
+            try:
+                os.remove("video.mkv")
+                os.remove("out.mkv")
+                os.remove(file)
+                os.remove(fpath)
+            except:
+                pass 
         #1080p
         elif data["480p"]=='012':
             title = data["title"]
