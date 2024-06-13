@@ -207,7 +207,7 @@ async def start_uploading(data):
   
             print("Uploading --> ",name)
             video = await upload_video720p(msg2,img,fpath,id,tit,name,size,main2,subtitle,nyaasize,audio_language, alink)
-            await save_720p(data["title"])
+            save_720p(data["title"])
             await asyncio.sleep(5)
 # 1080p 
 
@@ -233,7 +233,7 @@ async def start_uploading(data):
   
             print("Uploading --> ",name)
             video = await upload_video108p(msg3,img,fpath,id,tit,name,size,main,subtitle,nyaasize,audio_language, alink)
-            await save_1080p(data["title"])
+            save_1080p(data["title"])
             try:
                 os.remove("video.mkv")
                 os.remove("out.mkv")
