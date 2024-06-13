@@ -317,7 +317,7 @@ async def start_uploading(data):
   
             print("Uploading --> ",name)
             video = await upload_video720p(msg,title,img,fpath,id,tit,name,size,main,subtitle,nyaasize,audio_language, alink)
-            await save_720p(data["title"])
+            save_720p(data["title"])
 #1080p 
 
             msg3 = await app.send_photo(bin_id,photo=img,caption=title)
@@ -426,7 +426,7 @@ async def start_uploading(data):
   
             print("Uploading --> ",name)
             video = await upload_video1080p(msg,title,img,fpath,id,tit,name,size,main,subtitle,nyaasize,audio_language, alink)
-            await save_1080p(data["title"])
+            save_1080p(data["title"])
             try:
                 os.remove("video.mkv")
                 os.remove("out.mkv")
