@@ -157,13 +157,24 @@ def save_link480p(name, link):
     )
     return
 
-def save_link480p(name, link):
+def save_link720p(name, link):
     animexdb = db.animes
     animexdb.update_one(
         {
             "name": name
         },
         {"$set": {"data.slink720p": link}},
+        upsert=True,
+    )
+    return
+
+def save_link10880p(name, link):
+    animexdb = db.animes
+    animexdb.update_one(
+        {
+            "name": name
+        },
+        {"$set": {"data.slink1080p": link}},
         upsert=True,
     )
     return
