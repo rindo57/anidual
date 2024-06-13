@@ -18,7 +18,7 @@ from main.modules.anilist import get_anime_name
 
 from main.modules.anilist import get_anime_img
 
-from main.modules.db import present_user, add_user, is_fid_in_db, save_file_in_db, save_postid, get_postid, save_link, get_link
+from main.modules.db import present_user, add_user, is_fid_in_db, save_file_in_db, save_postid, get_postid, save_link480p, get_link480p, save_link720p, get_link720p, save_link1080p
 
 from main.modules.thumbnail import generate_thumbnail
 
@@ -88,7 +88,7 @@ async def upload_video(msg: Message, img, file, id, tit, name, ttl, main, subtit
             ulvis = f"https://ulvis.net/api.php?url={ouolink}&private=1"
             result = requests.get(ulvis)
             flink = result.text
-            save_link(name, flink)
+            save_link480p(name, flink)
             dl_markup = InlineKeyboardMarkup(
                 [
                     [
@@ -206,7 +206,7 @@ async def upload_video720p(msg: Message, img, file, id, tit, name, ttl, main, su
             ulvis = f"https://ulvis.net/api.php?url={ouolink}&private=1"
             result = requests.get(ulvis)
             fxlink = result.text
-            save_link(name, fxlink)
+            save_link720p(name, fxlink)
             dl_markup = InlineKeyboardMarkup(
                 [
                     [
@@ -226,8 +226,9 @@ async def upload_video720p(msg: Message, img, file, id, tit, name, ttl, main, su
                 reply_markup=dl_markup
             )
             anidl_id=-1001234112068
-            name480p = filed.replace("[Web][720p x265 10Bit][Opus][Erai-raws]", "[Web][480p x265 10Bit][Opus][Erai-raws]")
-            code480p = await get_link(name480p)
+            filex = filed.replace("[AniDL] ", "")
+            name480p = filex.replace("[Web][720p x265 10Bit][Opus][Erai-raws]", "[1080p Web-DL]")
+            code480p = await get_link480p(name480p)
             dl480pcap = f"<b>{anidltitle}</b>\n<i>{tit}</i>\n<blockquote><b><a href={code480p}>🗂️ [Web ~ Erai-raws][480p x265 10Bit CRF@23][JAP ~ Opus][Multiple Subs ~ {subtitle}]</a></b></blockquote>"
             dl720pcap = f"\n<blockquote><b><a href={code720p}>🗂️ [Web ~ Erai-raws][720p x265 10Bit CRF@22][JAP ~ Opus][Multiple Subs ~ {subtitle}]</a></b></blockquote>"
             anidlcap2 = dl480p + "\n" + f"<blockquote><b><a href={fxlink}>🗂️ [Web ~ Erai-raws][720p x265 10Bit CRF@22][JAP ~ Opus][Multiple Subs ~ {subtitle}]</a></b></blockquote>"
@@ -317,7 +318,7 @@ async def upload_video1080p(msg: Message, img, file, id, tit, name, ttl, main, s
             ulvis = f"https://ulvis.net/api.php?url={ouolink}&private=1"
             result = requests.get(ulvis)
             fxylink = result.text
-            save_link(name, fxylink)
+            save_link1080p(name, fxylink)
             dl_markup = InlineKeyboardMarkup(
                 [
                     [
@@ -337,11 +338,11 @@ async def upload_video1080p(msg: Message, img, file, id, tit, name, ttl, main, s
                 reply_markup=dl_markup
             )
             anidl_id=-1001234112068
-            
-            name480p = filed.replace("[Web][1080p x265 10Bit][AAC][Erai-raws]", "[Web][480p x265 10Bit][Opus][Erai-raws]")
-            name720p = filed.replace("[Web][1080p x265 10Bit][AAC][Erai-raws]", "[Web][720p x265 10Bit][Opus][Erai-raws]")
-            code480p = await get_link(name480p)
-            code720p = await get_link(name720p)
+            filex = filed.replace("[AniDL] ", "")
+            name480p = filex.replace("[Web][1080p x265 10Bit][AAC][Erai-raws]", "[1080p][Multiple Subtitle]")
+            name720p = filex.replace("[Web][1080p x265 10Bit][AAC][Erai-raws]", "[1080p][Multiple Subtitle]")
+            code480p = await get_link480p(name480p)
+            code720p = await get_link720p(name720p)
             dl480pcap = f"<b>{anidltitle}</b>\n<i>{tit}</i>\n<blockquote><b><a href={code480p}>🗂️ [Web ~ Erai-raws][480p x265 10Bit CRF@23][JAP ~ Opus][Multiple Subs ~ {subtitle}]</a></b></blockquote>"
             dl720pcap = f"\n<blockquote><b><a href={code720p}>🗂️ [Web ~ Erai-raws][720p x265 10Bit CRF@22][JAP ~ Opus][Multiple Subs ~ {subtitle}]</a></b></blockquote>"
             anidlcap3 = dl480pcap + dl720pcap + "\n" + f"<blockquote><b><a href={fxylink}>🗂️ [Web ~ Erai-raws][1080p x265 10Bit CRF@22][JAP ~ AAC][Multiple Subs ~ {subtitle}]</a></b></blockquote>"
