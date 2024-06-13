@@ -186,12 +186,10 @@ async def start_uploading(data):
             titlev2 = data["title"]
             id, img, tit = await get_anime_img(get_anime_name(titlev2))
             msg2 = await app.send_photo(bin_id,photo=img,caption=titlev2)
-            os.rename(fpath,"video.mkv")
             titlx2 = titlev2.replace('[1080p][Multiple Subtitle]', '[Web][720p x265 10Bit][Opus][Erai-raws]')
             titm2 = f"**[AniDL] {titlx2}**"
             tito2 = f"[AniDL] {titlx2}"
             main2 = await app.send_photo(KAYO_ID,photo=img, caption=titm2)
-            duration = get_duration(file)
             compressed2 = await compress_video720p(duration,main2,tito2)
     
 
@@ -212,7 +210,6 @@ async def start_uploading(data):
 # 1080p 
 
             msg3 = await app.send_photo(bin_id,photo=img,caption=title)
-            os.rename(fpath,"video.mkv")
             titlx3 = title.replace('[1080p][Multiple Subtitle]', '[Web][1080p x265 10Bit][AAC][Erai-raws]')
             titm3 = f"**[AniDL] {titlx3}**"
             tito3 = f"[AniDL] {titlx3}"
@@ -322,7 +319,6 @@ async def start_uploading(data):
 #1080p 
 
             msg3 = await app.send_photo(bin_id,photo=img,caption=title)
-            os.rename(fpath,"video.mkv")
             titlx3 = title.replace('[1080p][Multiple Subtitle]', '[Web][1080p x265 10Bit][AAC][Erai-raws]')
             titm3 = f"**[AniDL] {titlx3}**"
             tito3 = f"[AniDL] {titlx3}"
@@ -343,7 +339,7 @@ async def start_uploading(data):
   
             print("Uploading --> ",name)
             video = await upload_video108p(msg3,img,fpath,id,tit,name,size,main,subtitle,nyaasize,audio_language, alink)
-            await save_1080p(data["title"])
+            save_1080p(data["title"])
             try:
                 os.remove("video.mkv")
                 os.remove("out.mkv")
