@@ -128,10 +128,22 @@ def get_postid(name):
     else:
         return False
 
-def get_link(filename):
-    data = filesdb.find_one({"filename": filename})
-    filink = data["hash"]
+def get_link(filename):    
+    andb = db.animes
+    data = andb.find_one({"name": filename})
+    filink = data["slink"]
     if data:
         return filink
     else:
         return None
+
+def save_link(name, link):
+    animexdb = db.animes
+    animexdb.update_one(
+        {
+            "name": name
+        },
+        {"$set": {"data.slink": link}},
+        upsert=True,
+    )
+    return
