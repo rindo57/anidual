@@ -180,13 +180,12 @@ async def start_uploading(data):
             print("Uploading --> ",name)
             video = await upload_video(msg,img,fpath,id,tit,name,size,main,subtitle,nyaasize,audio_language, alink)
             print("480title: ", data["title"])
-            await save_480p(data["title"])
-            await asyncio.sleep(5)
-
+            save_480p(data["title"])
+   
             print(data["title"])
             titlev2 = data["title"])
             id, img, tit = await get_anime_img(get_anime_name(titlev2))
-            msg2 = await app.send_photo(bin_id,photo=img,caption=title)
+            msg2 = await app.send_photo(bin_id,photo=img,caption=titlev2)
             os.rename(fpath,"video.mkv")
             titlx2 = titlev2.replace('[1080p][Multiple Subtitle]', '[Web][720p x265 10Bit][Opus][Erai-raws]')
             titm2 = f"**[AniDL] {titlx2}**"
