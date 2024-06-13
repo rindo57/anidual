@@ -76,7 +76,18 @@ async def upload_video(msg: Message, img, file, id, tit, name, ttl, main, subtit
             hash = "".join([random.choice(ascii_letters + digits) for n in range(50)])
             save_file_in_db(filed, hash, subtitle, img, audio_info, tit, alink, size, upid)
             print(hash)
+            ddlurl = " https://anidl.ddlserverv1.me.in/beta/{hash}"
             gcaption = f"`📺 {filed}`\n\n`🔗 EP - {ep_num}:  https://anidl.ddlserverv1.me.in/beta/{hash}`" + "\n\n" + f"🔠 __{tit}__" + "\n" + "\n" + f"📝 `{subtitle}`"
+            da_url = "https://da.gd/"
+            shorten_url = f"{da_url}shorten"
+            response = requests.post(shorten_url, params={"url": ddlurl})
+            dalink = response.text.strip()
+            dalink = dalink.replace("https://", "")
+            dalink = dalink.replace("http://", "")
+            ouolink = f"http://ouo.press/qs/jezWr0hG?s={dalink}"
+            ulvis = f"https://ulvis.net/api.php?url={ouolink}&private=1"
+            result = requests.get(ulvis)
+            flink = result.text
             dl_markup = InlineKeyboardMarkup(
                 [
                     [
@@ -97,7 +108,7 @@ async def upload_video(msg: Message, img, file, id, tit, name, ttl, main, subtit
             )
             anidl_id=-1001234112068
             xurl = f"https://anidl.ddlserverv1.me.in/beta/{hash}"
-            anidlcap = f"<blockquote><b><a href=xurl>🗂️ [AniDL] {anidltitle} [Web ~ Erai-raws][480p x265 10Bit CRF@23][JAP ~ Opus][Multiple Subs ~ {subtitle}]</a></b></blockquote>"
+            anidlcap = f"<b>{anidltitle}</b>\n<i>{tit}</i>\n<blockquote><b><a href={flink}>🗂️ [Web ~ Erai-raws][480p x265 10Bit CRF@23][JAP ~ Opus][Multiple Subs ~ {subtitle}]</a></b></blockquote>"
             anidl_markup = InlineKeyboardMarkup(
                 [
                     [
@@ -162,7 +173,18 @@ async def upload_video720p(msg: Message, img, file, id, tit, name, ttl, main, su
             hash = "".join([random.choice(ascii_letters + digits) for n in range(50)])
             save_file_in_db(filed, hash, subtitle, img, audio_info, tit, alink, size, upid)
             print(hash)
+            ddlurl = f"https://anidl.ddlserverv1.me.in/beta/{hash}`"
             gcaption = f"`📺 {filed}`\n\n`🔗 EP - {ep_num}:  https://anidl.ddlserverv1.me.in/beta/{hash}`" + "\n\n" + f"🔠 __{tit}__" + "\n" + "\n" + f"📝 `{subtitle}`"
+            da_url = "https://da.gd/"
+            shorten_url = f"{da_url}shorten"
+            response = requests.post(shorten_url, params={"url": ddlurl})
+            dalink = response.text.strip()
+            dalink = dalink.replace("https://", "")
+            dalink = dalink.replace("http://", "")
+            ouolink = f"http://ouo.press/qs/jezWr0hG?s={dalink}"
+            ulvis = f"https://ulvis.net/api.php?url={ouolink}&private=1"
+            result = requests.get(ulvis)
+            flink = result.text
             dl_markup = InlineKeyboardMarkup(
                 [
                     [
@@ -183,7 +205,7 @@ async def upload_video720p(msg: Message, img, file, id, tit, name, ttl, main, su
             )
             anidl_id=-1001234112068
             xurl = f"https://anidl.ddlserverv1.me.in/beta/{hash}"
-            anidlcap2 = anidlcap + "\n" + f"<blockquote><b><a href=xurl>🗂️ [AniDL] {anidltitle} [Web ~ Erai-raws][720p x265 10Bit CRF@22][JAP ~ Opus][Multiple Subs ~ {subtitle}]</a></b></blockquote>"
+            anidlcap2 = anidlcap + "\n" + f"<blockquote><b><a href={flink}>🗂️ [Web ~ Erai-raws][720p x265 10Bit CRF@22][JAP ~ Opus][Multiple Subs ~ {subtitle}]</a></b></blockquote>"
             anidl_markup = InlineKeyboardMarkup(
                 [
                     [
@@ -192,7 +214,7 @@ async def upload_video720p(msg: Message, img, file, id, tit, name, ttl, main, su
                 ]
             )
             await asyncio.sleep(3)
-            await app.send_message(anidl_id,text=anidlcap2, reply_markup=anidl_markup, parse_mode=enums.ParseMode.HTML)
+            await app.edit_message_text(anidl_id, postid, text=anidlcap2, reply_markup=anidl_markup, parse_mode=enums.ParseMode.HTML)
     except Exception:
         await app.send_message(kayo_id, text="Something Went Wrong!")
 
@@ -231,7 +253,18 @@ async def upload_video1080p(msg: Message, img, file, id, tit, name, ttl, main, s
             hash = "".join([random.choice(ascii_letters + digits) for n in range(50)])
             save_file_in_db(filed, hash, subtitle, img, audio_info, tit, alink, size, upid)
             print(hash)
+            ddlurl = f"https://anidl.ddlserverv1.me.in/beta/{hash}`"
             gcaption = f"`📺 {filed}`\n\n`🔗 EP - {ep_num}:  https://anidl.ddlserverv1.me.in/beta/{hash}`" + "\n\n" + f"🔠 __{tit}__" + "\n" + "\n" + f"📝 `{subtitle}`"
+            da_url = "https://da.gd/"
+            shorten_url = f"{da_url}shorten"
+            response = requests.post(shorten_url, params={"url": ddlurl})
+            dalink = response.text.strip()
+            dalink = dalink.replace("https://", "")
+            dalink = dalink.replace("http://", "")
+            ouolink = f"http://ouo.press/qs/jezWr0hG?s={dalink}"
+            ulvis = f"https://ulvis.net/api.php?url={ouolink}&private=1"
+            result = requests.get(ulvis)
+            flink = result.text
             dl_markup = InlineKeyboardMarkup(
                 [
                     [
@@ -251,8 +284,7 @@ async def upload_video1080p(msg: Message, img, file, id, tit, name, ttl, main, s
                 reply_markup=dl_markup
             )
             anidl_id=-1001234112068
-            xurl = f"https://anidl.ddlserverv1.me.in/beta/{hash}"
-            anidlcap3 = anidlcap2 + "\n" + f"<blockquote><b><a href=xurl>🗂️ [AniDL] {anidltitle} [Web ~ Erai-raws][1080p x265 10Bit CRF@22][JAP ~ AAC][Multiple Subs ~ {subtitle}]</a></b></blockquote>\n\n<i>({tit})</i>""
+            anidlcap3 = anidlcap2 + "\n" + f"<blockquote><b><a href={flink}>🗂️ [Web ~ Erai-raws][1080p x265 10Bit CRF@22][JAP ~ AAC][Multiple Subs ~ {subtitle}]</a></b></blockquote>\n\n<i>({tit})</i>""
             anidl_markup = InlineKeyboardMarkup(
                 [
                     [
@@ -261,7 +293,7 @@ async def upload_video1080p(msg: Message, img, file, id, tit, name, ttl, main, s
                 ]
             )
             await asyncio.sleep(3)
-            await app.send_message(anidl_id,text=anidlcap2, reply_markup=anidl_markup, parse_mode=enums.ParseMode.HTML)
+            await app.edit_message_text(anidl_id, postid, text=anidlcap3, reply_markup=anidl_markup, parse_mode=enums.ParseMode.HTML)
     except Exception:
         await app.send_message(kayo_id, text="Something Went Wrong!")
     try:
