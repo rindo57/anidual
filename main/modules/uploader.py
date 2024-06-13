@@ -76,7 +76,7 @@ async def upload_video(msg: Message, img, file, id, tit, name, ttl, main, subtit
             hash = "".join([random.choice(ascii_letters + digits) for n in range(50)])
             save_file_in_db(filed, hash, subtitle, img, audio_info, tit, alink, size, upid)
             print(hash)
-            ddlurl = " https://anidl.ddlserverv1.me.in/beta/{hash}"
+            ddlurl = f"https://anidl.ddlserverv1.me.in/beta/{hash}"
             gcaption = f"`📺 {filed}`\n\n`🔗 EP - {ep_num}:  https://anidl.ddlserverv1.me.in/beta/{hash}`" + "\n\n" + f"🔠 __{tit}__" + "\n" + "\n" + f"📝 `{subtitle}`"
             da_url = "https://da.gd/"
             shorten_url = f"{da_url}shorten"
@@ -191,7 +191,7 @@ async def upload_video720p(msg: Message, img, file, id, tit, name, ttl, main, su
             hash = "".join([random.choice(ascii_letters + digits) for n in range(50)])
             save_file_in_db(filed, hash, subtitle, img, audio_info, tit, alink, size, upid)
             print(hash)
-            ddlurl = f"https://anidl.ddlserverv1.me.in/beta/{hash}`"
+            ddlurl = f"https://anidl.ddlserverv1.me.in/beta/{hash}"
             gcaption = f"`📺 {filed}`\n\n`🔗 EP - {ep_num}:  https://anidl.ddlserverv1.me.in/beta/{hash}`" + "\n\n" + f"🔠 __{tit}__" + "\n" + "\n" + f"📝 `{subtitle}`"
             da_url = "https://da.gd/"
             shorten_url = f"{da_url}shorten"
@@ -297,7 +297,7 @@ async def upload_video1080p(msg: Message, img, file, id, tit, name, ttl, main, s
             hash = "".join([random.choice(ascii_letters + digits) for n in range(50)])
             save_file_in_db(filed, hash, subtitle, img, audio_info, tit, alink, size, upid)
             print(hash)
-            ddlurl = f"https://anidl.ddlserverv1.me.in/beta/{hash}`"
+            ddlurl = f"https://anidl.ddlserverv1.me.in/beta/{hash}"
             gcaption = f"`📺 {filed}`\n\n`🔗 EP - {ep_num}:  https://anidl.ddlserverv1.me.in/beta/{hash}`" + "\n\n" + f"🔠 __{tit}__" + "\n" + "\n" + f"📝 `{subtitle}`"
             da_url = "https://da.gd/"
             shorten_url = f"{da_url}shorten"
