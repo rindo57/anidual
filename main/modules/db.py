@@ -168,7 +168,7 @@ def save_link720p(name, link):
     )
     return
 
-def save_link10880p(name, link):
+def save_link1080p(name, link):
     animexdb = db.animes
     animexdb.update_one(
         {
