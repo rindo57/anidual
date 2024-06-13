@@ -229,7 +229,7 @@ async def start_uploading(data):
                 os.rename("out.mkv",fpath)
   
             print("Uploading --> ",name)
-            video = await upload_video108p(msg3,img,fpath,id,tit,name,size,main,subtitle,nyaasize,audio_language, alink)
+            video = await upload_video1080p(msg3,img,fpath,id,tit,name,size,main,subtitle,nyaasize,audio_language, alink)
             save_1080p(data["title"])
             try:
                 os.remove("video.mkv")
@@ -338,7 +338,7 @@ async def start_uploading(data):
                 os.rename("out.mkv",fpath)
   
             print("Uploading --> ",name)
-            video = await upload_video108p(msg3,img,fpath,id,tit,name,size,main,subtitle,nyaasize,audio_language, alink)
+            video = await upload_video1080p(msg3,img,fpath,id,tit,name,size,main,subtitle,nyaasize,audio_language, alink)
             save_1080p(data["title"])
             try:
                 os.remove("video.mkv")
