@@ -109,7 +109,8 @@ async def start_uploading(data):
             dbtit = data["title"]
             link = data["link"]
             size = data["size"]
-            nyaasize = data["size"]
+            size = size.replace("GB", " GiB")
+            nyaasize = size
             subtitle = data["subtitle"]
             name, ext = title.split(".")
 
