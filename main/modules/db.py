@@ -128,3 +128,10 @@ def get_postid(name):
     else:
         return False
 
+def get_link(fid):
+    data = filesdb.find_one({"filename": filename})
+    filink = data["hash"]
+    if data:
+        return filink
+    else:
+        return None
