@@ -18,7 +18,7 @@ from main.modules.anilist import get_anime_name
 
 from main.modules.anilist import get_anime_img
 
-from main.modules.db import present_user, add_user, is_fid_in_db, save_file_in_db
+from main.modules.db import present_user, add_user, is_fid_in_db, save_file_in_db, save_postid, get_postid
 
 from main.modules.thumbnail import generate_thumbnail
 
@@ -42,7 +42,7 @@ from pyrogram.errors import FloodWait
 
 from main.inline import button1
 async def upload_video(msg: Message, img, file, id, tit, name, ttl, main, subtitle, nyaasize, audio_info, alink):
-    global postid, anidlcap, flink
+    global anidlcap, flink
     try:
         fuk = isfile(file)
         if fuk:
@@ -137,6 +137,8 @@ async def upload_video(msg: Message, img, file, id, tit, name, ttl, main, subtit
             await asyncio.sleep(3)
             post = await app.send_message(anidl_id,text=anidlcap, reply_markup=fmarkup, parse_mode=enums.ParseMode.HTML)
             postid = post.id
+            print("name: ", name)
+            save_postid(name, postid)
     except Exception:
         await app.send_message(kayo_id, text="Something Went Wrong!")
 
@@ -246,6 +248,7 @@ async def upload_video720p(msg: Message, img, file, id, tit, name, ttl, main, su
                     ],
             )
             await asyncio.sleep(3)
+            postid = await get_postid(name)
             await app.edit_message_text(anidl_id, postid, text=anidlcap2, reply_markup=fmarkup, parse_mode=enums.ParseMode.HTML)
     except Exception:
         await app.send_message(kayo_id, text="Something Went Wrong!")
@@ -362,6 +365,8 @@ async def upload_video1080p(msg: Message, img, file, id, tit, name, ttl, main, s
                 ]
             )
             await asyncio.sleep(3)
+            print("name: ", name)
+            postid = await get_postid(name)
             await app.edit_message_text(anidl_id, postid, text=anidlcap3, reply_markup=fmarkup, parse_mode=enums.ParseMode.HTML)
     except Exception:
         await app.send_message(kayo_id, text="Something Went Wrong!")
