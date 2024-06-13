@@ -18,7 +18,7 @@ from main.modules.anilist import get_anime_name
 
 from main.modules.anilist import get_anime_img
 
-from main.modules.db import present_user, add_user, is_fid_in_db, save_file_in_db, save_postid, get_postid
+from main.modules.db import present_user, add_user, is_fid_in_db, save_file_in_db, save_postid, get_postid, save_link, get_link
 
 from main.modules.thumbnail import generate_thumbnail
 
@@ -42,7 +42,7 @@ from pyrogram.errors import FloodWait
 
 from main.inline import button1
 async def upload_video(msg: Message, img, file, id, tit, name, ttl, main, subtitle, nyaasize, audio_info, alink):
-    global anidlcap, flink
+    
     try:
         fuk = isfile(file)
         if fuk:
@@ -88,7 +88,7 @@ async def upload_video(msg: Message, img, file, id, tit, name, ttl, main, subtit
             ulvis = f"https://ulvis.net/api.php?url={ouolink}&private=1"
             result = requests.get(ulvis)
             flink = result.text
-            
+            save_link(name, flink)
             dl_markup = InlineKeyboardMarkup(
                 [
                     [
@@ -110,6 +110,7 @@ async def upload_video(msg: Message, img, file, id, tit, name, ttl, main, subtit
             anidl_id=-1001234112068
             xurl = f"https://anidl.ddlserverv1.me.in/beta/{hash}"
             anidlcap = f"<b>{anidltitle}</b>\n<i>{tit}</i>\n<blockquote><b><a href={flink}>🗂️ [Web ~ Erai-raws][480p x265 10Bit CRF@23][JAP ~ Opus][Multiple Subs ~ {subtitle}]</a></b></blockquote>"
+            
             fmarkup=InlineKeyboardMarkup(
                     [
                         [
@@ -205,6 +206,7 @@ async def upload_video720p(msg: Message, img, file, id, tit, name, ttl, main, su
             ulvis = f"https://ulvis.net/api.php?url={ouolink}&private=1"
             result = requests.get(ulvis)
             fxlink = result.text
+            save_link(name, fxlink)
             dl_markup = InlineKeyboardMarkup(
                 [
                     [
@@ -224,14 +226,17 @@ async def upload_video720p(msg: Message, img, file, id, tit, name, ttl, main, su
                 reply_markup=dl_markup
             )
             anidl_id=-1001234112068
-
-            anidlcap2 = anidlcap + "\n" + f"<blockquote><b><a href={fxlink}>🗂️ [Web ~ Erai-raws][720p x265 10Bit CRF@22][JAP ~ Opus][Multiple Subs ~ {subtitle}]</a></b></blockquote>"
+            name480p = filed.replace("[Web][720p x265 10Bit][Opus][Erai-raws]", "[Web][480p x265 10Bit][Opus][Erai-raws]")
+            code480p = await get_link(name480p)
+            dl480pcap = f"<b>{anidltitle}</b>\n<i>{tit}</i>\n<blockquote><b><a href={code480p}>🗂️ [Web ~ Erai-raws][480p x265 10Bit CRF@23][JAP ~ Opus][Multiple Subs ~ {subtitle}]</a></b></blockquote>"
+            dl720pcap = f"\n<blockquote><b><a href={code720p}>🗂️ [Web ~ Erai-raws][720p x265 10Bit CRF@22][JAP ~ Opus][Multiple Subs ~ {subtitle}]</a></b></blockquote>"
+            anidlcap2 = dl480p + "\n" + f"<blockquote><b><a href={fxlink}>🗂️ [Web ~ Erai-raws][720p x265 10Bit CRF@22][JAP ~ Opus][Multiple Subs ~ {subtitle}]</a></b></blockquote>"
             fmarkup=InlineKeyboardMarkup(
                     [
                         [
                             InlineKeyboardButton(
                                 text="480p",
-                                url=flink,
+                                url=code480p,
                             ),
                             InlineKeyboardButton(
                                 text="720p",
@@ -266,7 +271,7 @@ async def upload_video720p(msg: Message, img, file, id, tit, name, ttl, main, su
         pass
 
 async def upload_video1080p(msg: Message, img, file, id, tit, name, ttl, main, subtitle, nyaasize, audio_info, alink):
-    global anidlcap2
+    
     try:
         fuk = isfile(file)
         if fuk:
@@ -312,6 +317,7 @@ async def upload_video1080p(msg: Message, img, file, id, tit, name, ttl, main, s
             ulvis = f"https://ulvis.net/api.php?url={ouolink}&private=1"
             result = requests.get(ulvis)
             fxylink = result.text
+            save_link(name, fxylink)
             dl_markup = InlineKeyboardMarkup(
                 [
                     [
@@ -331,17 +337,24 @@ async def upload_video1080p(msg: Message, img, file, id, tit, name, ttl, main, s
                 reply_markup=dl_markup
             )
             anidl_id=-1001234112068
-            anidlcap3 = anidlcap2 + "\n" + f"<blockquote><b><a href={fxylink}>🗂️ [Web ~ Erai-raws][1080p x265 10Bit CRF@22][JAP ~ AAC][Multiple Subs ~ {subtitle}]</a></b></blockquote>"
+            
+            name480p = filed.replace("[Web][1080p x265 10Bit][AAC][Erai-raws]", "[Web][480p x265 10Bit][Opus][Erai-raws]")
+            name720p = filed.replace("[Web][1080p x265 10Bit][AAC][Erai-raws]", "[Web][720p x265 10Bit][Opus][Erai-raws]")
+            code480p = await get_link(name480p)
+            code720p = await get_link(name720p)
+            dl480pcap = f"<b>{anidltitle}</b>\n<i>{tit}</i>\n<blockquote><b><a href={code480p}>🗂️ [Web ~ Erai-raws][480p x265 10Bit CRF@23][JAP ~ Opus][Multiple Subs ~ {subtitle}]</a></b></blockquote>"
+            dl720pcap = f"\n<blockquote><b><a href={code720p}>🗂️ [Web ~ Erai-raws][720p x265 10Bit CRF@22][JAP ~ Opus][Multiple Subs ~ {subtitle}]</a></b></blockquote>"
+            anidlcap3 = dl480pcap + dl720pcap + "\n" + f"<blockquote><b><a href={fxylink}>🗂️ [Web ~ Erai-raws][1080p x265 10Bit CRF@22][JAP ~ AAC][Multiple Subs ~ {subtitle}]</a></b></blockquote>"
             fmarkup=InlineKeyboardMarkup(
                     [
                         [
                             InlineKeyboardButton(
                                 text="480p",
-                                url=flink,
+                                url=code480p,
                             ),
                             InlineKeyboardButton(
                                 text="720p",
-                                url=fxlink,
+                                url=code720p,
                             ),
                             InlineKeyboardButton(
                                 text="1080p",
@@ -356,13 +369,6 @@ async def upload_video1080p(msg: Message, img, file, id, tit, name, ttl, main, s
                         ],
                         
                     ],
-            )
-            anidl_markup = InlineKeyboardMarkup(
-                [
-                    [
-                        InlineKeyboardButton(text="🔗 VISIT PAGE", url=f"https://anidl.org/airing-anime")
-                    ]
-                ]
             )
             await asyncio.sleep(3)
             print("name: ", name)
