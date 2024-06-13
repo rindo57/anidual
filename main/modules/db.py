@@ -141,7 +141,7 @@ async def get_link480p(filename):
 async def get_link720p(filename):    
     andb = db.animes
     data = andb.find_one({"name": filename})
-    filink = data["slink7280p"]
+    filink = data["slink720p"]
     if data:
         return filink
     else:
