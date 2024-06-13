@@ -11,7 +11,7 @@ from main.modules.utils import episode_linker, get_duration, get_epnum, status_t
 
 from pyrogram.types import Message, InlineKeyboardMarkup, InlineKeyboardButton, CallbackQuery
 
-from main.modules.uploader import upload_video
+from main.modules.uploader import upload_video, upload_video720p, upload_video1080p
 from main.modules.thumbnail import generate_thumbnail
 
 import os
