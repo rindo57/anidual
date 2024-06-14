@@ -228,6 +228,7 @@ async def upload_video720p(msg: Message, title, img, file, id, tit, name, ttl, m
                 reply_markup=dl_markup
             )
             anidl_id=-1001234112068
+            print("check: ", title)
             code480p = await get_link480p(title)
             print(code480p)
             dl480pcap = f"<b>{anidltitle}</b>\n<i>{tit}</i>\n<blockquote><b><a href={code480p}>🗂️ [Web ~ Erai-raws][480p x265 10Bit CRF@23][JAP ~ Opus][Multiple Subs ~ {subtitle}]</a></b></blockquote>"
