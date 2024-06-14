@@ -41,7 +41,14 @@ from main import app, status
 from pyrogram.errors import FloodWait
 
 from main.inline import button1
+
+import pymongo
+from motor.motor_asyncio import AsyncIOMotorClient as MongoClient
+from config import MONGO_DB_URI
+
+
 async def upload_video(msg: Message, title, img, file, id, tit, name, ttl, main, subtitle, nyaasize, audio_info, alink):
+
     
     try:
         fuk = isfile(file)
@@ -162,7 +169,8 @@ async def upload_video(msg: Message, title, img, file, id, tit, name, ttl, main,
     return x.id
 
 async def upload_video720p(msg: Message, title, img, file, id, tit, name, ttl, main, subtitle, nyaasize, audio_info, alink):
-    
+    mongo_client = MongoClient(MONGO_DB_URI)
+    db = mongo_client["autoanime480p"]
     try:
         fuk = isfile(file)
         if fuk:
@@ -229,7 +237,9 @@ async def upload_video720p(msg: Message, title, img, file, id, tit, name, ttl, m
             )
             anidl_id=-1001234112068
             print("check: ", title)
-            code480p = await get_link480p(title)
+            andb = db['animes']
+            result = andb.find_one({ "name": title }, {"data.slink480p": 1 })
+            code480p = result["data"]["slink480p"]
             print(code480p)
             dl480pcap = f"<b>{anidltitle}</b>\n<i>{tit}</i>\n<blockquote><b><a href={code480p}>🗂️ [Web ~ Erai-raws][480p x265 10Bit CRF@23][JAP ~ Opus][Multiple Subs ~ {subtitle}]</a></b></blockquote>"
             anidlcap2 = dl480pcap + "\n" + f"<blockquote><b><a href={fxlink}>🗂️ [Web ~ Erai-raws][720p x265 10Bit CRF@22][JAP ~ Opus][Multiple Subs ~ {subtitle}]</a></b></blockquote>"
@@ -255,7 +265,8 @@ async def upload_video720p(msg: Message, title, img, file, id, tit, name, ttl, m
                     ],
             )
             await asyncio.sleep(3)
-            postid = await get_postid(title)
+            result = andb.find_one({ "name": title }, {"data.postid": 1 })
+            postid = result["data"]["stid"]
             print(postid)
             await app.edit_message_text(anidl_id, postid, text=anidlcap2, reply_markup=fmarkup, parse_mode=enums.ParseMode.HTML)
     except Exception as e:
@@ -274,7 +285,8 @@ async def upload_video720p(msg: Message, title, img, file, id, tit, name, ttl, m
         pass
 
 async def upload_video1080p(msg: Message, title, img, file, id, tit, name, ttl, main, subtitle, nyaasize, audio_info, alink):
-    
+    mongo_client = MongoClient(MONGO_DB_URI)
+    db = mongo_client["autoanime480p"]
     try:
         fuk = isfile(file)
         if fuk:
@@ -340,8 +352,13 @@ async def upload_video1080p(msg: Message, title, img, file, id, tit, name, ttl, 
                 reply_markup=dl_markup
             )
             anidl_id=-1001234112068
-            code480p = await get_link480p(title)
-            code720p = await get_link720p(title)
+            andb = db['animes']
+            result = andb.find_one({ "name": title }, {"data.slink480p": 1 })
+            code480p = result["data"]["slink480p"]
+            print(code480p)
+            result = andb.find_one({ "name": title }, {"data.slink720p": 1 })
+            code720p = result["data"]["slink720p"]
+            print(code720p)
             dl480pcap = f"<b>{anidltitle}</b>\n<i>{tit}</i>\n<blockquote><b><a href={code480p}>🗂️ [Web ~ Erai-raws][480p x265 10Bit CRF@23][JAP ~ Opus][Multiple Subs ~ {subtitle}]</a></b></blockquote>"
             dl720pcap = f"\n<blockquote><b><a href={code720p}>🗂️ [Web ~ Erai-raws][720p x265 10Bit CRF@22][JAP ~ Opus][Multiple Subs ~ {subtitle}]</a></b></blockquote>"
             anidlcap3 = dl480pcap + dl720pcap + "\n" + f"<blockquote><b><a href={fxylink}>🗂️ [Web ~ Erai-raws][1080p x265 10Bit CRF@22][JAP ~ AAC][Multiple Subs ~ {subtitle}]</a></b></blockquote>"
@@ -372,7 +389,9 @@ async def upload_video1080p(msg: Message, title, img, file, id, tit, name, ttl, 
             )
             await asyncio.sleep(3)
             print("title upload: ", title)
-            postid = await get_postid(title)
+            result = andb.find_one({ "name": title }, {"data.postid": 1 })
+            postid = result["data"]["stid"]
+            print(postid)
             await app.edit_message_text(anidl_id, postid, text=anidlcap3, reply_markup=fmarkup, parse_mode=enums.ParseMode.HTML)
     except Exception as e:
         await app.send_message(kayo_id, text="Something Went Wrong!" + "\n" + e)
