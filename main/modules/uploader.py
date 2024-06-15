@@ -237,7 +237,7 @@ async def upload_video720p(msg: Message, title, img, file, id, tit, name, ttl, m
             code480p = await get_link480p(title)
             size480p = await get_size480p(title)
             dl480pcap = f"<b>{anidltitle}</b>\n<i>({tit})</i>\n<blockquote><b><a href={code480p}>🗂️ [Web ~ Erai-raws][480p x265 10Bit CRF@23][JAP ~ Opus][Multiple Subs ~ {subtitle}]</a></b> || <code>{size480p}</code></blockquote>"
-            anidlcap2 = dl480pcap + "\n" + f"<blockquote><b><a href={fxlink}>🗂️ [Web ~ Erai-raws][720p x265 10Bit CRF@22][JAP ~ Opus][Multiple Subs ~ {subtitle}]</a></b> || <code>{size720p}</code>\n#airing #single_audio #eng_sub</blockquote>"
+            anidlcap2 = dl480pcap + "\n" + f"<blockquote><b><a href={fxlink}>🗂️ [Web ~ Erai-raws][720p x265 10Bit CRF@22][JAP ~ Opus][Multiple Subs ~ {subtitle}]</a></b> || <code>{size720p}</code></blockquote>\n#airing #single_audio #eng_sub"
             save_size720p(title, size720p)
             fmarkup=InlineKeyboardMarkup(
                     [
@@ -354,7 +354,7 @@ async def upload_video1080p(msg: Message, title, img, file, id, tit, name, ttl, 
             size720p = await get_size720p(title)
             dl480pcap = f"<b>{anidltitle}</b>\n<i>({tit})</i>\n<blockquote><b><a href={code480p}>🗂️ [Web ~ Erai-raws][480p x265 10Bit CRF@23][JAP ~ Opus][Multiple Subs ~ {subtitle}]</a></b> || <code>{size480p}</code></blockquote>"
             dl720pcap = f"\n<blockquote><b><a href={code720p}>🗂️ [Web ~ Erai-raws][720p x265 10Bit CRF@22][JAP ~ Opus][Multiple Subs ~ {subtitle}]</a></b> || <code>{size720p}</code></blockquote>"
-            anidlcap3 = dl480pcap + dl720pcap + "\n" + f"<blockquote><b><a href={fxylink}>🗂️ [Web ~ Erai-raws][1080p x265 10Bit CRF@22][JAP ~ AAC][Multiple Subs ~ {subtitle}]</a></b> || <code>{size1080p}</code>\n#airing #single_audio #eng_sub</blockquote>"
+            anidlcap3 = dl480pcap + dl720pcap + "\n" + f"<blockquote><b><a href={fxylink}>🗂️ [Web ~ Erai-raws][1080p x265 10Bit CRF@22][JAP ~ AAC][Multiple Subs ~ {subtitle}]</a></b> || <code>{size1080p}</code></blockquote>\n#airing #single_audio #eng_sub"
             fmarkup=InlineKeyboardMarkup(
                     [
                         [
