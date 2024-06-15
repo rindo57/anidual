@@ -165,9 +165,9 @@ async def get_size720p(filename):
     else:
         return None
         
-def save_link480p(name, link):
+async def save_link480p(name, link):
     animexdb = db['animes']
-    animexdb.update_one(
+    await animexdb.update_one(
         {
             "name": name
         },
@@ -177,9 +177,9 @@ def save_link480p(name, link):
     return
 
     
-def save_link720p(name, link):
+async def save_link720p(name, link):
     animexdb = db['animes']
-    animexdb.update_one(
+    await animexdb.update_one(
         {
             "name": name
         },
@@ -188,9 +188,9 @@ def save_link720p(name, link):
     )
     return
 
-def save_link1080p(name, link):
+async def save_link1080p(name, link):
     animexdb = db.animes
-    animexdb.update_one(
+    await animexdb.update_one(
         {
             "name": name
         },
@@ -199,9 +199,9 @@ def save_link1080p(name, link):
     )
     return
 
-def save_size480p(title, size480p):
+async def save_size480p(title, size480p):
     animexdb = db['animes']
-    animexdb.update_one(
+    await animexdb.update_one(
         {
             "name": title
         },
@@ -210,9 +210,9 @@ def save_size480p(title, size480p):
     )
     return
 
-def save_size720p(title, size480p):
+async def save_size720p(title, size480p):
     animexdb = db['animes']
-    animexdb.update_one(
+    await animexdb.update_one(
         {
             "name": title
         },
@@ -223,7 +223,7 @@ def save_size720p(title, size480p):
 
 def save_size1080p(title, size1080p):
     animexdb = db['animes']
-    animexdb.update_one(
+    await animexdb.update_one(
         {
             "name": title
         },
