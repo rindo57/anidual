@@ -146,8 +146,17 @@ atext = """
 ▸ **Rating**: {}
 ▸ **Rank**: {} | **Popularity**: {}
 """
-
 async def get_anilist_data(name):
+    vars_ = {"search": name}
+    data = await get_anime(vars_,less=False)
+    id_ = data.get("id")
+    title = data.get("title")
+    img = f"https://img.anili.st/media/{id_}"
+    alink = f"https://anilist.co/anime/{id_}"
+    return img, alink
+  
+async def get_anilist_dataz(name):
+  
     malurl = f"https://api.jikan.moe/v4/anime?q={name}"
     malresponse = requests.get(malurl)
     maldata = malresponse.json()
