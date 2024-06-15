@@ -238,7 +238,8 @@ async def upload_video720p(msg: Message, title, img, file, id, tit, name, ttl, m
             anidl_id=-1001234112068
             print("check: ", title)
             andb = db['animes']
-            result = andb.find_one({ "name": title }, {"data.slink480p": 1 })
+            result = await andb.find_one({ "name": title }, {"data.slink480p": 1 })
+            print(result)
             code480p = result["data"]["slink480p"]
             print(code480p)
             dl480pcap = f"<b>{anidltitle}</b>\n<i>{tit}</i>\n<blockquote><b><a href={code480p}>🗂️ [Web ~ Erai-raws][480p x265 10Bit CRF@23][JAP ~ Opus][Multiple Subs ~ {subtitle}]</a></b></blockquote>"
@@ -265,7 +266,7 @@ async def upload_video720p(msg: Message, title, img, file, id, tit, name, ttl, m
                     ],
             )
             await asyncio.sleep(3)
-            result = andb.find_one({ "name": title }, {"data.postid": 1 })
+            result = await andb.find_one({ "name": title }, {"data.postid": 1 })
             postid = result["data"]["stid"]
             print(postid)
             await app.edit_message_text(anidl_id, postid, text=anidlcap2, reply_markup=fmarkup, parse_mode=enums.ParseMode.HTML)
