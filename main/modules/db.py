@@ -221,7 +221,7 @@ async def save_size720p(title, size480p):
     )
     return
 
-def save_size1080p(title, size1080p):
+async def save_size1080p(title, size1080p):
     animexdb = db['animes']
     await animexdb.update_one(
         {
