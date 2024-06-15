@@ -100,8 +100,9 @@ def save_1080p(name):
         upsert=True,
     )
     return
-def save_file_in_db(filed, hash, subtitle, img, audio_info, tit, alink, size, upid=None):
-    filesdb.update_one(
+
+async def save_file_in_db(filed, hash, subtitle, img, audio_info, tit, alink, size, upid=None):
+    await filesdb.update_one(
         {
             "hash": hash,
             "fid": str(upid),
