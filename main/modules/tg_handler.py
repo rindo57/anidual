@@ -313,7 +313,7 @@ async def start_uploading(data):
             msg = await app.send_photo(bin_id,photo=img,caption=title)
 
             print("Downloading --> ",name)
-            img, caption, alink = await get_anilist_data(title)
+            img, alink = await get_anilist_data(title)
             await asyncio.sleep(5)
             await status.edit(await status_text(f"Downloading {name}"),reply_markup=button1)
             file = await downloader(msg,link,size,title)
@@ -423,7 +423,7 @@ async def start_uploading(data):
             msg = await app.send_photo(bin_id,photo=img,caption=title)
 
             print("Downloading --> ",name)
-            img, caption, alink = await get_anilist_data(title)
+            img, alink = await get_anilist_data(title)
             await asyncio.sleep(5)
             await status.edit(await status_text(f"Downloading {name}"),reply_markup=button1)
             file = await downloader(msg,link,size,title)
