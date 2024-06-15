@@ -348,7 +348,7 @@ async def upload_video1080p(msg: Message, title, img, file, id, tit, name, ttl, 
             anidl_id=-1001234112068
             code480p = await get_link480p(title)
             print(code480p)
-            code480p = await get_link720p(title)
+            code720p = await get_link720p(title)
             print(code720p)
             size480p = await get_size480p(title)
             size720p = await get_size720p(title)
