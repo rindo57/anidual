@@ -18,7 +18,7 @@ from main.modules.anilist import get_anime_name
 
 from main.modules.anilist import get_anime_img
 
-from main.modules.db import present_user, add_user, is_fid_in_db, save_file_in_db, save_postid, get_postid, save_link480p, get_link480p, save_link720p, get_link720p, save_link1080p
+from main.modules.db import present_user, add_user, is_fid_in_db, save_file_in_db, save_postid, get_postid, save_link480p, get_link480p, save_link720p, get_link720p, save_link1080p,  get_size480p(,  get_size720p,  save_size480p, save_size720p
 
 from main.modules.thumbnail import generate_thumbnail
 
@@ -54,7 +54,7 @@ async def upload_video(msg: Message, title, img, file, id, tit, name, ttl, main,
             c_time = time.time()
             duration = get_duration(file)
             durationx = get_durationx(file)
-            size = get_filesize(file)
+            size480p = get_filesize(file)
             ep_num = get_epnum(name)
             print(ep_num)
             print("name: ", name)
@@ -115,13 +115,13 @@ async def upload_video(msg: Message, title, img, file, id, tit, name, ttl, main,
             )
             anidl_id=-1001234112068
             xurl = f"https://anidl.ddlserverv1.me.in/beta/{hash}"
-            anidlcap = f"<b>{anidltitle}</b>\n<i>{tit}</i>\n<blockquote><b><a href={flink}>🗂️ [Web ~ Erai-raws][480p x265 10Bit CRF@23][JAP ~ Opus][Multiple Subs ~ {subtitle}]</a></b></blockquote>"
-            
+            anidlcap = f"<b>{anidltitle}</b>\n<i>({tit})</i>\n<blockquote><b><a href={flink}>🗂️ [Web ~ Erai-raws][480p x265 10Bit CRF@23][JAP ~ Opus][Multiple Subs ~ {subtitle}]</a></b> || <code>{size480p}</code></blockquote>"
+            save_size480p(title, size480p)
             fmarkup=InlineKeyboardMarkup(
                     [
                         [
                             InlineKeyboardButton(
-                                text="480p",
+                                text="🔗 480p",
                                 url=flink,
                             ),
                         ],
@@ -174,7 +174,7 @@ async def upload_video720p(msg: Message, title, img, file, id, tit, name, ttl, m
             c_time = time.time()
             duration = get_duration(file)
             durationx = get_durationx(file)
-            size = get_filesize(file)
+            size720p = get_filesize(file)
             ep_num = get_epnum(name)
             print(ep_num)
             rest = tit
@@ -234,17 +234,19 @@ async def upload_video720p(msg: Message, title, img, file, id, tit, name, ttl, m
             anidl_id=-1001234112068
             print("check: ", title)
             code480p = await get_link480p(title)
-            dl480pcap = f"<b>{anidltitle}</b>\n<i>{tit}</i>\n<blockquote><b><a href={code480p}>🗂️ [Web ~ Erai-raws][480p x265 10Bit CRF@23][JAP ~ Opus][Multiple Subs ~ {subtitle}]</a></b></blockquote>"
-            anidlcap2 = dl480pcap + "\n" + f"<blockquote><b><a href={fxlink}>🗂️ [Web ~ Erai-raws][720p x265 10Bit CRF@22][JAP ~ Opus][Multiple Subs ~ {subtitle}]</a></b></blockquote>"
+            size480p = await get_size480p(title)
+            dl480pcap = f"<b>{anidltitle}</b>\n<i>({tit})</i>\n<blockquote><b><a href={code480p}>🗂️ [Web ~ Erai-raws][480p x265 10Bit CRF@23][JAP ~ Opus][Multiple Subs ~ {subtitle}]</a></b> || <code>{size480p}</code> </blockquote>"
+            anidlcap2 = dl480pcap + "\n" + f"<blockquote><b><a href={fxlink}>🗂️ [Web ~ Erai-raws][720p x265 10Bit CRF@22][JAP ~ Opus][Multiple Subs ~ {subtitle}]</a></b> || <code>{size720p}</code> </blockquote>"
+            save_size720p(title, size720p)
             fmarkup=InlineKeyboardMarkup(
                     [
                         [
                             InlineKeyboardButton(
-                                text="480p",
+                                text="🔗 480p",
                                 url=code480p,
                             ),
                             InlineKeyboardButton(
-                                text="720p",
+                                text="🔗 720p",
                                 url=fxlink,
                             ),
                         ],
@@ -285,7 +287,7 @@ async def upload_video1080p(msg: Message, title, img, file, id, tit, name, ttl, 
             c_time = time.time()
             duration = get_duration(file)
             durationx = get_durationx(file)
-            size = get_filesize(file)
+            size1080p = get_filesize(file)
             ep_num = get_epnum(name)
             print(ep_num)
             rest = tit
@@ -347,22 +349,24 @@ async def upload_video1080p(msg: Message, title, img, file, id, tit, name, ttl, 
             print(code480p)
             code480p = await get_link720p(title)
             print(code720p)
-            dl480pcap = f"<b>{anidltitle}</b>\n<i>{tit}</i>\n<blockquote><b><a href={code480p}>🗂️ [Web ~ Erai-raws][480p x265 10Bit CRF@23][JAP ~ Opus][Multiple Subs ~ {subtitle}]</a></b></blockquote>"
-            dl720pcap = f"\n<blockquote><b><a href={code720p}>🗂️ [Web ~ Erai-raws][720p x265 10Bit CRF@22][JAP ~ Opus][Multiple Subs ~ {subtitle}]</a></b></blockquote>"
-            anidlcap3 = dl480pcap + dl720pcap + "\n" + f"<blockquote><b><a href={fxylink}>🗂️ [Web ~ Erai-raws][1080p x265 10Bit CRF@22][JAP ~ AAC][Multiple Subs ~ {subtitle}]</a></b></blockquote>"
+            size480p = await get_size480p(title)
+            size720p = await get_size720p(title)
+            dl480pcap = f"<b>{anidltitle}</b>\n<i>({tit})</i>\n<blockquote><b><a href={code480p}>🗂️ [Web ~ Erai-raws][480p x265 10Bit CRF@23][JAP ~ Opus][Multiple Subs ~ {subtitle}]</a></b> || <code>{size480p}</code></blockquote>"
+            dl720pcap = f"\n<blockquote><b><a href={code720p}>🗂️ [Web ~ Erai-raws][720p x265 10Bit CRF@22][JAP ~ Opus][Multiple Subs ~ {subtitle}]</a></b> || <code>{size720p}</code></blockquote>"
+            anidlcap3 = dl480pcap + dl720pcap + "\n" + f"<blockquote><b><a href={fxylink}>🗂️ [Web ~ Erai-raws][1080p x265 10Bit CRF@22][JAP ~ AAC][Multiple Subs ~ {subtitle}]</a></b> || <code>{size1080p}</code></blockquote>"
             fmarkup=InlineKeyboardMarkup(
                     [
                         [
                             InlineKeyboardButton(
-                                text="480p",
+                                text="🔗 480p",
                                 url=code480p,
                             ),
                             InlineKeyboardButton(
-                                text="720p",
+                                text="🔗 720p",
                                 url=code720p,
                             ),
                             InlineKeyboardButton(
-                                text="1080p",
+                                text="🔗 1080p",
                                 url=fxylink,
                             ),
                         ],
@@ -379,7 +383,15 @@ async def upload_video1080p(msg: Message, title, img, file, id, tit, name, ttl, 
             print("title upload: ", title)
             postid = await get_postid(title)
             print(postid)
+            ongid = -1001159872623
             await app.edit_message_text(anidl_id, postid, text=anidlcap3, reply_markup=fmarkup, parse_mode=enums.ParseMode.HTML)
+            await asyncio.sleep(3)
+            await app.copy_message(
+                chat_id=ongid,
+                from_chat_id=anidl_id,
+                message_id=postid
+                reply_markup=fmarkup
+            )
     except Exception as e:
         await app.send_message(kayo_id, text="Something Went Wrong!" + "\n" + e)
     try:
