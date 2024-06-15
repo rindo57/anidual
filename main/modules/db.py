@@ -101,8 +101,8 @@ def save_1080p(name):
     )
     return
 
-async def save_file_in_db(filed, hash, subtitle, img, audio_info, tit, alink, size, upid=None):
-    await filesdb.update_one(
+def save_file_in_db(filed, hash, subtitle, img, audio_info, tit, alink, size, upid=None):
+    filesdb.update_one(
         {
             "hash": hash,
             "fid": str(upid),
@@ -165,9 +165,9 @@ async def get_size720p(filename):
     else:
         return None
         
-async def save_link480p(name, link):
+def save_link480p(name, link):
     animexdb = db['animes']
-    await animexdb.update_one(
+    animexdb.update_one(
         {
             "name": name
         },
@@ -177,9 +177,9 @@ async def save_link480p(name, link):
     return
 
     
-async def save_link720p(name, link):
+def save_link720p(name, link):
     animexdb = db['animes']
-    await animexdb.update_one(
+    animexdb.update_one(
         {
             "name": name
         },
@@ -188,9 +188,9 @@ async def save_link720p(name, link):
     )
     return
 
-async def save_link1080p(name, link):
+def save_link1080p(name, link):
     animexdb = db.animes
-    await animexdb.update_one(
+    animexdb.update_one(
         {
             "name": name
         },
@@ -199,9 +199,9 @@ async def save_link1080p(name, link):
     )
     return
 
-async def save_size480p(title, size480p):
+def save_size480p(title, size480p):
     animexdb = db['animes']
-    await animexdb.update_one(
+    animexdb.update_one(
         {
             "name": title
         },
@@ -210,9 +210,9 @@ async def save_size480p(title, size480p):
     )
     return
 
-async def save_size720p(title, size480p):
+def save_size720p(title, size480p):
     animexdb = db['animes']
-    await animexdb.update_one(
+    animexdb.update_one(
         {
             "name": title
         },
@@ -221,9 +221,9 @@ async def save_size720p(title, size480p):
     )
     return
 
-async def save_size1080p(title, size1080p):
+def save_size1080p(title, size1080p):
     animexdb = db['animes']
-    await animexdb.update_one(
+    animexdb.update_one(
         {
             "name": title
         },
