@@ -43,7 +43,7 @@ def parse():
         item['link'] = "magnet:?xt=urn:btih:" + i['erai_infohash']
         item['480p'] = '0'
         data.append(item)
-        data.reverse()
+       
     return data
 
 async def auto_parser():
