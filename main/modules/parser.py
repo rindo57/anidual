@@ -34,7 +34,7 @@ def parse():
     b = b[0:72] 
     
     data = []    
-
+    data.reverse()
     for i in b:
         item = {}
         item['title'] = trim_title(i['title'])
