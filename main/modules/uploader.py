@@ -380,6 +380,36 @@ async def upload_video1080p(msg: Message, title, img, file, id, tit, name, ttl, 
                         
                     ],
             )
+            fmarkup2=InlineKeyboardMarkup(
+                    [
+                        [
+                            InlineKeyboardButton(
+                                text="🔗 480p",
+                                url=code480p,
+                            ),
+                            InlineKeyboardButton(
+                                text="🔗 720p",
+                                url=code720p,
+                            ),
+                            InlineKeyboardButton(
+                                text="🔗 1080p",
+                                url=fxylink,
+                            ),
+                        ],
+                        [   
+                            InlineKeyboardButton(
+                                text="🫡",
+                                url="https://t.me/theHoldCoinBot/app?startapp=ref_ypPlRLP1",
+                            ),
+                            InlineKeyboardButton(
+                                text="🌐 AIRING ANIME",
+                                url="https://anidl.org/airing-anime",
+                            ),
+                        
+                        ],
+                        
+                    ],
+            )
             await asyncio.sleep(3)
             print("title upload: ", title)
             postid = await get_postid(title)
@@ -391,7 +421,7 @@ async def upload_video1080p(msg: Message, title, img, file, id, tit, name, ttl, 
                 chat_id=ongid,
                 from_chat_id=anidl_id,
                 message_id=postid,
-                reply_markup=fmarkup
+                reply_markup=fmarkup2
             )
     except Exception as e:
         await app.send_message(kayo_id, text="Something Went Wrong!" + "\n" + e)
