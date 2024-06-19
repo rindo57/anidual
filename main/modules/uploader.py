@@ -398,7 +398,7 @@ async def upload_video1080p(msg: Message, title, img, file, id, tit, name, ttl, 
                         ],
                         [   
                             InlineKeyboardButton(
-                                text="🫡",
+                                text="🎮",
                                 url="https://t.me/theHoldCoinBot/app?startapp=ref_ypPlRLP1",
                             ),
                             InlineKeyboardButton(
