@@ -1,5 +1,5 @@
 import asyncio
-
+from bs64 import BeautifulSoup
 import os
 from string import ascii_letters, digits
 import time
@@ -84,16 +84,23 @@ async def upload_video(msg: Message, title, img, file, id, tit, name, ttl, main,
             print(hash)
             ddlurl = f"https://anidl.ddlserverv1.me.in/beta/{hash}"
             gcaption = f"`📺 {filed}`\n\n`🔗 EP - {ep_num}:  https://anidl.ddlserverv1.me.in/beta/{hash}`" + "\n\n" + f"🔠 __{tit}__" + "\n" + "\n" + f"📝 `{subtitle}`"
+            cfurl = "http://localhost:8191/v1"
+            headers = {"Content-Type": "application/json"}
+            dataz = {
+                "cmd": "request.get",
+                "url": f"http://ouo.press/api/jezWr0hG?s={ddlurl}",
+                "maxTimeout": 60000
+            }
+            responsez = requests.post(cfurl, headers=headers, json=dataz)
+            html_content = responsez.json()['solution']['response']
+            soup = BeautifulSoup(html_content, 'html.parser')
+            extracted_url = soup.body.get_text()
+            print(extracted_url)
             da_url = "https://da.gd/"
             shorten_url = f"{da_url}shorten"
-            response = requests.post(shorten_url, params={"url": ddlurl})
-            dalink = response.text.strip()
-            dalink = dalink.replace("https://", "")
-            dalink = dalink.replace("http://", "")
-            ouolink = f"http://ouo.press/qs/jezWr0hG?s={dalink}"
-            ulvis = f"https://ulvis.net/api.php?url={ouolink}&private=1"
-            result = requests.get(ulvis)
-            flink = result.text
+            response = requests.post(shorten_url, params={"url": extracted_url})
+            flink = response.text.strip()
+            
             print("title upload: ", title)
             save_link480p(title, flink)
             dl_markup = InlineKeyboardMarkup(
@@ -203,16 +210,22 @@ async def upload_video720p(msg: Message, title, img, file, id, tit, name, ttl, m
             print(hash)
             ddlurl = f"https://anidl.ddlserverv1.me.in/beta/{hash}"
             gcaption = f"`📺 {filed}`\n\n`🔗 EP - {ep_num}:  https://anidl.ddlserverv1.me.in/beta/{hash}`" + "\n\n" + f"🔠 __{tit}__" + "\n" + "\n" + f"📝 `{subtitle}`"
+            cfurl = "http://localhost:8191/v1"
+            headers = {"Content-Type": "application/json"}
+            dataz = {
+                "cmd": "request.get",
+                "url": f"http://ouo.press/api/jezWr0hG?s={ddlurl}",
+                "maxTimeout": 60000
+            }
+            responsez = requests.post(cfurl, headers=headers, json=dataz)
+            html_content = responsez.json()['solution']['response']
+            soup = BeautifulSoup(html_content, 'html.parser')
+            extracted_url = soup.body.get_text()
+            print(extracted_url)
             da_url = "https://da.gd/"
             shorten_url = f"{da_url}shorten"
-            response = requests.post(shorten_url, params={"url": ddlurl})
-            dalink = response.text.strip()
-            dalink = dalink.replace("https://", "")
-            dalink = dalink.replace("http://", "")
-            ouolink = f"http://ouo.press/qs/jezWr0hG?s={dalink}"
-            ulvis = f"https://ulvis.net/api.php?url={ouolink}&private=1"
-            result = requests.get(ulvis)
-            fxlink = result.text
+            response = requests.post(shorten_url, params={"url": extracted_url})
+            fxlink = response.text.strip()
             save_link720p(title, fxlink)
             dl_markup = InlineKeyboardMarkup(
                 [
@@ -316,16 +329,22 @@ async def upload_video1080p(msg: Message, title, img, file, id, tit, name, ttl, 
             print(hash)
             ddlurl = f"https://anidl.ddlserverv1.me.in/beta/{hash}"
             gcaption = f"`📺 {filed}`\n\n`🔗 EP - {ep_num}:  https://anidl.ddlserverv1.me.in/beta/{hash}`" + "\n\n" + f"🔠 __{tit}__" + "\n" + "\n" + f"📝 `{subtitle}`"
+            cfurl = "http://localhost:8191/v1"
+            headers = {"Content-Type": "application/json"}
+            dataz = {
+                "cmd": "request.get",
+                "url": f"http://ouo.press/api/jezWr0hG?s={ddlurl}",
+                "maxTimeout": 60000
+            }
+            responsez = requests.post(cfurl, headers=headers, json=dataz)
+            html_content = responsez.json()['solution']['response']
+            soup = BeautifulSoup(html_content, 'html.parser')
+            extracted_url = soup.body.get_text()
+            print(extracted_url)
             da_url = "https://da.gd/"
             shorten_url = f"{da_url}shorten"
-            response = requests.post(shorten_url, params={"url": ddlurl})
-            dalink = response.text.strip()
-            dalink = dalink.replace("https://", "")
-            dalink = dalink.replace("http://", "")
-            ouolink = f"http://ouo.press/qs/jezWr0hG?s={dalink}"
-            ulvis = f"https://ulvis.net/api.php?url={ouolink}&private=1"
-            result = requests.get(ulvis)
-            fxylink = result.text
+            response = requests.post(shorten_url, params={"url": extracted_url})
+            fxylink = response.text.strip()
             save_link1080p(title, fxylink)
             dl_markup = InlineKeyboardMarkup(
                 [
