@@ -1,5 +1,5 @@
 import asyncio
-from bs64 import BeautifulSoup
+from bs4 import BeautifulSoup
 import os
 from string import ascii_letters, digits
 import time
