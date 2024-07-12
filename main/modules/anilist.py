@@ -111,9 +111,11 @@ async def get_anime(vars_,less):
 async def get_anime_img(query):
     vars_ = {"search": query}
     idm, title_img, title = await get_anime(vars_,less=True)
-
+    data = await get_anime(vars_,less=False)
+    id_ = data.get("id")
+    alink = f"https://anilist.co/anime/{id_}"
     #title = format_text(title)
-    return idm, title_img, title
+    return idm, title_img, title, alink
     
 def get_anime_name(title):
     x = title.split(" - ")[-1]
