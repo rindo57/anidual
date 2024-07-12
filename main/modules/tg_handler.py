@@ -240,7 +240,7 @@ async def start_uploading(data):
             titlev2 = data["title"]
             stit = titlev2.replace("[AniDL] ", "")
             newname720 = titlev2.replace(".mkv", "[720p x265 10Bit][Dual-Audio ~ Opus].mkv")
-            id, img, tit = await get_anime_img(get_anime_name(stit))
+            id, img, tit, alink = await get_anime_img(get_anime_name(stit))
             msg2 = await app.send_photo(bin_id,photo=img,caption=newname720)
             fpath = "downloads/" + newname720
     
