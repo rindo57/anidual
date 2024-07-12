@@ -188,7 +188,7 @@ async def start_uploading(data):
             duration = get_duration(file)
             durationx = get_durationx(file)
             fileqd = os.path.basename(file)
-            newname = title + "[480p x265 10Bit][Dual-Audio ~ Opus].mkv"
+            newname = title.replace(".mkv", "[480p x265 10Bit][Dual-Audio ~ Opus].mkv")
             filed = fileqd.replace(fileqd, newname)
             fpath = "downloads/" + filed
     
@@ -238,7 +238,7 @@ async def start_uploading(data):
             print(data["title"])
             titlev2 = data["title"]
             stit = titlev2.replace("[AniDL] ", "")
-            newname720 = titlev2 + "[720p x265 10Bit][Dual-Audio ~ Opus].mkv"
+            newname720 = titlev2.replace(".mkv", "[720p x265 10Bit][Dual-Audio ~ Opus].mkv")
             id, img, tit = await get_anime_img(get_anime_name(stit))
             msg2 = await app.send_photo(bin_id,photo=img,caption=newname720)
             fpath = "downloads/" + newname720
@@ -262,7 +262,7 @@ async def start_uploading(data):
             save_720p(data["title"])
             await asyncio.sleep(5)
 # 1080p 
-            newname1080 = titlev2 + "[1080p x265 10Bit][Dual-Audio ~ AAC].mkv"
+            newname1080 = titlev2.replace(".mkv", "[1080p x265 10Bit][Dual-Audio ~ AAC].mkv")
             msg3 = await app.send_photo(bin_id,photo=img,caption=newname1080)
             main3 = await app.send_photo(KAYO_ID,photo=img, caption=newname1080)
             fpath = "downloads/" + newname1080
@@ -323,7 +323,7 @@ async def start_uploading(data):
             duration = get_duration(file)
             durationx = get_durationx(file)
             fileqd = os.path.basename(file)
-            newname720 = title + "[720p x265 10Bit][Dual-Audio ~ Opus].mkv"
+            newname720 = title.replace(".mkv", "[720p x265 10Bit][Dual-Audio ~ Opus].mkv")
             filed = fileqd.replace(fileqd, newname720)
             fpath = "downloads/" + filed 
     
@@ -368,7 +368,7 @@ async def start_uploading(data):
             save_720p(data["title"])
 #1080p 
 
-            newname1080 = titlev2 + "[1080p x265 10Bit][Dual-Audio ~ AAC].mkv"
+            newname1080 = titlev2.replace(".mkv", "[1080p x265 10Bit][Dual-Audio ~ AAC].mkv")
             msg3 = await app.send_photo(bin_id,photo=img,caption=newname1080)
             main3 = await app.send_photo(KAYO_ID,photo=img, caption=newname1080)
             fpath = "downloads/" + newname1080
@@ -429,7 +429,7 @@ async def start_uploading(data):
             duration = get_duration(file)
             durationx = get_durationx(file)
             fileqd = os.path.basename(file)
-            newname1080 = title + "[1080p x265 10Bit][Dual-Audio ~ AAC].mkv"
+            newname1080 = title.replace(".mkv", "[1080p x265 10Bit][Dual-Audio ~ AAC].mkv")
             filed = fileqd.replace(fileqd, newname1080)
             fpath = "downloads/" + filed 
     
