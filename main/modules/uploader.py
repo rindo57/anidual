@@ -68,8 +68,9 @@ async def upload_video(msg: Message, title, img, file, id, tit, name, ttl, main,
             print("name: ", name)
             rest = tit
             filed = os.path.basename(file)
-            source = extract_source(filed)
             print('filed: ', filed)
+            source = extract_source(filed)
+            print("src: ", source)
             anidltitle = filed.replace("[AniDL] ", "")
             anidltitle = anidltitle.replace(" [Web ~ AMZN][480p x265 10Bit][Dual-Audio ~ Opus].mkv", "")
             anidltitle = anidltitle.replace(" [Web ~ CR][480p x265 10Bit][Dual-Audio ~ Opus].mkv", "")
