@@ -178,7 +178,7 @@ async def start_uploading(data):
             msg = await app.send_photo(bin_id,photo=img,caption=title)
 
             print("Downloading --> ",name)
-            img, alink = await get_anilist_data(zumba)
+            img, alink = await get_anilist_data((get_anime_name(zumba))
             await asyncio.sleep(5)
             await status.edit(await status_text(f"Downloading {name}"),reply_markup=button1)
             file = await downloader(msg,link,size,title)
