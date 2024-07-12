@@ -93,11 +93,11 @@ def replace_text_with_mapping(subtitle, mapping):
 
 
 mapping = {
-    "us": "ENG",
-    "br": "POR-BR",
-    "mx": "SPA-LA",
+    "en": "ENG",
+    "pt-BR": "POR-BR",
+    "es-419": "SPA-LA",
     "es": "SPA",
-    "sa": "ARA",
+    "ar": "ARA",
     "fr": "FRE",
     "de": "GER",
     "it": "ITA",
@@ -119,40 +119,41 @@ mapping = {
     "da": "DAN",
     "zh": "CHI",
     "bg": "BUL",
-    "vn": "VIE",
+    "vi": "VIE",
     "hi": "HIN",
     "te": "TEL",
     "uk": "UKR",
     "hu": "HUN",
     "cs": "CES",
     "hr": "HRV",
-    "my": "MAY",
+    "ms": "MAY",
     "sk": "SLK",
-    "fil": "FIL",
-    "cn": "CHI",
-    "jp": "JAP",
-    "no": "NOB",
-    "se": "SWE",
-    "gr": "GRE",
-    "kr": "KOR",
-    "dk": "DAN",
-    "cz": "CES"
+    "fil": "FIL"
 }
 
-def get_audio_language(video_path):
+
+def get_audio_languages(video_path):
     try:
         media_info = MediaInfo.parse(video_path)
+        audio_tracks = []
         for track in media_info.tracks:
             if track.track_type == 'Audio':
-                language = track.language
-                language = language.replace("ja", "JP")
-                return language
-        return None
+                audio_tracks.append(track.language)
+        return audio_tracks
     except Exception as e:
         print(f"Error: {e}")
         return None
         
-
+def esl(video_path):
+    media_info = MediaInfo.parse(video_path)
+    
+    subtitle_languages = []
+    for track in media_info.tracks:
+        if track.track_type == 'Text':
+            subtitle_languages.append(track.language)
+    
+    return subtitle_languages
+    
 async def start_uploading(data):
 
     try:
@@ -163,8 +164,6 @@ async def start_uploading(data):
             size = data["size"]
             size = size.replace("GB", " GiB")
             nyaasize = size
-            subtitl = data["subtitle"]
-            subtitle = replace_text_with_mapping(subtitl, mapping)
             name, ext = title.split(".")
 
             name += f" [AniDL]." + ext
@@ -188,17 +187,9 @@ async def start_uploading(data):
 
             duration = get_duration(file)
             durationx = get_durationx(file)
-            filed = os.path.basename(file)
-            filed = filed.replace(filed[-14:], ".mkv")
-            filed = filed.replace("[Erai-raws]", "[AniDL]")
-            filed = filed.replace("[1080p][Multiple Subtitle]", "[1080p Web-DL]")
-            filed = filed.replace("[1080p]", "[1080p Web-DL]")
-            filed = filed.replace("2nd Season", "S2")
-            filed = filed.replace("3rd Season", "S3")
-            filed = filed.replace("4th Season", "S4")
-            filed = filed.replace("5th Season", "S5")
-            filed = filed.replace("6th Season", "S6")
-            filed = filed.replace("7th Season", "S7")
+            fileqd = os.path.basename(file)
+            filed = fileqd.replace(fileqd, title)
+            
             razo = filed.replace("[1080p Web-DL]", "[480p x265] @animxt")
             fpath = "downloads/" + filed
             ghostname = name
@@ -206,9 +197,7 @@ async def start_uploading(data):
             ghostname = ghostname.replace("[1080p]", "")
             ghostname = ghostname.replace("2nd Season", "S2")
             ghostname = ghostname.replace("3rd Season", "S3")
-            subtitle = subtitle.replace("][", ", ")
-            subtitle = subtitle.replace("[", "")
-            subtitle = subtitle.replace("]", "")     
+   
     
             os.rename(file,"video.mkv")
             titlx = title.replace('[1080p][Multiple Subtitle]', '[Web][480p x265 10Bit][Opus][Erai-raws]')
@@ -217,11 +206,26 @@ async def start_uploading(data):
             main = await app.send_photo(KAYO_ID,photo=img, caption=titm)
             video_path="video.mkv"
         
-            audio_language = get_audio_language(video_path)
-            if audio_language:
-                print("Audio Track Language:", audio_language)
+            audio_language = get_audio_languages(video_path)
+            joinaud = ", ".join(audio_language)
+            if joinaud:
+                print("Audio Track Language:", joinaud)
             else:
                 print("Failed to get audio language.")
+            subtitle_languages = esl(video_path)
+        
+            if subtitle_languages:
+                print("Subtitle Track Language:", subtitle_languages)
+            else:
+                print("Failed to get subtitle language.")
+            joinsub = ", ".join(subtitle_languages)
+            exsub = joinsub.replace("][", ", ")
+            exsub = exsub.replace("[", "")
+            exsub = exsub.replace("]", "")  
+            subtitle = exsub
+            msubtitle = replace_text_with_mapping(subtitle, mapping)
+            print(msubtitle)
+        
             compressed = await compress_video(duration,main,tito)
     
 
@@ -236,7 +240,7 @@ async def start_uploading(data):
                 os.rename("out.mkv",fpath)
   
             print("Uploading --> ",name)
-            video = await upload_video(msg,title,img,fpath,id,tit,name,size,main,subtitle,nyaasize,audio_language, alink)
+            video = await upload_video(msg,title,img,fpath,id,tit,name,size,main,msubtitle,nyaasize,joinaud, alink)
             print("480title: ", data["title"])
             save_480p(data["title"])
    
@@ -262,7 +266,7 @@ async def start_uploading(data):
                 os.rename("out.mkv",fpath)
   
             print("Uploading --> ",name)
-            video = await upload_video720p(msg2,title,img,fpath,id,tit,name,size,main2,subtitle,nyaasize,audio_language, alink)
+            video = await upload_video720p(msg2,title,img,fpath,id,tit,name,size,main2,msubtitle,nyaasize,joinaud, alink)
             save_720p(data["title"])
             await asyncio.sleep(5)
 # 1080p 
@@ -287,7 +291,7 @@ async def start_uploading(data):
                 os.rename("out.mkv",fpath)
   
             print("Uploading --> ",name)
-            video = await upload_video1080p(msg3,title,img,fpath,id,tit,name,size,main3,subtitle,nyaasize,audio_language, alink)
+            video = await upload_video1080p(msg3,title,img,fpath,id,tit,name,size,main3,msubtitle,nyaasize,joinaud, alink)
             save_1080p(data["title"])
             try:
                 os.remove("video.mkv")
@@ -306,8 +310,6 @@ async def start_uploading(data):
             size = size.replace("GB", " GiB")
             nyaasize = size
             
-            subtitl = data["subtitle"]
-            subtitle = replace_text_with_mapping(subtitl, mapping)
             name, ext = title.split(".")
 
             name += f" [AniDL]." + ext
@@ -344,10 +346,7 @@ async def start_uploading(data):
             ghostname = ghostname.replace("[1080p][Multiple Subtitle]", "")
             ghostname = ghostname.replace("[1080p]", "")
             ghostname = ghostname.replace("2nd Season", "S2")
-            ghostname = ghostname.replace("3rd Season", "S3")
-            subtitle = subtitle.replace("][", ", ")
-            subtitle = subtitle.replace("[", "")
-            subtitle = subtitle.replace("]", "")     
+            ghostname = ghostname.replace("3rd Season", "S3")   
     
             os.rename(file,"video.mkv")
             titlx = title.replace('[1080p][Multiple Subtitle]', '[Web][720p x265 10Bit][Opus][Erai-raws]')
@@ -356,11 +355,25 @@ async def start_uploading(data):
             main = await app.send_photo(KAYO_ID,photo=img, caption=titm)
             video_path="video.mkv"
         
-            audio_language = get_audio_language(video_path)
-            if audio_language:
-                print("Audio Track Language:", audio_language)
+            audio_language = get_audio_languages(video_path)
+            joinaud = ", ".join(audio_language)
+            if joinaud:
+                print("Audio Track Language:", joinaud)
             else:
                 print("Failed to get audio language.")
+            subtitle_languages = esl(video_path)
+        
+            if subtitle_languages:
+                print("Subtitle Track Language:", subtitle_languages)
+            else:
+                print("Failed to get subtitle language.")
+            joinsub = ", ".join(subtitle_languages)
+            exsub = joinsub.replace("][", ", ")
+            exsub = exsub.replace("[", "")
+            exsub = exsub.replace("]", "")  
+            subtitle = exsub
+            msubtitle = replace_text_with_mapping(subtitle, mapping)
+            print(msubtitle)
             compressed = await compress_video720p(duration,main,tito)
     
 
@@ -375,7 +388,7 @@ async def start_uploading(data):
                 os.rename("out.mkv",fpath)
   
             print("Uploading --> ",name)
-            video = await upload_video720p(msg,title,img,fpath,id,tit,name,size,main,subtitle,nyaasize,audio_language, alink)
+            video = await upload_video720p(msg,title,img,fpath,id,tit,name,size,main,msubtitle,nyaasize,joinaud, alink)
             save_720p(data["title"])
 #1080p 
 
@@ -399,7 +412,7 @@ async def start_uploading(data):
                 os.rename("out.mkv",fpath)
   
             print("Uploading --> ",name)
-            video = await upload_video1080p(msg3,title,img,fpath,id,tit,name,size,main3,subtitle,nyaasize,audio_language, alink)
+            video = await upload_video1080p(msg3,title,img,fpath,id,tit,name,size,main3,msubtitle,nyaasize,joinaud, alink)
             save_1080p(data["title"])
             try:
                 os.remove("video.mkv")
@@ -416,8 +429,7 @@ async def start_uploading(data):
             size = data["size"]
             size = size.replace("GB", " GiB")
             nyaasize = size
-            subtitl = data["subtitle"]
-            subtitle = replace_text_with_mapping(subtitl, mapping)
+
             name, ext = title.split(".")
 
             name += f" [AniDL]." + ext
@@ -466,11 +478,26 @@ async def start_uploading(data):
             main = await app.send_photo(KAYO_ID,photo=img, caption=titm)
             video_path="video.mkv"
         
-            audio_language = get_audio_language(video_path)
-            if audio_language:
-                print("Audio Track Language:", audio_language)
+            audio_language = get_audio_languages(video_path)
+            joinaud = ", ".join(audio_language)
+            if joinaud:
+                print("Audio Track Language:", joinaud)
             else:
                 print("Failed to get audio language.")
+            subtitle_languages = esl(video_path)
+        
+            if subtitle_languages:
+                print("Subtitle Track Language:", subtitle_languages)
+            else:
+                print("Failed to get subtitle language.")
+            joinsub = ", ".join(subtitle_languages)
+            exsub = joinsub.replace("][", ", ")
+            exsub = exsub.replace("[", "")
+            exsub = exsub.replace("]", "")  
+            subtitle = exsub
+            msubtitle = replace_text_with_mapping(subtitle, mapping)
+            print(msubtitle)
+
             compressed = await compress_video1080p(duration,main,tito)
     
 
@@ -485,7 +512,7 @@ async def start_uploading(data):
                 os.rename("out.mkv",fpath)
   
             print("Uploading --> ",name)
-            video = await upload_video1080p(msg,title,img,fpath,id,tit,name,size,main,subtitle,nyaasize,audio_language, alink)
+            video = await upload_video1080p(msg,title,img,fpath,id,tit,name,size,main,msubtitle,nyaasize,joinaud, alink)
             save_1080p(data["title"])
             try:
                 os.remove("video.mkv")
