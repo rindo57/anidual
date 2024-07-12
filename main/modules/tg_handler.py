@@ -180,7 +180,7 @@ async def start_uploading(data):
             print("Downloading --> ",name)
             
             await asyncio.sleep(5)
-            await status.edit(await status_text(f"Downloading {name}"),reply_markup=button1)
+            
             file = await downloader(msg,link,size,title)
 
             await msg.edit(f"Download Complete : {name}")
@@ -316,7 +316,7 @@ async def start_uploading(data):
             print("Downloading --> ",name)
             
             await asyncio.sleep(5)
-            await status.edit(await status_text(f"Downloading {name}"),reply_markup=button1)
+            
             file = await downloader(msg,link,size,title)
 
             await msg.edit(f"Download Complete : {name}")
@@ -423,7 +423,7 @@ async def start_uploading(data):
             print("Downloading --> ",name)
             
             await asyncio.sleep(5)
-            await status.edit(await status_text(f"Downloading {name}"),reply_markup=button1)
+            
             file = await downloader(msg,link,size,title)
 
             await msg.edit(f"Download Complete : {name}")
