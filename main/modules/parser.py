@@ -14,17 +14,17 @@ def trim_title(title: str):
         if at=="Dual-Audio":
             if source=="HIDI":
                 source = source.replace("HIDI", "HIDIVE")
-                title = f"[AniDL] {titler.strip()} - {episode.strip()} [Web ~ {source.strip()}][1080p x265 10Bit][Dual-Audio ~ AAC].mkv"
+                title = f"[AniDL] {titler.strip()} - {episode.strip()} [Web ~ {source.strip()}]"
             else:
-                title = f"[AniDL] {titler.strip()} - {episode.strip()} [Web ~ {source.strip()}][1080p x265 10Bit][Dual-Audio ~ AAC].mkv"
+                title = f"[AniDL] {titler.strip()} - {episode.strip()} [Web ~ {source.strip()}]"
         else:
             if source=="HIDI":
                 source = source.replace("HIDI", "HIDIVE")
-                title = f"[AniDL] {at.strip()} - {episode.strip()} [Web ~ {source.strip()}][1080p x265 10Bit][Dual-Audio ~ AAC].mkv"
+                title = f"[AniDL] {at.strip()} - {episode.strip()} [Web ~ {source.strip()}]"
             else:
-                title = f"[AniDL] {at.strip()} - {episode.strip()} [Web ~ {source.strip()}][1080p x265 10Bit][Dual-Audio ~ AAC].mkv"
+                title = f"[AniDL] {at.strip()} - {episode.strip()} [Web ~ {source.strip()}]"
     title = title.replace("[YouDeer]", "[AniDL]")
-    title = title.replace("(WEB 1080p Dual Audio) | My Deer Friend Nokotan", "[Web ~ YouDeer][1080p x265 10Bit][Dual-Audio ~ AAC]")
+    title = title.replace("(WEB 1080p Dual Audio) | My Deer Friend Nokotan", "[Web ~ YouDeer]")
     return title
 
 def multi_sub(title: str):
