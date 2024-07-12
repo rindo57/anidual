@@ -188,22 +188,13 @@ async def start_uploading(data):
             duration = get_duration(file)
             durationx = get_durationx(file)
             fileqd = os.path.basename(file)
-            filed = fileqd.replace(fileqd, title)
-            
-            razo = filed.replace("[1080p Web-DL]", "[480p x265] @animxt")
+            newname = title + "[480p x265 10Bit][Dual-Audio ~ Opus].mkv"
+            filed = fileqd.replace(fileqd, newname)
             fpath = "downloads/" + filed
-            ghostname = name
-            ghostname = ghostname.replace("[1080p][Multiple Subtitle]", "")
-            ghostname = ghostname.replace("[1080p]", "")
-            ghostname = ghostname.replace("2nd Season", "S2")
-            ghostname = ghostname.replace("3rd Season", "S3")
-   
     
             os.rename(file,"video.mkv")
-            titlx = title.replace('[1080p][Multiple Subtitle]', '[Web][480p x265 10Bit][Opus][Erai-raws]')
-            titm = f"**[AniDL] {titlx}**"
-            tito = f"[AniDL] {titlx}"
-            main = await app.send_photo(KAYO_ID,photo=img, caption=titm)
+
+            main = await app.send_photo(KAYO_ID,photo=img, caption=newname)
             video_path="video.mkv"
         
             audio_language = get_audio_languages(video_path)
@@ -226,7 +217,7 @@ async def start_uploading(data):
             msubtitle = replace_text_with_mapping(subtitle, mapping)
             print(msubtitle)
         
-            compressed = await compress_video(duration,main,tito)
+            compressed = await compress_video(duration,main,newname)
     
 
             if compressed == "None" or compressed == None:
@@ -246,13 +237,14 @@ async def start_uploading(data):
    
             print(data["title"])
             titlev2 = data["title"]
-            id, img, tit = await get_anime_img(get_anime_name(titlev2))
-            msg2 = await app.send_photo(bin_id,photo=img,caption=titlev2)
-            titlx2 = titlev2.replace('[1080p][Multiple Subtitle]', '[Web][720p x265 10Bit][Opus][Erai-raws]')
-            titm2 = f"**[AniDL] {titlx2}**"
-            tito2 = f"[AniDL] {titlx2}"
-            main2 = await app.send_photo(KAYO_ID,photo=img, caption=titm2)
-            compressed2 = await compress_video720p(duration,main2,tito2)
+            stit = titlev2.replace("[AniDL] ", "")
+            newname720 = titlev2 + "[720p x265 10Bit][Dual-Audio ~ Opus].mkv"
+            id, img, tit = await get_anime_img(get_anime_name(stit))
+            msg2 = await app.send_photo(bin_id,photo=img,caption=newname720)
+            fpath = "downloads/" + newname720
+    
+            main2 = await app.send_photo(KAYO_ID,photo=img, caption=f"**newname720**")
+            compressed2 = await compress_video720p(duration,main2,newname720)
     
 
             if compressed2 == "None" or compressed2 == None:
@@ -270,14 +262,11 @@ async def start_uploading(data):
             save_720p(data["title"])
             await asyncio.sleep(5)
 # 1080p 
-
-            msg3 = await app.send_photo(bin_id,photo=img,caption=title)
-            titlx3 = title.replace('[1080p][Multiple Subtitle]', '[Web][1080p x265 10Bit][AAC][Erai-raws]')
-            titm3 = f"**[AniDL] {titlx3}**"
-            tito3 = f"[AniDL] {titlx3}"
-            main3 = await app.send_photo(KAYO_ID,photo=img, caption=titm3)
-            
-            compressed3 = await compress_video1080p(duration,main3,tito3)
+            newname1080 = titlev2 + "[1080p x265 10Bit][Dual-Audio ~ AAC].mkv"
+            msg3 = await app.send_photo(bin_id,photo=img,caption=newname1080)
+            main3 = await app.send_photo(KAYO_ID,photo=img, caption=newname1080)
+            fpath = "downloads/" + newname1080
+            compressed3 = await compress_video1080p(duration,main3,newname1080)
     
 
             if compressed3 == "None" or compressed3 == None:
@@ -333,26 +322,13 @@ async def start_uploading(data):
 
             duration = get_duration(file)
             durationx = get_durationx(file)
-            filed = os.path.basename(file)
-            filed = filed.replace(filed[-14:], ".mkv")
-            filed = filed.replace("[Erai-raws]", "[AniDL]")
-            filed = filed.replace("[1080p][Multiple Subtitle]", "[1080p Web-DL]")
-            filed = filed.replace("[1080p]", "[1080p Web-DL]")
-            filed = filed.replace("2nd Season", "S2")
-            filed = filed.replace("3rd Season", "S3")
-            razo = filed.replace("[1080p Web-DL]", "[720p x265] @animxt")
-            fpath = "downloads/" + filed
-            ghostname = name
-            ghostname = ghostname.replace("[1080p][Multiple Subtitle]", "")
-            ghostname = ghostname.replace("[1080p]", "")
-            ghostname = ghostname.replace("2nd Season", "S2")
-            ghostname = ghostname.replace("3rd Season", "S3")   
+            fileqd = os.path.basename(file)
+            newname720 = title + "[720p x265 10Bit][Dual-Audio ~ Opus].mkv"
+            filed = fileqd.replace(fileqd, newname720)
+            fpath = "downloads/" + filed 
     
             os.rename(file,"video.mkv")
-            titlx = title.replace('[1080p][Multiple Subtitle]', '[Web][720p x265 10Bit][Opus][Erai-raws]')
-            titm = f"**[AniDL] {titlx}**"
-            tito = f"[AniDL] {titlx}"
-            main = await app.send_photo(KAYO_ID,photo=img, caption=titm)
+            main = await app.send_photo(KAYO_ID,photo=img, caption=newname720)
             video_path="video.mkv"
         
             audio_language = get_audio_languages(video_path)
@@ -374,7 +350,7 @@ async def start_uploading(data):
             subtitle = exsub
             msubtitle = replace_text_with_mapping(subtitle, mapping)
             print(msubtitle)
-            compressed = await compress_video720p(duration,main,tito)
+            compressed = await compress_video720p(duration,main,newname720)
     
 
             if compressed == "None" or compressed == None:
@@ -392,16 +368,14 @@ async def start_uploading(data):
             save_720p(data["title"])
 #1080p 
 
-            msg3 = await app.send_photo(bin_id,photo=img,caption=title)
-            titlx3 = title.replace('[1080p][Multiple Subtitle]', '[Web][1080p x265 10Bit][AAC][Erai-raws]')
-            titm3 = f"**[AniDL] {titlx3}**"
-            tito3 = f"[AniDL] {titlx3}"
-            main3 = await app.send_photo(KAYO_ID,photo=img, caption=titm3)
-            
-            compressed = await compress_video1080p(duration,main3,tito3)
+            newname1080 = titlev2 + "[1080p x265 10Bit][Dual-Audio ~ AAC].mkv"
+            msg3 = await app.send_photo(bin_id,photo=img,caption=newname1080)
+            main3 = await app.send_photo(KAYO_ID,photo=img, caption=newname1080)
+            fpath = "downloads/" + newname1080
+            compressed3 = await compress_video1080p(duration,main3,newname1080)
     
 
-            if compressed == "None" or compressed == None:
+            if compressed3 == "None" or compressed3 == None:
 
                 print("Encoding Failed Uploading The Original File")
 
@@ -420,7 +394,8 @@ async def start_uploading(data):
                 os.remove(file)
                 os.remove(fpath)
             except:
-                pass 
+                pass  
+
         #1080p
         elif data["480p"]=='012':
             title = data["title"]
@@ -453,29 +428,17 @@ async def start_uploading(data):
 
             duration = get_duration(file)
             durationx = get_durationx(file)
-            filed = os.path.basename(file)
-            filed = filed.replace(filed[-14:], ".mkv")
-            filed = filed.replace("[Erai-raws]", "[AniDL]")
-            filed = filed.replace("[1080p][Multiple Subtitle]", "[1080p Web-DL]")
-            filed = filed.replace("[1080p]", "[1080p Web-DL]")
-            filed = filed.replace("2nd Season", "S2")
-            filed = filed.replace("3rd Season", "S3")
-            razo = filed.replace("[1080p Web-DL]", "[720p x265] @animxt")
-            fpath = "downloads/" + filed
-            ghostname = name
-            ghostname = ghostname.replace("[1080p][Multiple Subtitle]", "")
-            ghostname = ghostname.replace("[1080p]", "")
-            ghostname = ghostname.replace("2nd Season", "S2")
-            ghostname = ghostname.replace("3rd Season", "S3")
-            subtitle = subtitle.replace("][", ", ")
-            subtitle = subtitle.replace("[", "")
-            subtitle = subtitle.replace("]", "")     
+            fileqd = os.path.basename(file)
+            newname1080 = title + "[1080p x265 10Bit][Dual-Audio ~ AAC].mkv"
+            filed = fileqd.replace(fileqd, newname1080)
+            fpath = "downloads/" + filed 
     
             os.rename(file,"video.mkv")
-            titlx = title.replace('[1080p][Multiple Subtitle]', '[Web][1080p x265 10Bit][AAC][Erai-raws]')
-            titm = f"**[AniDL] {titlx}**"
-            tito = f"[AniDL] {titlx}"
-            main = await app.send_photo(KAYO_ID,photo=img, caption=titm)
+            main = await app.send_photo(KAYO_ID,photo=img, caption=newname1080)
+            fpath = "downloads/" + filed  
+    
+            os.rename(file,"video.mkv")
+            main = await app.send_photo(KAYO_ID,photo=img, caption=newname1080)
             video_path="video.mkv"
         
             audio_language = get_audio_languages(video_path)
@@ -498,7 +461,7 @@ async def start_uploading(data):
             msubtitle = replace_text_with_mapping(subtitle, mapping)
             print(msubtitle)
 
-            compressed = await compress_video1080p(duration,main,tito)
+            compressed = await compress_video1080p(duration,main,newname1080)
     
 
             if compressed == "None" or compressed == None:
