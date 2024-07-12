@@ -29,7 +29,7 @@ def multi_sub(title: str):
     return subtitle
 
 def parse():
-    a = feedparser.parse("https://www.siftrss.com/f/6XM5qNo7aq")
+    a = feedparser.parse("https://nyaa.si/?page=rss&q=VARYG%20(Dual-Audio)-Deer|[YouDeer]")
     b = a["entries"]
     
     
