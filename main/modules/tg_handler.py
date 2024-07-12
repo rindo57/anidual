@@ -173,7 +173,8 @@ async def start_uploading(data):
             DATABASE_ID = -1001895203720
             bin_id = -1002062055380
             name = name.replace(f" [AniDL].","").replace(ext,"").strip()
-            id, img, tit = await get_anime_img(get_anime_name(title))
+            zumba = title.replace("[AniDL] ", "")
+            id, img, tit = await get_anime_img(get_anime_name(zumba))
             msg = await app.send_photo(bin_id,photo=img,caption=title)
 
             print("Downloading --> ",name)
@@ -308,7 +309,8 @@ async def start_uploading(data):
             DATABASE_ID = -1001895203720
             bin_id = -1002062055380
             name = name.replace(f" [AniDL].","").replace(ext,"").strip()
-            id, img, tit = await get_anime_img(get_anime_name(title))
+            zumba = title.replace("[AniDL] ", "")
+            id, img, tit = await get_anime_img(get_anime_name(zumba))
             msg = await app.send_photo(bin_id,photo=img,caption=title)
 
             print("Downloading --> ",name)
@@ -414,7 +416,8 @@ async def start_uploading(data):
             DATABASE_ID = -1001895203720
             bin_id = -1002062055380
             name = name.replace(f" [AniDL].","").replace(ext,"").strip()
-            id, img, tit = await get_anime_img(get_anime_name(title))
+            zumba = title.replace("[AniDL] ", "")
+            id, img, tit = await get_anime_img(get_anime_name(zumba))
             msg = await app.send_photo(bin_id,photo=img,caption=title)
 
             print("Downloading --> ",name)
