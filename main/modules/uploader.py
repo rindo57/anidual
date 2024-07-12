@@ -42,7 +42,14 @@ from pyrogram.errors import FloodWait
 
 from main.inline import button1
 
-
+def extract_source(filename):
+    pattern = r"\[Web ~ (.*?)\]"
+    match = re.search(pattern, filename)
+    if match:
+        source = match.group(1)
+        return source
+    else:
+        return None
 
 async def upload_video(msg: Message, title, img, file, id, tit, name, ttl, main, subtitle, nyaasize, audio_info, alink):
 
@@ -54,16 +61,22 @@ async def upload_video(msg: Message, title, img, file, id, tit, name, ttl, main,
             c_time = time.time()
             duration = get_duration(file)
             durationx = get_durationx(file)
+            
             size480p = get_filesize(file)
             ep_num = get_epnum(name)
             print(ep_num)
             print("name: ", name)
             rest = tit
             filed = os.path.basename(file)
+            source = extract_source(filed)
             print('filed: ', filed)
             anidltitle = filed.replace("[AniDL] ", "")
-            anidltitle = anidltitle.replace("[1080p Web-DL].mkv", "")
-            filed = filed.replace("[1080p Web-DL]", "[Web][480p x265 10Bit][Opus][Erai-raws]")
+            anidltitle = anidltitle.replace(" [Web ~ AMZN][480p x265 10Bit][Dual-Audio ~ Opus].mkv", "")
+            anidltitle = anidltitle.replace(" [Web ~ CR][480p x265 10Bit][Dual-Audio ~ Opus].mkv", "")
+            anidltitle = anidltitle.replace(" [Web ~ HIDIVE][480p x265 10Bit][Dual-Audio ~ Opus].mkv", "")
+            anidltitle = anidltitle.replace(" [Web ~ DSNP][480p x265 10Bit][Dual-Audio ~ Opus].mkv", "")
+            anidltitle = anidltitle.replace(" [Web ~ HMAX][480p x265 10Bit][Dual-Audio ~ Opus].mkv", "")
+            anidltitle = anidltitle.replace(" [Web ~ YouDeer][480p x265 10Bit][Dual-Audio ~ Opus].mkv", "")
             fukpath = "downloads/" + filed
             caption = f"{filed}"
 
@@ -123,7 +136,7 @@ async def upload_video(msg: Message, title, img, file, id, tit, name, ttl, main,
             )
             anidl_id=-1001234112068
             xurl = f"https://anidl.ddlserverv1.me.in/beta/{hash}"
-            anidlcap = f"<b>{anidltitle}</b>\n<i>({tit})</i>\n<blockquote><b><a href={flink}>🗂️ [Web ~ Erai-raws][480p x265 10Bit CRF@23][JAP ~ Opus][Multiple Subs ~ {subtitle}]</a></b> || <code>{size480p}</code></blockquote>\n#airing #single_audio #multi_subs"
+            anidlcap = f"<b>{anidltitle}</b>\n<i>({tit})</i>\n<blockquote><b><a href={flink}>🗂️ [Web ~ {source}][480p x265 10Bit CRF@23][JAP/ENG ~ Opus][Multiple Subs ~ {subtitle}]</a></b> || <code>{size480p}</code></blockquote>\n#airing #dual_audio #multi_subs"
             save_size480p(title, size480p)
             fmarkup=InlineKeyboardMarkup(
                     [
@@ -186,11 +199,16 @@ async def upload_video720p(msg: Message, title, img, file, id, tit, name, ttl, m
             ep_num = get_epnum(name)
             print(ep_num)
             rest = tit
-            filed = os.path.basename(file)
+            source = extract_source(filed)
             print('filed: ', filed)
             anidltitle = filed.replace("[AniDL] ", "")
-            anidltitle = anidltitle.replace("[1080p Web-DL].mkv", "")
-            filed = filed.replace("[1080p Web-DL]", "[Web][720p x265 10Bit][Opus][Erai-raws]")
+            anidltitle = anidltitle.replace(" [Web ~ AMZN][720p x265 10Bit][Dual-Audio ~ Opus].mkv", "")
+            anidltitle = anidltitle.replace(" [Web ~ CR][720p x265 10Bit][Dual-Audio ~ Opus].mkv", "")
+            anidltitle = anidltitle.replace(" [Web ~ HIDIVE][720p x265 10Bit][Dual-Audio ~ Opus].mkv", "")
+            anidltitle = anidltitle.replace(" [Web ~ DSNP][720p x265 10Bit][Dual-Audio ~ Opus].mkv", "")
+            anidltitle = anidltitle.replace(" [Web ~ HMAX][720p x265 10Bit][Dual-Audio ~ Opus].mkv", "")
+            anidltitle = anidltitle.replace(" [Web ~ YouDeer][720p x265 10Bit][Dual-Audio ~ Opus].mkv", "")
+            
             fukpath = "downloads/" + filed
             caption = f"{filed}"
 
@@ -249,8 +267,8 @@ async def upload_video720p(msg: Message, title, img, file, id, tit, name, ttl, m
             print("check: ", title)
             code480p = await get_link480p(title)
             size480p = await get_size480p(title)
-            dl480pcap = f"<b>{anidltitle}</b>\n<i>({tit})</i>\n<blockquote><b><a href={code480p}>🗂️ [Web ~ Erai-raws][480p x265 10Bit CRF@23][JAP ~ Opus][Multiple Subs ~ {subtitle}]</a></b> || <code>{size480p}</code></blockquote>"
-            anidlcap2 = dl480pcap + "\n" + f"<blockquote><b><a href={fxlink}>🗂️ [Web ~ Erai-raws][720p x265 10Bit CRF@22][JAP ~ Opus][Multiple Subs ~ {subtitle}]</a></b> || <code>{size720p}</code></blockquote>\n#airing #single_audio #multi_subs"
+            dl480pcap = f"<b>{anidltitle}</b>\n<i>({tit})</i>\n<blockquote><b><a href={code480p}>🗂️ [Web ~ {source}][480p x265 10Bit CRF@23][JAP/ENG ~ Opus][Multiple Subs ~ {subtitle}]</a></b> || <code>{size480p}</code></blockquote>"
+            anidlcap2 = dl480pcap + "\n" + f"<blockquote><b><a href={fxlink}>🗂️ [Web ~ {source}][720p x265 10Bit CRF@22][JAP/ENG ~ Opus][Multiple Subs ~ {subtitle}]</a></b> || <code>{size720p}</code></blockquote>\n#airing #dual_audio #multi_subs"
             save_size720p(title, size720p)
             fmarkup=InlineKeyboardMarkup(
                     [
@@ -306,6 +324,7 @@ async def upload_video1080p(msg: Message, title, img, file, id, tit, name, ttl, 
             print(ep_num)
             rest = tit
             filed = os.path.basename(file)
+            source = extract_source(filed)
             print('filed: ', filed)
             anidltitle = filed.replace("[AniDL] ", "")
             anidltitle = anidltitle.replace("[1080p Web-DL].mkv", "")
@@ -371,9 +390,9 @@ async def upload_video1080p(msg: Message, title, img, file, id, tit, name, ttl, 
             print(code720p)
             size480p = await get_size480p(title)
             size720p = await get_size720p(title)
-            dl480pcap = f"<b>{anidltitle}</b>\n<i>({tit})</i>\n<blockquote><b><a href={code480p}>🗂️ [Web ~ Erai-raws][480p x265 10Bit CRF@23][JAP ~ Opus][Multiple Subs ~ {subtitle}]</a></b> || <code>{size480p}</code></blockquote>"
-            dl720pcap = f"\n<blockquote><b><a href={code720p}>🗂️ [Web ~ Erai-raws][720p x265 10Bit CRF@22][JAP ~ Opus][Multiple Subs ~ {subtitle}]</a></b> || <code>{size720p}</code></blockquote>"
-            anidlcap3 = dl480pcap + dl720pcap + "\n" + f"<blockquote><b><a href={fxylink}>🗂️ [Web ~ Erai-raws][1080p x265 10Bit CRF@22][JAP ~ AAC][Multiple Subs ~ {subtitle}]</a></b> || <code>{size1080p}</code></blockquote>\n#airing #single_audio #multi_subs"
+            dl480pcap = f"<b>{anidltitle}</b>\n<i>({tit})</i>\n<blockquote><b><a href={code480p}>🗂️ [Web ~ {source}][480p x265 10Bit CRF@23][JAP/ENG ~ Opus][Multiple Subs ~ {subtitle}]</a></b> || <code>{size480p}</code></blockquote>"
+            dl720pcap = f"\n<blockquote><b><a href={code720p}>🗂️ [Web ~ {source}][720p x265 10Bit CRF@22][JAP/ENG ~ Opus][Multiple Subs ~ {subtitle}]</a></b> || <code>{size720p}</code></blockquote>"
+            anidlcap3 = dl480pcap + dl720pcap + "\n" + f"<blockquote><b><a href={fxylink}>🗂️ [Web ~ {source}][1080p x265 10Bit CRF@22][JAP/ENG ~ AAC][Multiple Subs ~ {subtitle}]</a></b> || <code>{size1080p}</code></blockquote>\n#airing #dual_audio #multi_subs"
             fmarkup=InlineKeyboardMarkup(
                     [
                         [
