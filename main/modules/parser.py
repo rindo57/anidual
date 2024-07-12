@@ -40,7 +40,8 @@ def parse():
     for i in b:
         item = {}
         item['title'] = trim_title(i['title'])
-        item['size'] = i['nyaa_size']   
+        item['size'] = i['nyaa_size']  
+        item['480p'] = '0'
         item['link'] = "magnet:?xt=urn:btih:" + i['nyaa_infohash']
         data.append(item)
         data.reverse()
