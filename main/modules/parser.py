@@ -25,8 +25,8 @@ def trim_title(title: str):
                 title = f"[AniDL] {at.strip()} - {episode.strip()} [Web ~ {source.strip()}]"
     title = title.replace("[YouDeer]", "[AniDL]")
     title = title.replace("(WEB 1080p Dual Audio) | My Deer Friend Nokotan", "[Web ~ YouDeer]")
-    print(title)
-    return title + ".mkv"
+    title = title +".mkv"
+    return title
 
 def multi_sub(title: str):
     subtitle = title.split()[-1] 
