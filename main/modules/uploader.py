@@ -327,8 +327,13 @@ async def upload_video1080p(msg: Message, title, img, file, id, tit, name, ttl, 
             source = extract_source(filed)
             print('filed: ', filed)
             anidltitle = filed.replace("[AniDL] ", "")
-            anidltitle = anidltitle.replace("[1080p Web-DL].mkv", "")
-            filed = filed.replace("[1080p Web-DL]", "[Web][1080p x265 10Bit][AAC][Erai-raws]")
+            anidltitle = anidltitle.replace(" [Web ~ AMZN][1080p x265 10Bit][Dual-Audio ~ AAC].mkv", "")
+            anidltitle = anidltitle.replace(" [Web ~ CR][1080p x265 10Bit][Dual-Audio ~ AAC].mkv", "")
+            anidltitle = anidltitle.replace(" [Web ~ HIDIVE][1080p x265 10Bit][Dual-Audio ~ AAC].mkv", "")
+            anidltitle = anidltitle.replace(" [Web ~ DSNP][1080p x265 10Bit][Dual-Audio ~ AAC].mkv", "")
+            anidltitle = anidltitle.replace(" [Web ~ HMAX][1080p x265 10Bit][Dual-Audio ~ AAC].mkv", "")
+            anidltitle = anidltitle.replace(" [Web ~ YouDeer][1080p x265 10Bit][Dual-Audio ~ AAC].mkv", "")
+            
             fukpath = "downloads/" + filed
             caption = f"{filed}"
 
