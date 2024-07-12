@@ -41,7 +41,7 @@ from main import app, status
 from pyrogram.errors import FloodWait
 
 from main.inline import button1
-
+import re
 def extract_source(filename):
     pattern = r"\[Web ~ (.*?)\]"
     match = re.search(pattern, filename)
@@ -200,6 +200,8 @@ async def upload_video720p(msg: Message, title, img, file, id, tit, name, ttl, m
             ep_num = get_epnum(name)
             print(ep_num)
             rest = tit
+            filed = os.path.basename(file)
+            print('filed: ', filed)
             source = extract_source(filed)
             print('filed: ', filed)
             anidltitle = filed.replace("[AniDL] ", "")
