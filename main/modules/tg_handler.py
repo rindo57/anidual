@@ -174,7 +174,17 @@ async def start_uploading(data):
             bin_id = -1002062055380
             name = name.replace(f" [AniDL].","").replace(ext,"").strip()
             zumba = title.replace("[AniDL] ", "")
+            zumba = zumba.replace("S2", "Season 2")
+            zumba = zumba.replace("S3", "Season 3")
+            zumba = zumba.replace("S4", "Season 4")
+            zumba = zumba.replace("S5", "Season 5")
+            zumba = zumba.replace("S6", "Season 6")
+            zumba = zumba.replace("S7", "Season 7")
+            zumba = zumba.replace("S8", "Season 8")
+            zumba = zumba.replace("S9", "Season 9")
+            zumba = zumba.replace("S10", "Season 10")
             id, img, tit, alink = await get_anime_img(get_anime_name(zumba))
+            
             msg = await app.send_photo(bin_id,photo=img,caption=title)
 
             print("Downloading --> ",name)
@@ -310,6 +320,15 @@ async def start_uploading(data):
             bin_id = -1002062055380
             name = name.replace(f" [AniDL].","").replace(ext,"").strip()
             zumba = title.replace("[AniDL] ", "")
+            zumba = zumba.replace("S2", "Season 2")
+            zumba = zumba.replace("S3", "Season 3")
+            zumba = zumba.replace("S4", "Season 4")
+            zumba = zumba.replace("S5", "Season 5")
+            zumba = zumba.replace("S6", "Season 6")
+            zumba = zumba.replace("S7", "Season 7")
+            zumba = zumba.replace("S8", "Season 8")
+            zumba = zumba.replace("S9", "Season 9")
+            zumba = zumba.replace("S10", "Season 10")
             id, img, tit, alink = await get_anime_img(get_anime_name(zumba))
             msg = await app.send_photo(bin_id,photo=img,caption=title)
 
@@ -417,6 +436,15 @@ async def start_uploading(data):
             bin_id = -1002062055380
             name = name.replace(f" [AniDL].","").replace(ext,"").strip()
             zumba = title.replace("[AniDL] ", "")
+            zumba = zumba.replace("S2", "Season 2")
+            zumba = zumba.replace("S3", "Season 3")
+            zumba = zumba.replace("S4", "Season 4")
+            zumba = zumba.replace("S5", "Season 5")
+            zumba = zumba.replace("S6", "Season 6")
+            zumba = zumba.replace("S7", "Season 7")
+            zumba = zumba.replace("S8", "Season 8")
+            zumba = zumba.replace("S9", "Season 9")
+            zumba = zumba.replace("S10", "Season 10")
             id, img, tit, alink = await get_anime_img(get_anime_name(zumba))
             msg = await app.send_photo(bin_id,photo=img,caption=title)
 
