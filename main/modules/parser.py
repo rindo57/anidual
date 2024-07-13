@@ -25,6 +25,16 @@ def trim_title(title: str):
                 title = f"[AniDL] {at.strip()} - {episode.strip()} [Web ~ {source.strip()}]"
     title = title.replace("[YouDeer]", "[AniDL]")
     title = title.replace("(WEB 1080p Dual Audio) | My Deer Friend Nokotan", "[Web ~ YouDeer]")
+    title = title.replace(" - S01E", " - ")
+    title = title.replace(" - S02E", " S2 - ")
+    title = title.replace(" - S03E", " S3 - ")
+    title = title.replace(" - S04E", " S4 - ")
+    title = title.replace(" - S05E", " S5 - ")
+    title = title.replace(" - S06E", " S6 - ")
+    title = title.replace(" - S07E", " S7 - ")
+    title = title.replace(" - S08E", " S8 - ")
+    title = title.replace(" - S09E", " S9 - ")
+    title = title.replace(" - S10E", " S10 - ")
     title = title +".mkv"
     return title
 
