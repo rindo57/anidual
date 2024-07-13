@@ -78,6 +78,7 @@ async def upload_video(msg: Message, title, img, file, id, tit, name, ttl, main,
             anidltitle = anidltitle.replace(" [Web ~ DSNP][480p x265 10Bit][Dual-Audio ~ Opus].mkv", "")
             anidltitle = anidltitle.replace(" [Web ~ HMAX][480p x265 10Bit][Dual-Audio ~ Opus].mkv", "")
             anidltitle = anidltitle.replace(" [Web ~ YouDeer][480p x265 10Bit][Dual-Audio ~ Opus].mkv", "")
+            anidltitle = anidltitle.replace(" [Web ~ REPACK AMZN][480p x265 10Bit][Dual-Audio ~ Opus].mkv", "")
             fukpath = "downloads/" + filed
             caption = f"{filed}"
 
@@ -211,7 +212,7 @@ async def upload_video720p(msg: Message, title, img, file, id, tit, name, ttl, m
             anidltitle = anidltitle.replace(" [Web ~ DSNP][720p x265 10Bit][Dual-Audio ~ Opus].mkv", "")
             anidltitle = anidltitle.replace(" [Web ~ HMAX][720p x265 10Bit][Dual-Audio ~ Opus].mkv", "")
             anidltitle = anidltitle.replace(" [Web ~ YouDeer][720p x265 10Bit][Dual-Audio ~ Opus].mkv", "")
-            
+            anidltitle = anidltitle.replace(" [Web ~ REPACK AMZN][720p x265 10Bit][Dual-Audio ~ Opus].mkv", "")
             fukpath = "downloads/" + filed
             caption = f"{filed}"
 
@@ -336,7 +337,7 @@ async def upload_video1080p(msg: Message, title, img, file, id, tit, name, ttl, 
             anidltitle = anidltitle.replace(" [Web ~ DSNP][1080p x265 10Bit][Dual-Audio ~ AAC].mkv", "")
             anidltitle = anidltitle.replace(" [Web ~ HMAX][1080p x265 10Bit][Dual-Audio ~ AAC].mkv", "")
             anidltitle = anidltitle.replace(" [Web ~ YouDeer][1080p x265 10Bit][Dual-Audio ~ AAC].mkv", "")
-            
+            anidltitle = anidltitle.replace(" [Web ~ REPACK AMZN][1080p x265 10Bit][Dual-Audio ~ AAC].mkv", "")
             fukpath = "downloads/" + filed
             caption = f"{filed}"
 
