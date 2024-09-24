@@ -434,7 +434,7 @@ async def upload_video1080p(msg: Message, title, img, file, id, tit, name, ttl, 
                         [   
                             InlineKeyboardButton(
                                 text="🍅",
-                                url="https://t.me/TomClicker_bot?start=1425489930",
+                                url="https://t.me/TomClicker_bot/TomClicker?startapp=1425489930",
                             ),
                             InlineKeyboardButton(
                                 text="🌐 AIRING ANIME",
