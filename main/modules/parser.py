@@ -135,4 +135,4 @@ async def auto_parser():
         except:
             pass
 
-        await asyncio.sleep(30)
+        await asyncio.sleep(60)
