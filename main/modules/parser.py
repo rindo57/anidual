@@ -62,7 +62,7 @@ def trim_titlex(title: str):
         # Constructing the new title format
         new_title = f"[AniDL] Bleach - Sennen Kessen Hen - Soukoku Tan - {int(episode):02d} [Web ~ AMZN]"
         print(new_title)
-    title = title +".mp4"
+    title = "[AniDL] "+ title +".mp4"
     return title
 
         
