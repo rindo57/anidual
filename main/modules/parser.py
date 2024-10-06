@@ -7,6 +7,7 @@ from main import queue
 from main.inline import button1
 import re
 def trim_title(title: str):
+    title = title.replace("NieR:Automata Ver1.1a", "NieR Automata Ver1_1a")
     pattern = r"^(.*?)\s*(S\d+E\d+)\s*(.*?)\s\d{3,4}p\s(.*?)\sWEB-DL.*?\((.*?),.*?\)$"
     match = re.match(pattern, title)
     if match:
