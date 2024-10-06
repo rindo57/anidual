@@ -31,8 +31,8 @@ async def save_animedb(name,data):
   
 async def del_anime(name): 
     try:
-        animesdb = db.animes
-        result = await animesdb.delete_one({"name": name})
+        
+        result = await animedb.delete_one({"name": name})
         if result.deleted_count > 0:
             print(f"Successfully deleted anime: {name}")
         else:
