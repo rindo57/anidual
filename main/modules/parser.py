@@ -60,9 +60,9 @@ def trim_titlex(title: str):
         season, episode, extra = match.groups()
         
         # Constructing the new title format
-        new_title = f"[AniDL] Bleach - Sennen Kessen Hen - Soukoku Tan - {int(episode):02d} [Web ~ AMZN]"
-        print(new_title)
-    title = "[AniDL] "+ title +".mp4"
+        title = f"[AniDL] Bleach - Sennen Kessen Hen - Soukoku Tan - {int(episode):02d} [Web ~ AMZN]"
+        print(title)
+    title = title +".mp4"
     return title
 
         
