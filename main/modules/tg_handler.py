@@ -470,8 +470,7 @@ async def start_uploading(data):
             filed = filed.replace(filed, newname1080)
             fpath = "downloads/" + filed 
     
-            os.rename(file,"video.mkv")
-            main = await app.send_photo(KAYO_ID,photo=img, caption=newname1080)
+
             fpath = "downloads/" + filed  
     
             os.rename(file,"video.mkv")
