@@ -198,10 +198,10 @@ async def start_uploading(data):
 
             duration = get_duration(file)
             durationx = get_durationx(file)
-            filexz = os.path.basename(file)
+            filed = os.path.basename(file)
             newname = title.replace(".mkv", "[480p x265 10Bit][Dual-Audio ~ Opus].mkv")
             newname = newname.replace(".mp4", "[480p x265 10Bit][Opus].mkv")
-            filed = filexz.replace(filexz, newname)
+            filed = filed.replace(filed, newname)
             fpath = "downloads/" + filed
     
             os.rename(file,"video.mkv")
@@ -464,10 +464,10 @@ async def start_uploading(data):
 
             duration = get_duration(file)
             durationx = get_durationx(file)
-            fileqd = os.path.basename(file)
+            filed = os.path.basename(file)
             newname1080 = title.replace(".mkv", "[1080p x265 10Bit][Dual-Audio ~ AAC].mkv")
             newname1080 = newname1080.replace(".mp4", "[1080p x265 10Bit][AAC].mkv")
-            filed = fileqd.replace(fileqd, newname1080)
+            filed = filed.replace(filed, newname1080)
             fpath = "downloads/" + filed 
     
             os.rename(file,"video.mkv")
