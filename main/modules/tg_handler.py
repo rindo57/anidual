@@ -276,7 +276,7 @@ async def start_uploading(data):
             await asyncio.sleep(5)
 # 1080p 
             newname1080 = titlev2.replace(".mkv", "[1080p x265 10Bit][Dual-Audio ~ AAC].mkv")
-            newname1080 = titleV2.replace(".mp4", "[1080p x265 10Bit][AAC].mkv")
+            newname1080 = titlev2.replace(".mp4", "[1080p x265 10Bit][AAC].mkv")
             msg3 = await app.send_photo(bin_id,photo=img,caption=newname1080)
             main3 = await app.send_photo(KAYO_ID,photo=img, caption=newname1080)
             fpath = "downloads/" + newname1080
@@ -394,7 +394,7 @@ async def start_uploading(data):
 #1080p 
 
             newname1080 = titlev2.replace(".mkv", "[1080p x265 10Bit][Dual-Audio ~ AAC].mkv")
-            newname1080 = titleV2.replace(".mp4", "[1080p x265 10Bit][AAC].mkv")
+            newname1080 = titlev2.replace(".mp4", "[1080p x265 10Bit][AAC].mkv")
             msg3 = await app.send_photo(bin_id,photo=img,caption=newname1080)
             main3 = await app.send_photo(KAYO_ID,photo=img, caption=newname1080)
             fpath = "downloads/" + newname1080
