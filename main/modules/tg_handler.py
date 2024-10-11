@@ -526,6 +526,9 @@ async def start_uploading(data):
             print("All format uploaded.")
             print("del " , name)
             await del_anime(name)
+            id = None
+            name = None
+            video = None
 
    
     except FloodWait as e:
