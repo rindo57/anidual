@@ -303,7 +303,9 @@ async def start_uploading(data):
                 os.remove(fpath)
             except:
                 pass  
-
+            print("All format uploaded.")
+            print("del " , name)
+            await del_anime(name)
         
         elif data["480p"]=='01':
             title = data["title"]
@@ -421,7 +423,9 @@ async def start_uploading(data):
                 os.remove(fpath)
             except:
                 pass  
-
+            print("All format uploaded.")
+            print("del " , name)
+            await del_anime(name)
         #1080p
         elif data["480p"]=='012':
             title = data["title"]
@@ -521,6 +525,9 @@ async def start_uploading(data):
             except:
 
                 pass  
+            print("All format uploaded.")
+            print("del " , name)
+            await del_anime(name)
         else:
             name = data["title"]
             print("All format uploaded.")
