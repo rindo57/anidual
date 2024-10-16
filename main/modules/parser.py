@@ -25,6 +25,7 @@ def trim_title(title: str):
             else:
                 title = f"[AniDL] {at.strip()} - {episode.strip()} [Web ~ {source.strip()}]"
     title = title.replace("[YouDeer]", "[AniDL]")
+    title = title.replace("Shi Cao", "Shicao")
     title = title.replace("(WEB 1080p Dual Audio) | My Deer Friend Nokotan", "[Web ~ YouDeer]")
     title = title.replace(" - S01E", " - ")
     title = title.replace(" - S02E", " S2 - ")
