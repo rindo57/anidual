@@ -29,9 +29,17 @@ async def save_animedb(name,data):
     data = await animedb.insert_one({"name": name, "data": data})
     return
   
+  
 async def del_anime(name): 
-    result = await animedb.delete_one({"name": name})
-    print("Deleted: ", name) 
+    try:
+        animesdb = db.animes
+        result = await animesdb.delete_one({"name": name})
+        if result.deleted_count > 0:
+            print(f"Successfully deleted anime: {name}")
+        else:
+            print(f"No anime found with the name: {name}")
+    except pymongo.errors.PyMongoError as e:
+        print(f"Error deleting anime: {e}")
 
 async def get_uploads(): 
     anime_list = []
