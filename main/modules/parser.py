@@ -92,7 +92,6 @@ def parse():
     for i in c:
         item = {}
         item['title'] = trim_titlex(i['title'])        
-        item['subtitle'] = "us"
         item['size'] = i['nyaa_size']   
         item['link'] = "magnet:?xt=urn:btih:" + i['nyaa_infohash']
         item['480p'] = '0'
@@ -121,7 +120,7 @@ async def auto_parser():
         
         for i in rss:
             if i["title"] not in uanimes and i["title"] not in saved_anime:
-               # if ".mkv" in i["title"] or ".mp4" in i["title"]:
+                # if ".mkv" in i["title"] or ".mp4" in i["title"]:
                     title = i["title"]
                     await save_animedb(title,i)
 
