@@ -320,7 +320,7 @@ ETA: {}
         status="Encoding"
         speed=tr(speed)
         res=extract_resolution(source_text)
-        await save_progress(sourcetext,status,engine,percent, speed, ETA,res)
+        save_progress(sourcetext,status,engine,percent, speed, ETA,res)
         return text2
 
 
