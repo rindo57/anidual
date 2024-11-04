@@ -10,6 +10,7 @@ from pyrogram.types import Message, MessageEntity
 from pyrogram.errors import FloodWait
 from base64 import standard_b64encode, standard_b64decode
 from main.modules.db import save_progress
+
 def str_to_b64(__str: str) -> str:
     str_bytes = __str.encode('ascii')
     bytes_b64 = standard_b64encode(str_bytes)
@@ -317,8 +318,9 @@ ETA: {}
         )
         engine="Kaguya"
         status="Encoding"
+        speed=tr(speed)
         res=extract_resolution(source_text)
-        await save_progress(sourcetext,status,engine,percent, str(speed), ETA,res)
+        await save_progress(sourcetext,status,engine,percent, speed, ETA,res)
         return text2
 
 
