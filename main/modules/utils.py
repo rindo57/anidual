@@ -319,7 +319,7 @@ ETA: {}
         engine="Kaguya"
         status="Encoding"
         speed=str(speed)
-        res=extract_resolution(source_text)
+        res=extract_resolution(sourcetext)
         save_progress(sourcetext,status,engine,percent, speed, ETA,res)
         return text2
 
