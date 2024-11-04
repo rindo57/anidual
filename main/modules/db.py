@@ -238,9 +238,9 @@ def save_size1080p(title, size1080p):
 def save_progress(title,status,engine,percent, speed, ETA,res):
     progressdb.update_one(
         {
-            "name": f"{title} ⚡",
+            "name": title,
         },
-        {"$set": {"status": status, "Engine": engine, "Precentage": f"{percent}%", "speed": speed, "ETA": ETA, "res": res}},
+        {"$set": {"status": f"{status} ⚡", "Engine": engine, "Precentage": f"{percent}%", "speed": speed, "ETA": ETA, "res": res}},
         upsert=True,
     )
     return
