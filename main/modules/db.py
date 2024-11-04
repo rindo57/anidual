@@ -6,6 +6,8 @@ print("[INFO]: STARTING MONGO DB CLIENT")
 mongo_client = MongoClient(MONGO_DB_URI)
 db = mongo_client.dual
 dbx = mongo_client["anidl"]
+dbz = mongo_client["progress"]
+progressdb=dbz["info"]
 filesdb = dbx["files"]
 animedb = db.animes
 uploadsdb = db.uploads
@@ -229,6 +231,16 @@ def save_size1080p(title, size1080p):
             "name": title
         },
         {"$set": {"data.size1080p": size1080p}},
+        upsert=True,
+    )
+    return
+
+def save_progress(title,status,engine,percent, speed, ETA,res)):
+    progressdb.update_one(
+        {
+            "title": title,
+        },
+        {"$set": {"status": status, "Engine": engine, "Precentage": percent, "speed": speed, "ETA": ETA, "res": res}},
         upsert=True,
     )
     return
