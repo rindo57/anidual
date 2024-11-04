@@ -235,7 +235,7 @@ def save_size1080p(title, size1080p):
     )
     return
 
-def save_progress(title,status,engine,percent, speed, ETA,res)):
+def save_progress(title,status,engine,percent, speed, ETA,res):
     progressdb.update_one(
         {
             "title": title,
