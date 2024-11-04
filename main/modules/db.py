@@ -245,7 +245,7 @@ def save_progress(title,status,engine,percent, speed, ETA,res):
     )
     return
 
-def del_progress(title):
+async def del_progress(title):
     try:
         result = await progressdb.delete_one({"name": title})
         if result.deleted_count > 0:
