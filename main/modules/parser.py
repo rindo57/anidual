@@ -44,18 +44,18 @@ def trim_titlex(title: str):
     # Updated regex pattern to capture required groups
     title = title.replace("BLEACH S01E27", "BLEACH S01E01")
     title = title.replace("BLEACH S01E28", "BLEACH S01E02")
-    title = title.replace("BLEACH S01E29", "BLEACH S01E03")
-    title = title.replace("BLEACH S01E30", "BLEACH S01E04")
-    title = title.replace("BLEACH S01E31", "BLEACH S01E05")
-    title = title.replace("BLEACH S01E32", "BLEACH S01E06")
-    title = title.replace("BLEACH S01E33", "BLEACH S01E07")
-    title = title.replace("BLEACH S01E34", "BLEACH S01E08")
-    title = title.replace("BLEACH S01E35", "BLEACH S01E09")
-    title = title.replace("BLEACH S01E36", "BLEACH S01E10")
-    title = title.replace("BLEACH S01E37", "BLEACH S01E11")
-    title = title.replace("BLEACH S01E38", "BLEACH S01E12")
-    title = title.replace("BLEACH S01E39", "BLEACH S01E13")
-    pattern = r"^BLEACH S(\d{2})E(\d{2}) (.*?)(?: \d{3,4}p AMZN WEB-DL DDP\d\.\d H \d{3}-[A-Z]+ \(Multi-Subs\))$"
+    title = title.replace("BLEACH Thousand Year Blood War S01E29", "BLEACH S01E03")
+    title = title.replace("BLEACH Thousand Year Blood War S01E30", "BLEACH S01E04")
+    title = title.replace("BLEACH Thousand Year Blood War S01E31", "BLEACH S01E05")
+    title = title.replace("BLEACH Thousand Year Blood War S01E32", "BLEACH S01E06")
+    title = title.replace("BLEACH Thousand Year Blood War S01E33", "BLEACH S01E07")
+    title = title.replace("BLEACH Thousand Year Blood War S01E34", "BLEACH S01E08")
+    title = title.replace("BLEACH Thousand Year Blood War S01E35", "BLEACH S01E09")
+    title = title.replace("BLEACH Thousand Year Blood War S01E36", "BLEACH S01E10")
+    title = title.replace("BLEACH Thousand Year Blood War S01E37", "BLEACH S01E11")
+    title = title.replace("BLEACH Thousand Year Blood War S01E38", "BLEACH S01E12")
+    title = title.replace("BLEACH Thousand Year Blood War S01E39", "BLEACH S01E13")
+    pattern = r"^BLEACH S(\d{2})E(\d{2}) (.*?)(?: \d{3,4}p AMZN WEB-DL DDP\d\.\d H \d{3}-[A-Z]+ \(Bleach: Sennen Kessen-hen, Multi-Subs\))$"
     match = re.match(pattern, title)
     
     if match:
@@ -74,7 +74,7 @@ def multi_sub(title: str):
 
 def parse():
     a = feedparser.parse("https://www.siftrss.com/f/BoR8BQAzjA1")
-    ny = feedparser.parse('''https://nyaa.si/?page=rss&q=%22BLEACH%22%201080p%20AMZN%20WEB-DL%20DDP2.0%20H%20264-VARYG%20-Blood''')
+    ny = feedparser.parse('''https://nyaa.si/?page=rss&q=%22Bleach%22%201080p%20AMZN%20WEB-DL%20DDP2.0%20H%20264-VARYG''')
     b = a["entries"]
     
     c = ny["entries"]
