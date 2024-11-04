@@ -9,7 +9,7 @@ from string import ascii_letters, ascii_uppercase, digits
 from pyrogram.types import Message, MessageEntity
 from pyrogram.errors import FloodWait
 from base64 import standard_b64encode, standard_b64decode
-
+from main.modules.db import save_progress
 def str_to_b64(__str: str) -> str:
     str_bytes = __str.encode('ascii')
     bytes_b64 = standard_b64encode(str_bytes)
@@ -160,6 +160,11 @@ def tags_generator(title):
         x = x[:-1]
     return x
 
+def extract_resolution(f):
+    match re.search(r'(\d{3,4}p)', f)
+    if match:
+        return match.group(1)
+    return None
 async def status_text(text):
     stat = """
 ⭐️ **Status :** {}
@@ -269,6 +274,7 @@ ETA: {}
             speed,
             ETA
         )
+       # await save_progress(sourcetext,status,
         return text
 
     elif enco == True:
@@ -309,6 +315,10 @@ ETA: {}
             str(speed),
             ETA
         )
+        engine="Kaguya"
+        status="Encoding"
+        res=extract_resolution(source_text)
+        await save_progress(sourcetext,status,engine,percent, str(speed), ETA,res)
         return text2
 
 
