@@ -86,12 +86,12 @@ async def upload_video(msg: Message, title, img, file, id, tit, name, ttl, main,
             gay_id = 1159872623
             upid = int(main.id)
             print(upid)
-        '''    x = await app.edit_message_media(
+        """    x = await app.edit_message_media(
                 chat_id=kayo_id,
                 message_id=upid,
                 media=InputMediaDocument(file),
                 file_name=filed
-            )'''
+            )"""
             x = await app.send_document(
                 kayo_id,
                 file,
