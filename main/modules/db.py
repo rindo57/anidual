@@ -238,9 +238,20 @@ def save_size1080p(title, size1080p):
 def save_progress(title,status,engine,percent, speed, ETA,res):
     progressdb.update_one(
         {
-            "title": title,
+            "name": title,
         },
         {"$set": {"status": status, "Engine": engine, "Precentage": percent, "speed": speed, "ETA": ETA, "res": res}},
         upsert=True,
     )
+    return
+
+def del_progress(title):
+    try:
+        result = await progressdb.delete_one({"name": title})
+        if result.deleted_count > 0:
+            print(f"Successfully deleted progress: {title}")
+        else:
+            print(f"No anime found with the progress: {title}")
+    except pymongo.errors.PyMongoError as e:
+        print(f"Error deleting progress: {e}")
     return
