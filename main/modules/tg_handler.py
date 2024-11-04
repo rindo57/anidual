@@ -241,8 +241,9 @@ async def start_uploading(data):
             else:
 
                 os.rename("out.mkv",fpath)
-  
+            await main.delete()
             print("Uploading --> ",name)
+            
             video = await upload_video(msg,title,img,fpath,id,tit,name,size,main,msubtitle,nyaasize,joinaud, alink)
             print("480title: ", data["title"])
             save_480p(data["title"])
@@ -269,7 +270,7 @@ async def start_uploading(data):
             else:
 
                 os.rename("out.mkv",fpath)
-  
+            await main2.delete()
             print("Uploading --> ",name)
             video = await upload_video720p(msg2,title,img,fpath,id,tit,name,size,main2,msubtitle,nyaasize,joinaud, alink)
             save_720p(data["title"])
@@ -292,7 +293,7 @@ async def start_uploading(data):
             else:
 
                 os.rename("out.mkv",fpath)
-  
+            await main3.delete()
             print("Uploading --> ",name)
             video = await upload_video1080p(msg3,title,img,fpath,id,tit,name,size,main3,msubtitle,nyaasize,joinaud, alink)
             save_1080p(data["title"])
@@ -389,7 +390,7 @@ async def start_uploading(data):
             else:
 
                 os.rename("out.mkv",fpath)
-  
+            await main.delete()
             print("Uploading --> ",name)
             video = await upload_video720p(msg,title,img,fpath,id,tit,name,size,main,msubtitle,nyaasize,joinaud, alink)
             save_720p(data["title"])
@@ -412,7 +413,7 @@ async def start_uploading(data):
             else:
 
                 os.rename("out.mkv",fpath)
-  
+            await main3.delete()
             print("Uploading --> ",name)
             video = await upload_video1080p(msg3,title,img,fpath,id,tit,name,size,main3,msubtitle,nyaasize,joinaud, alink)
             save_1080p(data["title"])
@@ -513,7 +514,7 @@ async def start_uploading(data):
             else:
 
                 os.rename("out.mkv",fpath)
-  
+            await main.delete()
             print("Uploading --> ",name)
             video = await upload_video1080p(msg,title,img,fpath,id,tit,name,size,main,msubtitle,nyaasize,joinaud, alink)
             save_1080p(data["title"])
