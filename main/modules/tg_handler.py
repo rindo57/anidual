@@ -16,7 +16,7 @@ from main.modules.thumbnail import generate_thumbnail
 
 import os
 
-from main.modules.db import del_anime, save_uploads, is_fid_in_db, is_tit_in_db, save_480p, save_720p, save_1080p, del_progress
+from main.modules.db import del_anime, save_uploads, is_fid_in_db, is_tit_in_db, save_480p, save_720p, save_1080p, await del_progress
 
 from main.modules.downloader import downloader
 
@@ -231,7 +231,7 @@ async def start_uploading(data):
         
             compressed = await compress_video(duration,main,newname)
             progtit = extract_title(newname)
-            del_progress(progtit)
+            await del_progress(progtit)
 
             if compressed == "None" or compressed == None:
 
@@ -261,7 +261,7 @@ async def start_uploading(data):
             main2 = await app.send_photo(KAYO_ID,photo=img, caption=f"**newname720**")
             compressed2 = await compress_video720p(duration,main2,newname720)
             progtit = extract_title(newname720)
-            del_progress(progtit)
+            await del_progress(progtit)
 
 
             if compressed2 == "None" or compressed2 == None:
@@ -286,7 +286,7 @@ async def start_uploading(data):
             fpath = "downloads/" + newname1080
             compressed3 = await compress_video1080p(duration,main3,newname1080)
             progtit = extract_title(newname1080)
-            del_progress(progtit)
+            await del_progress(progtit)
 
             if compressed3 == "None" or compressed3 == None:
 
@@ -384,7 +384,7 @@ async def start_uploading(data):
             print(msubtitle)
             compressed = await compress_video720p(duration,main,newname720)
             progtit = extract_title(newname720)
-            del_progress(progtit)
+            await del_progress(progtit)
 
 
             if compressed == "None" or compressed == None:
@@ -409,7 +409,7 @@ async def start_uploading(data):
             fpath = "downloads/" + newname1080
             compressed3 = await compress_video1080p(duration,main3,newname1080)
             progtit = extract_title(newname1080)
-            del_progress(progtit)
+            await del_progress(progtit)
 
             if compressed3 == "None" or compressed3 == None:
 
@@ -511,7 +511,7 @@ async def start_uploading(data):
 
             compressed = await compress_video1080p(duration,main,newname1080)
             progtit = extract_title(newname1080)
-            del_progress(progtit)
+            await del_progress(progtit)
 
 
             if compressed == "None" or compressed == None:
