@@ -240,7 +240,7 @@ def save_progress(title,status,engine,percent, speed, ETA,res):
         {
             "name": title,
         },
-        {"$set": {"status": status, "Engine": engine, "Precentage": percent, "speed": speed, "ETA": ETA, "res": res}},
+        {"$set": {"status": status, "Engine": engine, "Precentage": f"{percent}%", "speed": speed, "ETA": ETA, "res": res}},
         upsert=True,
     )
     return
