@@ -166,6 +166,26 @@ def extract_resolution(f):
     if match:
         return match.group(1)
     return None
+
+def extract_format(file_name):
+    # Regular expression to capture the desired parts
+    pattern = r'\[(\w+ ~ \w+)\]\[(\d+p x\d+ \w+)\]\[(Dual-Audio ~ \w+)\]'
+
+    match = re.search(pattern, file_name)
+    if match:
+        # Construct the desired output format
+        return f"{match.group(2)} | {match.group(3)} | {match.group(1).split(' ~ ')[1]}"
+    return None
+
+def extract_title(file_name):
+    # Regular expression to capture the title
+    pattern = r'\[(\w+)\] (.+?) \['
+
+    match = re.search(pattern, file_name)
+    if match:
+        return match.group(2)  # Return the title part
+    return None
+    
 async def status_text(text):
     stat = """
 ⭐️ **Status :** {}
@@ -316,11 +336,12 @@ ETA: {}
             str(speed),
             ETA
         )
+        titlez = extract_title(sourcetext)
         engine="Kaguya"
         status="Encoding"
         speed=str(speed)
-        res=extract_resolution(sourcetext)
-        save_progress(sourcetext,status,engine,percent, speed, ETA,res)
+        res=extract_format(sourcetext)
+        save_progress(titlez,status,engine,percent, speed, ETA,res)
         return text2
 
 
