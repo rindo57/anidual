@@ -84,8 +84,7 @@ async def upload_video(msg: Message, title, img, file, id, tit, name, ttl, main,
 
             kayo_id = -1001895203720
             gay_id = 1159872623
-            upid = int(main.id)
-            print(upid)
+            
     
             x = await app.send_document(
                 kayo_id,
@@ -99,6 +98,8 @@ async def upload_video(msg: Message, title, img, file, id, tit, name, ttl, main,
                     ttl
             )
             )
+            upid = int(x.id)
+            print(upid)
             await asyncio.sleep(3)
             hash = "".join([random.choice(ascii_letters + digits) for n in range(50)])
             print("hash1:", hash)
@@ -227,8 +228,7 @@ async def upload_video720p(msg: Message, title, img, file, id, tit, name, ttl, m
 
             kayo_id = -1001895203720
             gay_id = 1159872623
-            upid = int(main.id)
-            print(upid)
+        
             x = await app.send_document(
                 kayo_id,
                 file,
@@ -241,6 +241,8 @@ async def upload_video720p(msg: Message, title, img, file, id, tit, name, ttl, m
                     ttl
             )
             )
+            upid = int(x.id)
+            print(upid)
             await asyncio.sleep(3)
             hash = "".join([random.choice(ascii_letters + digits) for n in range(50)])
             save_file_in_db(filed, hash, subtitle, img, audio_info, tit, alink, size720p, upid)
@@ -352,7 +354,7 @@ async def upload_video1080p(msg: Message, title, img, file, id, tit, name, ttl, 
             kayo_id = -1001895203720
             gay_id = 1159872623
             upid = int(main.id)
-            print(upid)
+         
             x = await app.send_document(
                 kayo_id,
                 file,
@@ -365,6 +367,8 @@ async def upload_video1080p(msg: Message, title, img, file, id, tit, name, ttl, 
                     ttl
             )
             )
+            upid = int(x.id)
+            print(upid)
             await asyncio.sleep(3)
             hash = "".join([random.choice(ascii_letters + digits) for n in range(50)])
             save_file_in_db(filed, hash, subtitle, img, audio_info, tit, alink, size1080p, upid)
