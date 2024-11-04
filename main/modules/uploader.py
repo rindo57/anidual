@@ -98,6 +98,7 @@ async def upload_video(msg: Message, title, img, file, id, tit, name, ttl, main,
                     c_time,
                     ttl
             )
+            )
             await asyncio.sleep(3)
             hash = "".join([random.choice(ascii_letters + digits) for n in range(50)])
             print("hash1:", hash)
@@ -239,6 +240,7 @@ async def upload_video720p(msg: Message, title, img, file, id, tit, name, ttl, m
                     c_time,
                     ttl
             )
+            )
             await asyncio.sleep(3)
             hash = "".join([random.choice(ascii_letters + digits) for n in range(50)])
             save_file_in_db(filed, hash, subtitle, img, audio_info, tit, alink, size720p, upid)
@@ -361,6 +363,7 @@ async def upload_video1080p(msg: Message, title, img, file, id, tit, name, ttl, 
                     r,
                     c_time,
                     ttl
+            )
             )
             await asyncio.sleep(3)
             hash = "".join([random.choice(ascii_letters + digits) for n in range(50)])
