@@ -162,7 +162,7 @@ def tags_generator(title):
     return x
 
 def extract_resolution(f):
-    match re.search(r'(\d{3,4}p)', f)
+    match = re.search(r'(\d{3,4}p)', f)
     if match:
         return match.group(1)
     return None
