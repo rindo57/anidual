@@ -16,7 +16,7 @@ from main.modules.thumbnail import generate_thumbnail
 
 import os
 
-from main.modules.db import del_anime, save_uploads, is_fid_in_db, is_tit_in_db, save_480p, save_720p, save_1080p, await del_progress
+from main.modules.db import del_anime, save_uploads, is_fid_in_db, is_tit_in_db, save_480p, save_720p, save_1080p, del_progress
 
 from main.modules.downloader import downloader
 
