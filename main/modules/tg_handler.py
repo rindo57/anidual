@@ -212,8 +212,9 @@ async def start_uploading(data):
             video_path="video.mkv"
         
             audio_language = get_audio_language(video_path)
-            if audio_language:
-                print("Audio Track Language:", audio_language)
+            joinaud = ", ".join(audio_language)
+            if joinaud:
+                print("Audio Track Language:", joinaud)
             else:
                 print("Failed to get audio language.")
             pending_720p(data["title"])
@@ -232,7 +233,7 @@ async def start_uploading(data):
                 os.rename("out.mkv",fpath)
             await main.delete()
             print("Uploading --> ",name)
-            video = await upload_video(msg,title,tito,fpath,entitle,name,size,subtitle,nyaasize,audio_language)
+            video = await upload_video(msg,title,tito,fpath,entitle,name,size,subtitle,nyaasize,joinaud)
             print("480title: ", data["title"])
             
             save_480p(data["title"])
@@ -264,7 +265,7 @@ async def start_uploading(data):
                 os.rename("out.mkv",fpath)
             await main2.delete()
             print("Uploading --> ",name)
-            video = await upload_video720p(msg2,title,tito2,fpath,entitle,name,size,subtitle,nyaasize,audio_language)
+            video = await upload_video720p(msg2,title,tito2,fpath,entitle,name,size,subtitle,nyaasize,joinaud)
             
             save_720p(data["title"])
             await asyncio.sleep(5)
@@ -293,7 +294,7 @@ async def start_uploading(data):
                 os.rename("out.mkv",fpath)
             await main3.delete()
             print("Uploading --> ",name)
-            video = await upload_video1080p(msg3,title,tito3,fpath,entitle,name,size,subtitle,nyaasize,audio_language)
+            video = await upload_video1080p(msg3,title,tito3,fpath,entitle,name,size,subtitle,nyaasize,joinaud)
            
             save_1080p(data["title"])
             try:
@@ -362,8 +363,9 @@ async def start_uploading(data):
             video_path="video.mkv"
         
             audio_language = get_audio_language(video_path)
-            if audio_language:
-                print("Audio Track Language:", audio_language)
+            joinaud = ", ".join(audio_language)
+            if joinaud:
+                print("Audio Track Language:", joinaud)
             else:
                 print("Failed to get audio language.")
             pending_1080p(data["title"])
@@ -382,7 +384,7 @@ async def start_uploading(data):
                 os.rename("out.mkv",fpath)
             await main.delete()
             print("Uploading --> ",name)
-            video = await upload_video720p(msg,title,tito,fpath,entitle,name,size,main,subtitle,nyaasize,audio_language)
+            video = await upload_video720p(msg,title,tito,fpath,entitle,name,size,main,subtitle,nyaasize,joinaud)
            
             save_720p(data["title"])
 #1080p 
@@ -409,7 +411,7 @@ async def start_uploading(data):
                 os.rename("out.mkv",fpath)
             await main3.delete()
             print("Uploading --> ",name)
-            video = await upload_video1080p(msg3,title,tito3,fpath,entitle,name,size,subtitle,nyaasize,audio_language)
+            video = await upload_video1080p(msg3,title,tito3,fpath,entitle,name,size,subtitle,nyaasize,joinaud)
             
             save_1080p(data["title"])
             try:
@@ -480,8 +482,9 @@ async def start_uploading(data):
             video_path="video.mkv"
         
             audio_language = get_audio_language(video_path)
-            if audio_language:
-                print("Audio Track Language:", audio_language)
+            joinaud = ", ".join(audio_language)
+            if joinaud:
+                print("Audio Track Language:", joinaud)
             else:
                 print("Failed to get audio language.")
             no_pending(data["title"])
@@ -500,7 +503,7 @@ async def start_uploading(data):
                 os.rename("out.mkv",fpath)
             await main.delete()
             print("Uploading --> ",name)
-            video = await upload_video1080p(msg,title,tito,fpath,entitle,name,size,subtitle,nyaasize,audio_language)
+            video = await upload_video1080p(msg,title,tito,fpath,entitle,name,size,subtitle,nyaasize,joinaud)
             
             save_1080p(data["title"])
             try:
