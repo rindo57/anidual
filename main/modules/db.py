@@ -28,6 +28,7 @@ async def get_animesdb():
     return anime_list
 
 async def save_animedb(name,data): 
+    name = name.replace("[AniDL] ", "")
     data = await animedb.insert_one({"name": name, "data": data})
     return
   
