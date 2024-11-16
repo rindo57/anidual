@@ -115,30 +115,30 @@ def trim_title(title: str):
         if at=="Dual-Audio":
             if source=="HIDI":
                 source = source.replace("HIDI", "HIDIVE")
-                title = f"[AniDL] {titler.strip()} - {episode.strip()} [Web ~ {source.strip()}]"
+                title = f"{titler.strip()} - {episode.strip()} [Web ~ {source.strip()}]"
             else:
-                title = f"[AniDL] {titler.strip()} - {episode.strip()} [Web ~ {source.strip()}]"
+                title = f"{titler.strip()} - {episode.strip()} [Web ~ {source.strip()}]"
         else:
             if source=="HIDI":
                 source = source.replace("HIDI", "HIDIVE")
-                title = f"[AniDL] {at.strip()} - {episode.strip()} [Web ~ {source.strip()}]"
+                title = f"{at.strip()} - {episode.strip()} [Web ~ {source.strip()}]"
             else:
-                title = f"[AniDL] {at.strip()} - {episode.strip()} [Web ~ {source.strip()}]"
+                title = f"{at.strip()} - {episode.strip()} [Web ~ {source.strip()}]"
     elif match2:
         titler, episode, extra, source, at = match2.groups()
         if at=="Dual-Audio":
             if source=="HIDI":
                 source = source.replace("HIDI", "HIDIVE")
-                title = f"[AniDL] {titler.strip()} - {episode.strip()} [Web ~ {source.strip()}]"
+                title = f"{titler.strip()} - {episode.strip()} [Web ~ {source.strip()}]"
             else:
-                title = f"[AniDL] {titler.strip()} - {episode.strip()} [Web ~ {source.strip()}]"
+                title = f"{titler.strip()} - {episode.strip()} [Web ~ {source.strip()}]"
         else:
             if source=="HIDI":
                 source = source.replace("HIDI", "HIDIVE")
-                title = f"[AniDL] {at.strip()} - {episode.strip()} [Web ~ {source.strip()}]"
+                title = f"{at.strip()} - {episode.strip()} [Web ~ {source.strip()}]"
             else:
-                title = f"[AniDL] {at.strip()} - {episode.strip()} [Web ~ {source.strip()}]"
-    title = title.replace("[YouDeer]", "[AniDL]")
+                title = f"{at.strip()} - {episode.strip()} [Web ~ {source.strip()}]"
+    title = title.replace("[YouDeer]", "")
     title = title.replace("Shi Cao", "Shicao")
     title = title.replace("(WEB 1080p Dual Audio) | My Deer Friend Nokotan", "[Web ~ YouDeer]")
     title = title.replace(" - S01E", " - ")
@@ -191,7 +191,7 @@ def trim_titlex(title: str):
         season, episode, extra = match.groups()
         
         # Constructing the new title format
-        title = f"[AniDL] Bleach - Sennen Kessen Hen - Soukoku Tan - {int(episode):02d} [Web ~ AMZN]"
+        title = f"Bleach - Sennen Kessen Hen - Soukoku Tan - {int(episode):02d} [Web ~ AMZN]"
         print(title)
     title = title +".mp4"
     return title
