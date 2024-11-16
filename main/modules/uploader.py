@@ -51,7 +51,7 @@ def extract_source(filename):
     else:
         return None
 
-async def upload_video(msg: Message, title, img, file, id, tit, name, ttl, main, subtitle, nyaasize, audio_info, alink):
+async def upload_video(msg: Message, title, file, tit, name, ttl, main, subtitle, nyaasize, audio_info):
 
     
     try:
@@ -79,6 +79,8 @@ async def upload_video(msg: Message, title, img, file, id, tit, name, ttl, main,
             anidltitle = anidltitle.replace(" [Web ~ HMAX][480p x265 10Bit][Dual-Audio ~ Opus].mkv", "")
             anidltitle = anidltitle.replace(" [Web ~ YouDeer][480p x265 10Bit][Dual-Audio ~ Opus].mkv", "")
             anidltitle = anidltitle.replace(" [Web ~ REPACK AMZN][480p x265 10Bit][Dual-Audio ~ Opus].mkv", "")
+            anidltitle = anidltitle.replace(" [Web ~ MAX][480p x265 10Bit][Dual-Audio ~ Opus].mkv", "")
+            anidltitle = anidltitle.replace(" [Web ~ NF][480p x265 10Bit][Dual-Audio ~ Opus].mkv", "")
             fukpath = "downloads/" + filed
             caption = f"{filed}"
 
@@ -103,7 +105,7 @@ async def upload_video(msg: Message, title, img, file, id, tit, name, ttl, main,
             await asyncio.sleep(3)
             hash = "".join([random.choice(ascii_letters + digits) for n in range(50)])
             print("hash1:", hash)
-            save_file_in_db(filed, hash, subtitle, img, audio_info, tit, alink, size480p, upid)
+            save_file_in_db(filed, hash, subtitle, audio_info, tit, size480p, upid)
             print(hash)
             ddlurl = f"https://anidl.ddlserverv1.me.in/beta/{hash}"
             gcaption = f"`📺 {filed}`\n\n`🔗 EP - {ep_num}:  https://anidl.ddlserverv1.me.in/beta/{hash}`" + "\n\n" + f"🔠 __{tit}__" + "\n" + "\n" + f"📝 `{subtitle}`"
@@ -141,11 +143,7 @@ async def upload_video(msg: Message, title, img, file, id, tit, name, ttl, main,
                 caption=gcaption
             )
             await asyncio.sleep(3)
-            await app.edit_message_reply_markup(
-                chat_id=kayo_id,
-                message_id=upid,
-                reply_markup=dl_markup
-            )
+          
             anidl_id=-1001234112068
             xurl = f"https://anidl.ddlserverv1.me.in/beta/{hash}"
             anidlcap = f"<b>{anidltitle}</b>\n<i>({tit})</i>\n<blockquote><b><a href={flink}>🗂️ [Web ~ {source}][480p x265 10Bit CRF@23][JAP/ENG ~ Opus][Multiple Subs ~ {subtitle}]</a></b> || <code>{size480p}</code></blockquote>\n#airing #dual_audio #multi_subs"
@@ -198,7 +196,7 @@ async def upload_video(msg: Message, title, img, file, id, tit, name, ttl, main,
 
     return x.id
 
-async def upload_video720p(msg: Message, title, img, file, id, tit, name, ttl, main, subtitle, nyaasize, audio_info, alink):
+async def upload_video720p(msg: Message, title, file, tit, name, ttl, main, subtitle, nyaasize, audio_info):
 
     try:
         fuk = isfile(file)
@@ -223,6 +221,8 @@ async def upload_video720p(msg: Message, title, img, file, id, tit, name, ttl, m
             anidltitle = anidltitle.replace(" [Web ~ HMAX][720p x265 10Bit][Dual-Audio ~ Opus].mkv", "")
             anidltitle = anidltitle.replace(" [Web ~ YouDeer][720p x265 10Bit][Dual-Audio ~ Opus].mkv", "")
             anidltitle = anidltitle.replace(" [Web ~ REPACK AMZN][720p x265 10Bit][Dual-Audio ~ Opus].mkv", "")
+            anidltitle = anidltitle.replace(" [Web ~ MAX][720p x265 10Bit][Dual-Audio ~ Opus].mkv", "")
+            anidltitle = anidltitle.replace(" [Web ~ NF][720p x265 10Bit][Dual-Audio ~ Opus].mkv", "")
             fukpath = "downloads/" + filed
             caption = f"{filed}"
 
@@ -245,7 +245,7 @@ async def upload_video720p(msg: Message, title, img, file, id, tit, name, ttl, m
             print(upid)
             await asyncio.sleep(3)
             hash = "".join([random.choice(ascii_letters + digits) for n in range(50)])
-            save_file_in_db(filed, hash, subtitle, img, audio_info, tit, alink, size720p, upid)
+            save_file_in_db(filed, hash, subtitle, audio_info, tit, size720p, upid)
             print(hash)
             ddlurl = f"https://anidl.ddlserverv1.me.in/beta/{hash}"
             gcaption = f"`📺 {filed}`\n\n`🔗 EP - {ep_num}:  https://anidl.ddlserverv1.me.in/beta/{hash}`" + "\n\n" + f"🔠 __{tit}__" + "\n" + "\n" + f"📝 `{subtitle}`"
@@ -272,11 +272,7 @@ async def upload_video720p(msg: Message, title, img, file, id, tit, name, ttl, m
                 caption=gcaption
             )
             await asyncio.sleep(3)
-            await app.edit_message_reply_markup(
-                chat_id=kayo_id,
-                message_id=upid,
-                reply_markup=dl_markup
-            )
+           
             anidl_id=-1001234112068
             print("check: ", title)
             code480p = await get_link480p(title)
@@ -324,7 +320,7 @@ async def upload_video720p(msg: Message, title, img, file, id, tit, name, ttl, m
 
         pass
 
-async def upload_video1080p(msg: Message, title, img, file, id, tit, name, ttl, main, subtitle, nyaasize, audio_info, alink):
+async def upload_video1080p(msg: Message, title, file, tit, name, ttl, main, subtitle, nyaasize, audio_info):
 
     try:
         fuk = isfile(file)
@@ -348,6 +344,8 @@ async def upload_video1080p(msg: Message, title, img, file, id, tit, name, ttl, 
             anidltitle = anidltitle.replace(" [Web ~ HMAX][1080p x265 10Bit][Dual-Audio ~ AAC].mkv", "")
             anidltitle = anidltitle.replace(" [Web ~ YouDeer][1080p x265 10Bit][Dual-Audio ~ AAC].mkv", "")
             anidltitle = anidltitle.replace(" [Web ~ REPACK AMZN][1080p x265 10Bit][Dual-Audio ~ AAC].mkv", "")
+            anidltitle = anidltitle.replace(" [Web ~ MAX][1080p x265 10Bit][Dual-Audio ~ AAC].mkv", "")
+            anidltitle = anidltitle.replace(" [Web ~ NF][1080p x265 10Bit][Dual-Audio ~ AAC].mkv", "")
             fukpath = "downloads/" + filed
             caption = f"{filed}"
 
@@ -371,7 +369,7 @@ async def upload_video1080p(msg: Message, title, img, file, id, tit, name, ttl, 
             print(upid)
             await asyncio.sleep(3)
             hash = "".join([random.choice(ascii_letters + digits) for n in range(50)])
-            save_file_in_db(filed, hash, subtitle, img, audio_info, tit, alink, size1080p, upid)
+            save_file_in_db(filed, hash, subtitle, audio_info, tit, size1080p, upid)
             print(hash)
             ddlurl = f"https://anidl.ddlserverv1.me.in/beta/{hash}"
             gcaption = f"`📺 {filed}`\n\n`🔗 EP - {ep_num}:  https://anidl.ddlserverv1.me.in/beta/{hash}`" + "\n\n" + f"🔠 __{tit}__" + "\n" + "\n" + f"📝 `{subtitle}`"
@@ -398,11 +396,7 @@ async def upload_video1080p(msg: Message, title, img, file, id, tit, name, ttl, 
                 caption=gcaption
             )
             await asyncio.sleep(3)
-            await app.edit_message_reply_markup(
-                chat_id=kayo_id,
-                message_id=upid,
-                reply_markup=dl_markup
-            )
+         
             anidl_id=-1001234112068
             code480p = await get_link480p(title)
             print(code480p)
