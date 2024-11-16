@@ -351,7 +351,7 @@ async def upload_video1080p(msg: Message, title, tito, file, tit, name, ttl, sub
 
             kayo_id = -1001895203720
             gay_id = 1159872623
-            upid = int(main.id)
+    
          
             x = await app.send_document(
                 kayo_id,
