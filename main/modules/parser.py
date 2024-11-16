@@ -47,6 +47,8 @@ mapping = {
     "Turkish": "tr",
     "Ukrainian": "ua",
     "Vietnamese": "vn",
+    "Chinese (Hong Kong)": "cn",
+    "Chinese": "cn",
     "Chinese (Simplified)": "cn",
     "Chinese (Traditional)": "tw"
 }
