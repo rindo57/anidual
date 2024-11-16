@@ -337,7 +337,7 @@ ETA: {}
             ETA
         )
         titlez = extract_title(sourcetext)
-        engine="Kaguya"
+        engine="Raphael"
         status="Encoding"
         speed=str(speed)
         res=extract_format(sourcetext)
