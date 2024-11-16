@@ -6,6 +6,8 @@ import feedparser
 from main import queue
 from main.inline import button1
 import re
+import requests
+from bs4 import BeautifulSoup
 mapping = {
     "English": "us",
     "English [Forced]": "us",
