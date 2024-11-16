@@ -89,7 +89,8 @@ def extract_audio_subtitles(url):
 
         # Convert sets to comma-separated strings and filter out empty values
         audio_languages = ", ".join(sorted(filter(None, audio_languages)))
-        subtitle_languages = ", ".join(sorted(filter(None, subtitle_languages)))
+        subtitle_languages = "][".join(sorted(filter(None, subtitle_languages)))
+        subtitle_languages = f"[{subtitle_languages}]"
 
         return subtitle_languages
 
@@ -191,16 +192,18 @@ def parse():
         item['entitle'] = trim_etitle(i['title'])
         item['subtitle'] = extract_audio_subtitles(i['link'])
         item['size'] = i['nyaa_size']  
-        item['480p'] = '0'
+        item['uploaded'] = '0'
         item['link'] = "magnet:?xt=urn:btih:" + i['nyaa_infohash']
         data.append(item)
         data.reverse()
     for i in c:
         item = {}
-        item['title'] = trim_titlex(i['title'])        
+        item['title'] = trim_title(i['title']) 
+        item['entitle'] = trim_etitle(i['title'])
+        item['subtitle'] = extract_audio_subtitles(i['link'])
         item['size'] = i['nyaa_size']   
         item['link'] = "magnet:?xt=urn:btih:" + i['nyaa_infohash']
-        item['480p'] = '0'
+        item['uploaded'] = '0'
         data.append(item)
         data.reverse()
     return data
