@@ -40,6 +40,8 @@ mapping = {
     "Portuguese (Brazilian)": "br",
     "Portuguese (European)": "pt",
     "Romanian": "ro",
+    "Russian": "ru",
+    "French (European)": "fr",
     "Swedish": "se",
     "Thai": "th",
     "Turkish": "tr",
@@ -75,7 +77,7 @@ def extract_audio_subtitles(url):
 
         # Get the text content of the div
         description_text = torrent_description_div.get_text(separator="\n")
-        description_text = description_text.replace("**", "").replace("`", "").replace(" [Dubtitle]", "").replace("[SDH]", "")
+        description_text = description_text.replace("**", "").replace("`", "").replace(" [Dubtitle]", "").replace(" [SDH]", "").replace(" [CC]", "").replace("Chinese (China)", "Chinese").replace("English (BILI)", "en").replace("English (HIDI)", "en").replace("Indonesian (BILI)","Indonesian").replace("Thai (BILI)","Thai")
 
         # Extracting audio details
         audio_match = re.search(r"Audios \(\d+\):(.*?)(?:\n|$)", description_text, re.DOTALL)
@@ -147,6 +149,7 @@ def trim_title(title: str):
     title = title.replace(" - S08E", " S8 - ")
     title = title.replace(" - S09E", " S9 - ")
     title = title.replace(" - S10E", " S10 - ")
+     title = title.replace("Bleach: Sennen Kessen-hen - 25", "BLEACH S01E13")
     title = title +".mkv"
     return title
 
@@ -178,6 +181,7 @@ def trim_titlex(title: str):
     title = title.replace("BLEACH Thousand Year Blood War S01E37", "BLEACH S01E11")
     title = title.replace("BLEACH Thousand Year Blood War S01E38", "BLEACH S01E12")
     title = title.replace("BLEACH Thousand Year Blood War S01E39", "BLEACH S01E13")
+    
     pattern = r"^BLEACH S(\d{2})E(\d{2}) (.*?)(?: \d{3,4}p AMZN WEB-DL DDP\d\.\d H \d{3}-[A-Z]+ \(Bleach: Sennen Kessen-hen, Multi-Subs\))$"
     match = re.match(pattern, title)
     
