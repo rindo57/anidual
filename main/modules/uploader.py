@@ -51,7 +51,7 @@ def extract_source(filename):
     else:
         return None
 
-async def upload_video(msg: Message, title, file, tit, name, ttl, main, subtitle, nyaasize, audio_info):
+async def upload_video(msg: Message, title, tito, file, tit, name, ttl, subtitle, nyaasize, audio_info):
 
     
     try:
@@ -196,7 +196,7 @@ async def upload_video(msg: Message, title, file, tit, name, ttl, main, subtitle
 
     return x.id
 
-async def upload_video720p(msg: Message, title, file, tit, name, ttl, main, subtitle, nyaasize, audio_info):
+async def upload_video720p(msg: Message, title, tito, file, tit, name, ttl, subtitle, nyaasize, audio_info):
 
     try:
         fuk = isfile(file)
@@ -320,7 +320,7 @@ async def upload_video720p(msg: Message, title, file, tit, name, ttl, main, subt
 
         pass
 
-async def upload_video1080p(msg: Message, title, file, tit, name, ttl, main, subtitle, nyaasize, audio_info):
+async def upload_video1080p(msg: Message, title, tito, file, tit, name, ttl, subtitle, nyaasize, audio_info):
 
     try:
         fuk = isfile(file)
