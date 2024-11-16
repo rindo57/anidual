@@ -40,6 +40,19 @@ def trim_title(title: str):
     title = title +".mkv"
     return title
 
+def trim_etitle(title):
+    # Regex pattern to match content inside parentheses
+    pattern = r"\(([^)]+)\)"
+    matches = re.findall(pattern, title)  # Use `findall` to capture all matches
+
+    for match in matches:
+        # Extract main title (before the first comma, if present)
+        main_title = match.split(',')[0].strip()
+        if main_title != "Dual-Audio":  # Ensure we're not returning "Dual-Audio"
+            return main_title
+
+    return None 
+
 def trim_titlex(title: str):
     # Updated regex pattern to capture required groups
     title = title.replace("BLEACH S01E27", "BLEACH S01E01")
@@ -84,6 +97,7 @@ def parse():
     for i in b:
         item = {}
         item['title'] = trim_title(i['title'])
+        item['entitle'] = trim_etitle(i['title'])
         item['size'] = i['nyaa_size']  
         item['480p'] = '0'
         item['link'] = "magnet:?xt=urn:btih:" + i['nyaa_infohash']
