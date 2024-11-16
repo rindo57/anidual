@@ -151,7 +151,7 @@ def trim_title(title: str):
     title = title.replace(" - S08E", " S8 - ")
     title = title.replace(" - S09E", " S9 - ")
     title = title.replace(" - S10E", " S10 - ")
-     title = title.replace("Bleach: Sennen Kessen-hen - 25", "BLEACH S01E13")
+
     title = title +".mkv"
     return title
 
