@@ -103,9 +103,25 @@ def extract_audio_subtitles(url):
 def trim_title(title: str):
     title = title.replace("NieR:Automata Ver1.1a", "NieR Automata Ver1_1a")
     pattern = r"^(.*?)\s*(S\d+E\d+)\s*(.*?)\s\d{3,4}p\s(.*?)\sWEB-DL.*?\((.*?),.*?\)$"
+    pattern2 = r"^(.*?)\s*(S\d+E\d+)\s*(.*?)\s\d{3,4}p\s(.*?)\sWEB-DL.*?\((.*?)\)$"
     match = re.match(pattern, title)
+    match2 = re.match(pattern2, title)
     if match:
         titler, episode, extra, source, at = match.groups()
+        if at=="Dual-Audio":
+            if source=="HIDI":
+                source = source.replace("HIDI", "HIDIVE")
+                title = f"[AniDL] {titler.strip()} - {episode.strip()} [Web ~ {source.strip()}]"
+            else:
+                title = f"[AniDL] {titler.strip()} - {episode.strip()} [Web ~ {source.strip()}]"
+        else:
+            if source=="HIDI":
+                source = source.replace("HIDI", "HIDIVE")
+                title = f"[AniDL] {at.strip()} - {episode.strip()} [Web ~ {source.strip()}]"
+            else:
+                title = f"[AniDL] {at.strip()} - {episode.strip()} [Web ~ {source.strip()}]"
+    elif match2:
+        titler, episode, extra, source, at = match2.groups()
         if at=="Dual-Audio":
             if source=="HIDI":
                 source = source.replace("HIDI", "HIDIVE")
@@ -138,13 +154,13 @@ def trim_etitle(title):
     # Regex pattern to match content inside parentheses
     pattern = r"\(([^)]+)\)"
     matches = re.findall(pattern, title)  # Use `findall` to capture all matches
-
+    
     for match in matches:
         # Extract main title (before the first comma, if present)
         main_title = match.split(',')[0].strip()
         if main_title != "Dual-Audio":  # Ensure we're not returning "Dual-Audio"
+            main_title = main_title.replace("(2024", "(2024)")
             return main_title
-
     return None 
 
 def trim_titlex(title: str):
