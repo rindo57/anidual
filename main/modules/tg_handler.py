@@ -204,7 +204,7 @@ async def start_uploading(data):
             subtitle = subtitle.replace("]", "")     
             print(subtitle)
             os.rename(file,"video.mkv")
-            titlx = filed.replace('.mkv', '[480p x265 10Bit][Dual-Audio ~ Opus].mkv"')
+            titlx = filed.replace('.mkv', '[480p x265 10Bit][Dual-Audio ~ Opus].mkv')
             titm = f"**[AniDL] {titlx}**"
             tito = f"[AniDL] {titlx}"
             
@@ -243,7 +243,7 @@ async def start_uploading(data):
             msg2 = await app.send_message(bin_id,titlev2)
             titlev2 = titlev2.replace("[1080p]", "[1080p Web-DL]")
             
-            titlx2 = titlev2.replace('.mkv', '[720p x265 10Bit][Dual-Audio ~ Opus].mkv"')
+            titlx2 = titlev2.replace('.mkv', '[720p x265 10Bit][Dual-Audio ~ Opus].mkv')
            
             titm2 = f"**[AniDL] {titlx2}**"
             tito2 = f"[AniDL] {titlx2}"
