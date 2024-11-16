@@ -78,10 +78,12 @@ def save_480p(name):
         {
             "name": name
         },
-        {"$set": {"data.480p": '01'}},
+        {"$set": {"data.uploaded": '480p'}},
         upsert=True,
     )
+    
     return
+
 
 def save_720p(name):
     animexdb = db.animes
@@ -89,7 +91,7 @@ def save_720p(name):
         {
             "name": name
         },
-        {"$set": {"data.480p": '012'}},
+        {"$set": {"data.uploaded": '480p + 720p'}},
         upsert=True,
     )
     return
@@ -99,18 +101,79 @@ def save_1080p(name):
         {
             "name": name
         },
-        {"$set": {"data.480p": '0123'}},
+        {"$set": {"data.uploaded": '480p + 720p + 1080p'}},
         upsert=True,
     )
     return
 
-def save_file_in_db(filed, hash, subtitle, img, audio_info, tit, alink, size, upid=None):
+
+def pending_720p(name):
+    animexdb = db.animes
+    animexdb.update_one(
+        {
+            "name": name
+        },
+        {"$set": {"data.pending": '720p + 1080p'}},
+        upsert=True,
+    )
+   
+   #pdb.update_one(
+       # {
+        #    "name": name
+    #    },
+     #   {"$set": {"data.pending": '720p + 1080p'}},
+      #  upsert=True,
+  #  )
+    
+    return
+
+def pending_1080p(name):
+    animexdb = db.animes
+    animexdb.update_one(
+        {
+            "name": name
+        },
+        {"$set": {"data.pending": '1080p'}},
+        upsert=True,
+    )
+   
+#   pdb.update_one(
+     #   {
+       #     "name": name
+ #       },
+     #   {"$set": {"data.pending": '1080p'}},
+      #  upsert=True,
+  #  )
+    
+    
+    return
+
+def no_pending(name):
+    animexdb = db.animes
+    animexdb.update_one(
+        {
+            "name": name
+        },
+        {"$set": {"data.pending": '0'}},
+        upsert=True,
+    )
+    
+  #  pdb.update_one(
+      #  {
+      #      "name": name
+    #    },
+    #    {"$set": {"data.pending": '0'}},
+   #     upsert=True,
+#    )
+    
+    return
+def save_file_in_db(filed, hash, subtitle, audio_info, tit, size, upid=None):
     filesdb.update_one(
         {
             "hash": hash,
             "fid": str(upid),
         },
-        {"$set": {"filename": filed, "filenamex": filed, "code": hash, "msg_id": upid, "subtitle": subtitle, "image": img, "audio": audio_info, "etitle": tit, "alink": alink, "size": size}},
+        {"$set": {"filename": filed, "filenamex": filed, "code": hash, "msg_id": upid, "subtitle": subtitle, "audio": audio_info, "etitle": tit, "size": size}},
         upsert=True,
     )
     return
