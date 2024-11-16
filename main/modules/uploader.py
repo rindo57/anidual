@@ -67,7 +67,7 @@ async def upload_video(msg: Message, title, tito, file, tit, name, ttl, subtitle
             print(ep_num)
             print("name: ", name)
             rest = tit
-            filed = os.path.basename(file)
+            filed = tito
             print('filed: ', filed)
             source = extract_source(filed)
             print("src: ", source)
@@ -209,7 +209,7 @@ async def upload_video720p(msg: Message, title, tito, file, tit, name, ttl, subt
             ep_num = get_epnum(name)
             print(ep_num)
             rest = tit
-            filed = os.path.basename(file)
+            filed = tito
             print('filed: ', filed)
             source = extract_source(filed)
             print('filed: ', filed)
@@ -333,7 +333,7 @@ async def upload_video1080p(msg: Message, title, tito, file, tit, name, ttl, sub
             ep_num = get_epnum(name)
             print(ep_num)
             rest = tit
-            filed = os.path.basename(file)
+            filed = tito
             source = extract_source(filed)
             print('filed: ', filed)
             anidltitle = filed.replace("[AniDL] ", "")
