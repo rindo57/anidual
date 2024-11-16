@@ -6,6 +6,98 @@ import feedparser
 from main import queue
 from main.inline import button1
 import re
+
+mapping = {
+    "English": "ENG",
+    "English [Forced]": "",
+    "Japanese": "JPN",
+    "Arabic": "ARA",
+    "Arabic (Saudi Arabia)": "ARA",
+    "Catalan": "CAT",
+    "Czech": "CES",
+    "Danish": "DAN",
+    "German": "GER",
+    "Greek": "GRE",
+    "Spanish (Latin American)": "SPA-LA",
+    "Spanish (European)": "SPA",
+    "Basque": "EUS",
+    "Finnish": "FIN",
+    "Filipino": "FIL",
+    "French": "FRE",
+    "Galician": "GLG",
+    "Hebrew": "HEB",
+    "Hindi": "HIN",
+    "Croatian": "HRV",
+    "Hungarian": "HUN",
+    "Indonesian": "IND",
+    "Italian": "ITA",
+    "Korean": "KOR",
+    "Malay": "MAY",
+    "Norwegian Bokmål": "NOB",
+    "Dutch": "DUT",
+    "Polish": "POL",
+    "Portuguese (Brazilian)": "POR-BR",
+    "Portuguese (European)": "POR",
+    "Romanian": "RUM",
+    "Swedish": "SWE",
+    "Thai": "THA",
+    "Turkish": "TUR",
+    "Ukrainian": "UKR",
+    "Vietnamese": "VIE",
+    "Chinese (Simplified)": "CHI-SIM",
+    "Chinese (Traditional)": "CHI-TRA"
+}
+
+def map_language(language):
+    return mapping.get(language.strip(), language.strip())  # Default to original if not found
+
+def extract_audio_subtitles(url):
+    try:
+        # Fetching the webpage content
+        url = url.replace("download", "view")
+        url = url.replace(".torrent", "")
+        response = requests.get(url)
+        response.raise_for_status()
+        soup = BeautifulSoup(response.content, "html.parser")
+
+        # Extracting title
+        title = soup.find("title").text.strip()
+
+        # Extracting the torrent description
+        torrent_description_div = soup.find("div", id="torrent-description")
+        if not torrent_description_div:
+            return title, [], []
+
+        # Initialize variables to store audio and subtitle details
+        audio_languages = set()
+        subtitle_languages = set()
+
+        # Get the text content of the div
+        description_text = torrent_description_div.get_text(separator="\n")
+        description_text = description_text.replace("**", "").replace("`", "").replace(" [Dubtitle]", "").replace("[SDH]", "")
+
+        # Extracting audio details
+        audio_match = re.search(r"Audios \(\d+\):(.*?)(?:\n|$)", description_text, re.DOTALL)
+        if audio_match:
+            audio_raw = audio_match.group(1)
+            audio_languages = {map_language(audio.split(",")[0].strip()) for audio in audio_raw.split("│")}
+
+        # Extracting subtitle details
+        subtitle_match = re.search(r"Subtitles \(\d+\):(.*?)(?:\n|$)", description_text, re.DOTALL)
+        if subtitle_match:
+            subtitle_raw = subtitle_match.group(1)
+            subtitle_languages = {map_language(subtitle.split(",")[0].strip()) for subtitle in subtitle_raw.split("│")}
+
+        # Convert sets to comma-separated strings and filter out empty values
+        audio_languages = ", ".join(sorted(filter(None, audio_languages)))
+        subtitle_languages = ", ".join(sorted(filter(None, subtitle_languages)))
+
+        return subtitle_languages
+
+    except requests.RequestException as e:
+        print("Error fetching URL:", e)
+        return None
+        
 def trim_title(title: str):
     title = title.replace("NieR:Automata Ver1.1a", "NieR Automata Ver1_1a")
     pattern = r"^(.*?)\s*(S\d+E\d+)\s*(.*?)\s\d{3,4}p\s(.*?)\sWEB-DL.*?\((.*?),.*?\)$"
@@ -98,6 +190,7 @@ def parse():
         item = {}
         item['title'] = trim_title(i['title'])
         item['entitle'] = trim_etitle(i['title'])
+        item['subtitle'] = extract_audio_subtitles(i['link'])
         item['size'] = i['nyaa_size']  
         item['480p'] = '0'
         item['link'] = "magnet:?xt=urn:btih:" + i['nyaa_infohash']
