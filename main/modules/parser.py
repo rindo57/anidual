@@ -217,6 +217,7 @@ def parse():
         item['subtitle'] = extract_audio_subtitles(i['link'])
         item['size'] = i['nyaa_size']  
         item['uploaded'] = '0'
+        item['pending'] = '480p + 720p + 1080p'
         item['link'] = "magnet:?xt=urn:btih:" + i['nyaa_infohash']
         data.append(item)
         data.reverse()
@@ -228,6 +229,7 @@ def parse():
         item['size'] = i['nyaa_size']   
         item['link'] = "magnet:?xt=urn:btih:" + i['nyaa_infohash']
         item['uploaded'] = '0'
+        item['pending'] = '480p + 720p + 1080p'
         data.append(item)
         data.reverse()
     return data
