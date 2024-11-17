@@ -210,7 +210,7 @@ async def start_uploading(data):
             main = await app.send_message(KAYO_ID,titm)
             video_path="video.mkv"
         
-            audio_language = get_audio_language(video_path)
+            audio_language = get_audio_languages(video_path)
             joinaud = ", ".join(audio_language)
             if joinaud:
                 print("Audio Track Language:", joinaud)
@@ -361,7 +361,7 @@ async def start_uploading(data):
             main = await app.send_message(KAYO_ID,titm)
             video_path="video.mkv"
         
-            audio_language = get_audio_language(video_path)
+            audio_language = get_audio_languages(video_path)
             joinaud = ", ".join(audio_language)
             if joinaud:
                 print("Audio Track Language:", joinaud)
@@ -480,7 +480,7 @@ async def start_uploading(data):
             main = await app.send_message(KAYO_ID,titm)
             video_path="video.mkv"
         
-            audio_language = get_audio_language(video_path)
+            audio_language = get_audio_languages(video_path)
             joinaud = ", ".join(audio_language)
             if joinaud:
                 print("Audio Track Language:", joinaud)
