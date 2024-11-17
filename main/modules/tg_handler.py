@@ -141,15 +141,14 @@ mapping = {
     
 }
 
-def get_audio_language(video_path):
+def get_audio_languages(video_path):
     try:
         media_info = MediaInfo.parse(video_path)
+        audio_tracks = []
         for track in media_info.tracks:
             if track.track_type == 'Audio':
-                language = track.language
-                language = language.replace("ja", "JP")
-                return language
-        return None
+                audio_tracks.append(track.language)
+        return audio_tracks
     except Exception as e:
         print(f"Error: {e}")
         return None
