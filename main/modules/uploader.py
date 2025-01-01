@@ -91,7 +91,7 @@ async def upload_video(msg: Message, title, tito, file, tit, name, ttl, subtitle
             x = await app.send_document(
                 kayo_id,
                 file,
-                file_name=filed,
+                file_name=filed.replace("/", "_"),
                 progress=progress_for_pyrogram,
                 progress_args=(
                     filed,
@@ -231,7 +231,7 @@ async def upload_video720p(msg: Message, title, tito, file, tit, name, ttl, subt
             x = await app.send_document(
                 kayo_id,
                 file,
-                file_name=filed,
+                file_name=filed.replace("/", "_"),
                 progress=progress_for_pyrogram,
                 progress_args=(
                     filed,
@@ -364,7 +364,7 @@ async def upload_video1080p(msg: Message, title, tito, file, tit, name, ttl, sub
             x = await app.send_document(
                 kayo_id,
                 file,
-                file_name=filed,
+                file_name=filed.replace("/", "_"),
                 progress=progress_for_pyrogram,
                 progress_args=(
                     filed,
