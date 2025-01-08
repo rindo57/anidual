@@ -8,6 +8,8 @@ from main.inline import button1
 import re
 import requests
 from bs4 import BeautifulSoup
+import requests
+import anitopy
 mapping = {
     "English": "us",
     "English [Forced]": "us",
@@ -156,17 +158,10 @@ def trim_title(title: str):
     return title
 
 def trim_etitle(title):
-    # Regex pattern to match content inside parentheses
-    pattern = r"\(([^)]+)\)"
-    matches = re.findall(pattern, title)  # Use `findall` to capture all matches
-    
-    for match in matches:
-        # Extract main title (before the first comma, if present)
-        main_title = match.split(',')[0].strip()
-        if main_title != "Dual-Audio":  # Ensure we're not returning "Dual-Audio"
-            main_title = main_title.replace("(2024", "(2024)")
-            return main_title
-    return None 
+    filename_content = anitopy.parse(title)
+    print(filename_content)
+    eng__title = filename_content["anime_title"]
+    return eng_title
 
 def trim_titlex(title: str):
     # Updated regex pattern to capture required groups
