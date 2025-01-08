@@ -160,7 +160,7 @@ def trim_title(title: str):
 def trim_etitle(title):
     filename_content = anitopy.parse(title)
     print(filename_content)
-    eng__title = filename_content["anime_title"]
+    eng_title = filename_content["anime_title"]
     return eng_title
 
 def trim_titlex(title: str):
