@@ -108,6 +108,8 @@ def extract_audio_subtitles(url):
         
 def trim_title(title: str):
     title = title.replace("NieR:Automata Ver1.1a", "NieR Automata Ver1_1a")
+    title = title.replace("Dr.", "Dr")
+                          
     pattern = r"^(.*?)\s*(S\d+E\d+)\s*(.*?)\s\d{3,4}p\s(.*?)\sWEB-DL.*?\((.*?),.*?\)$"
     pattern2 = r"^(.*?)\s*(S\d+E\d+)\s*(.*?)\s\d{3,4}p\s(.*?)\sWEB-DL.*?\((.*?)\)$"
     match = re.match(pattern, title)
