@@ -63,7 +63,15 @@ def extract_audio_subtitles(url):
         # Fetching the webpage content
         url = url.replace("download", "view")
         url = url.replace(".torrent", "")
-        response = requests.get(url)
+        url - url.replace("si", "land")
+        cfurl = "http://localhost:8191/v1"
+        headers = {"Content-Type": "application/json"}
+        dataz = {
+            "cmd": "request.get",
+            "url": url,
+            "maxTimeout": 60000
+        }
+        response = requests.post(cfurl, headers=headers, json=dataz)
         response.raise_for_status()
         soup = BeautifulSoup(response.content, "html.parser")
 
