@@ -63,7 +63,7 @@ def extract_audio_subtitles(url):
         # Fetching the webpage content
         url = url.replace("download", "view")
         url = url.replace(".torrent", "")
-        url - url.replace("si", "land")
+        url = url.replace("si", "land")
         cfurl = "http://localhost:8191/v1"
         headers = {"Content-Type": "application/json"}
         dataz = {
