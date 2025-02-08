@@ -60,59 +60,38 @@ def map_language(language):
 
 def extract_audio_subtitles(url):
     try:
-        # Fetching the webpage content
-        url = url.replace("download", "view")
-        url = url.replace(".torrent", "")
-        url = url.replace("si", "land")
+        url = url.replace("download", "view").replace(".torrent", "").replace("si", "land")
         cfurl = "http://localhost:8191/v1"
         headers = {"Content-Type": "application/json"}
-        dataz = {
-            "cmd": "request.get",
-            "url": url,
-            "maxTimeout": 60000
-        }
+        dataz = {"cmd": "request.get", "url": url, "maxTimeout": 60000}
         response = requests.post(cfurl, headers=headers, json=dataz)
-        response.raise_for_status()
-        soup = BeautifulSoup(response.content, "html.parser")
+        html_content = response.json()['solution']['response']
+        soup = BeautifulSoup(html_content, "html.parser")
 
-        # Extracting title
-        title = soup.find("title").text.strip()
-
-        # Extracting the torrent description
         torrent_description_div = soup.find("div", id="torrent-description")
         if not torrent_description_div:
-            return title, [], []
+            return '[]'
 
-        # Initialize variables to store audio and subtitle details
-        audio_languages = set()
+        description_text = torrent_description_div.get_text(separator="\n").strip()
+        description_text = re.sub(r"[\[\]`]", "", description_text)  # Remove unwanted brackets and backticks
+        description_text = description_text.replace(" [Dubtitle]", "").replace(" [SDH]", "").replace(" [CC]", "").replace("Chinese (China)", "Chinese").replace("English (BILI)", "en").replace("English (HIDI)", "en").replace("Indonesian (BILI)","Indonesian").replace("Thai (BILI)","Thai")
+        subtitle_match = re.search(r"Subtitles \(\d+\):\s*([\s\S]*?)(?=\n\s*Chapters:|$)", description_text)
         subtitle_languages = set()
-
-        # Get the text content of the div
-        description_text = torrent_description_div.get_text(separator="\n")
-        description_text = description_text.replace("**", "").replace("`", "").replace(" [Dubtitle]", "").replace(" [SDH]", "").replace(" [CC]", "").replace("Chinese (China)", "Chinese").replace("English (BILI)", "en").replace("English (HIDI)", "en").replace("Indonesian (BILI)","Indonesian").replace("Thai (BILI)","Thai")
-
-        # Extracting audio details
-        audio_match = re.search(r"Audios \(\d+\):(.*?)(?:\n|$)", description_text, re.DOTALL)
-        if audio_match:
-            audio_raw = audio_match.group(1)
-            audio_languages = {map_language(audio.split(",")[0].strip()) for audio in audio_raw.split("│")}
-
-        # Extracting subtitle details
-        subtitle_match = re.search(r"Subtitles \(\d+\):(.*?)(?:\n|$)", description_text, re.DOTALL)
         if subtitle_match:
             subtitle_raw = subtitle_match.group(1)
-            subtitle_languages = {map_language(subtitle.split(",")[0].strip()) for subtitle in subtitle_raw.split("│")}
+            subtitle_raw = re.sub(r"\s*\n\s*", " ", subtitle_raw)  # Remove newlines within subtitles section
+            for subtitle in subtitle_raw.split("│"):
+                lang_part = subtitle.split(",")[0].strip()
+                lang = map_language(lang_part)
+                if lang:
+                    subtitle_languages.add(lang)
 
-        # Convert sets to comma-separated strings and filter out empty values
-        audio_languages = ", ".join(sorted(filter(None, audio_languages)))
-        subtitle_languages = "][".join(sorted(filter(None, subtitle_languages)))
-        subtitle_languages = f"[{subtitle_languages}]"
-
-        return subtitle_languages
+        subtitle_languages = sorted(subtitle_languages)
+        return f'[{"][".join(subtitle_languages)}]' if subtitle_languages else '[]'
 
     except requests.RequestException as e:
         print("Error fetching URL:", e)
-        return None
+        return '[]'
         
 def trim_title(title: str):
     title = title.replace("NieR:Automata Ver1.1a", "NieR Automata Ver1_1a")
