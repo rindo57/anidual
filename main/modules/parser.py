@@ -74,7 +74,7 @@ def extract_audio_subtitles(url):
 
         description_text = torrent_description_div.get_text(separator="\n").strip()
         description_text = re.sub(r"[\[\]`]", "", description_text)  # Remove unwanted brackets and backticks
-        description_text = description_text.replace(" [Dubtitle]", "").replace(" [SDH]", "").replace(" [CC]", "").replace("Chinese (China)", "Chinese").replace("English (BILI)", "en").replace("English (HIDI)", "en").replace("Indonesian (BILI)","Indonesian").replace("Thai (BILI)","Thai")
+        		description_text = description_text.replace(" Dubtitle", "").replace(" SDH", "").replace(" CC", "").replace("Chinese (China)", "Chinese").replace("English (BILI)", "en").replace("English (HIDI)", "en").replace("Indonesian (BILI)","Indonesian").replace("Thai (BILI)","Thai")
         subtitle_match = re.search(r"Subtitles \(\d+\):\s*([\s\S]*?)(?=\n\s*Chapters:|$)", description_text)
         subtitle_languages = set()
         if subtitle_match:
