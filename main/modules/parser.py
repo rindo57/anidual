@@ -60,13 +60,10 @@ def map_language(language):
 
 def extract_audio_subtitles(url):
     try:
-        url = url.replace("download", "view").replace(".torrent", "").replace("si", "land")
-        cfurl = "http://localhost:8191/v1"
-        headers = {"Content-Type": "application/json"}
-        dataz = {"cmd": "request.get", "url": url, "maxTimeout": 60000}
-        response = requests.post(cfurl, headers=headers, json=dataz)
-        html_content = response.json()['solution']['response']
-        soup = BeautifulSoup(html_content, "html.parser")
+        url = url.replace("download", "view").replace(".torrent", "").replace("nyaa.si", "nyaa-proxy.vercel.app")
+        response = request.get(url)
+        response.raise_for_status()
+        soup = BeautifulSoup(response.content, "html.parser")
 
         torrent_description_div = soup.find("div", id="torrent-description")
         if not torrent_description_div:
