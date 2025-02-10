@@ -61,7 +61,7 @@ def map_language(language):
 def extract_audio_subtitles(url):
     try:
         url = url.replace("download", "view").replace(".torrent", "").replace("nyaa.si", "nyaa-proxy.vercel.app")
-        response = request.get(url)
+        response = requests.get(url)
         requests.response.raise_for_status()
         soup = BeautifulSoup(response.content, "html.parser")
 
