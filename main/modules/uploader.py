@@ -310,9 +310,12 @@ async def upload_video720p(msg: Message, title, tito, file, tit, name, ttl, subt
                     ],
             )
             await asyncio.sleep(3)
+            '''
             postid = await get_postid(title)
             print(postid)
+        
             await app.edit_message_text(anidl_id, postid, text=anidlcap2, reply_markup=fmarkup, parse_mode=enums.ParseMode.HTML)
+            '''
     except Exception as e:
         await app.send_message(kayo_id, text="Something Went Wrong!" + "\n" + e)
     try:
@@ -481,9 +484,10 @@ async def upload_video1080p(msg: Message, title, tito, file, tit, name, ttl, sub
             )
             await asyncio.sleep(3)
             print("title upload: ", title)
-            postid = await get_postid(title)
-            print(postid)
-            ongid = -1001159872623
+            #postid = await get_postid(title)
+            #print(postid)
+            #ongid = -1001159872623
+            '''
             await app.edit_message_text(anidl_id, postid, text=anidlcap3, reply_markup=fmarkup, parse_mode=enums.ParseMode.HTML)
             await asyncio.sleep(3)
             await app.copy_message(
@@ -492,6 +496,7 @@ async def upload_video1080p(msg: Message, title, tito, file, tit, name, ttl, sub
                 message_id=postid,
                 reply_markup=fmarkup2
             )
+            '''
     except Exception as e:
         await app.send_message(kayo_id, text="Something Went Wrong!" + "\n" + e)
     try:
